@@ -17,6 +17,9 @@
             , park_yn AS parkYn
             , create_date AS createDate
             , modify_date AS modifyDate
+            , address
+            , comment
+            , court_name AS courtName
         FROM basket_spot
     </select>
 
@@ -31,16 +34,22 @@
             , shower_yn
             , park_yn
             , create_date
+            , address
+            , comment
+            , court_name
         ) VALUES (
             #{lat}
             , #{lon}
-            , #{courtType,jdbcType=VARCHAR}
+            , #{courtType}
             , #{feeYn}
-            , #{courtSize,jdbcType=VARCHAR}
+            , #{courtSize}
             , #{goalPost}
             , #{showerYn}
             , #{parkYn}
             , NOW()
+            , #{address}
+            , #{comment}
+            , #{courtName}
         )
     </insert>
 
@@ -54,6 +63,7 @@
             , shower_yn = #{showerYn}
             , park_yn = #{parkYn}
             , modify_date = NOW()
+            , comment = #{comment}
         WHERE
             lat = #{lat}
         AND lon = #{lon}
