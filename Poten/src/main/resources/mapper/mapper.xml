@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.poten.basket.Poten.DAO.MapDAO">
+
+    <select id="mapList" resultType="com.poten.basket.Poten.VO.MapResponse">
+        SELECT
+            lat
+            , lon
+            , court_type AS courtType
+            , fee_yn AS feeYn
+            , court_size AS courtSize
+            , goal_post AS goalPost
+            , shower_yn AS showerYn
+            , park_yn AS parkYn
+            , create_date AS createDate
+            , modify_date AS modifyDate
+        FROM basket_spot
+    </select>
+
+    <insert id="mapCre" parameterType="com.poten.basket.Poten.VO.MapRequest">
+        INSERT INTO basket_spot (
+            lat
+            , lon
+            , court_type
+            , fee_yn
+            , court_size
+            , goal_post
+            , shower_yn
+            , park_yn
+            , create_date
+        ) VALUES (
+            #{lat}
+            , #{lon}
+            , #{courtType,jdbcType=VARCHAR}
+            , #{feeYn}
+            , #{courtSize,jdbcType=VARCHAR}
+            , #{goalPost}
+            , #{showerYn}
+            , #{parkYn}
+            , NOW()
+        )
+    </insert>
+
+    <update id="mapUpt" parameterType="com.poten.basket.Poten.VO.MapRequest">
+        UPDATE basket_spot
+        SET
+            court_type = #{courtType}
+            , fee_yn = #{feeYn}
+            , court_size = #{courtSize}
+            , goal_post = #{goalPost}
+            , shower_yn = #{showerYn}
+            , park_yn = #{parkYn}
+            , modify_date = NOW()
+        WHERE
+            lat = #{lat}
+        AND lon = #{lon}
+    </update>
+
+    <delete id="mapDel" parameterType="map">
+        DELETE FROM basket_spot
+        WHERE
+            lat = #{lat}
+        AND lon = #{lon}
+    </delete>
+</mapper>
