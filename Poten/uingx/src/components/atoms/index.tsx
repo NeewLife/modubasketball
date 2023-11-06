@@ -9,3 +9,5 @@ export * from './typography/headline';
 export * from './typography/title';
 
 export { Typography } from './typography/Typography';
+
+export * from './input';
