@@ -35,3 +35,8 @@ out/
 
 ### VS Code ###
 .vscode/
+
+
+### react ###
+/uingx/node_modules
+/uingx/build
