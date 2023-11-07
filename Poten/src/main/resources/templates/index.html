@@ -1,24 +1,29 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8"/>
     <title>Kakao 지도 시작하기</title>
 </head>
 <body>
-<div id="map" style="width:1600px;height:800px;"></div>
+<div id="map" style="width:1200px;height:700px;"></div>
 <!--생성 테스트용-->
-<form action="/spot/create">
-    <input type="text" id="courtType" name="courtType" placeholder="코트 타입">
-    <input type="text" id="feeYn" name="feeYn" placeholder="사용료 여부">
-    <input type="text" id="courtSize" name="courtSize" placeholder="코트 크기">
-    <input type="text" id="goalPost" name="goalPost" placeholder="골대 갯수">
-    <input type="text" id="showerYn" name="showerYn" placeholder="샤워가능여부">
-    <input type="text" id="parkYn" name="parkYn" placeholder="주차여부">
-    <input type="text" id="lat" name="lat" placeholder="위도">
-    <input type="text" id="lon" name="lon" placeholder="경도">
-    <button type="submit">생성</button>
+<form action="/spot/create" id="createForm">
+    <span style="position: absolute; top: 0px; right: 10px; width: 300px;">
+        <input type="text" id="courtType" name="courtType" placeholder="코트 타입">
+        <input type="text" id="feeYn" name="feeYn" placeholder="사용료 여부">
+        <input type="text" id="courtSize" name="courtSize" placeholder="코트 크기">
+        <input type="text" id="goalPost" name="goalPost" placeholder="골대 갯수">
+        <input type="text" id="showerYn" name="showerYn" placeholder="샤워가능여부">
+        <input type="text" id="parkYn" name="parkYn" placeholder="주차여부">
+        <input type="text" id="lat" name="lat" placeholder="위도">
+        <input type="text" id="lon" name="lon" placeholder="경도">
+        <input type="text" id="address" name="address" placeholder="주소">
+        <input type="text" id="comment" name="comment" placeholder="기타 정보">
+        <input type="text" id="courtName" name="courtName" placeholder="코트 이름">
+        <button type="button" onclick="createSpot()">생성</button>
+        <button type="button" onclick="search()">검색</button>
+    </span>
 </form>
-
 <!--삭제 테스트용-->
 <form action="/spot/delete" id="deleteForm">
     <input type="hidden" id="lat2" name="lat">
@@ -37,8 +42,12 @@
     <input type="text" id="lon3" name="lon" placeholder="경도">
     <button type="submit">수정하기</button>
 </form>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=	fde71bf93e6ac65fad89567ffb615633"></script>
-<script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=	fde71bf93e6ac65fad89567ffb615633&libraries=services"></script>
+<script th:inline="javascript">
+/*<![CDATA[*/
+    var mapList = [[${mapList}]] ;
+/*]]>*/
+
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div
     mapOption = {
         center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
@@ -46,6 +55,8 @@ var mapContainer = document.getElementById('map'), // 지도를 표시할 div
     };
 
 var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+var geocoder = new kakao.maps.services.Geocoder();
 
 // 마커를 표시할 위치와 title 객체 배열입니다
 var positions = [
@@ -133,6 +144,55 @@ function deleteSpot(lat, lon){
     document.getElementById('lon2').value = lon;
 
     document.getElementById('deleteForm').submit();
+}
+
+function search(){
+    var address = document.getElementById('address').value;
+
+    geocoder.addressSearch(address, function(result, status) {
+
+        // 정상적으로 검색이 완료됐으면
+         if (status === kakao.maps.services.Status.OK) {
+
+            var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+            document.getElementById('lat').value = result[0].y;
+            document.getElementById('lon').value = result[0].x;
+
+            // 결과값으로 받은 위치를 마커로 표시합니다
+            var marker = new kakao.maps.Marker({
+                map: map,
+                position: coords
+            });
+
+            // 인포윈도우로 장소에 대한 설명을 표시합니다
+            var infowindow = new kakao.maps.InfoWindow({
+                content: '<div style="width:150px;text-align:center;padding:6px 0;">' + address + '</div>'
+            });
+            infowindow.open(map, marker);
+
+            // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+            map.setCenter(coords);
+        }
+    })
+}
+
+function createSpot(){
+    var chkDup = false;
+
+    function checkDup(element){
+        var lat = document.getElementById('lat').value;
+        var lon = document.getElementById('lon').value;
+        if(element.lat == lat && element.lon == lon){
+            chkDup = true;
+        }
+        return chkDup;
+    }
+    if(mapList.some(checkDup) == true){
+        alert("중복됨");
+        return false;
+    }
+    document.getElementById('createForm').submit();
 }
 </script>
 </body>
