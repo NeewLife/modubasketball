@@ -1,16 +1,9 @@
-import React, { useEffect } from 'react';
-
 import './index.css';
+import { useRoutes } from 'react-router-dom';
+import { element } from './route';
 
 export const App = () => {
-  useEffect(() => {
-    const container = document.getElementById('map');
-    const options = {
-      center: new window.kakao.maps.LatLng(33.450701, 126.570667),
-      level: 3,
-    };
-    const map = new window.kakao.maps.Map(container, options);
-  }, []);
+  const routes = useRoutes(element);
 
-  return <div id="map" className="w-screen h-screen" />;
+  return routes;
 };
