@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { DetailedHTMLProps, InputHTMLAttributes, useEffect, useState } from 'react';
 
 import Search from '@constants/icon/search.svg';
 import { Input } from '@components/atoms';
@@ -6,10 +6,13 @@ import { Input } from '@components/atoms';
 interface SearchBarProps {
   text?: string;
   onTrackable?: (text: string) => void;
+  onSearch?: () => void;
 }
 
-export const SearchBar = (props: SearchBarProps) => {
-  const { text = '', onTrackable = () => {} } = props;
+export const SearchBar = (
+  props: SearchBarProps & DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>,
+) => {
+  const { text = '', onTrackable = () => {}, onSearch = () => {}, ...prop } = props;
 
   const [localText, setLocalText] = useState(text);
 
@@ -30,8 +33,9 @@ export const SearchBar = (props: SearchBarProps) => {
         placeholder="위치-장소를 검색하세요"
         value={localText}
         onTrackable={onChange}
+        {...prop}
       />
-      <img alt="search" className="absolute right-[20px]" src={Search} />
+      <img alt="search" className="absolute right-[20px]" src={Search} onClick={onSearch} />
     </div>
   );
 };

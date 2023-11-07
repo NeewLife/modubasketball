@@ -8,7 +8,7 @@ interface ButtonBigProps extends ButtonOptionsProps {
 export const ButtonBig = (
   props: ButtonBigProps & DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>,
 ) => {
-  const { text, background = 'secondary' } = props;
+  const { text, background = 'secondary', className, ...prop } = props;
 
   const backgroundClassName =
     background === 'secondary' ? 'bg-secondary-20 active:bg-secondary-30 hover:bg-secondary-30' : 'bg-gray-50';
@@ -18,6 +18,7 @@ export const ButtonBig = (
       type="button"
       aria-label="big"
       className={`w-[230px] h-[64px] shadow-custom rounded-[10px] ${backgroundClassName}`}
+      {...prop}
     >
       <Headline type="sub" text={text} color="text-gray-10" />
     </button>

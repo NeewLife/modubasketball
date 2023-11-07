@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { KeyboardEvent, useCallback, useState } from 'react';
 
 import LogoHeader from '@constants/image/logo-header.png';
 import Layer1 from '@constants/image/layer1.png';
@@ -10,8 +10,42 @@ import Header from '@constants/image/header.png';
 
 import { Body, ButtonLong, Display, Headline } from '@components/atoms';
 import { SearchBar } from '@components/molecules';
+import { useKeyword } from '@utils/zustand';
+import { useNavigate } from 'react-router-dom';
 
 export const Home = () => {
+  const [search, setSearch] = useState('');
+  const { keyword, type, setType } = useKeyword();
+
+  const navigate = useNavigate();
+
+  const onChange = (sSearch: string) => {
+    setSearch(sSearch);
+  };
+
+  const onSearchAction = useCallback(
+    (sType: 'search' | 'gps') => {
+      setType({ keyword: search, type: sType });
+
+      navigate('/map');
+    },
+    [keyword, type],
+  );
+
+  const onSearch = () => {
+    onSearchAction('search');
+  };
+
+  const onKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
+    event.stopPropagation();
+
+    if (event.key === 'Enter') onSearchAction('search');
+  };
+
+  const onClickGps = () => {
+    onSearchAction('gps');
+  };
+
   return (
     <div className="w-screen h-screen overflow-auto">
       <div className="w-full h-[70px] flex items-center justify-center">
@@ -29,9 +63,9 @@ export const Home = () => {
             <Headline type="main" text="내 주변의 농구장을 찾아보거라." />
           </div>
           <div className="mt-[14px]">
-            <SearchBar />
+            <SearchBar text={search} onTrackable={onChange} onSearch={onSearch} onKeyDown={onKeyDown} />
           </div>
-          <ButtonLong text="내 주변 농구장 찾기" />
+          <ButtonLong text="내 주변 농구장 찾기" onClick={onClickGps} />
         </div>
         <img className="pt-[20px]" alt="header" src={Header} />
       </div>
