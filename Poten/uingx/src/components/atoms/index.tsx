@@ -11,3 +11,12 @@ export * from './typography/title';
 export { Typography } from './typography/Typography';
 
 export * from './input';
+
+export { type ButtonOptionsProps } from './button/Button';
+
+export * from './button/big';
+export * from './button/icon';
+export * from './button/long';
+export * from './button/medium';
+
+export { Button } from './button/Button';
