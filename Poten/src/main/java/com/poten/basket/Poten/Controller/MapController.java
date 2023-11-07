@@ -28,7 +28,7 @@ public class MapController {
         List<MapResponse> mapList = mapService.mapList();
         System.out.println("mapList = " + mapList);
         model.addAttribute("mapList", mapList);
-        return "index";
+        return "forward:/index.html";
     }
 
     /*
@@ -36,12 +36,11 @@ public class MapController {
     * 필요 params - com.poten.basket.Poten.VO.MapRequest
     * */
     @RequestMapping("/spot/create")
-    public String saveSpot(MapRequest params){
+    public void saveSpot(MapRequest params){
         System.out.println("====================create====================");
         System.out.println("create의 params = " + params);
         mapService.mapCre(params);
         System.out.println("생성됨");
-        return "redirect:/";
     }
 
     /*
@@ -49,7 +48,7 @@ public class MapController {
     * 필요 params - lat(위도), lon(경도)
     * */
     @RequestMapping("/spot/delete")
-    public String deleteSpot(@RequestParam double lat
+    public void deleteSpot(@RequestParam double lat
                             , @RequestParam double lon){
         System.out.println("====================delete====================");
         System.out.println(lat + "," + lon);
@@ -58,7 +57,6 @@ public class MapController {
         params.put("lon", lon);
         mapService.mapDel(params);
         System.out.println("삭제됨");
-        return "redirect:/";
     }
 
     /*
@@ -66,11 +64,10 @@ public class MapController {
     * 필요 params - com.poten.basket.Poten.VO.MapRequest
     * */
     @RequestMapping("/spot/update")
-    public String updateSpot(MapRequest params){
+    public void updateSpot(MapRequest params){
         System.out.println("====================update====================");
         System.out.println("update의 params = " + params);
         mapService.mapUpt(params);
-        return "redirect:/";
     }
 
 }
