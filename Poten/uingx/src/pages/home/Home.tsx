@@ -15,7 +15,7 @@ import { useNavigate } from 'react-router-dom';
 
 export const Home = () => {
   const [search, setSearch] = useState('');
-  const { keyword, type, setType } = useKeyword();
+  const { type, setType } = useKeyword();
 
   const navigate = useNavigate();
 
@@ -29,7 +29,7 @@ export const Home = () => {
 
       navigate('/map');
     },
-    [keyword, type],
+    [search, type],
   );
 
   const onSearch = () => {
