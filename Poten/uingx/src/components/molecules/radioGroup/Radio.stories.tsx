@@ -10,5 +10,18 @@ export default meta;
 type Story = StoryObj<typeof RadioGroup>;
 
 export const Preview: Story = {
-  args: {},
+  args: {
+    data: [
+      {
+        id: '1',
+        text: '무료',
+        check: true,
+      },
+      {
+        id: '2',
+        text: '유료',
+        check: false,
+      },
+    ],
+  },
 };

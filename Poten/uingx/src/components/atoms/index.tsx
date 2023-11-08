@@ -20,3 +20,4 @@ export * from './button/medium';
 export { Button } from './button/Button';
 
 export * from './radio';
+export * from './textarea';
