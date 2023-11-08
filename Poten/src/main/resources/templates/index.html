@@ -5,45 +5,68 @@
     <title>Kakao 지도 시작하기</title>
 </head>
 <body>
-<div id="map" style="width:1200px;height:700px;"></div>
+<div id="map" style="width:1200px;height:900px;"></div>
 <!--생성 테스트용-->
 <form action="/spot/create" id="createForm">
-    <span style="position: absolute; top: 0px; right: 10px; width: 300px;">
-        <input type="text" id="courtType" name="courtType" placeholder="코트 타입">
-        <input type="text" id="feeYn" name="feeYn" placeholder="사용료 여부">
-        <input type="text" id="courtSize" name="courtSize" placeholder="코트 크기">
-        <input type="text" id="goalPost" name="goalPost" placeholder="골대 갯수">
-        <input type="text" id="showerYn" name="showerYn" placeholder="샤워가능여부">
-        <input type="text" id="parkYn" name="parkYn" placeholder="주차여부">
-        <input type="text" id="lat" name="lat" placeholder="위도">
-        <input type="text" id="lon" name="lon" placeholder="경도">
-        <input type="text" id="address" name="address" placeholder="주소">
-        <input type="text" id="comment" name="comment" placeholder="기타 정보">
-        <input type="text" id="courtName" name="courtName" placeholder="코트 이름">
-        <button type="button" onclick="createSpot()">생성</button>
+    <span style="position: absolute; top: 0px; right: 10%; width: 500px;">
+        <input type="text" id="address" name="address" placeholder="주소" autofocus>
         <button type="button" onclick="search()">검색</button>
+
+        <div>
+            코트 종류<br>
+            <input type="radio" id="courtType1" name="courtType" value="아스팔트"><label for="courtType1">아스팔트</label>
+            <input type="radio" id="courtType2" name="courtType" value="우레탄"><label for="courtType2">우레탄</label>
+            <input type="radio" id="courtType3" name="courtType" value="고무"><label for="courtType3">고무</label>
+            <input type="radio" id="courtType4" name="courtType" value="모래"><label for="courtType4">모래</label>
+            <input type="radio" id="courtType5" name="courtType" value="알 수 없음"><label for="courtType5">알 수 없음</label>
+        </div>
+        <br>
+        <div>
+            사용료<br>
+            <input type="radio" name="feeYn" value="무료">무료
+            <input type="radio" name="feeYn" value="유료">유료
+        </div>
+        <br>
+        <div>
+            코트 사이즈<br>
+            <input type="radio" name="courtSize" value="풀코트">풀코트
+            <input type="radio" name="courtSize" value="반코트">반코트
+        </div>
+        <br>
+        <div>
+            주차여부<br>
+            <input type="radio" name="parkYn" value="가능">가능
+            <input type="radio" name="parkYn" value="불가능">불가능
+        </div>
+        <input type="text" id="goalPost" name="goalPost" placeholder="골대 갯수"><br>
+        <input type="hidden" id="lat" name="lat" placeholder="위도">
+        <input type="hidden" id="lon" name="lon" placeholder="경도">
+        <input type="text" id="comment" name="comment" placeholder="기타 정보"><br>
+        <input type="text" id="courtName" name="courtName" placeholder="코트 이름"><br>
+        <button type="button" onclick="createSpot()">생성</button>
     </span>
 </form>
 <!--삭제 테스트용-->
-<form action="/spot/delete" id="deleteForm">
-    <input type="hidden" id="lat2" name="lat">
-    <input type="hidden" id="lon2" name="lon">
-</form>
+<!--<form action="/spot/delete" id="deleteForm">-->
+<!--    <input type="hidden" id="lat2" name="lat">-->
+<!--    <input type="hidden" id="lon2" name="lon">-->
+<!--</form>-->
 
 <!--수정 테스트용-->
-<form action="/spot/update">
-    <input type="text" id="courtType3" name="courtType" placeholder="코트 타입">
-    <input type="text" id="feeYn3" name="feeYn" placeholder="사용료 여부">
-    <input type="text" id="courtSize3" name="courtSize" placeholder="코트 크기">
-    <input type="text" id="goalPost3" name="goalPost" placeholder="골대 갯수">
-    <input type="text" id="showerYn3" name="showerYn" placeholder="샤워가능여부">
-    <input type="text" id="parkYn3" name="parkYn" placeholder="주차여부">
-    <input type="text" id="lat3" name="lat" placeholder="위도">
-    <input type="text" id="lon3" name="lon" placeholder="경도">
-    <button type="submit">수정하기</button>
-</form>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=	fde71bf93e6ac65fad89567ffb615633&libraries=services"></script>
+<!--<form action="/spot/update">-->
+<!--    <input type="text" id="courtType3" name="courtType" placeholder="코트 타입">-->
+<!--    <input type="text" id="feeYn3" name="feeYn" placeholder="사용료 여부">-->
+<!--    <input type="text" id="courtSize3" name="courtSize" placeholder="코트 크기">-->
+<!--    <input type="text" id="goalPost3" name="goalPost" placeholder="골대 갯수">-->
+<!--    <input type="text" id="showerYn3" name="showerYn" placeholder="샤워가능여부">-->
+<!--    <input type="text" id="parkYn3" name="parkYn" placeholder="주차여부">-->
+<!--    <input type="text" id="lat3" name="lat" placeholder="위도">-->
+<!--    <input type="text" id="lon3" name="lon" placeholder="경도">-->
+<!--    <button type="submit">수정하기</button>-->
+<!--</form>-->
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fde71bf93e6ac65fad89567ffb615633&libraries=services"></script>
 <script th:inline="javascript">
+
 /*<![CDATA[*/
     var mapList = [[${mapList}]] ;
 /*]]>*/
@@ -133,8 +156,8 @@ kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
 
     console.log(message);
 
-    document.getElementById('lat').value = latlng.getLat();
-    document.getElementById('lon').value = latlng.getLng();
+<!--    document.getElementById('lat').value = latlng.getLat();-->
+<!--    document.getElementById('lon').value = latlng.getLng();-->
 });
 
 
@@ -190,6 +213,7 @@ function createSpot(){
     }
     if(mapList.some(checkDup) == true){
         alert("중복됨");
+        location.href = "/";
         return false;
     }
     document.getElementById('createForm').submit();

@@ -26,7 +26,8 @@ public class MapController {
     @RequestMapping("/")
     public String openMap(Model model){
         List<MapResponse> mapList = mapService.mapList();
-        System.out.println("mapList = " + mapList);
+        System.out.println("지도화면");
+//        System.out.println("mapList = " + mapList);
         model.addAttribute("mapList", mapList);
         return "index";
     }

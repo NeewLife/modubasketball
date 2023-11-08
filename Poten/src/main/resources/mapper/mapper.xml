@@ -13,7 +13,6 @@
             , fee_yn AS feeYn
             , court_size AS courtSize
             , goal_post AS goalPost
-            , shower_yn AS showerYn
             , park_yn AS parkYn
             , create_date AS createDate
             , modify_date AS modifyDate
@@ -31,7 +30,6 @@
             , fee_yn
             , court_size
             , goal_post
-            , shower_yn
             , park_yn
             , create_date
             , address
@@ -44,7 +42,6 @@
             , #{feeYn}
             , #{courtSize}
             , #{goalPost}
-            , #{showerYn}
             , #{parkYn}
             , NOW()
             , #{address}
@@ -60,7 +57,6 @@
             , fee_yn = #{feeYn}
             , court_size = #{courtSize}
             , goal_post = #{goalPost}
-            , shower_yn = #{showerYn}
             , park_yn = #{parkYn}
             , modify_date = NOW()
             , comment = #{comment}
