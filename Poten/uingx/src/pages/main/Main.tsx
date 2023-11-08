@@ -1,5 +1,6 @@
 import React from 'react';
-import { ButtonIcon, ButtonMedium, Headline, Map } from '@components/atoms';
+import { ButtonIcon, ButtonMedium, Headline } from '@components/atoms';
+import { Map } from '@components/organisms';
 
 import Location from '@constants/icon/location.svg';
 import Arrrow from '@constants/icon/arrow.svg';
@@ -25,7 +26,7 @@ export const Main = () => {
         </div>
       </div>
       <div className="grow relative">
-        <Map />
+        <Map keyword={keyword} type={type} />
         <div className="fixed right-[30px] bottom-[19px] z-50">
           <ButtonIcon text="location" icon={Location} />
         </div>

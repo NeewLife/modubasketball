@@ -1,10 +1,10 @@
 import React from 'react';
 
 import { Meta, StoryObj } from '@storybook/react';
-import { Map } from '@components/atoms';
+import { Map } from '@components/organisms';
 
 const meta: Meta<typeof Map> = {
-  title: 'atoms/map',
+  title: 'organisms/Map',
   component: Map,
 };
 
@@ -14,7 +14,7 @@ type Story = StoryObj<typeof Map>;
 export const Preview: Story = {
   render: () => (
     <div className="h-screen">
-      <Map />
+      <Map keyword="" type="gps" />
     </div>
   ),
 };

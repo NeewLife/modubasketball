@@ -1,5 +1,3 @@
-export * from './map';
-
 export { type TypographyOptionsProps } from './typography/Typography';
 
 export * from './typography/body';

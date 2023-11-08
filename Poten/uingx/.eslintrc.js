@@ -42,6 +42,9 @@ module.exports = {
     'class-methods-use-this': 0,
     'no-param-reassign': 0,
     'object-shorthand': 0,
+    '@typescript-eslint/no-explicit-any': 0,
+    'no-plusplus': 0,
+    'no-lonely-if': 0,
   },
   ignorePatterns: ['.eslintrc.js'],
 };
