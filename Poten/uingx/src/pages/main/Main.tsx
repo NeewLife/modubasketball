@@ -7,6 +7,7 @@ import Arrrow from '@constants/icon/arrow.svg';
 import LogoHeader from '@constants/image/logo-header.png';
 import { useKeyword } from '@utils/zustand';
 import { useNavigate } from 'react-router-dom';
+import { sampleData } from './sample';
 
 export const Main = () => {
   const { keyword, type } = useKeyword();
@@ -26,7 +27,7 @@ export const Main = () => {
         </div>
       </div>
       <div className="grow relative">
-        <Map keyword={keyword} type={type} />
+        <Map keyword={keyword} type={type} markerData={sampleData} />
         <div className="fixed right-[30px] bottom-[19px] z-50">
           <ButtonIcon text="location" icon={Location} />
         </div>

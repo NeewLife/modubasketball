@@ -2,6 +2,7 @@ import React from 'react';
 
 import { Meta, StoryObj } from '@storybook/react';
 import { Map } from '@components/organisms';
+import { sampleData } from '@pages/index';
 
 const meta: Meta<typeof Map> = {
   title: 'organisms/Map',
@@ -14,7 +15,7 @@ type Story = StoryObj<typeof Map>;
 export const Preview: Story = {
   render: () => (
     <div className="h-screen">
-      <Map keyword="" type="gps" />
+      <Map markerData={sampleData} keyword="" type="gps" />
     </div>
   ),
 };

@@ -1,4 +1,7 @@
 import React, { useEffect } from 'react';
+import { IMap } from '@services/index';
+
+import Marker from '@constants/image/marker.png';
 
 type PlaceTypes = {
   id: string;
@@ -16,14 +19,30 @@ type PlaceTypes = {
 };
 
 interface MapProps {
+  markerData: IMap[];
+
   type: 'search' | 'gps';
   keyword: string;
 }
 
 export const Map = (props: MapProps) => {
-  const { type, keyword } = props;
+  const { markerData = [], type, keyword } = props;
 
-  const callback = (map: any) => (data: PlaceTypes[], status: string) => {
+  const onMarkerHandler = (map: any) => (sMarkerData: IMap[]) => {
+    for (let i = 0; i < sMarkerData.length; i++) {
+      const markerImage = new window.kakao.maps.MarkerImage(Marker, new window.kakao.maps.Size(20, 30));
+
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const marker = new window.kakao.maps.Marker({
+        map: map,
+        position: new window.kakao.maps.LatLng(sMarkerData[i].lat, sMarkerData[i].lon),
+        image: markerImage,
+        clickable: true,
+      });
+    }
+  };
+
+  const onSearchHandler = (map: any) => (data: PlaceTypes[], status: string) => {
     if (status === window.kakao.maps.services.Status.OK) {
       const bounds = new window.kakao.maps.LatLngBounds();
       for (let i = 0; i < data.length; i++) {
@@ -45,7 +64,7 @@ export const Map = (props: MapProps) => {
 
     const ps = new window.kakao.maps.services.Places(map);
 
-    if (type === 'search') ps.keywordSearch(keyword, callback(map));
+    if (type === 'search') ps.keywordSearch(keyword, onSearchHandler(map));
     else {
       if (!navigator.geolocation) {
         alert('사용 불가');
@@ -59,6 +78,15 @@ export const Map = (props: MapProps) => {
         });
       }
     }
+
+    const markers = markerData.map((prop) => {
+      return {
+        lat: prop.lat,
+        lon: prop.lon,
+      };
+    });
+
+    onMarkerHandler(map)(markers);
   }, []);
 
   return <div id="map" className="w-full h-full" />;

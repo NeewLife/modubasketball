@@ -13,9 +13,10 @@ export const Preview: Story = {
   args: {
     text: '아스팔트',
     check: true,
+    rounded: 'all',
   },
   argTypes: {
-    key: {
+    id: {
       table: {
         disable: true,
       },
