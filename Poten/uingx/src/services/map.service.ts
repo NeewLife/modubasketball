@@ -1,7 +1,7 @@
 import { CustomAxios } from './common';
 
 export interface IMap {
-  id?: number;
+  id: number;
   lat?: number; // 위도
   lon?: number; // 경도
   courtType?: string; // 코트 종류
@@ -30,7 +30,7 @@ class MapService {
   }
 
   update(prop: IMap) {
-    return CustomAxios.post('/spot/update', prop);
+    return CustomAxios.put('/spot/update', prop);
   }
 
   delete(id: number) {

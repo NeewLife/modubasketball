@@ -1,21 +1,36 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { ButtonIcon, ButtonMedium, Headline } from '@components/atoms';
-import { Map } from '@components/organisms';
-
 import Location from '@constants/icon/location.svg';
 import Arrrow from '@constants/icon/arrow.svg';
 import LogoHeader from '@constants/image/logo-header.png';
-import { useKeyword } from '@utils/zustand';
+import { Map } from '@components/organisms';
+import { useKeyword, useUpdate } from '@utils/zustand';
+import { IMap, useMapService } from '@services/index';
+
 import { useNavigate } from 'react-router-dom';
-import { sampleData } from './sample';
+import { AxiosResponse } from 'axios';
 
 export const Main = () => {
   const { keyword, type } = useKeyword();
+  const { uMap } = useUpdate();
   const navigate = useNavigate();
+
+  const [markerData, setMarkerData] = useState<IMap[]>([]);
+  const [location, setLocation] = useState(0);
 
   const onClickPre = () => {
     navigate('/');
   };
+
+  const onClickLocation = () => {
+    setLocation(location + 1);
+  };
+
+  useEffect(() => {
+    useMapService.getAll().then((response: AxiosResponse<IMap[]>) => {
+      setMarkerData(response.data);
+    });
+  }, [uMap]);
 
   return (
     <div className="w-screen h-screen overflow-auto flex flex-col relative">
@@ -27,9 +42,9 @@ export const Main = () => {
         </div>
       </div>
       <div className="grow relative">
-        <Map keyword={keyword} type={type} markerData={sampleData} />
+        <Map keyword={keyword} type={type} markerData={markerData} isCenter={location} />
         <div className="fixed right-[30px] bottom-[19px] z-50">
-          <ButtonIcon text="location" icon={Location} />
+          <ButtonIcon text="location" icon={Location} onClick={onClickLocation} />
         </div>
         <div className="fixed right-[30px] bottom-[84px] z-50">
           <ButtonMedium text="농구장 제보하기" />

@@ -9,7 +9,8 @@ const customStyles = {
     width: '800px',
     bottom: 'auto',
     left: '50%',
-    transform: 'translate(-50%, 0)',
+    top: '50%',
+    transform: 'translate(-50%, -50%)',
   },
   overlay: {
     zIndex: 100,

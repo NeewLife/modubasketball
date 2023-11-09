@@ -26,6 +26,12 @@ module.exports = {
   devServer: {
     liveReload: true,
     port: 9095,
+    proxy: {
+      '/api': {
+        target: 'http://localhost:8080',
+        pathRewrite: { '/api': '/' },
+      },
+    },
   },
   module: {
     rules: [

@@ -3,8 +3,11 @@ import { Headline, Title } from '@components/atoms';
 import { Form, IFormTypes } from '@components/templates';
 
 import Edit from '@constants/icon/edit.svg';
+import { useModal } from '@utils/zustand/useModal';
+import { InfoEdit } from './InfoEdit';
 
 export interface InfoProps {
+  id: number;
   address: string;
   courtName: string;
   courtType: string;
@@ -18,6 +21,10 @@ export interface InfoProps {
 export const Info = (props: InfoProps) => {
   const { address, courtName, courtType, courtSize, goalPost, feeYn, parkYn, comment } = props;
 
+  const onClickEdit = () => {
+    useModal.setState(() => ({ children: <InfoEdit {...props} /> }));
+  };
+
   const formProps: IFormTypes[] = [
     {
       type: 'input',
@@ -25,6 +32,7 @@ export const Info = (props: InfoProps) => {
       prop: {
         disabled: true,
         text: courtType,
+        placeholder: '정보를 입력해주세요.',
       },
     },
     {
@@ -33,6 +41,7 @@ export const Info = (props: InfoProps) => {
       prop: {
         disabled: true,
         text: courtSize,
+        placeholder: '정보를 입력해주세요.',
       },
     },
     {
@@ -42,6 +51,7 @@ export const Info = (props: InfoProps) => {
         disabled: true,
         text: goalPost,
         type: 'number',
+        placeholder: '정보를 입력해주세요.',
       },
     },
     {
@@ -89,6 +99,8 @@ export const Info = (props: InfoProps) => {
         text: comment,
         rows: 3,
         disabled: true,
+        placeholder:
+          '저녁 9시가 지나면 조명이 꺼져서 어두워요, 농구 골대 높이가 약간 낮은편이에요 등 자유롭게 적어주세요.',
       },
     },
   ];
@@ -97,7 +109,7 @@ export const Info = (props: InfoProps) => {
     <div>
       <div className="flex items-center justify-between">
         <Headline type="main" text="농구장 정보" />
-        <img className="cursor-pointer mr-[37px]" alt="edit" src={Edit} />
+        <img className="cursor-pointer mr-[37px]" alt="edit" src={Edit} onClick={onClickEdit} />
       </div>
       <div className="mt-[8px]">
         <Title type="sub" text={address} />
