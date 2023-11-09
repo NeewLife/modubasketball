@@ -1,6 +1,6 @@
 import React, { ChangeEvent, DetailedHTMLProps, TextareaHTMLAttributes, useEffect, useState } from 'react';
 
-interface TextareaProps {
+export interface TextareaProps {
   text?: string;
   onTrackable?: (text: string) => void;
 }
@@ -24,11 +24,10 @@ export const Textarea = (
 
   return (
     <textarea
-      className={`w-full rounded-[10px] border border-gray-40 py-[18px] px-[20px] outline-none resize-none text-[18px] leading-normal font-[regular] ${className}`}
+      className={`w-full rounded-[10px] bg-gray-10 border border-gray-40 py-[18px] px-[20px] outline-none resize-none text-[18px] leading-normal font-[regular] ${className}`}
       onChange={onChange}
+      value={localText}
       {...prop}
-    >
-      {localText}
-    </textarea>
+    />
   );
 };

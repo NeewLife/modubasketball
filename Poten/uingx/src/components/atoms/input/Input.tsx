@@ -1,6 +1,6 @@
 import React, { ChangeEvent, DetailedHTMLProps, InputHTMLAttributes, useEffect, useState } from 'react';
 
-interface InputProps {
+export interface InputProps {
   text?: string;
   onTrackable?: (text: string) => void;
 }

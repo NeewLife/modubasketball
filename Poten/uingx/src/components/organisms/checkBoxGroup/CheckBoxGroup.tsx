@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { CheckBox } from '@components/molecules';
 
-interface CheckBoxGroupProps {
+export interface CheckBoxGroupProps {
   data: { id: string; text: string; check: boolean }[];
   onTrackable?: (id: string) => void;
 }

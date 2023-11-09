@@ -1,3 +1,5 @@
+const Scroll = require('tailwind-scrollbar');
+
 module.exports = {
   content: ['./src/**/*.{html,js,ts,tsx}'],
   theme: {
@@ -34,5 +36,5 @@ module.exports = {
     },
   },
 
-  plugins: [],
+  plugins: [Scroll],
 };
