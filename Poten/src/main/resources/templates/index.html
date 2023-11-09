@@ -182,6 +182,21 @@ function search(){
             document.getElementById('lat').value = result[0].y;
             document.getElementById('lon').value = result[0].x;
 
+            var chkDup = false;
+
+            function checkDup(element){
+                var lat = document.getElementById('lat').value;
+                var lon = document.getElementById('lon').value;
+                if(element.lat == lat && element.lon == lon){
+                    chkDup = true;
+                }
+                return chkDup;
+            }
+            if(mapList.some(checkDup) == true){
+                alert("중복됨");
+                location.href = "/";
+            }
+
             // 결과값으로 받은 위치를 마커로 표시합니다
             var marker = new kakao.maps.Marker({
                 map: map,
@@ -197,25 +212,15 @@ function search(){
             // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
             map.setCenter(coords);
         }
+
+
     })
+
+
+
 }
 
 function createSpot(){
-    var chkDup = false;
-
-    function checkDup(element){
-        var lat = document.getElementById('lat').value;
-        var lon = document.getElementById('lon').value;
-        if(element.lat == lat && element.lon == lon){
-            chkDup = true;
-        }
-        return chkDup;
-    }
-    if(mapList.some(checkDup) == true){
-        alert("중복됨");
-        location.href = "/";
-        return false;
-    }
     document.getElementById('createForm').submit();
 }
 </script>
