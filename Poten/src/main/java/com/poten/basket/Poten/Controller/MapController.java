@@ -24,13 +24,12 @@ public class MapController {
      * return 지도 데이터 형식 - com.poten.basket.Poten.VO.MapResponse
      * */
     @GetMapping("/")
-    public ModelAndView openMap(){
-        ModelAndView modelAndView = new ModelAndView();
-        List<MapResponse> mapList = mapService.mapList();
-        System.out.println("지도화면");
-        modelAndView.setViewName("index");
-        modelAndView.addObject("mapList", mapList);
-        return modelAndView;
+    public ResponseEntity<List<MapResponse>> openMap(){
+
+        List<MapResponse> mapList = List<MapResponse>.builder()
+                .data(mapService.mapList())
+                .build();
+        return ResponseEntity.ok(mapList);
     }
 
     /*
