@@ -187,7 +187,8 @@ function search(){
             function checkDup(element){
                 var lat = document.getElementById('lat').value;
                 var lon = document.getElementById('lon').value;
-                if(element.lat == lat && element.lon == lon){
+                console.log(element.address === address);
+                if(element.lat == lat && element.lon == lon || element.address === address){
                     chkDup = true;
                 }
                 return chkDup;
