@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Modal from 'react-modal';
 import { useModal } from '@utils/zustand/useModal';
 
@@ -36,6 +36,16 @@ const changeCustomStyles = {
 
 export const CustomModal = () => {
   const { open, change, changeChildren, children, setOpen, setClose } = useModal();
+
+  useEffect(() => {
+    if (change) {
+      setTimeout(() => {
+        setClose();
+        if (changeChildren.props.id !== 'end') setOpen(changeChildren);
+        useModal.setState(() => ({ change: false }));
+      }, 1500);
+    }
+  }, [change]);
 
   const onloaclSetClose = () => {
     setClose();
