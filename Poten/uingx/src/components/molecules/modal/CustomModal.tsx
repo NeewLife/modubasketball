@@ -11,6 +11,22 @@ const customStyles = {
     left: '50%',
     top: '50%',
     transform: 'translate(-50%, -50%)',
+    borderRadius: '30px',
+  },
+  overlay: {
+    zIndex: 100,
+    backgroundColor: 'rgba(26, 26, 26, 0.5)',
+  },
+};
+
+const changeCustomStyles = {
+  content: {
+    width: '360px',
+    bottom: 'auto',
+    left: '50%',
+    top: '50%',
+    transform: 'translate(-50%, -50%)',
+    borderRadius: '30px',
   },
   overlay: {
     zIndex: 100,
@@ -19,15 +35,29 @@ const customStyles = {
 };
 
 export const CustomModal = () => {
-  const { open, children, setClose } = useModal();
+  const { open, change, changeChildren, children, setOpen, setClose } = useModal();
+
+  const onloaclSetClose = () => {
+    setClose();
+    if (change) {
+      if (changeChildren.props.id !== 'end') setOpen(changeChildren);
+      useModal.setState(() => ({ change: false }));
+    }
+  };
 
   return (
-    <Modal isOpen={open} onRequestClose={setClose} style={customStyles}>
-      <div className="relative rounded-[30px] bg-gray-10 py-[45px] px-[55px] h-[800px] overflow-auto scrollbar-thin scrollbar-thumb-gray-30 scrollbar-track-gray-10">
+    <Modal isOpen={open} onRequestClose={onloaclSetClose} style={!change ? customStyles : changeCustomStyles}>
+      <div
+        className={`relative bg-gray-10 py-[45px] px-[55px] overflow-auto scrollbar-thin scrollbar-thumb-gray-30 scrollbar-track-gray-10 ${
+          !change && 'h-[80vh]'
+        }`}
+      >
         {children}
-        <div className="absolute top-[54px] right-[45px] cursor-pointer">
-          <img alt="close" src={Close} onClick={setClose} />
-        </div>
+        {!change && (
+          <div className="absolute top-[54px] right-[45px] cursor-pointer">
+            <img alt="close" src={Close} onClick={onloaclSetClose} />
+          </div>
+        )}
       </div>
     </Modal>
   );

@@ -1,10 +1,9 @@
 import React, { useMemo, useState } from 'react';
-import { Info, InfoProps, courtSizeData, courtTypeData, feeYnData, parkYnData } from '@pages/index';
+import { Info, InfoProps, courtSizeData, courtTypeData, feeYnData, parkYnData, InfoSuccess } from '@pages/index';
 import { ButtonBig, Headline, Input, Title } from '@components/atoms';
 import { Form, IFormTypes } from '@components/templates';
-import { useModal } from '@utils/zustand/useModal';
-import { useMapService } from '@services/map.service';
-import { useUpdate } from '@utils/zustand/useUpdate';
+import { useModal, useUpdate } from '@utils/zustand';
+import { useMapService } from '@services/index';
 
 interface InfoEditProps {
   type: 'update' | 'save';
@@ -42,21 +41,30 @@ export const InfoEdit = (props: InfoEditProps & InfoProps) => {
       useMapService.update(request).then((response) => {
         if (response.status === 200) {
           setMap();
-          useModal.setState(() => ({ children: <Info {...request} /> }));
+          useModal.setState(() => ({
+            change: true,
+            changeChildren: <Info {...request} />,
+            children: <InfoSuccess type="update" />,
+          }));
         }
       });
     } else {
       useMapService.save({ ...request, lat: lat, lon: lon }).then((response) => {
         if (response.status === 200) {
           setMap();
-          setClose();
+          useModal.setState(() => ({
+            change: true,
+            changeChildren: <div id="end" />,
+            children: <InfoSuccess type="save" />,
+          }));
         }
       });
     }
   };
 
   const onClickCancel = () => {
-    useModal.setState(() => ({ children: <Info {...props} /> }));
+    if (type === 'update') useModal.setState(() => ({ children: <Info {...props} /> }));
+    else setClose();
   };
 
   const onChangeInput = (key: string) => (text: string) => {
