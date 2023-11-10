@@ -4,7 +4,7 @@ import { Form, IFormTypes } from '@components/templates';
 
 import Edit from '@constants/icon/edit.svg';
 import { useModal } from '@utils/zustand/useModal';
-import { InfoEdit } from './InfoEdit';
+import { InfoEdit } from '@pages/index';
 
 export interface InfoProps {
   id: number;
@@ -22,7 +22,7 @@ export const Info = (props: InfoProps) => {
   const { address, courtName, courtType, courtSize, goalPost, feeYn, parkYn, comment } = props;
 
   const onClickEdit = () => {
-    useModal.setState(() => ({ children: <InfoEdit {...props} /> }));
+    useModal.setState(() => ({ children: <InfoEdit type="update" {...props} /> }));
   };
 
   const formProps: IFormTypes[] = [

@@ -17,6 +17,7 @@ export const Main = () => {
 
   const [markerData, setMarkerData] = useState<IMap[]>([]);
   const [location, setLocation] = useState(0);
+  const [edit, setEdit] = useState(0);
 
   const onClickPre = () => {
     navigate('/');
@@ -24,6 +25,10 @@ export const Main = () => {
 
   const onClickLocation = () => {
     setLocation(location + 1);
+  };
+
+  const onClickEdit = () => {
+    setEdit(edit + 1);
   };
 
   useEffect(() => {
@@ -42,12 +47,12 @@ export const Main = () => {
         </div>
       </div>
       <div className="grow relative">
-        <Map keyword={keyword} type={type} markerData={markerData} isCenter={location} />
+        <Map keyword={keyword} type={type} markerData={markerData} onCenter={location} onEdit={edit} />
         <div className="fixed right-[30px] bottom-[19px] z-50">
           <ButtonIcon text="location" icon={Location} onClick={onClickLocation} />
         </div>
         <div className="fixed right-[30px] bottom-[84px] z-50">
-          <ButtonMedium text="농구장 제보하기" />
+          <ButtonMedium text="농구장 제보하기" onClick={onClickEdit} />
         </div>
       </div>
     </div>

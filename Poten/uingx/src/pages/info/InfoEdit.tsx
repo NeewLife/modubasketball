@@ -6,16 +6,25 @@ import { useModal } from '@utils/zustand/useModal';
 import { useMapService } from '@services/map.service';
 import { useUpdate } from '@utils/zustand/useUpdate';
 
-export const InfoEdit = (props: InfoProps) => {
+interface InfoEditProps {
+  type: 'update' | 'save';
+  lat?: number;
+  lon?: number;
+}
+
+export const InfoEdit = (props: InfoEditProps & InfoProps) => {
+  const { type, lat, lon, ...prop } = props;
+
   const [data, setData] = useState({
     ...props,
-    courtType: courtTypeData.find((datum) => datum.text === props?.courtType)?.id,
-    courtSize: courtSizeData.find((datum) => datum.text === props?.courtSize)?.id,
-    feeYn: feeYnData.find((datum) => datum.text === props?.feeYn)?.id,
-    parkYn: parkYnData.find((datum) => datum.text === props?.parkYn)?.id,
+    courtType: courtTypeData.find((datum) => datum.text === prop.courtType)?.id,
+    courtSize: courtSizeData.find((datum) => datum.text === prop.courtSize)?.id,
+    feeYn: feeYnData.find((datum) => datum.text === prop.feeYn)?.id,
+    parkYn: parkYnData.find((datum) => datum.text === prop.parkYn)?.id,
   });
 
   const { setMap } = useUpdate();
+  const { setClose } = useModal();
 
   const onClickSave = () => {
     const request = {
@@ -29,12 +38,21 @@ export const InfoEdit = (props: InfoProps) => {
       comment: data.comment,
     } as InfoProps;
 
-    useMapService.update(request).then((response) => {
-      if (response.status === 200) {
-        setMap();
-        useModal.setState(() => ({ children: <Info {...request} /> }));
-      }
-    });
+    if (type === 'update') {
+      useMapService.update(request).then((response) => {
+        if (response.status === 200) {
+          setMap();
+          useModal.setState(() => ({ children: <Info {...request} /> }));
+        }
+      });
+    } else {
+      useMapService.save({ ...request, lat: lat, lon: lon }).then((response) => {
+        if (response.status === 200) {
+          setMap();
+          setClose();
+        }
+      });
+    }
   };
 
   const onClickCancel = () => {
@@ -127,7 +145,7 @@ export const InfoEdit = (props: InfoProps) => {
   return (
     <div>
       <div>
-        <Headline type="main" text="농구장 정보 수정하기" />
+        <Headline type="main" text={`${type === 'update' ? '농구장 정보 수정하기' : '농구장 제보하기'}`} />
       </div>
       <div className="mt-[8px]">
         <Title type="sub" text={data.address} />

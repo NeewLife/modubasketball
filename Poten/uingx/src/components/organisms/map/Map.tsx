@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { IMap } from '@services/index';
 
 import Marker from '@constants/image/marker.png';
+// import MarkerNow from '@constants/image/markerNow.png';
 import GeoLocation from '@constants/icon/geoLocation.svg';
 
 import { useModal } from '@utils/zustand/useModal';
-import { Info, InfoProps } from '@pages/info';
+import { Info, InfoEdit, InfoProps } from '@pages/info';
 
 type PlaceTypes = {
   id: string;
@@ -22,49 +23,51 @@ type PlaceTypes = {
   y: string;
 };
 
-// type GeocoderTypes = {
-//   address: {
-//     address_name: string;
-//     main_address_no: string;
-//     mountain_yn: string;
-//     region_1depth_name: string;
-//     region_2depth_name: string;
-//     region_3depth_name: string;
-//     sub_address_no: string;
-//     zip_code: string;
-//   };
-//   road_address: {
-//     address_name: string;
-//     building_name: string;
-//     main_building_no: string;
-//     region_1depth_name: string;
-//     region_2depth_name: string;
-//     region_3depth_name: string;
-//     road_name: string;
-//     sub_building_no: string;
-//     underground_yn: string;
-//     zone_no: string;
-//   };
-// };
+type GeocoderTypes = {
+  address: {
+    address_name: string;
+    main_address_no: string;
+    mountain_yn: string;
+    region_1depth_name: string;
+    region_2depth_name: string;
+    region_3depth_name: string;
+    sub_address_no: string;
+    zip_code: string;
+  };
+  road_address: {
+    address_name: string;
+    building_name: string;
+    main_building_no: string;
+    region_1depth_name: string;
+    region_2depth_name: string;
+    region_3depth_name: string;
+    road_name: string;
+    sub_building_no: string;
+    underground_yn: string;
+    zone_no: string;
+  };
+};
 
 interface MapProps {
   markerData: IMap[];
-  isCenter?: number;
+  onCenter?: number;
+
+  onEdit?: number;
 
   type: 'search' | 'gps';
   keyword: string;
 }
 
 export const Map = (props: MapProps) => {
-  const { markerData = [], type, keyword, isCenter = 0 } = props;
+  const { markerData = [], type, keyword, onCenter = 0, onEdit = 0 } = props;
 
   const { setOpen } = useModal();
   const [localMap, setLocalMap] = useState();
 
-  // const onGecoderHandler = (lat?: number, lon?: number, callback?: (result: GeocoderTypes[]) => void) => {
-  //   const gecoder = new window.kakao.maps.services.Geocoder();
-  //   gecoder.coord2Address(lon, lat, callback);
-  // };
+  const onGecoderHandler = (lat?: number, lon?: number, callback?: (result: GeocoderTypes[]) => void) => {
+    const gecoder = new window.kakao.maps.services.Geocoder();
+    gecoder.coord2Address(lon, lat, callback);
+  };
 
   const onClustererHandler = (map: any, markers: any[]) => {
     const clusterer = new window.kakao.maps.MarkerClusterer({
@@ -179,7 +182,40 @@ export const Map = (props: MapProps) => {
 
   useEffect(() => {
     if (localMap) onGeoLocationHandler(localMap);
-  }, [isCenter]);
+  }, [onCenter]);
+
+  useEffect(() => {
+    if (localMap && onEdit) {
+      const option = {
+        map: localMap,
+        drawingMode: [window.kakao.maps.drawing.OverlayType.MARKER],
+      };
+
+      const manager = new window.kakao.maps.drawing.DrawingManager(option);
+      manager.select(window.kakao.maps.drawing.OverlayType.MARKER);
+
+      manager.addListener('drawend', (data: any) => {
+        const position = data.coords.toLatLng();
+
+        onGecoderHandler(position.getLat(), position.getLng(), (result) => {
+          if (result.length === 0) {
+            alert('생성 불가 지역');
+            return;
+          }
+
+          const address = result[0].road_address ? result[0].road_address.address_name : result[0].address.address_name;
+
+          const infoData = {
+            address: address,
+          } as InfoProps;
+
+          setOpen(<InfoEdit type="save" {...infoData} lat={position.getLat()} lon={position.getLng()} />);
+        });
+
+        manager.remove(data.target);
+      });
+    }
+  }, [onEdit]);
 
   return <div id="map" className="w-full h-full" />;
 };

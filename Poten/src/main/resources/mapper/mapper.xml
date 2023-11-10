@@ -63,6 +63,7 @@
             <!-- , shower_yn = #{showerYn} -->
             , park_yn = #{parkYn}
             , modify_date = NOW()
+            , court_name = #{courtName}
             , comment = #{comment}
         WHERE
             id = #{id}

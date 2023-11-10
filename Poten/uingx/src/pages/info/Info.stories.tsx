@@ -13,7 +13,7 @@ export const Preview: Story = {
   args: {
     address: '서울 영등포구 양원동 33-3',
     courtName: '이촌 한강공원 농구장',
-    courtType: '4',
+    courtType: '아스팔트',
     courtSize: '풀코트',
     goalPost: '4',
     feeYn: '무료',
