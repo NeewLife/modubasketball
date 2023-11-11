@@ -46,7 +46,7 @@ public class MapController {
    * 지도 데이터 삭제
    * 필요 params - lat(위도), lon(경도)
    * */
-  @DeleteMapping("/spot/delete")
+  @DeleteMapping("/spot/delete/${id}")
   public ResponseEntity deleteSpot(@PathVariable int id) {
     System.out.println("====================delete====================");
     System.out.println(id);
