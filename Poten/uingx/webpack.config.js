@@ -80,6 +80,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: './public/index.html',
+      favicon: './public/logo.png',
       minify:
         webpackMode === 'production'
           ? {
@@ -89,8 +90,8 @@ module.exports = {
           : false,
     }),
     new CleanWebpackPlugin(),
-    new CopyWebpackPlugin({
-      patterns: [{ from: './public/logo.png', to: './logo.png' }],
-    }),
+    // new CopyWebpackPlugin({
+    //   patterns: [{ from: './public/logo.png', to: './logo.png' }],
+    // }),
   ],
 };
