@@ -5,6 +5,9 @@ import { Form, IFormTypes } from '@components/templates';
 import { useModal, useUpdate } from '@utils/zustand';
 import { useMapService } from '@services/index';
 
+import Delete from '@constants/icon/delete.svg';
+import DeleteBig from '@constants/icon/deleteBig.svg';
+
 interface InfoEditProps {
   type: 'update' | 'save';
   lat?: number;
@@ -44,7 +47,7 @@ export const InfoEdit = (props: InfoEditProps & InfoProps) => {
           useModal.setState(() => ({
             change: true,
             changeChildren: <Info {...request} />,
-            children: <InfoSuccess type="update" />,
+            children: <InfoSuccess type="수정이 완료되었습니다." message="농구장 정보로 이동합니다." />,
           }));
         }
       });
@@ -55,7 +58,7 @@ export const InfoEdit = (props: InfoEditProps & InfoProps) => {
           useModal.setState(() => ({
             change: true,
             changeChildren: <div id="end" />,
-            children: <InfoSuccess type="save" />,
+            children: <InfoSuccess type="저장이 완료되었습니다." message="지도로 이동합니다." />,
           }));
         }
       });
@@ -65,6 +68,25 @@ export const InfoEdit = (props: InfoEditProps & InfoProps) => {
   const onClickCancel = () => {
     if (type === 'update') useModal.setState(() => ({ children: <Info {...props} /> }));
     else setClose();
+  };
+
+  const onClickDelete = () => {
+    useMapService.delete(props?.id).then((response) => {
+      if (response.status === 200) {
+        setMap();
+        useModal.setState(() => ({
+          change: true,
+          changeChildren: <div id="end" />,
+          children: (
+            <InfoSuccess
+              type="삭제 요청 되었습니다."
+              message="해당 농구장은 관리자 확인 후 삭제 됩니다."
+              icon={DeleteBig}
+            />
+          ),
+        }));
+      }
+    });
   };
 
   const onChangeInput = (key: string) => (text: string) => {
@@ -152,8 +174,11 @@ export const InfoEdit = (props: InfoEditProps & InfoProps) => {
 
   return (
     <div>
-      <div>
+      <div className="flex items-center justify-between">
         <Headline type="main" text={`${type === 'update' ? '농구장 정보 수정하기' : '농구장 제보하기'}`} />
+        {type === 'update' && (
+          <img className="cursor-pointer mr-[37px]" alt="delete" src={Delete} onClick={onClickDelete} />
+        )}
       </div>
       <div className="mt-[8px]">
         <Title type="sub" text={data.address} />
@@ -163,6 +188,7 @@ export const InfoEdit = (props: InfoEditProps & InfoProps) => {
           text={data.courtName}
           onTrackable={onChangeInput('courtName')}
           placeholder="농구장 이름을 입력해주세요."
+          regex={{ regex: /^[A-Za-z0-9가-힣]{0,20}$/, message: '20자 이내로 입력해주세요.' }}
         />
       </div>
       <div className="mt-[58px] pl-[20px]">
