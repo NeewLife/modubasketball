@@ -72,9 +72,12 @@
     </update>
 
     <delete id="mapDel" parameterType="map">
-        DELETE FROM basket_spot
+        UPDATE basket_spot
+        SET
+            del_req = del_req + 1
         WHERE
-            lat = #{lat}
-        AND lon = #{lon}
+            id = #{id}
+<!--             lat = #{lat}
+        AND lon = #{lon} -->
     </delete>
 </mapper>
