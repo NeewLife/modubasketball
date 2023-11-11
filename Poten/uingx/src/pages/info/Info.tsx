@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Headline, Title } from '@components/atoms';
 import { Form, IFormTypes } from '@components/templates';
 
@@ -105,12 +105,21 @@ export const Info = (props: InfoProps) => {
     },
   ];
 
+  useEffect(() => {
+    useModal.setState(() => ({
+      width: '800px',
+      height: true,
+      close: true,
+      edit: {
+        icon: Edit,
+        onClick: onClickEdit,
+      },
+    }));
+  }, []);
+
   return (
-    <div>
-      <div className="flex items-center justify-between">
-        <Headline type="main" text="농구장 정보" />
-        <img className="cursor-pointer mr-[37px]" alt="edit" src={Edit} onClick={onClickEdit} />
-      </div>
+    <div className="pt-[10px] pr-[40px] pl-[20px]">
+      <Headline type="main" text="농구장 정보" />
       <div className="mt-[8px]">
         <Title type="sub" text={address} />
       </div>

@@ -4,38 +4,27 @@ import { useModal } from '@utils/zustand/useModal';
 
 import Close from '@constants/icon/close.svg';
 
-const customStyles = {
-  content: {
-    width: '800px',
-    bottom: 'auto',
-    left: '50%',
-    top: '50%',
-    transform: 'translate(-50%, -50%)',
-    borderRadius: '30px',
-  },
-  overlay: {
-    zIndex: 100,
-    backgroundColor: 'rgba(26, 26, 26, 0.5)',
-  },
-};
-
-const changeCustomStyles = {
-  content: {
-    width: '360px',
-    bottom: 'auto',
-    left: '50%',
-    top: '50%',
-    transform: 'translate(-50%, -50%)',
-    borderRadius: '30px',
-  },
-  overlay: {
-    zIndex: 100,
-    backgroundColor: 'rgba(26, 26, 26, 0.5)',
-  },
+const customStyles = (width: string) => {
+  return {
+    content: {
+      width: `${width}`,
+      bottom: 'auto',
+      left: '50%',
+      top: '50%',
+      transform: 'translate(-50%, -50%)',
+      borderRadius: '30px',
+      padding: '35px',
+      overflow: 'hidden',
+    },
+    overlay: {
+      zIndex: 100,
+      backgroundColor: 'rgba(26, 26, 26, 0.5)',
+    },
+  };
 };
 
 export const CustomModal = () => {
-  const { open, change, changeChildren, children, setOpen, setClose } = useModal();
+  const { open, change, changeChildren, children, width, height, close, edit, setOpen, setClose } = useModal();
 
   useEffect(() => {
     if (change) {
@@ -56,18 +45,17 @@ export const CustomModal = () => {
   };
 
   return (
-    <Modal isOpen={open} onRequestClose={onloaclSetClose} style={!change ? customStyles : changeCustomStyles}>
+    <Modal isOpen={open} onRequestClose={onloaclSetClose} style={customStyles(width)}>
       <div
-        className={`relative bg-gray-10 py-[45px] px-[55px] overflow-auto scrollbar-thin scrollbar-thumb-gray-30 scrollbar-track-gray-10 ${
-          !change && 'h-[80vh]'
+        className={`relative bg-gray-10 scrollbar-thin scrollbar-thumb-gray-30 scrollbar-track-gray-10 overflow-auto ${
+          height && 'h-[80vh]'
         }`}
       >
         {children}
-        {!change && (
-          <div className="absolute top-[54px] right-[45px] cursor-pointer">
-            <img alt="close" src={Close} onClick={onloaclSetClose} />
-          </div>
-        )}
+        <div className="absolute top-0 right-0 flex gap-[18px]">
+          {edit && <img className="cursor-pointer" alt="eidt" src={edit.icon} onClick={edit.onClick} />}
+          {close && <img className="cursor-pointer" alt="close" src={Close} onClick={onloaclSetClose} />}
+        </div>
       </div>
     </Modal>
   );

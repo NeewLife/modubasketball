@@ -7,6 +7,15 @@ export interface IModal {
 
   change: boolean;
   changeChildren: JSX.Element;
+
+  width: string;
+  height: boolean;
+
+  close: boolean;
+  edit?: {
+    icon: string;
+    onClick: () => void;
+  };
 }
 
 interface IUseModal extends IModal {
@@ -18,6 +27,9 @@ export const useModal = create<IUseModal>((set) => ({
   open: false,
   change: false,
   changeChildren: <div />,
+  close: true,
+  width: 'auto',
+  height: true,
   setOpen: (children) => {
     set(() => ({ open: true, children: children }));
   },

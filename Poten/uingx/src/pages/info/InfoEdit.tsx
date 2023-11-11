@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Info, InfoProps, courtSizeData, courtTypeData, feeYnData, parkYnData, InfoSuccess } from '@pages/index';
 import { ButtonBig, Headline, Input, Title } from '@components/atoms';
 import { Form, IFormTypes } from '@components/templates';
@@ -172,14 +172,25 @@ export const InfoEdit = (props: InfoEditProps & InfoProps) => {
     [data],
   );
 
+  useEffect(() => {
+    useModal.setState(() => ({
+      width: '800px',
+      height: true,
+      close: true,
+    }));
+
+    if (type === 'update')
+      useModal.setState(() => ({
+        edit: {
+          icon: Delete,
+          onClick: onClickDelete,
+        },
+      }));
+  }, []);
+
   return (
-    <div>
-      <div className="flex items-center justify-between">
-        <Headline type="main" text={`${type === 'update' ? '농구장 정보 수정하기' : '농구장 제보하기'}`} />
-        {type === 'update' && (
-          <img className="cursor-pointer mr-[37px]" alt="delete" src={Delete} onClick={onClickDelete} />
-        )}
-      </div>
+    <div className="pt-[10px] pr-[40px] pl-[20px]">
+      <Headline type="main" text={`${type === 'update' ? '농구장 정보 수정하기' : '농구장 제보하기'}`} />
       <div className="mt-[8px]">
         <Title type="sub" text={data.address} />
       </div>
