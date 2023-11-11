@@ -3,16 +3,20 @@ import { ButtonIcon, ButtonMedium, Headline } from '@components/atoms';
 import Location from '@constants/icon/location.svg';
 import Arrrow from '@constants/icon/arrow.svg';
 import LogoHeader from '@constants/image/logo-header.png';
+import FeedbackIcon from '@constants/icon/feedback.svg';
 import { Map } from '@components/organisms';
-import { useKeyword, useUpdate } from '@utils/zustand';
+import { useKeyword, useModal, useUpdate } from '@utils/zustand';
 import { IMap, useMapService } from '@services/index';
 
 import { useNavigate } from 'react-router-dom';
 import { AxiosResponse } from 'axios';
+import { Feedback } from '@pages/index';
 
 export const Main = () => {
   const { keyword, type } = useKeyword();
   const { uMap } = useUpdate();
+  const { setOpen } = useModal();
+
   const navigate = useNavigate();
 
   const [markerData, setMarkerData] = useState<IMap[]>([]);
@@ -25,6 +29,10 @@ export const Main = () => {
 
   const onClickLocation = () => {
     setLocation(location + 1);
+  };
+
+  const onClickFeedback = () => {
+    setOpen(<Feedback />);
   };
 
   const onClickEdit = () => {
@@ -48,10 +56,9 @@ export const Main = () => {
       </div>
       <div className="grow relative">
         <Map keyword={keyword} type={type} markerData={markerData} onCenter={location} onEdit={edit} />
-        <div className="fixed right-[30px] bottom-[19px] z-50">
+        <div className="fixed right-[30px] bottom-[42px] z-50 flex flex-col items-end gap-[15px]">
+          <ButtonIcon text="feedback" icon={FeedbackIcon} onClick={onClickFeedback} color="" />
           <ButtonIcon text="location" icon={Location} onClick={onClickLocation} />
-        </div>
-        <div className="fixed right-[30px] bottom-[84px] z-50">
           <ButtonMedium text="농구장 제보하기" onClick={onClickEdit} />
         </div>
       </div>

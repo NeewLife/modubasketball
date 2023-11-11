@@ -31,13 +31,13 @@ export const InfoEdit = (props: InfoEditProps & InfoProps) => {
   const onClickSave = () => {
     const request = {
       ...props,
-      courtName: data.courtName,
+      courtName: data.courtName.trim(),
       courtType: courtTypeData.find((datum) => datum.id === data.courtType)?.text,
       courtSize: courtSizeData.find((datum) => datum.id === data.courtSize)?.text,
       goalPost: data.goalPost,
       feeYn: feeYnData.find((datum) => datum.id === data.feeYn)?.text,
       parkYn: parkYnData.find((datum) => datum.id === data.parkYn)?.text,
-      comment: data.comment,
+      comment: data.comment.trim(),
     } as InfoProps;
 
     if (type === 'update') {

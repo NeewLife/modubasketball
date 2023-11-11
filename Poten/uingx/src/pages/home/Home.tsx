@@ -7,15 +7,18 @@ import Layer3 from '@constants/image/layer3.png';
 import Fotter from '@constants/image/fotter.png';
 import LogoFotter from '@constants/image/logo-fotter.png';
 import Header from '@constants/image/header.png';
+import Message from '@constants/image/message.png';
 
-import { Body, ButtonLong, Display, Headline } from '@components/atoms';
+import { Body, ButtonBig, ButtonLong, Display, Headline } from '@components/atoms';
 import { SearchBar } from '@components/molecules';
-import { useKeyword } from '@utils/zustand';
+import { useKeyword, useModal } from '@utils/zustand';
 import { useNavigate } from 'react-router-dom';
+import { Feedback } from '@pages/index';
 
 export const Home = () => {
   const [search, setSearch] = useState('');
   const { type, setType } = useKeyword();
+  const { setOpen } = useModal();
 
   const navigate = useNavigate();
 
@@ -44,6 +47,10 @@ export const Home = () => {
 
   const onClickGps = () => {
     onSearchAction('gps');
+  };
+
+  const onClickFeedback = () => {
+    setOpen(<Feedback />);
   };
 
   return (
@@ -110,10 +117,32 @@ export const Home = () => {
       <div className="h-[592px] flex items-center justify-center">
         <img alt="fotter" src={Fotter} />
       </div>
+      <div className="bg-gray-20 h-[300px]">123</div>
+      <div className="bg-secondary-10 h-[696px] flex flex-col items-center justify-center">
+        <div>
+          <Headline type="main" text="모두의 농구장이 도움이 되었나요?" color="text-brand-30" />
+        </div>
+        <div className="flex flex-col items-center mt-[12px]">
+          <Body text="모두의 농구장을 이용하시는 모든 분들의 의견은" />
+          <Body text="서비스를 개선하는 데 도움이 됩니다." />
+        </div>
+        <img className="mt-[22px]" alt="message" src={Message} />
+        <ButtonBig className="mt-[37px]" text="피드백 남기기" onClick={onClickFeedback} />
+      </div>
       <div className="h-[200px] flex items-center justify-between bg-gray-20">
-        <img alt="logoFotter" src={LogoFotter} className="pl-[119px]" />
-        <div className="pr-[106px]">
+        <div className="pl-[119px]">
+          <img className="mb-[14px]" alt="logoFotter" src={LogoFotter} />
           <Body text="© 2023. Modubasketball. All rights reserved." />
+        </div>
+        <div className="pr-[106px] flex">
+          <div className="flex flex-col w-20">
+            <Body text="Tel" />
+            <Body text="E-mail" />
+          </div>
+          <div className="flex flex-col">
+            <Body text="0507-0178-0372" />
+            <Body text="wonder.gwb@gmail.com" />
+          </div>
         </div>
       </div>
     </div>
