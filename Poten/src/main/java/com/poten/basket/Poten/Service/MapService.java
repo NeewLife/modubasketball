@@ -31,4 +31,6 @@ public class MapService {
     public void mapDel(int params){
         mapDAO.mapDel(params);
     }
+
+    public void feedback(HashMap<String, Object> params){mapDAO.feedback(params);}
 }

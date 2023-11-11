@@ -20,4 +20,6 @@ public interface MapDAO {
     void mapUpt(MapRequest params);
 
     void mapDel(int params);
+
+    void feedback(HashMap<String, Object> params);
 }

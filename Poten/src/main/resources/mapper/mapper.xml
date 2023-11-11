@@ -23,6 +23,16 @@
         FROM basket_spot
     </select>
 
+    <insert id="feedback" parameterType="map">
+        INSERT INTO feedback(
+            fd_comment
+            , fd_rating
+        ) VALUES(
+            #{fdComment}
+            , #{fdRating}
+        )
+    </insert>
+
     <insert id="mapCre" parameterType="com.poten.basket.Poten.VO.MapRequest">
         INSERT INTO basket_spot (
             lat

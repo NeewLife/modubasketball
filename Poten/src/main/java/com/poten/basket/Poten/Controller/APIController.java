@@ -3,17 +3,17 @@ package com.poten.basket.Poten.Controller;
 import com.poten.basket.Poten.Service.MapService;
 import com.poten.basket.Poten.VO.MapRequest;
 import com.poten.basket.Poten.VO.MapResponse;
+
 import java.util.HashMap;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 @RestController
 @RequestMapping("/api")
-public class MapController {
+public class APIController {
 
   @Autowired
   MapService mapService;
@@ -66,5 +66,15 @@ public class MapController {
     System.out.println("update의 params = " + params);
     mapService.mapUpt(params);
     return new ResponseEntity(params, HttpStatus.OK);
+  }
+
+  @PostMapping("/feedback")
+  public ResponseEntity feedback(@RequestParam int fdRating
+                               , @RequestParam String fdComment){
+      HashMap<String, Object> params = new HashMap<>();
+      params.put("fdRating", fdRating);
+      params.put("fdComment", fdComment);
+      mapService.feedback(params);
+      return new ResponseEntity(params, HttpStatus.OK);
   }
 }
