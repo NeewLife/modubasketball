@@ -27,7 +27,6 @@ export const Input = (
     setLocalText(event.target.value);
 
     if (regex) setMatch(regex.regex.test(event.target.value));
-    // const match = /^[A-Za-z0-9가-힣]{0,20}$/.test(event.target.value);
     onTrackable(event.target.value, match);
   };
 

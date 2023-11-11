@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { IMap } from '@services/index';
 
 import Marker from '@constants/image/marker.png';
-// import MarkerNow from '@constants/image/markerNow.png';
 import GeoLocation from '@constants/icon/geoLocation.svg';
 
 import { useModal } from '@utils/zustand/useModal';
@@ -52,17 +51,19 @@ interface MapProps {
   markerData: IMap[];
   onCenter?: number;
 
-  onEdit?: number;
+  isEdit?: boolean;
+  onTrackable?: (isEdit: boolean) => void;
 
   type: 'search' | 'gps';
   keyword: string;
 }
 
 export const Map = (props: MapProps) => {
-  const { markerData = [], type, keyword, onCenter = 0, onEdit = 0 } = props;
+  const { markerData = [], type, keyword, onCenter = 0, isEdit = false, onTrackable = () => [] } = props;
 
   const { setOpen } = useModal();
   const [localMap, setLocalMap] = useState();
+  const [localManager, setLocalManager] = useState<any>();
 
   const onGecoderHandler = (lat?: number, lon?: number, callback?: (result: GeocoderTypes[]) => void) => {
     const gecoder = new window.kakao.maps.services.Geocoder();
@@ -152,6 +153,37 @@ export const Map = (props: MapProps) => {
     });
   };
 
+  const onSearchCenter = (map: any) => {
+    const ps = new window.kakao.maps.services.Places(map);
+    ps.keywordSearch(keyword, onSearchHandler(map));
+  };
+
+  const onManagerHandler = (manager: any) => {
+    manager.select(window.kakao.maps.drawing.OverlayType.MARKER);
+
+    manager.addListener('drawend', (data: any) => {
+      const position = data.coords.toLatLng();
+
+      onGecoderHandler(position.getLat(), position.getLng(), (result) => {
+        if (result.length === 0) {
+          alert('생성 불가 지역');
+          return;
+        }
+
+        const address = result[0].road_address ? result[0].road_address.address_name : result[0].address.address_name;
+
+        const infoData = {
+          address: address,
+        } as InfoProps;
+
+        setOpen(<InfoEdit type="save" {...infoData} lat={position.getLat()} lon={position.getLng()} />);
+        onTrackable(!isEdit);
+      });
+
+      manager.remove(data.target);
+    });
+  };
+
   useEffect(() => {
     const container = document.getElementById('map');
     const options = {
@@ -160,9 +192,8 @@ export const Map = (props: MapProps) => {
     };
 
     const map = new window.kakao.maps.Map(container, options);
-    const ps = new window.kakao.maps.services.Places(map);
 
-    if (type === 'search') ps.keywordSearch(keyword, onSearchHandler(map));
+    if (type === 'search') onSearchCenter(map);
     else {
       if (!navigator.geolocation) {
         alert('사용 불가');
@@ -171,7 +202,19 @@ export const Map = (props: MapProps) => {
       }
     }
     setLocalMap(map);
+    setLocalManager(
+      new window.kakao.maps.drawing.DrawingManager({
+        map: map,
+        drawingMode: [window.kakao.maps.drawing.OverlayType.MARKER],
+      }),
+    );
   }, []);
+
+  useEffect(() => {
+    if (localMap) {
+      onSearchCenter(localMap);
+    }
+  }, [keyword]);
 
   useEffect(() => {
     if (localMap) {
@@ -185,37 +228,11 @@ export const Map = (props: MapProps) => {
   }, [onCenter]);
 
   useEffect(() => {
-    if (localMap && onEdit) {
-      const option = {
-        map: localMap,
-        drawingMode: [window.kakao.maps.drawing.OverlayType.MARKER],
-      };
-
-      const manager = new window.kakao.maps.drawing.DrawingManager(option);
-      manager.select(window.kakao.maps.drawing.OverlayType.MARKER);
-
-      manager.addListener('drawend', (data: any) => {
-        const position = data.coords.toLatLng();
-
-        onGecoderHandler(position.getLat(), position.getLng(), (result) => {
-          if (result.length === 0) {
-            alert('생성 불가 지역');
-            return;
-          }
-
-          const address = result[0].road_address ? result[0].road_address.address_name : result[0].address.address_name;
-
-          const infoData = {
-            address: address,
-          } as InfoProps;
-
-          setOpen(<InfoEdit type="save" {...infoData} lat={position.getLat()} lon={position.getLng()} />);
-        });
-
-        manager.remove(data.target);
-      });
+    if (localManager) {
+      if (isEdit) onManagerHandler(localManager);
+      else localManager.cancel();
     }
-  }, [onEdit]);
+  }, [isEdit]);
 
   return <div id="map" className="w-full h-full" />;
 };

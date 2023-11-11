@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { KeyboardEvent, useEffect, useState } from 'react';
 import { ButtonIcon, ButtonMedium, Headline } from '@components/atoms';
 import Location from '@constants/icon/location.svg';
 import Arrrow from '@constants/icon/arrow.svg';
@@ -11,6 +11,7 @@ import { IMap, useMapService } from '@services/index';
 import { useNavigate } from 'react-router-dom';
 import { AxiosResponse } from 'axios';
 import { Feedback } from '@pages/index';
+import { SearchBar } from '@components/molecules';
 
 export const Main = () => {
   const { keyword, type } = useKeyword();
@@ -21,7 +22,11 @@ export const Main = () => {
 
   const [markerData, setMarkerData] = useState<IMap[]>([]);
   const [location, setLocation] = useState(0);
-  const [edit, setEdit] = useState(0);
+
+  const [isEdit, setIsEdit] = useState(false);
+
+  const [localKeyword, setLocalKeyword] = useState(keyword);
+  const [sendKeyword, setSendKeyword] = useState(keyword);
 
   const onClickPre = () => {
     navigate('/');
@@ -36,7 +41,25 @@ export const Main = () => {
   };
 
   const onClickEdit = () => {
-    setEdit(edit + 1);
+    setIsEdit(!isEdit);
+  };
+
+  const onTrackableEdit = (sIsEdit: boolean) => {
+    setIsEdit(sIsEdit);
+  };
+
+  const onChangeKeyword = (text: string) => {
+    setLocalKeyword(text);
+  };
+
+  const onKeyDownKeyword = (event: KeyboardEvent<HTMLInputElement>) => {
+    event.stopPropagation();
+
+    if (event.key === 'Enter') setSendKeyword(localKeyword);
+  };
+
+  const onSearchKeyword = () => {
+    setSendKeyword(localKeyword);
   };
 
   useEffect(() => {
@@ -44,6 +67,12 @@ export const Main = () => {
       setMarkerData(response.data);
     });
   }, [uMap]);
+
+  useEffect(() => {
+    window.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') setIsEdit(false);
+    });
+  }, []);
 
   return (
     <div className="w-screen h-screen overflow-auto flex flex-col relative">
@@ -55,7 +84,26 @@ export const Main = () => {
         </div>
       </div>
       <div className="grow relative">
-        <Map keyword={keyword} type={type} markerData={markerData} onCenter={location} onEdit={edit} />
+        <Map
+          keyword={sendKeyword}
+          type={type}
+          markerData={markerData}
+          onCenter={location}
+          isEdit={isEdit}
+          onTrackable={onTrackableEdit}
+        />
+        <div className="absolute left-[32px] top-[20px] z-50">
+          {type === 'search' && (
+            <SearchBar
+              className="h-[50px] w-[320px]"
+              value={localKeyword}
+              onKeyDown={onKeyDownKeyword}
+              onSearch={onSearchKeyword}
+              onTrackable={onChangeKeyword}
+            />
+          )}
+        </div>
+
         <div className="fixed right-[30px] bottom-[42px] z-50 flex flex-col items-end gap-[15px]">
           <ButtonIcon text="feedback" icon={FeedbackIcon} onClick={onClickFeedback} color="" />
           <ButtonIcon text="location" icon={Location} onClick={onClickLocation} />

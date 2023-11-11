@@ -12,7 +12,7 @@ interface SearchBarProps {
 export const SearchBar = (
   props: SearchBarProps & DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>,
 ) => {
-  const { text = '', onTrackable = () => {}, onSearch = () => {}, ...prop } = props;
+  const { text = '', onTrackable = () => {}, onSearch = () => {}, className, ...prop } = props;
 
   const [localText, setLocalText] = useState(text);
 
@@ -29,7 +29,7 @@ export const SearchBar = (
     <div className="relative flex items-center cursor-pointer">
       <Input
         type="text"
-        className="shadow-custom pr-[54px] placeholder:text-gray-50 placeholder:font-[semiBold] placeholder:text-[18px] placeholder:leading-normal"
+        className={`shadow-custom pr-[54px] placeholder:text-gray-50 placeholder:font-[semiBold] placeholder:text-[18px] placeholder:leading-normal ${className}`}
         placeholder="위치-장소를 검색하세요"
         value={localText}
         onTrackable={onChange}
