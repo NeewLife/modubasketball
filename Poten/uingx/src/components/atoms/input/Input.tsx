@@ -26,8 +26,14 @@ export const Input = (
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
     setLocalText(event.target.value);
 
-    if (regex) setMatch(regex.regex.test(event.target.value));
-    onTrackable(event.target.value, match);
+    if (regex) {
+      const sMatch = regex.regex.test(event.target.value);
+
+      setMatch(sMatch);
+      onTrackable(event.target.value, sMatch);
+    } else {
+      onTrackable(event.target.value);
+    }
   };
 
   return (

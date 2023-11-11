@@ -80,7 +80,7 @@ export const Main = () => {
         <img alt="loadHeader" src={LogoHeader} />
         <div className="absolute inset-0 flex items-center pl-[10px]">
           <img className="cursor-pointer mr-[26px]" alt="arrow" src={Arrrow} onClick={onClickPre} />
-          <Headline type="sub" text={type === 'search' ? keyword : '내 주변 찾기'} />
+          {type === 'gps' && <Headline type="sub" text="내 주변 찾기" />}
         </div>
       </div>
       <div className="grow relative">

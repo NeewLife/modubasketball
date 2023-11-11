@@ -25,19 +25,29 @@ export const InfoEdit = (props: InfoEditProps & InfoProps) => {
     parkYn: parkYnData.find((datum) => datum.text === prop.parkYn)?.id,
   });
 
+  const [match, setMatch] = useState({
+    courtName: true,
+    goalPost: true,
+  });
+
+  const isMatch = useMemo(
+    () => Object.values(match).every((value) => value === true),
+    [match.courtName, match.goalPost],
+  );
+
   const { setMap } = useUpdate();
   const { setClose } = useModal();
 
   const onClickSave = () => {
     const request = {
       ...props,
-      courtName: data.courtName.trim(),
+      courtName: data.courtName ? data.courtName.trim() : '',
       courtType: courtTypeData.find((datum) => datum.id === data.courtType)?.text,
       courtSize: courtSizeData.find((datum) => datum.id === data.courtSize)?.text,
       goalPost: data.goalPost,
       feeYn: feeYnData.find((datum) => datum.id === data.feeYn)?.text,
       parkYn: parkYnData.find((datum) => datum.id === data.parkYn)?.text,
-      comment: data.comment.trim(),
+      comment: data.comment ? data.comment.trim() : '',
     } as InfoProps;
 
     if (type === 'update') {
@@ -89,8 +99,10 @@ export const InfoEdit = (props: InfoEditProps & InfoProps) => {
     });
   };
 
-  const onChangeInput = (key: string) => (text: string) => {
+  const onChangeInput = (key: string) => (text: string, sMatch?: boolean) => {
     setData({ ...data, [key]: text });
+
+    if (key === 'courtName' || key === 'goalPost') setMatch({ ...match, [key]: !!sMatch });
   };
 
   const formProps: IFormTypes[] = useMemo(
@@ -129,6 +141,7 @@ export const InfoEdit = (props: InfoEditProps & InfoProps) => {
           type: 'number',
           onTrackable: onChangeInput('goalPost'),
           placeholder: '정보를 입력해주세요.',
+          regex: { regex: /^[0-9]{1}$|^[1]{1}[0-9]{1}$/, message: '0 ~ 19사이로 입력해주세요.' },
         },
       },
       {
@@ -207,7 +220,12 @@ export const InfoEdit = (props: InfoEditProps & InfoProps) => {
       </div>
       <div className="flex items-center justify-center mt-[50px] gap-[21px]">
         <ButtonBig text="취소하기" background="gray" onClick={onClickCancel} />
-        <ButtonBig text="저장하기" background="secondary" onClick={onClickSave} />
+        <ButtonBig
+          text="저장하기"
+          background={`${isMatch ? 'secondary' : 'white'}`}
+          color={`${isMatch ? 'white' : 'gray'}`}
+          onClick={onClickSave}
+        />
       </div>
     </div>
   );
