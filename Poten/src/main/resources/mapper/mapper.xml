@@ -71,7 +71,7 @@
         <!-- AND lon = #{lon} -->
     </update>
 
-    <delete id="mapDel" parameterType="map">
+    <delete id="mapDel" parameterType="int">
         UPDATE basket_spot
         SET
             del_req = del_req + 1

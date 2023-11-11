@@ -28,7 +28,7 @@ public class MapService {
         mapDAO.mapUpt(params);
     }
 
-    public void mapDel(HashMap<String, Object> params){
+    public void mapDel(int params){
         mapDAO.mapDel(params);
     }
 }

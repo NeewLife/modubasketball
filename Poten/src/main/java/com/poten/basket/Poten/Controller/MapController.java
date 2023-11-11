@@ -47,18 +47,12 @@ public class MapController {
    * 필요 params - lat(위도), lon(경도)
    * */
   @DeleteMapping("/spot/delete")
-  public ResponseEntity deleteSpot(
-    @RequestParam double lat,
-    @RequestParam double lon
-  ) {
+  public ResponseEntity deleteSpot(@PathVariable int id) {
     System.out.println("====================delete====================");
-    System.out.println(lat + "," + lon);
-    HashMap<String, Object> params = new HashMap<>();
-    params.put("lat", lat);
-    params.put("lon", lon);
-    mapService.mapDel(params);
+    System.out.println(id);
+    mapService.mapDel(id);
     System.out.println("삭제됨");
-    return new ResponseEntity(params, HttpStatus.OK);
+    return new ResponseEntity(id, HttpStatus.OK);
   }
 
   /*

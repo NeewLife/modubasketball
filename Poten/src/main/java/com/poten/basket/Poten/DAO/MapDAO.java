@@ -19,5 +19,5 @@ public interface MapDAO {
 
     void mapUpt(MapRequest params);
 
-    void mapDel(Map<String, Object> params);
+    void mapDel(int params);
 }
