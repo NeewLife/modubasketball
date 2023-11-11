@@ -18,23 +18,23 @@ export interface IMap {
 
 class MapService {
   getAll() {
-    return CustomAxios.get('/');
+    return CustomAxios.get('/api/');
   }
 
   getOne(id: number) {
-    return CustomAxios.get(`/${id}`);
+    return CustomAxios.get(`/api/${id}`);
   }
 
   save(prop: IMap) {
-    return CustomAxios.post('/spot/create', prop);
+    return CustomAxios.post('/api/spot/create', prop);
   }
 
   update(prop: IMap) {
-    return CustomAxios.put('/spot/update', prop);
+    return CustomAxios.put('/api/spot/update', prop);
   }
 
   delete(id: number) {
-    return CustomAxios.delete(`/spot/delete/${id}`);
+    return CustomAxios.delete(`/api/spot/delete/${id}`);
   }
 }
 

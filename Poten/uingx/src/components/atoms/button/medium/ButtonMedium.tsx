@@ -12,7 +12,7 @@ export const ButtonMedium = (
     <button
       type="button"
       aria-label="big"
-      className="w-[220px] h-[60px] shadow-custom rounded-[100px] bg-secondary-20 active:bg-secondary-30 hover:bg-secondary-30"
+      className="w-[220px] h-[60px] shadow-custom rounded-[100px] bg-secondary-20 active:bg-secondary-30 hover:bg-secondary-30 outline-none"
       {...prop}
     >
       <div className="flex items-center justify-center gap-[10px]">

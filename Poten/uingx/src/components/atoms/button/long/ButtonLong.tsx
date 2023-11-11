@@ -10,7 +10,7 @@ export const ButtonLong = (
     <button
       type="button"
       aria-label="long"
-      className="w-[500px] h-[72px] shadow-custom rounded-[10px] bg-secondary-20 active:bg-secondary-30 hover:bg-secondary-30"
+      className="w-[500px] h-[72px] shadow-custom rounded-[10px] bg-secondary-20 active:bg-secondary-30 hover:bg-secondary-30 outline-none"
       {...prop}
     >
       <Headline type="sub" text={text} color="text-gray-10" />

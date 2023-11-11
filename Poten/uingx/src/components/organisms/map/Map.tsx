@@ -156,7 +156,7 @@ export const Map = (props: MapProps) => {
     const container = document.getElementById('map');
     const options = {
       center: new window.kakao.maps.LatLng(37.566826, 126.9786567),
-      level: 6,
+      level: 3,
     };
 
     const map = new window.kakao.maps.Map(container, options);

@@ -27,9 +27,9 @@ module.exports = {
     liveReload: true,
     port: 9095,
     proxy: {
-      '/api': {
+      '/proxy': {
         target: 'http://localhost:8080',
-        pathRewrite: { '/api': '/' },
+        pathRewrite: { '/proxy': '/' },
       },
     },
   },

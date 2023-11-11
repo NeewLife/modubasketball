@@ -17,7 +17,7 @@ export const ButtonBig = (
     <button
       type="button"
       aria-label="big"
-      className={`w-[230px] h-[64px] shadow-custom rounded-[10px] ${backgroundClassName}`}
+      className={`w-[230px] h-[64px] shadow-custom rounded-[10px] outline-none ${backgroundClassName}`}
       {...prop}
     >
       <Headline type="sub" text={text} color="text-gray-10" />

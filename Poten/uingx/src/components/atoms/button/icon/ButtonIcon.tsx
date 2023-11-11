@@ -14,7 +14,7 @@ export const ButtonIcon = (
     <button
       type="button"
       aria-label="icon"
-      className="bg-gray-10 shadow-custom rounded-full w-[50px] h-[50px] flex items-center justify-center"
+      className="bg-gray-10 shadow-custom rounded-full w-[50px] h-[50px] flex items-center justify-center outline-none"
       {...prop}
     >
       <img alt={text} src={icon} width={30} height={30} />
