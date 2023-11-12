@@ -39,6 +39,8 @@ export const InfoEdit = (props: InfoEditProps & InfoProps) => {
   const { setClose } = useModal();
 
   const onClickSave = () => {
+    if (!isMatch) return;
+
     const request = {
       ...props,
       courtName: data.courtName ? data.courtName.trim() : '',
