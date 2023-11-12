@@ -25,5 +25,6 @@ public interface MapDAO {
 
     void feedback(HashMap<String, Object> params);
 
+    void visitCounting();
 
 }

@@ -69,7 +69,7 @@
         )
     </insert>
 
-    <update id="visitCount">
+    <update id="visitCounting">
         UPDATE visit
         SET
             visit_count = visit_count + 1
