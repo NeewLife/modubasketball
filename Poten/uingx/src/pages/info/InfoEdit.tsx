@@ -214,7 +214,7 @@ export const InfoEdit = (props: InfoEditProps & InfoProps) => {
           text={data.courtName}
           onTrackable={onChangeInput('courtName')}
           placeholder="농구장 이름을 입력해주세요."
-          regex={{ regex: /^[A-Za-z0-9가-힣]{0,20}$/, message: '20자 이내로 입력해주세요.' }}
+          regex={{ regex: /^[A-Za-z0-9가-힣\s]{0,20}$/, message: '20자 이내로 입력해주세요.' }}
         />
       </div>
       <div className="mt-[58px] pl-[20px]">
