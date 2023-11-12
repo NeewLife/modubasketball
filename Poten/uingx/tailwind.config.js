@@ -34,6 +34,14 @@ module.exports = {
         100: '#1A1A1A',
       },
     },
+    screens: {
+      desktop: [
+        {
+          min: '376px',
+        },
+      ],
+      mobile: [{ min: '0px', max: '375px' }],
+    },
   },
 
   plugins: [Scroll],

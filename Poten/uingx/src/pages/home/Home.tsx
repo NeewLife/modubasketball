@@ -1,4 +1,4 @@
-import React, { KeyboardEvent, useCallback, useState } from 'react';
+import React, { KeyboardEvent, useCallback, useEffect, useState } from 'react';
 
 import LogoHeader from '@constants/image/logo-header.png';
 import Layer1 from '@constants/image/layer1.png';
@@ -8,12 +8,15 @@ import Fotter from '@constants/image/fotter.png';
 import LogoFotter from '@constants/image/logo-fotter.png';
 import Header from '@constants/image/header.png';
 import Message from '@constants/image/message.png';
+import LogoSmallHeader from '@constants/image/logo-small-header.png';
 
-import { Body, ButtonBig, ButtonLong, Display, Headline } from '@components/atoms';
+import { Body, ButtonBig, ButtonLong, Display, Headline, Title } from '@components/atoms';
 import { SearchBar } from '@components/molecules';
 import { useKeyword, useModal } from '@utils/zustand';
 import { useNavigate } from 'react-router-dom';
 import { Feedback } from '@pages/index';
+import { IMap, useMapService } from '@services/map.service';
+import { AxiosResponse } from 'axios';
 
 export const Home = () => {
   const [search, setSearch] = useState('');
@@ -21,6 +24,11 @@ export const Home = () => {
   const { setOpen } = useModal();
 
   const navigate = useNavigate();
+
+  const [data, setData] = useState({
+    info: 0,
+    visit: 0,
+  });
 
   const onChange = (sSearch: string) => {
     setSearch(sSearch);
@@ -53,10 +61,17 @@ export const Home = () => {
     setOpen(<Feedback />);
   };
 
+  useEffect(() => {
+    useMapService.getAll().then((response: AxiosResponse<IMap[]>) => {
+      setData({ ...data, info: response.data.length });
+    });
+  }, []);
+
   return (
     <div className="w-screen h-screen overflow-auto">
       <div className="w-full h-[70px] flex items-center justify-center">
-        <img alt="logoHeader" src={LogoHeader} />
+        <img className="mobile:hidden" alt="logoHeader" src={LogoHeader} />
+        <img className="desktop:hidden" alt="logoHeader" src={LogoSmallHeader} />
       </div>
       <div className="h-[791px] flex items-center justify-center gap-[265px]">
         <div className="flex flex-col gap-[20px]">
@@ -117,7 +132,24 @@ export const Home = () => {
       <div className="h-[592px] flex items-center justify-center">
         <img alt="fotter" src={Fotter} />
       </div>
-      <div className="bg-gray-20 h-[300px]">123</div>
+      <div className="bg-gray-20 h-[300px] flex items-center justify-center gap-[280px]">
+        <div className="flex flex-col items-center">
+          <Display text={`${data.info}개`} color="text-secondary-20" />
+          <div className="mt-[2px]">
+            <Title type="main" text="현재 전국의 농구장 정보가 " />
+            <Title type="main" text={data.info.toString()} color="text-secondary-20" />
+            <Title type="main" text="개 입력되어 있어요!" />
+          </div>
+        </div>
+        <div className="flex flex-col items-center">
+          <Display text={`${data.visit}명`} color="text-secondary-20" />
+          <div className="mt-[2px]">
+            <Title type="main" text="지금까지 " />
+            <Title type="main" text={data.visit.toString()} color="text-secondary-20" />
+            <Title type="main" text="명의 농구인들이 이 서비스를 방문했어요!" />
+          </div>
+        </div>
+      </div>
       <div className="bg-secondary-10 h-[696px] flex flex-col items-center justify-center">
         <div>
           <Headline type="main" text="모두의 농구장이 도움이 되었나요?" color="text-brand-30" />
