@@ -15,6 +15,8 @@ public interface MapDAO {
 
     List<MapResponse> mapList();
 
+    int visitCount();
+
     void mapCre(MapRequest params);
 
     void mapUpt(MapRequest params);

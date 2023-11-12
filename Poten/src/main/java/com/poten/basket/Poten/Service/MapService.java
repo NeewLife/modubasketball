@@ -17,8 +17,11 @@ public class MapService {
     MapDAO mapDAO;
 
     public List<MapResponse> mapList() {
+        mapDAO.visitCount();
         return mapDAO.mapList();
     }
+
+    public int visitCount() {return mapDAO.visitCount();}
 
     public void mapCre(MapRequest params){
         mapDAO.mapCre(params);
