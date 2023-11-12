@@ -23,6 +23,12 @@
         FROM basket_spot
     </select>
 
+    <select id="visitCount" resultType="int">
+        SELECT visit_count
+        FROM visit
+        WHERE visit = "visit"
+    </select>
+
     <insert id="feedback" parameterType="map">
         INSERT INTO feedback(
             fd_comment
@@ -62,6 +68,13 @@
             , #{courtName}
         )
     </insert>
+
+    <update id="visitCounting">
+        UPDATE visit
+        SET
+            visit_count = visit_count + 1
+        WHERE visit = "visit"
+    </update>
 
     <update id="mapUpt" parameterType="com.poten.basket.Poten.VO.MapRequest">
         UPDATE basket_spot

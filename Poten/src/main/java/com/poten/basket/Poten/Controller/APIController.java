@@ -29,6 +29,12 @@ public class APIController {
     return ResponseEntity.ok(mapList);
   }
 
+  @GetMapping("/count")
+  public ResponseEntity visitCount() {
+    int visitCount = mapService.visitCount();
+    return ResponseEntity.ok(visitCount);
+  }
+
   /*
    * 지도 데이터 추가
    * 필요 params - com.poten.basket.Poten.VO.MapRequest
