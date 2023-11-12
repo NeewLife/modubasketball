@@ -24,4 +24,6 @@ public interface MapDAO {
     void mapDel(int params);
 
     void feedback(HashMap<String, Object> params);
+
+
 }
