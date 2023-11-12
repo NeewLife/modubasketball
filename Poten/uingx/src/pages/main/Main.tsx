@@ -77,7 +77,7 @@ export const Main = () => {
   return (
     <div className="w-screen h-screen overflow-auto flex flex-col relative">
       <div className="h-[70px] flex items-center justify-center relative">
-        <img alt="loadHeader" src={LogoHeader} />
+        <img className="cursor-pointer z-50" alt="loadHeader" src={LogoHeader} onClick={onClickPre} />
         <div className="absolute inset-0 flex items-center pl-[10px]">
           <img className="cursor-pointer mr-[26px]" alt="arrow" src={Arrrow} onClick={onClickPre} />
           {type === 'gps' && <Headline type="sub" text="내 주변 찾기" />}

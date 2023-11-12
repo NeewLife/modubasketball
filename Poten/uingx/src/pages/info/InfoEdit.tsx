@@ -209,7 +209,7 @@ export const InfoEdit = (props: InfoEditProps & InfoProps) => {
       <div className="mt-[8px]">
         <Title type="sub" text={data.address} />
       </div>
-      <div className="mt-[2px]">
+      <div className="mt-[18px]">
         <Input
           text={data.courtName}
           onTrackable={onChangeInput('courtName')}

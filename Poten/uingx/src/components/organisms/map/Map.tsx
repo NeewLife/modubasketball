@@ -84,7 +84,7 @@ export const Map = (props: MapProps) => {
     const markers = [];
 
     for (let i = 0; i < sMarkerData.length; i++) {
-      const markerImage = new window.kakao.maps.MarkerImage(Marker, new window.kakao.maps.Size(20, 30));
+      const markerImage = new window.kakao.maps.MarkerImage(Marker, new window.kakao.maps.Size(30, 30));
 
       const marker = new window.kakao.maps.Marker({
         map: map,

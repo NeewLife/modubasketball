@@ -46,11 +46,7 @@ export const CustomModal = () => {
 
   return (
     <Modal isOpen={open} onRequestClose={onloaclSetClose} style={customStyles(width)}>
-      <div
-        className={`relative bg-gray-10 scrollbar-thin scrollbar-thumb-gray-30 scrollbar-track-gray-10 overflow-auto ${
-          height && 'h-[80vh]'
-        }`}
-      >
+      <div className={`relative bg-gray-10 overflow-auto ${height && 'h-[80vh]'}`}>
         {children}
         <div className="absolute top-0 right-0 flex gap-[18px]">
           {edit && <img className="cursor-pointer" alt="eidt" src={edit.icon} onClick={edit.onClick} />}

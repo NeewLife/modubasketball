@@ -8,7 +8,6 @@ import Fotter from '@constants/image/fotter.png';
 import LogoFotter from '@constants/image/logo-fotter.png';
 import Header from '@constants/image/header.png';
 import Message from '@constants/image/message.png';
-import LogoSmallHeader from '@constants/image/logo-small-header.png';
 
 import { Body, ButtonBig, ButtonLong, Display, Headline, Title } from '@components/atoms';
 import { SearchBar } from '@components/molecules';
@@ -71,7 +70,6 @@ export const Home = () => {
     <div className="w-screen h-screen overflow-auto">
       <div className="w-full h-[70px] flex items-center justify-center">
         <img className="mobile:hidden" alt="logoHeader" src={LogoHeader} />
-        <img className="desktop:hidden" alt="logoHeader" src={LogoSmallHeader} />
       </div>
       <div className="h-[791px] flex items-center justify-center gap-[265px]">
         <div className="flex flex-col gap-[20px]">
@@ -150,7 +148,7 @@ export const Home = () => {
           </div>
         </div>
       </div>
-      <div className="bg-secondary-10 h-[696px] flex flex-col items-center justify-center">
+      <div className="bg-[#F1FFFF] h-[696px] flex flex-col items-center justify-center">
         <div>
           <Headline type="main" text="모두의 농구장이 도움이 되었나요?" color="text-brand-30" />
         </div>
@@ -159,7 +157,9 @@ export const Home = () => {
           <Body text="서비스를 개선하는 데 도움이 됩니다." />
         </div>
         <img className="mt-[22px]" alt="message" src={Message} />
-        <ButtonBig className="mt-[37px]" text="피드백 남기기" onClick={onClickFeedback} />
+        <div className="mt-[37px]">
+          <ButtonBig text="피드백 남기기" onClick={onClickFeedback} />
+        </div>
       </div>
       <div className="h-[200px] flex items-center justify-between bg-gray-20">
         <div className="pl-[119px]">
