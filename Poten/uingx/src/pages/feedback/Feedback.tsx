@@ -7,11 +7,11 @@ import face2Default from '@constants/image/face-2-default.png';
 import face3Default from '@constants/image/face-3-default.png';
 import face4Default from '@constants/image/face-4-default.png';
 import face5Default from '@constants/image/face-5-default.png';
-import face1Pressed from '@constants/image/Face-1-Pressed.png';
-import face2Pressed from '@constants/image/Face-2-Pressed.png';
-import face3Pressed from '@constants/image/Face-3-Pressed.png';
-import face4Pressed from '@constants/image/Face-4-Pressed.png';
-import face5Pressed from '@constants/image/Face-5-Pressed.png';
+import face1Pressed from '@constants/image/face-1-pressed.png';
+import face2Pressed from '@constants/image/face-2-pressed.png';
+import face3Pressed from '@constants/image/face-3-pressed.png';
+import face4Pressed from '@constants/image/face-4-pressed.png';
+import face5Pressed from '@constants/image/face-5-pressed.png';
 import FeedbackBig from '@constants/icon/feedbackBig.svg';
 
 import { useFeedbackService } from '@services/index';
