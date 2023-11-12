@@ -3,8 +3,8 @@ HELP.md
 build/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
-!**/src/main/**/static/
 !**/src/test/**/build/
+static\
 
 ### STS ###
 .apt_generated
@@ -42,4 +42,5 @@ out/
 /uingx/node_modules
 /uingx/build
 /uingx/build-storybook.log
-/uingx/chromatic.log
+/uingx/chromatic.logstatic\
+
