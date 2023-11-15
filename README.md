@@ -1,4 +1,22 @@
-## 소개 이미지
+# 모두의 농구장
+
+모두의 농구장에서 내 주변, 우리 동네의 농구장을 발견해보세요.
+
+### Getting Started
+
+```
+backend : gradle build
+          spring boot run
+        
+frontend : npm i
+           npm start
+```
+
+---
+
+### Project (https://modubasketball.com/)
+
+---
 
 ![modubasketball-1](https://github.com/NeewLife/modubasketball/assets/107593357/af370471-9138-4f20-844d-43ada13e7c84)
 ![modubasketball-2](https://github.com/NeewLife/modubasketball/assets/107593357/15017cd4-4f22-4c8e-b5d4-5a236ea5de9b)
