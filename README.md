@@ -16,8 +16,6 @@ frontend : npm i
 
 ### Project (https://modubasketball.com/)
 
----
-
 ![modubasketball-1](https://github.com/NeewLife/modubasketball/assets/107593357/af370471-9138-4f20-844d-43ada13e7c84)
 ![modubasketball-2](https://github.com/NeewLife/modubasketball/assets/107593357/15017cd4-4f22-4c8e-b5d4-5a236ea5de9b)
 ![modubasketball-3](https://github.com/NeewLife/modubasketball/assets/107593357/41e983f9-2bc6-4ffa-b4a9-27fe12a64186)
