@@ -29,11 +29,11 @@ export const FotterVisit = () => {
         <Display text={`${data.info}개`} color="text-secondary-20" />
         <div className="desktop:mt-[2px] mt-[5px] flex flex-col items-center">
           {type === 'desktop' ? (
-            <>
+            <div>
               <Title type="main" text="현재 전국의 농구장 정보가 " />
               <Title type="main" text={data.info.toString()} color="text-secondary-20" />
               <Title type="main" text="개 입력되어 있어요!" />
-            </>
+            </div>
           ) : (
             <>
               <Title type="main" text="현재 전국의 농구장 정보가" />
@@ -49,11 +49,11 @@ export const FotterVisit = () => {
         <Display text={`${data.visit}명`} color="text-secondary-20" />
         <div className="desktop:mt-[2px] mt-[5px] flex flex-col items-center">
           {type === 'desktop' ? (
-            <>
+            <div>
               <Title type="main" text="지금까지 " />
               <Title type="main" text={data.visit.toString()} color="text-secondary-20" />
               <Title type="main" text="명의 농구인들이 이 서비스를 방문했어요!" />
-            </>
+            </div>
           ) : (
             <>
               <div>

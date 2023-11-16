@@ -4,9 +4,6 @@ import { SearchBar } from '@components/molecules';
 import { useKeyword, useResize } from '@utils/zustand';
 import { useNavigate } from 'react-router-dom';
 
-import Header from '@constants/image/header.png';
-import HeaderSmall from '@constants/image/header-small.png';
-
 export const LayoutSearch = () => {
   const [search, setSearch] = useState('');
   const { type, setType } = useKeyword();

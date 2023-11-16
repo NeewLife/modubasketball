@@ -19,7 +19,7 @@ export const Home = () => {
         <img alt="logoHeader" src={resize.type === 'desktop' ? LogoHeader : LogoSmallHeader} />
       </div>
       <div
-        className="flex px-[18px] desktop:items-center desktop:justify-center desktop:gap-[265px] desktop:mt-[170px] desktop:mb-[161px]
+        className="flex desktop:items-center desktop:justify-center desktop:gap-[265px] desktop:mt-[170px] desktop:mb-[161px]
                    tablet:flex-col tablet:gap-[23px] tablet:mb-[40px] tablet:mt-[72px]
                    mobile:flex-col mobile:gap-[23px] mobile:mb-[40px] mobile:mt-[72px]
                   "
@@ -28,8 +28,8 @@ export const Home = () => {
           <LayoutSearch />
         </div>
         <div
-          className="
-                    tablet:order-1 tablet:flex tablet:justify-center
+          className="px-[18px]
+                     tablet:order-1 tablet:flex tablet:justify-center
                      mobile:order-1  mobile:flex mobile:justify-center
                     "
         >

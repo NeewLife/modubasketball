@@ -103,7 +103,7 @@ export const Main = () => {
         />
         <div
           className="absolute left-[32px] top-[20px] z-50
-                     mobile:left-0 mobile:top-[12px] mobile:w-full mobile:flex mobile:justify-center
+                     mobile:left-0 mobile:top-[12px] mobile:w-full mobile:flex mobile:justify-center mobile:px-[27px]
         "
         >
           {keyword.type === 'search' && (
