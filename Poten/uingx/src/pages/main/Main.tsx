@@ -65,9 +65,14 @@ export const Main = () => {
   };
 
   useEffect(() => {
-    useMapService.getAll().then((response: AxiosResponse<IMap[]>) => {
-      setMarkerData(response.data);
-    });
+    useMapService
+      .getAll()
+      .then((response: AxiosResponse<IMap[]>) => {
+        setMarkerData(response.data);
+      })
+      .catch(() => {
+        setMarkerData([]);
+      });
   }, [uMap]);
 
   useEffect(() => {

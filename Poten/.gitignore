@@ -43,4 +43,5 @@ out/
 /uingx/build
 /uingx/build-storybook.log
 /uingx/chromatic.logstatic\
+/uingx/storybook-static
 

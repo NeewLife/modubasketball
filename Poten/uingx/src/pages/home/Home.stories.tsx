@@ -9,6 +9,4 @@ const meta: Meta<typeof Home> = {
 export default meta;
 type Story = StoryObj<typeof Home>;
 
-export const Preview: Story = {
-  args: {},
-};
+export const Preview: Story = {};

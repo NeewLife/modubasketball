@@ -17,7 +17,7 @@ export const Input = (
   const { text = '', onTrackable = () => {}, regex, className, ...prop } = props;
 
   const [localText, setLocalText] = useState(text);
-  const [match, setMatch] = useState(true);
+  const [match, setMatch] = useState(regex ? regex.regex.test(text) : true);
 
   useEffect(() => {
     setLocalText(text);

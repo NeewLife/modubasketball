@@ -7,7 +7,16 @@ export interface TypographyOptionsProps {
 }
 
 interface TypographyProps extends TypographyOptionsProps {
-  format?: 'display' | 'headline' | 'headlineSmall' | 'title' | 'subTitle' | 'body' | 'caption';
+  format?:
+    | 'display'
+    | 'headline'
+    | 'headlineSmall'
+    | 'title'
+    | 'subTitle'
+    | 'body'
+    | 'caption'
+    | 'subBody'
+    | 'smallTitle';
 }
 
 export const Typography = (props: TypographyProps) => {
@@ -37,6 +46,12 @@ export const Typography = (props: TypographyProps) => {
         break;
       case 'caption':
         sElement = <Caption text={text} color={color} />;
+        break;
+      case 'smallTitle':
+        sElement = <Title type="mainSmall" text={text} color={color} />;
+        break;
+      case 'subBody':
+        sElement = <Body type="sub" text={text} color={color} />;
         break;
       default:
         sElement = <Caption text={text} color={color} />;

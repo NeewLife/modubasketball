@@ -1,13 +1,10 @@
 import React from 'react';
 import { Body } from '@components/atoms';
-import { useResize } from '@utils/zustand';
 
 import LogoFotter from '@constants/image/logo-fotter.png';
 import LogoSmallFotter from '@constants/image/logo-small-fotter.png';
 
 export const Fotter = () => {
-  const { type } = useResize();
-
   return (
     <div
       className="desktop:h-[200px] h-[346px] flex desktop:items-center desktop:justify-between bg-gray-20
@@ -16,11 +13,8 @@ export const Fotter = () => {
                 "
     >
       <div className="desktop:pl-[119px] pl-[24px]">
-        <img
-          className="desktop:mb-[14px] mb-[7px]"
-          alt="logoFotter"
-          src={type === 'desktop' ? LogoFotter : LogoSmallFotter}
-        />
+        <img className="desktop:mb-[14px] mb-[7px] tablet:hidden mobile:hidden" alt="logoFotter" src={LogoFotter} />
+        <img className="desktop:mb-[14px] mb-[7px] desktop:hidden" alt="logoSmallFotter" src={LogoSmallFotter} />
         <Body text="© 2023. Modubasketball. All rights reserved." />
       </div>
       <div

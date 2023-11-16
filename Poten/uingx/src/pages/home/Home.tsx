@@ -6,17 +6,15 @@ import FotterImage from '@constants/image/fotter.png';
 import FotterSmallImage from '@constants/image/fotter-small.png';
 
 import { Fotter, FotterFeedback, FotterVisit, LayoutContent, LayoutSearch } from '@pages/index';
-import { useResize } from '@utils/zustand';
 
 import Header from '@constants/image/header.png';
 
 export const Home = () => {
-  const resize = useResize();
-
   return (
     <div className="w-screen h-screen overflow-auto">
       <div className="w-full desktop:h-[70px] h-[44px] flex items-center justify-center">
-        <img alt="logoHeader" src={resize.type === 'desktop' ? LogoHeader : LogoSmallHeader} />
+        <img className="tablet:hidden mobile:hidden" alt="logoHeader" src={LogoHeader} />
+        <img className="desktop:hidden" alt="logoHeader" src={LogoSmallHeader} />
       </div>
       <div
         className="flex desktop:items-center desktop:justify-center desktop:gap-[265px] desktop:mt-[170px] desktop:mb-[161px]
@@ -24,7 +22,7 @@ export const Home = () => {
                    mobile:flex-col mobile:gap-[23px] mobile:mb-[40px] mobile:mt-[72px]
                   "
       >
-        <div className="tablet:order-2 mobile:order-2">
+        <div className="tablet:order-2 mobile:order-2 desktop:w-[533px]">
           <LayoutSearch />
         </div>
         <div
@@ -38,7 +36,8 @@ export const Home = () => {
       </div>
       <LayoutContent />
       <div className="h-[592px] flex items-center justify-center">
-        <img alt="fotter" src={resize.type === 'desktop' ? FotterImage : FotterSmallImage} />
+        <img className="tablet:hidden mobile:hidden" alt="fotter" src={FotterImage} />
+        <img className="desktop:hidden" alt="fotter" src={FotterSmallImage} />
       </div>
       <FotterVisit />
       <FotterFeedback />
