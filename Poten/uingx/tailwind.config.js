@@ -35,12 +35,17 @@ module.exports = {
       },
     },
     screens: {
-      desktop: [
-        {
-          min: '376px',
-        },
-      ],
-      mobile: [{ min: '0px', max: '375px' }],
+      desktop: [{
+          min: '1025px',
+      }],
+      tablet: [{
+        min: '481px',
+        max: '1024px'
+      }],
+      mobile: [{ 
+        min: '0px', 
+        max: '480px' 
+      }],
     },
   },
 

@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
-import { Headline, Title } from '@components/atoms';
+import { Body, Headline, Title } from '@components/atoms';
 import { Form, IFormTypes } from '@components/templates';
 
 import Edit from '@constants/icon/edit.svg';
 import { useModal } from '@utils/zustand/useModal';
 import { InfoEdit } from '@pages/index';
+import { useResize } from '@utils/zustand';
 
 export interface InfoProps {
   id: number;
@@ -20,6 +21,8 @@ export interface InfoProps {
 
 export const Info = (props: InfoProps) => {
   const { address, courtName, courtType, courtSize, goalPost, feeYn, parkYn, comment } = props;
+
+  const { type } = useResize();
 
   const onClickEdit = () => {
     useModal.setState(() => ({ children: <InfoEdit type="update" {...props} /> }));
@@ -114,19 +117,28 @@ export const Info = (props: InfoProps) => {
         icon: Edit,
         onClick: onClickEdit,
       },
+      isModile: false,
     }));
   }, []);
 
   return (
-    <div className="pt-[10px] pr-[40px] pl-[20px]">
-      <Headline type="main" text="농구장 정보" />
+    <div className="pt-[10px] pr-[40px] pl-[20px] mobile:p-0 tablet:p-0">
+      <Headline type={type === 'desktop' ? 'main' : 'sub'} text="농구장 정보" />
       <div className="mt-[8px]">
-        <Title type="sub" text={address} />
+        {type === 'desktop' ? (
+          <Title type="sub" text={address} />
+        ) : (
+          <Body type="sub" text={address} color="text-gray-70" />
+        )}
       </div>
-      <div className="mt-[2px]">
-        <Headline type="sub" text={courtName} color="text-secondary-30" />
+      <div className="mt-[2px] tablet:mt-[5px] mobile:mt-[5px]">
+        {type === 'desktop' ? (
+          <Headline type="sub" text={courtName} color="text-secondary-30" />
+        ) : (
+          <Title type="main" text={courtName} color="text-secondary-30" />
+        )}
       </div>
-      <div className="mt-[58px] pl-[20px]">
+      <div className="mt-[58px] pl-[20px] tablet:mt-[40px] tablet:p-0 mobile:mt-[40px] mobile:p-0">
         <Form data={formProps} />
       </div>
     </div>

@@ -1,8 +1,8 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Info, InfoProps, courtSizeData, courtTypeData, feeYnData, parkYnData, InfoSuccess } from '@pages/index';
-import { ButtonBig, Headline, Input, Title } from '@components/atoms';
+import { Body, ButtonBig, Headline, Input, Title } from '@components/atoms';
 import { Form, IFormTypes } from '@components/templates';
-import { useModal, useUpdate } from '@utils/zustand';
+import { useModal, useResize, useUpdate } from '@utils/zustand';
 import { useMapService } from '@services/index';
 
 import Delete from '@constants/icon/delete.svg';
@@ -16,6 +16,8 @@ interface InfoEditProps {
 
 export const InfoEdit = (props: InfoEditProps & InfoProps) => {
   const { type, lat, lon, ...prop } = props;
+
+  const resize = useResize();
 
   const [data, setData] = useState({
     ...props,
@@ -143,7 +145,7 @@ export const InfoEdit = (props: InfoEditProps & InfoProps) => {
           type: 'number',
           onTrackable: onChangeInput('goalPost'),
           placeholder: '정보를 입력해주세요.',
-          regex: { regex: /^[0-9]{1}$|^[1]{1}[0-9]{1}$/, message: '0 ~ 19사이로 입력해주세요.' },
+          regex: { regex: /^[0-9]{1}$|^[1]{1}[0-9]{1}$/, message: '*0 ~ 19사이로 입력해주세요.' },
         },
       },
       {
@@ -192,6 +194,7 @@ export const InfoEdit = (props: InfoEditProps & InfoProps) => {
       width: '800px',
       height: true,
       close: true,
+      isModile: false,
     }));
 
     if (type === 'update')
@@ -204,23 +207,30 @@ export const InfoEdit = (props: InfoEditProps & InfoProps) => {
   }, []);
 
   return (
-    <div className="pt-[10px] pr-[40px] pl-[20px]">
-      <Headline type="main" text={`${type === 'update' ? '농구장 정보 수정하기' : '농구장 제보하기'}`} />
+    <div className="pt-[10px] pr-[40px] pl-[20px] mobile:p-0 tablet:p-0">
+      <Headline
+        type={resize.type === 'desktop' ? 'main' : 'sub'}
+        text={`${type === 'update' ? '농구장 정보 수정하기' : '농구장 제보하기'}`}
+      />
       <div className="mt-[8px]">
-        <Title type="sub" text={data.address} />
+        {resize.type === 'desktop' ? (
+          <Title type="sub" text={data.address} />
+        ) : (
+          <Body type="sub" text={data.address} color="text-gray-70" />
+        )}
       </div>
-      <div className="mt-[18px]">
+      <div className="desktop:mt-[18px] mt-[10px]">
         <Input
           text={data.courtName}
           onTrackable={onChangeInput('courtName')}
           placeholder="농구장 이름을 입력해주세요."
-          regex={{ regex: /^[A-Za-z0-9가-힣\s]{0,20}$/, message: '20자 이내로 입력해주세요.' }}
+          regex={{ regex: /^[A-Za-z0-9가-힣\s]{0,20}$/, message: '*20자 이내로 입력해주세요.' }}
         />
       </div>
-      <div className="mt-[58px] pl-[20px]">
+      <div className="desktop:mt-[58px] desktop:pl-[20px] mt-[45px]">
         <Form data={formProps} />
       </div>
-      <div className="flex items-center justify-center mt-[50px] gap-[21px]">
+      <div className="flex items-center justify-center mt-[50px] desktop:gap-[21px] gap-[10px]">
         <ButtonBig text="취소하기" background="gray" onClick={onClickCancel} />
         <ButtonBig
           text="저장하기"
