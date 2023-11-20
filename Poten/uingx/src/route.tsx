@@ -1,5 +1,6 @@
 import React from 'react';
-import { Home, Main } from '@pages/index';
+import { Home, Main, AdminLogin, Admin } from '@pages/index';
+import { PrivateRouter } from './PrivateRouter';
 
 export const element = [
   {
@@ -14,5 +15,30 @@ export const element = [
         element: <Main />,
       },
     ],
+  },
+  {
+    path: '/admin',
+    children: [
+      {
+        index: true,
+        element: <AdminLogin />,
+      },
+      {
+        path: 'detail',
+        element: (
+          <PrivateRouter>
+            <Admin />
+          </PrivateRouter>
+        ),
+      },
+      {
+        path: '*',
+        element: <AdminLogin />,
+      },
+    ],
+  },
+  {
+    path: '*',
+    element: <Home />,
   },
 ];

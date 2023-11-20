@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { CookiesProvider } from 'react-cookie';
 
 import { CustomModal } from '@components/molecules';
 import { useRoutes } from 'react-router-dom';
@@ -18,11 +19,11 @@ export const App = () => {
     });
   }, []);
   return (
-    <>
+    <CookiesProvider>
       <div>
         <CustomModal />
       </div>
       {routes}
-    </>
+    </CookiesProvider>
   );
 };

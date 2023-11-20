@@ -23,6 +23,7 @@ module.exports = {
       },
       gray: {
         10: '#FFFFFF',
+        15: '#F8F8F8',
         20: '#F1F1F1',
         30: '#EAEAEA',
         40: '#DBDBDB',
@@ -35,17 +36,23 @@ module.exports = {
       },
     },
     screens: {
-      desktop: [{
+      desktop: [
+        {
           min: '1025px',
-      }],
-      tablet: [{
-        min: '481px',
-        max: '1024px'
-      }],
-      mobile: [{ 
-        min: '0px', 
-        max: '480px' 
-      }],
+        },
+      ],
+      tablet: [
+        {
+          min: '481px',
+          max: '1024px',
+        },
+      ],
+      mobile: [
+        {
+          min: '0px',
+          max: '480px',
+        },
+      ],
     },
   },
 

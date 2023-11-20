@@ -1,5 +1,5 @@
 import React, { KeyboardEvent, useEffect, useState } from 'react';
-import { ButtonIcon, ButtonMedium, Headline } from '@components/atoms';
+import { ButtonIcon, ButtonMedium, CustomAlert, Headline } from '@components/atoms';
 import Location from '@constants/icon/location.svg';
 import Arrrow from '@constants/icon/arrow.svg';
 import LogoHeader from '@constants/image/logo-header.png';
@@ -82,7 +82,7 @@ export const Main = () => {
   }, []);
 
   return (
-    <div className="w-screen h-screen overflow-auto flex flex-col relative">
+    <div className="w-screen h-[100dvh] overflow-auto flex flex-col relative">
       <div className="h-[70px] flex items-center justify-center relative">
         <img
           className="cursor-pointer z-50"
@@ -130,6 +130,9 @@ export const Main = () => {
           <ButtonIcon text="feedback" icon={FeedbackIcon} onClick={onClickFeedback} />
           <ButtonIcon className="mobile:order-3" text="location" icon={Location} onClick={onClickLocation} />
           <ButtonMedium text="농구장 제보하기" onClick={onClickEdit} />
+        </div>
+        <div className="absolute top-[10px] w-full flex justify-center z-50">
+          {isEdit && <CustomAlert text="제보하실 농구장의 위치를 지도에서 눌러주세요." type="success" />}
         </div>
       </div>
     </div>
