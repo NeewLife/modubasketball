@@ -1,5 +1,6 @@
-import React, { ButtonHTMLAttributes, DetailedHTMLProps, useMemo } from 'react';
-import { ButtonOptionsProps, Headline } from '@components/atoms';
+import React, { ButtonHTMLAttributes, DetailedHTMLProps, FC, useMemo } from 'react';
+import { ButtonOptionsProps, Headline, Title } from '@components/atoms';
+import { useResize } from '@utils/zustand';
 
 interface ButtonBigProps extends ButtonOptionsProps {
   size?: 'big' | 'small';
@@ -7,10 +8,11 @@ interface ButtonBigProps extends ButtonOptionsProps {
   color?: 'gray' | 'white';
 }
 
-export const ButtonBig = (
-  props: ButtonBigProps & DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>,
-) => {
+export const ButtonBig: FC<
+  ButtonBigProps & DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>
+> = (props) => {
   const { text, size = 'big', background = 'secondary', color = 'white', className, ...prop } = props;
+  const { type } = useResize();
 
   const backgroundClassName = useMemo(() => {
     let result;
@@ -40,10 +42,14 @@ export const ButtonBig = (
     <button
       type="button"
       aria-label="big"
-      className={`${sizeClassName} h-[64px] shadow-custom rounded-[10px] outline-none ${backgroundClassName}`}
+      className={`${sizeClassName} desktop:h-[64px] h-[50px] shadow-custom rounded-[10px] outline-none ${backgroundClassName}`}
       {...prop}
     >
-      <Headline type="sub" text={text} color={colorClassName} />
+      {type === 'desktop' ? (
+        <Headline type="sub" text={text} color={colorClassName} />
+      ) : (
+        <Title type="mainSmall" text={text} color={colorClassName} />
+      )}
     </button>
   );
 };

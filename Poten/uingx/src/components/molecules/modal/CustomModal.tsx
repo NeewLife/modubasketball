@@ -3,11 +3,13 @@ import Modal from 'react-modal';
 import { useModal } from '@utils/zustand/useModal';
 
 import Close from '@constants/icon/close.svg';
+import { useResize } from '@utils/zustand';
 
-const customStyles = (width: string) => {
+const customStyles = (width: string, type?: 'desktop' | 'tablet' | 'mobile') => {
   return {
     content: {
-      width: `${width}`,
+      width: `${type === 'desktop' ? width : ''}`,
+      minWidth: `${type !== 'desktop' ? width : ''}`,
       bottom: 'auto',
       left: '50%',
       top: '50%',
@@ -23,8 +25,23 @@ const customStyles = (width: string) => {
   };
 };
 
+const customMobildStyles = () => {
+  return {
+    content: {
+      width: '100vw',
+      height: '100dvh',
+      inset: 0,
+    },
+    overlay: {
+      zIndex: 100,
+    },
+  };
+};
+
 export const CustomModal = () => {
-  const { open, change, changeChildren, children, width, height, close, edit, setOpen, setClose } = useModal();
+  const { open, change, changeChildren, children, width, height, close, edit, isModile, setOpen, setClose } =
+    useModal();
+  const { type } = useResize();
 
   useEffect(() => {
     if (change) {
@@ -45,7 +62,11 @@ export const CustomModal = () => {
   };
 
   return (
-    <Modal isOpen={open} onRequestClose={onloaclSetClose} style={customStyles(width)}>
+    <Modal
+      isOpen={open}
+      onRequestClose={onloaclSetClose}
+      style={type === 'desktop' || isModile ? customStyles(width, type) : customMobildStyles()}
+    >
       <div className={`relative bg-gray-10 overflow-auto ${height && 'h-[80vh]'}`}>
         {children}
         <div className="absolute top-0 right-0 flex gap-[18px]">

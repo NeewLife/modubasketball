@@ -16,6 +16,8 @@ export interface IModal {
     icon: string;
     onClick: () => void;
   };
+
+  isModile: boolean;
 }
 
 interface IUseModal extends IModal {
@@ -30,6 +32,7 @@ export const useModal = create<IUseModal>((set) => ({
   close: true,
   width: 'auto',
   height: true,
+  isModile: false,
   setOpen: (children) => {
     set(() => ({ open: true, children: children }));
   },

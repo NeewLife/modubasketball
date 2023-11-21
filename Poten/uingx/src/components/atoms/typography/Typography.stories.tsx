@@ -41,8 +41,10 @@ export const Preview: Story = {
       <SHeadline type="main" text="내 주변에 있는 농구코트" />
       <SHeadline type="sub" text="농구코트의 위치와 상세 정보" />
       <STitle type="main" text="농구 애호가" />
+      <STitle type="mainSmall" text="농구 애호가" />
       <STitle type="sub" text="우리 동네 농구코트" />
       <SBody text="야외 농구코트" />
+      <SBody type="sub" text="야외 농구코트" />
       <SCaption text="상세 정보 표기" />
     </div>
   ),
@@ -104,6 +106,20 @@ export const Title: Story = {
   },
 };
 
+export const SmallTitle: Story = {
+  args: {
+    format: 'smallTitle',
+    text: '농구 애호가',
+  },
+  argTypes: {
+    color: {
+      table: {
+        disable: true,
+      },
+    },
+  },
+};
+
 export const SubTitle: Story = {
   args: {
     format: 'subTitle',
@@ -121,6 +137,20 @@ export const SubTitle: Story = {
 export const Body: Story = {
   args: {
     format: 'body',
+    text: '야외 농구코트',
+  },
+  argTypes: {
+    color: {
+      table: {
+        disable: true,
+      },
+    },
+  },
+};
+
+export const SubBody: Story = {
+  args: {
+    format: 'subBody',
     text: '야외 농구코트',
   },
   argTypes: {

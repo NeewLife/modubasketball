@@ -2,6 +2,7 @@ import React, { DetailedHTMLProps, InputHTMLAttributes, TextareaHTMLAttributes }
 import { RadioGroup, RadioGroupProps } from '@components/molecules';
 import { Input, InputProps, Textarea, TextareaProps, Title } from '@components/atoms';
 import { CheckBoxGroup, CheckBoxGroupProps } from '@components/organisms';
+import { useResize } from '@utils/zustand';
 
 interface IForm {
   type: string;
@@ -37,12 +38,14 @@ interface FormProps {
 export const Form = (props: FormProps) => {
   const { data = [] } = props;
 
+  const resize = useResize();
+
   return (
-    <div className="flex flex-col gap-[60px]">
+    <div className="flex flex-col desktop:gap-[60px] gap-[40px]">
       {data.map(({ label, type, prop }) => (
         <div key={label}>
           <div className="mb-[10px]">
-            <Title type="main" text={label} color="text-secondary-30" />
+            <Title type={resize.type === 'desktop' ? 'main' : 'mainSmall'} text={label} color="text-secondary-30" />
           </div>
           {type === 'input' && <Input {...prop} />}
           {type === 'checkBox' && <CheckBoxGroup {...prop} />}

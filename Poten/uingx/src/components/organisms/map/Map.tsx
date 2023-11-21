@@ -5,7 +5,7 @@ import Marker from '@constants/image/marker.png';
 import GeoLocation from '@constants/icon/geoLocation.svg';
 
 import { useModal } from '@utils/zustand/useModal';
-import { Info, InfoEdit, InfoProps } from '@pages/info';
+import { Info, InfoEdit, InfoProps } from '@pages/index';
 
 type PlaceTypes = {
   id: string;

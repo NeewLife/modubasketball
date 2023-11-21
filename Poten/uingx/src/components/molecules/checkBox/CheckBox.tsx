@@ -55,7 +55,9 @@ export const CheckBox = (props: CheckBoxProps) => {
     <div className="relative flex items-center cursor-pointer" tabIndex={0} role="button" onClick={onClick}>
       <Input
         type="text"
-        className={`pl-[54px] pointer-events-none ${classNameRounded} ${localCheck ? 'text-gray-100' : 'text-gray-60'}`}
+        className={`desktop:pl-[54px] tablet:pl-[54px] mobile:pl-[54px] pointer-events-none ${classNameRounded} ${
+          localCheck ? 'text-gray-100' : 'text-gray-60'
+        }`}
         value={text}
       />
       <img alt="check" className="absolute left-[20px]" src={localCheck ? Checked : UnChecked} />
