@@ -1,6 +1,7 @@
 package com.poten.basket.Poten.Service;
 
 import com.poten.basket.Poten.DAO.MapDAO;
+import com.poten.basket.Poten.VO.Feedbacks;
 import com.poten.basket.Poten.VO.MapRequest;
 import com.poten.basket.Poten.VO.MapResponse;
 import lombok.RequiredArgsConstructor;
@@ -31,9 +32,17 @@ public class MapService {
         mapDAO.mapUpt(params);
     }
 
+    public void mapDelReq(int params){
+        mapDAO.mapDelReq(params);
+    }
+
     public void mapDel(int params){
         mapDAO.mapDel(params);
     }
 
     public void feedback(HashMap<String, Object> params){mapDAO.feedback(params);}
+
+    public List<Feedbacks> getFeedbacks() {
+        return mapDAO.getFeedbacks();
+    }
 }

@@ -29,6 +29,15 @@
         WHERE visit = "visit"
     </select>
 
+    <select id="getFeedbacks" resultType="com.poten.basket.Poten.VO.Feedbacks">
+        SELECT
+        id
+        , fd_comment AS fdComment
+        , fd_rating AS fdRating
+        , fd_create_date AS fdCreateDate
+        FROM feedback
+    </select>
+
     <insert id="feedback" parameterType="map">
         INSERT INTO feedback(
             fd_comment
@@ -94,13 +103,19 @@
         <!-- AND lon = #{lon} -->
     </update>
 
-    <delete id="mapDel" parameterType="int">
+    <update id="mapDelReq" parameterType="int">
         UPDATE basket_spot
         SET
             del_req = del_req + 1
         WHERE
             id = #{id}
-<!--             lat = #{lat}
-        AND lon = #{lon} -->
+    </update>
+
+    <delete id="mapDel" parameterType="int">
+        DELETE FROM basket_spot
+        WHERE
+            id = #{id}
     </delete>
+
+
 </mapper>

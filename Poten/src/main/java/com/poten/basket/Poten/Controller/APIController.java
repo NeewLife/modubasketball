@@ -1,6 +1,7 @@
 package com.poten.basket.Poten.Controller;
 
 import com.poten.basket.Poten.Service.MapService;
+import com.poten.basket.Poten.VO.Feedbacks;
 import com.poten.basket.Poten.VO.MapRequest;
 import com.poten.basket.Poten.VO.MapResponse;
 
@@ -49,16 +50,16 @@ public class APIController {
   }
 
   /*
-   * 지도 데이터 삭제
-   * 필요 params - lat(위도), lon(경도)
+   * 지도 데이터 삭제 요청
+   * 필요 params - id
    * */
 
-  @DeleteMapping("/spot/delete/{id}")
-  public ResponseEntity deleteSpot(@PathVariable int id) {
-    System.out.println("====================delete====================");
+  @PutMapping("/spot/delete/{id}")
+  public ResponseEntity deleteReqSpot(@PathVariable int id) {
+    System.out.println("====================deleteReq====================");
     System.out.println(id);
-    mapService.mapDel(id);
-    System.out.println("삭제됨");
+    mapService.mapDelReq(id);
+    System.out.println("삭제 요청됨");
     return new ResponseEntity(id, HttpStatus.OK);
   }
 
@@ -83,4 +84,25 @@ public class APIController {
       mapService.feedback(params);
       return new ResponseEntity(params, HttpStatus.OK);
   }
+
+  @GetMapping("/admin/feedback/read")
+  public ResponseEntity getFeedbacks() {
+    List<Feedbacks> feedbacks = mapService.getFeedbacks();
+    return ResponseEntity.ok(feedbacks);
+  }
+
+  /*
+   * 관리자에서 지도 영구삭제
+   * 필요 params - id
+   * */
+  @DeleteMapping("/admin/delete/{id}")
+  public ResponseEntity deleteSpot(@PathVariable int id) {
+    System.out.println("====================delete====================");
+    System.out.println(id);
+    mapService.mapDel(id);
+    System.out.println("삭제됨");
+    return new ResponseEntity(id, HttpStatus.OK);
+  }
+
+
 }

@@ -4,7 +4,7 @@ build/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/
-static\
+static/
 
 ### STS ###
 .apt_generated
@@ -44,3 +44,5 @@ out/
 /uingx/build-storybook.log
 /uingx/chromatic.logstatic\
 
+static\
+static\

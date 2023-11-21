@@ -1,5 +1,6 @@
 package com.poten.basket.Poten.DAO;
 
+import com.poten.basket.Poten.VO.Feedbacks;
 import com.poten.basket.Poten.VO.MapRequest;
 import com.poten.basket.Poten.VO.MapResponse;
 import org.apache.ibatis.annotations.Mapper;
@@ -21,10 +22,13 @@ public interface MapDAO {
 
     void mapUpt(MapRequest params);
 
+    void mapDelReq(int params);
+
     void mapDel(int params);
 
     void feedback(HashMap<String, Object> params);
 
     void visitCounting();
 
+    List<Feedbacks> getFeedbacks();
 }
