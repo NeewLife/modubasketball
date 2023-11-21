@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { DetailedHTMLProps, HTMLAttributes } from 'react';
 import { TypographyOptionsProps } from '@components/atoms';
 
-export const Caption = (props: TypographyOptionsProps) => {
-  const { text, color = 'text-gray-100' } = props;
+export const Caption = (
+  props: TypographyOptionsProps & DetailedHTMLProps<HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>,
+) => {
+  const { text, color = 'text-gray-100', className } = props;
 
-  return <span className={`text-[12px] font-[regular] leading-normal ${color}`}>{text}</span>;
+  return <span className={`text-[12px] font-[regular] leading-normal ${color} ${className}`}>{text}</span>;
 };
