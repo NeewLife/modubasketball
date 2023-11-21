@@ -158,30 +158,26 @@ export const Map = (props: MapProps) => {
     ps.keywordSearch(keyword, onSearchHandler(map));
   };
 
-  const onManagerHandler = (manager: any) => {
-    manager.select(window.kakao.maps.drawing.OverlayType.MARKER);
+  const onDrawend = (manager: any) => (data: any) => {
+    const position = data.coords.toLatLng();
 
-    manager.addListener('drawend', (data: any) => {
-      const position = data.coords.toLatLng();
+    onGecoderHandler(position.getLat(), position.getLng(), (result) => {
+      if (result.length === 0) {
+        alert('생성 불가 지역');
+        return;
+      }
 
-      onGecoderHandler(position.getLat(), position.getLng(), (result) => {
-        if (result.length === 0) {
-          alert('생성 불가 지역');
-          return;
-        }
+      const address = result[0].road_address ? result[0].road_address.address_name : result[0].address.address_name;
 
-        const address = result[0].road_address ? result[0].road_address.address_name : result[0].address.address_name;
+      const infoData = {
+        address: address,
+      } as InfoProps;
 
-        const infoData = {
-          address: address,
-        } as InfoProps;
-
-        setOpen(<InfoEdit type="save" {...infoData} lat={position.getLat()} lon={position.getLng()} />);
-        onTrackable(!isEdit);
-      });
-
-      manager.remove(data.target);
+      setOpen(<InfoEdit type="save" {...infoData} lat={position.getLat()} lon={position.getLng()} />);
+      onTrackable(false);
     });
+
+    manager.remove(data.target);
   };
 
   useEffect(() => {
@@ -202,12 +198,14 @@ export const Map = (props: MapProps) => {
       }
     }
     setLocalMap(map);
-    setLocalManager(
-      new window.kakao.maps.drawing.DrawingManager({
-        map: map,
-        drawingMode: [window.kakao.maps.drawing.OverlayType.MARKER],
-      }),
-    );
+
+    const manager = new window.kakao.maps.drawing.DrawingManager({
+      map: map,
+      drawingMode: [window.kakao.maps.drawing.OverlayType.MARKER],
+    });
+
+    manager.addListener('drawend', onDrawend(manager));
+    setLocalManager(manager);
   }, []);
 
   useEffect(() => {
@@ -229,7 +227,7 @@ export const Map = (props: MapProps) => {
 
   useEffect(() => {
     if (localManager) {
-      if (isEdit) onManagerHandler(localManager);
+      if (isEdit) localManager.select(window.kakao.maps.drawing.OverlayType.MARKER);
       else localManager.cancel();
     }
   }, [isEdit]);
