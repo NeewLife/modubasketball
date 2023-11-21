@@ -4,6 +4,7 @@ import { useModal } from '@utils/zustand/useModal';
 
 import Close from '@constants/icon/close.svg';
 import { useResize } from '@utils/zustand';
+import { useCustomBack } from '@utils/common';
 
 const customStyles = (width: string, type?: 'desktop' | 'tablet' | 'mobile') => {
   return {
@@ -43,6 +44,16 @@ export const CustomModal = () => {
     useModal();
   const { type } = useResize();
 
+  const onloaclSetClose = () => {
+    setClose();
+    if (change) {
+      if (changeChildren.props.id !== 'end') setOpen(changeChildren);
+      useModal.setState(() => ({ change: false }));
+    }
+  };
+
+  useCustomBack(onloaclSetClose);
+
   useEffect(() => {
     if (change) {
       setTimeout(() => {
@@ -52,14 +63,6 @@ export const CustomModal = () => {
       }, 1500);
     }
   }, [change]);
-
-  const onloaclSetClose = () => {
-    setClose();
-    if (change) {
-      if (changeChildren.props.id !== 'end') setOpen(changeChildren);
-      useModal.setState(() => ({ change: false }));
-    }
-  };
 
   return (
     <Modal
