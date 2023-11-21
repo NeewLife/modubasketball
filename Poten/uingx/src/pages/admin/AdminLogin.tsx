@@ -2,12 +2,17 @@ import React, { useState, useEffect } from 'react';
 
 import LogoHeader from '@constants/image/logo-header.png';
 import LogoSmallHeader from '@constants/image/logo-small-header.png';
+import Error from '@constants/icon/error.svg';
+
 import { ButtonLong, Caption, Headline, Input, Title } from '@components/atoms';
 import { useNavigate } from 'react-router-dom';
+import { CustomAlertAction } from '@components/molecules';
 
 export const AdminLogin = () => {
   const navigate = useNavigate();
+
   const [password, setPassword] = useState('');
+  const [isError, setIsError] = useState(false);
 
   const onChangePassword = (text: string) => {
     setPassword(text);
@@ -17,7 +22,13 @@ export const AdminLogin = () => {
     if (password === 'test') {
       localStorage.setItem('admin', 'test');
       navigate('/admin/detail');
+    } else {
+      setIsError(true);
     }
+  };
+
+  const onTrackableError = (error: boolean) => {
+    setIsError(error);
   };
 
   useEffect(() => {
@@ -48,6 +59,16 @@ export const AdminLogin = () => {
           </div>
           <ButtonLong text="로그인" onClick={onLogin} />
         </div>
+      </div>
+      <div className="absolute desktop:top-[90px] top-[10px] w-full flex justify-center">
+        <CustomAlertAction
+          type="error"
+          hold={2000}
+          icon={Error}
+          open={isError}
+          onTrackable={onTrackableError}
+          text="비밀번호를 확인해주세요."
+        />
       </div>
     </div>
   );

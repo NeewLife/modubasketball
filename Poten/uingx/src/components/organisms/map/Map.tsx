@@ -53,13 +53,22 @@ interface MapProps {
 
   isEdit?: boolean;
   onTrackable?: (isEdit: boolean) => void;
+  onTrackableError?: (isError: boolean, message: string) => void;
 
   type: 'search' | 'gps';
   keyword: string;
 }
 
 export const Map = (props: MapProps) => {
-  const { markerData = [], type, keyword, onCenter = 0, isEdit = false, onTrackable = () => [] } = props;
+  const {
+    markerData = [],
+    type,
+    keyword,
+    onCenter = 0,
+    isEdit = false,
+    onTrackable = () => {},
+    onTrackableError = () => {},
+  } = props;
 
   const { setOpen } = useModal();
   const [localMap, setLocalMap] = useState();
@@ -163,7 +172,7 @@ export const Map = (props: MapProps) => {
 
     onGecoderHandler(position.getLat(), position.getLng(), (result) => {
       if (result.length === 0) {
-        alert('생성 불가 지역');
+        onTrackableError(true, '위치를 지원할 수 없는 곳입니다.');
         return;
       }
 
@@ -174,9 +183,9 @@ export const Map = (props: MapProps) => {
       } as InfoProps;
 
       setOpen(<InfoEdit type="save" {...infoData} lat={position.getLat()} lon={position.getLng()} />);
-      onTrackable(false);
     });
 
+    onTrackable(false);
     manager.remove(data.target);
   };
 
@@ -192,7 +201,7 @@ export const Map = (props: MapProps) => {
     if (type === 'search') onSearchCenter(map);
     else {
       if (!navigator.geolocation) {
-        alert('사용 불가');
+        onTrackableError(true, '지도를 확인할 수 없습니다. 관리자에게 문의하세요.');
       } else {
         onGeoLocationHandler(map);
       }

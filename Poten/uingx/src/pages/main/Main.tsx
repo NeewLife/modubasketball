@@ -1,18 +1,21 @@
 import React, { KeyboardEvent, useEffect, useState } from 'react';
 import { ButtonIcon, ButtonMedium, CustomAlert, Headline } from '@components/atoms';
+import { CustomAlertAction, SearchBar } from '@components/molecules';
+import { Map } from '@components/organisms';
+
 import Location from '@constants/icon/location.svg';
 import Arrrow from '@constants/icon/arrow.svg';
 import LogoHeader from '@constants/image/logo-header.png';
 import LogoSmallHeader from '@constants/image/logo-small-header.png';
 import FeedbackIcon from '@constants/icon/feedback.svg';
-import { Map } from '@components/organisms';
+import Error from '@constants/icon/error.svg';
+
 import { useKeyword, useModal, useResize, useUpdate } from '@utils/zustand';
 import { IMap, useMapService } from '@services/index';
 
 import { useNavigate } from 'react-router-dom';
 import { AxiosResponse } from 'axios';
 import { Feedback } from '@pages/index';
-import { SearchBar } from '@components/molecules';
 
 export const Main = () => {
   const keyword = useKeyword();
@@ -26,6 +29,10 @@ export const Main = () => {
   const [location, setLocation] = useState(0);
 
   const [isEdit, setIsEdit] = useState(false);
+  const [isError, setIsError] = useState({
+    isError: false,
+    message: '',
+  });
 
   const [localKeyword, setLocalKeyword] = useState(keyword.keyword);
   const [sendKeyword, setSendKeyword] = useState(keyword.keyword);
@@ -44,10 +51,16 @@ export const Main = () => {
 
   const onClickEdit = () => {
     setIsEdit(!isEdit);
+    setIsError({ ...isError, isError: false });
   };
 
   const onTrackableEdit = (sIsEdit: boolean) => {
     setIsEdit(sIsEdit);
+    setIsError({ ...isError, isError: false });
+  };
+
+  const onTrackableError = (sIsError: boolean, message: string) => {
+    setIsError({ isError: sIsError, message });
   };
 
   const onChangeKeyword = (text: string) => {
@@ -105,6 +118,7 @@ export const Main = () => {
           onCenter={location}
           isEdit={isEdit}
           onTrackable={onTrackableEdit}
+          onTrackableError={onTrackableError}
         />
         <div
           className="absolute left-[32px] top-[20px] z-50
@@ -133,6 +147,7 @@ export const Main = () => {
         </div>
         <div className="absolute top-[10px] w-full flex justify-center z-50">
           {isEdit && <CustomAlert text="제보하실 농구장의 위치를 지도에서 눌러주세요." type="success" />}
+          <CustomAlertAction open={isError.isError} text={isError.message} hold={2000} icon={Error} type="error" />
         </div>
       </div>
     </div>
