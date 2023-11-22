@@ -34,6 +34,19 @@ public class APIController {
     return ResponseEntity.ok(mapList);
   }
 
+  /*
+  * 방문자수 + 1
+  * */
+  @PutMapping("/counting")
+  public ResponseEntity<String> visitCounting() {
+    mapService.visitCounting();
+    return ResponseEntity.ok("count + 1 완료");
+  }
+
+  /*
+  * 방문자수 조회
+  * return 방문자수
+  * */
   @GetMapping("/count")
   public ResponseEntity visitCount() {
     int visitCount = mapService.visitCount();

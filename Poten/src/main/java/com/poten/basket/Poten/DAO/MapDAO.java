@@ -16,6 +16,10 @@ public interface MapDAO {
 
     List<MapResponse> mapList();
 
+    // 방문자수 + 1
+    void visitCounting();
+
+    // 방문자수 호출
     int visitCount();
 
     void mapCre(MapRequest params);
@@ -28,7 +32,7 @@ public interface MapDAO {
 
     void feedback(HashMap<String, Object> params);
 
-    void visitCounting();
+
 
     List<Feedbacks> getFeedbacks();
 }
