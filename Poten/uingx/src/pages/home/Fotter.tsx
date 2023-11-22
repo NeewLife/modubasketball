@@ -3,6 +3,7 @@ import { Body } from '@components/atoms';
 
 import LogoFotter from '@constants/image/logo-fotter.png';
 import LogoSmallFotter from '@constants/image/logo-small-fotter.png';
+import { Link } from 'react-router-dom';
 
 export const Fotter = () => {
   return (
@@ -26,7 +27,9 @@ export const Fotter = () => {
         <div className="flex flex-col w-20">
           <Body text="Tel" />
           <Body text="E-mail" />
-          <Body text="관리자" color="text-gray-70" className="cursor-pointer tablet:mt-[25px] mobile:mt-[25px]" />
+          <Link to="/admin" target="_blank">
+            <Body text="관리자" color="text-gray-70" className="cursor-pointer tablet:mt-[25px] mobile:mt-[25px]" />
+          </Link>
         </div>
         <div className="flex flex-col">
           <Body text="0507-0178-0372" />
