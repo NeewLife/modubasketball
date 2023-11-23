@@ -4,7 +4,6 @@ import { useModal } from '@utils/zustand/useModal';
 
 import Close from '@constants/icon/close.svg';
 import { useResize } from '@utils/zustand';
-import { useCustomBack } from '@utils/common';
 
 const customStyles = (width: string, type?: 'desktop' | 'tablet' | 'mobile') => {
   return {
@@ -51,8 +50,6 @@ export const CustomModal = () => {
       useModal.setState(() => ({ change: false }));
     }
   };
-
-  useCustomBack(onloaclSetClose);
 
   useEffect(() => {
     if (change) {

@@ -34,6 +34,7 @@ export const useModal = create<IUseModal>((set) => ({
   height: true,
   isModile: false,
   setOpen: (children) => {
+    window.history.pushState(null, '', window.location.href);
     set(() => ({ open: true, children: children }));
   },
   setClose: () => {
