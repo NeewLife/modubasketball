@@ -53,6 +53,7 @@ export const Admin = () => {
           />
         </div>
       </div>
+      <div className="h-[2px] bg-secondary-20" />
       <div className="relative desktop:w-[1380px] w-full grow flex justify-center m-auto desktop:pt-[46px] pt-[26px]">
         {menu === 'feedback' && <AdminFeedback />}
         {menu === 'delete' && <AdminDelete />}

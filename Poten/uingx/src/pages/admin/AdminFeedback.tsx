@@ -25,7 +25,10 @@ export const AdminFeedback = () => {
   }, [limit]);
 
   return (
-    <div className="absolute inset-0 overflow-auto tablet:mx-[15px] mobile:mx-[15px]" onScroll={onScroll}>
+    <div
+      className="absolute inset-0 overflow-auto tablet:mx-[15px] mobile:mx-[15px] scrollbar-none"
+      onScroll={onScroll}
+    >
       <div className="desktop:mt-[47px] mt-[20px] desktop:mb-[47px] mb-[20px] flex flex-col gap-[20px]">
         {data.map((datum) => (
           <div

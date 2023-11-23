@@ -145,7 +145,7 @@ export const InfoEdit = (props: InfoEditProps & InfoProps) => {
           type: 'number',
           onTrackable: onChangeInput('goalPost'),
           placeholder: '정보를 입력해주세요.',
-          regex: { regex: /^[0-9]{1}$|^[1]{1}[0-9]{1}$/, message: '*0 ~ 19사이로 입력해주세요.' },
+          regex: { regex: /^[0-9]{1}$|^[1]{1}[0-9]{1}$|^$/, message: '*0 ~ 19사이로 입력해주세요.' },
         },
       },
       {

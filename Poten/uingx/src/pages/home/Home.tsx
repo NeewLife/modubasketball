@@ -11,7 +11,7 @@ import Header from '@constants/image/header.png';
 
 export const Home = () => {
   return (
-    <div className="w-screen h-[100dvh] overflow-auto">
+    <div className="w-screen h-[100dvh] overflow-auto scrollbar scrollbar-track-gray-10 scrollbar-thumb-gray-30">
       <div className="w-full desktop:h-[70px] h-[44px] flex items-center justify-center">
         <img className="tablet:hidden mobile:hidden" alt="logoHeader" src={LogoHeader} />
         <img className="desktop:hidden" alt="logoHeader" src={LogoSmallHeader} />
