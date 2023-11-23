@@ -20,25 +20,28 @@ export const FotterVisit = () => {
   }, []);
 
   useEffect(() => {
-    const cookie = getCookie('visit');
-
-    if (!cookie) {
+    if (!getCookie('visit')) {
       useVisitService
-        .getAll()
-        .then((response: AxiosResponse<number>) => {
-          setVisit(response.data);
-
+        .count()
+        .then(() => {
           const expires = new Date();
-          expires.setHours(expires.getHours() + 24);
+          expires.setHours(expires.getHours() + 6);
 
-          setCookie('visit', response.data.toString(), { expires });
+          setCookie('visit', 'visit', { expires });
         })
         .catch(() => {
           setVisit(0);
         });
-    } else {
-      setVisit(cookie);
     }
+
+    useVisitService
+      .getAll()
+      .then((response: AxiosResponse<number>) => {
+        setVisit(response.data);
+      })
+      .catch(() => {
+        setVisit(0);
+      });
   }, []);
 
   return (

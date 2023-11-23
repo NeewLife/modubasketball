@@ -34,7 +34,7 @@ class MapService {
   }
 
   delete(id: number) {
-    return CustomAxios.delete(`/api/spot/delete/${id}`);
+    return CustomAxios.put(`/api/spot/delete/${id}`);
   }
 }
 

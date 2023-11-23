@@ -25,45 +25,44 @@ export const AdminFeedback = () => {
   }, [limit]);
 
   return (
-    <div
-      className="absolute inset-0 overflow-auto flex flex-col gap-[20px] desktop:mt-[47px] mt-[20px] tablet:mx-[15px] mobile:mx-[15px]"
-      onScroll={onScroll}
-    >
-      {data.map((datum) => (
-        <div
-          key={datum.id}
-          className="w-full bg-gray-10 px-[20px] py-[10px] rounded-[10px] flex items-center desktop:gap-[15px] gap-[10px] tablet:flex-col mobile:flex-col"
-        >
-          <Caption className="tablet:hidden mobile:hidden" text="2023-12-01" color="text-gray-60" />
-          <Caption className="tablet:hidden mobile:hidden" text="13:40:23" color="text-gray-60" />
+    <div className="absolute inset-0 overflow-auto tablet:mx-[15px] mobile:mx-[15px]" onScroll={onScroll}>
+      <div className="desktop:mt-[47px] mt-[20px] desktop:mb-[47px] mb-[20px] flex flex-col gap-[20px]">
+        {data.map((datum) => (
+          <div
+            key={datum.id}
+            className="w-full bg-gray-10 px-[20px] py-[10px] rounded-[10px] flex items-center desktop:gap-[15px] gap-[10px] tablet:flex-col mobile:flex-col"
+          >
+            <Caption className="tablet:hidden mobile:hidden" text="2023-12-01" color="text-gray-60" />
+            <Caption className="tablet:hidden mobile:hidden" text="13:40:23" color="text-gray-60" />
 
-          <div className="tablet:hidden mobile:hidden">
-            {datum.tdLating === 1 && <img alt={datum.id.toString()} src={Face5Pressed} width={30} height={30} />}
-            {datum.tdLating === 2 && <img alt={datum.id.toString()} src={Face4Pressed} width={30} height={30} />}
-            {datum.tdLating === 3 && <img alt={datum.id.toString()} src={Face3Pressed} width={30} height={30} />}
-            {datum.tdLating === 4 && <img alt={datum.id.toString()} src={Face2Pressed} width={30} height={30} />}
-            {datum.tdLating === 5 && <img alt={datum.id.toString()} src={Face1Pressed} width={30} height={30} />}
-          </div>
-
-          <div className="desktop:hidden w-full flex justify-between items-center">
-            <div className="flex gap-[10px]">
-              <Caption text="2023-12-01" color="text-gray-60" />
-              <Caption text="13:40:23" color="text-gray-60" />
-            </div>
-            <div>
+            <div className="tablet:hidden mobile:hidden">
               {datum.tdLating === 1 && <img alt={datum.id.toString()} src={Face5Pressed} width={30} height={30} />}
               {datum.tdLating === 2 && <img alt={datum.id.toString()} src={Face4Pressed} width={30} height={30} />}
               {datum.tdLating === 3 && <img alt={datum.id.toString()} src={Face3Pressed} width={30} height={30} />}
               {datum.tdLating === 4 && <img alt={datum.id.toString()} src={Face2Pressed} width={30} height={30} />}
               {datum.tdLating === 5 && <img alt={datum.id.toString()} src={Face1Pressed} width={30} height={30} />}
             </div>
-          </div>
 
-          <div className="flex-1">
-            <Body text={datum.fbComment} />
+            <div className="desktop:hidden w-full flex justify-between items-center">
+              <div className="flex gap-[10px]">
+                <Caption text="2023-12-01" color="text-gray-60" />
+                <Caption text="13:40:23" color="text-gray-60" />
+              </div>
+              <div>
+                {datum.tdLating === 1 && <img alt={datum.id.toString()} src={Face5Pressed} width={30} height={30} />}
+                {datum.tdLating === 2 && <img alt={datum.id.toString()} src={Face4Pressed} width={30} height={30} />}
+                {datum.tdLating === 3 && <img alt={datum.id.toString()} src={Face3Pressed} width={30} height={30} />}
+                {datum.tdLating === 4 && <img alt={datum.id.toString()} src={Face2Pressed} width={30} height={30} />}
+                {datum.tdLating === 5 && <img alt={datum.id.toString()} src={Face1Pressed} width={30} height={30} />}
+              </div>
+            </div>
+
+            <div className="flex-1 tablet:self-start mobile:self-start">
+              <Body text={datum.fbComment} />
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 };
