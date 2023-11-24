@@ -4,12 +4,13 @@ import com.poten.basket.Poten.DAO.MapDAO;
 import com.poten.basket.Poten.VO.Feedbacks;
 import com.poten.basket.Poten.VO.MapRequest;
 import com.poten.basket.Poten.VO.MapResponse;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class MapService {
@@ -33,8 +34,8 @@ public class MapService {
         mapDAO.mapUpt(params);
     }
 
-    public void mapDelReq(int params){
-        mapDAO.mapDelReq(params);
+    public void mapDelRequest(int params){
+        mapDAO.mapDelRequest(params);
     }
 
     public void mapDel(int params){
@@ -46,4 +47,24 @@ public class MapService {
     public List<Feedbacks> getFeedbacks() {
         return mapDAO.getFeedbacks();
     }
+
+    public Map<String, List<MapResponse>> mapReqList() {
+        List<MapResponse> mapReqList = mapDAO.mapReqList();
+        List<MapResponse> mapDelList = mapDAO.mapDelList();
+        List<MapResponse> mapRejList = mapDAO.mapRejList();
+
+        Map<String, List<MapResponse>> adminMapList = new HashMap<>();
+        adminMapList.put("mapReqList", mapReqList);
+        adminMapList.put("mapDelList", mapDelList);
+        adminMapList.put("mapRejList", mapRejList);
+
+        System.out.println("adminMapList = " + adminMapList);
+
+        return adminMapList;
+    }
+
+    public void mapDelReject(int params){
+        mapDAO.mapDelReject(params);
+    }
+
 }

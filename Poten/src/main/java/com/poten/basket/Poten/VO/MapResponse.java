@@ -20,4 +20,5 @@ public class MapResponse {
   private String address; // 주소
   private String comment; // 기타 정보란
   private String courtName; // 코트 고유명
+  private int delReq; // 삭제요청 수
 }

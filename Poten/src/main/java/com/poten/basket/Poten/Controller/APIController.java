@@ -7,6 +7,8 @@ import com.poten.basket.Poten.VO.MapResponse;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.CacheControl;
 import org.springframework.http.HttpHeaders;
@@ -70,12 +72,11 @@ public class APIController {
    * 지도 데이터 삭제 요청
    * 필요 params - id
    * */
-
   @PutMapping("/spot/delete/{id}")
   public ResponseEntity deleteReqSpot(@PathVariable int id) {
     System.out.println("====================deleteReq====================");
     System.out.println(id);
-    mapService.mapDelReq(id);
+    mapService.mapDelRequest(id);
     System.out.println("삭제 요청됨");
     return new ResponseEntity(id, HttpStatus.OK);
   }
@@ -108,11 +109,25 @@ public class APIController {
     return ResponseEntity.ok(feedbacks);
   }
 
+  @GetMapping("/admin/spot")
+  public ResponseEntity<Map<String, List<MapResponse>>> getAdminMap() {
+    Map<String, List<MapResponse>> mapReqList = mapService.mapReqList();
+    return ResponseEntity.ok(mapReqList);
+  }
+
+  @PutMapping("/admin/delete-reject/{id}")
+  public ResponseEntity deleteRejectSpot(@PathVariable int id) {
+    System.out.println("====================deleteReject====================");
+    System.out.println(id);
+    mapService.mapDelReject(id);
+    return new ResponseEntity(id, HttpStatus.OK);
+  }
+
   /*
-   * 관리자에서 지도 영구삭제
+   * 관리자에서 지도 논리적삭제
    * 필요 params - id
    * */
-  @DeleteMapping("/admin/delete/{id}")
+  @PutMapping("/admin/delete/{id}")
   public ResponseEntity deleteSpot(@PathVariable int id) {
     System.out.println("====================delete====================");
     System.out.println(id);

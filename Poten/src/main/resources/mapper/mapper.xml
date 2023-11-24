@@ -5,7 +5,7 @@
 
 <mapper namespace="com.poten.basket.Poten.DAO.MapDAO">
 
-    <select id="mapList" resultType="com.poten.basket.Poten.VO.MapResponse">
+    <sql id="mapList">
         SELECT
             id
             , lat
@@ -20,7 +20,35 @@
             , address
             , comment
             , court_name AS courtName
+            , del_req AS delReq
         FROM basket_spot
+    </sql>
+
+    <select id="mapList" resultType="com.poten.basket.Poten.VO.MapResponse">
+        <include refid="mapList"></include>
+        WHERE
+            is_deleted = 0
+    </select>
+
+    <select id="mapReqList" resultType="com.poten.basket.Poten.VO.MapResponse">
+        <include refid="mapList"></include>
+        WHERE
+            del_req >= 1
+        AND is_deleted = 0
+        AND is_rejected = 0
+    </select>
+
+    <select id="mapDelList" resultType="com.poten.basket.Poten.VO.MapResponse">
+        <include refid="mapList"></include>
+        WHERE
+            is_deleted = 1
+    </select>
+
+    <select id="mapRejList" resultType="com.poten.basket.Poten.VO.MapResponse">
+        <include refid="mapList"></include>
+        WHERE
+            is_rejected = 1
+        AND is_deleted = 0
     </select>
 
     <select id="visitCount" resultType="int">
@@ -103,19 +131,31 @@
         <!-- AND lon = #{lon} -->
     </update>
 
-    <update id="mapDelReq" parameterType="int">
+    <update id="mapDelRequest" parameterType="int">
         UPDATE basket_spot
         SET
             del_req = del_req + 1
+            , is_rejected = 0
         WHERE
             id = #{id}
     </update>
 
-    <delete id="mapDel" parameterType="int">
-        DELETE FROM basket_spot
+    <update id="mapDel" parameterType="int">
+        UPDATE basket_spot
+        SET
+            is_deleted = 1
         WHERE
             id = #{id}
-    </delete>
+    </update>
+
+    <update id="mapDelReject" parameterType="int">
+        UPDATE basket_spot
+        SET
+            del_req = 0
+            is_rejected = 1
+        WHERE
+            id = #{id}
+    </update>
 
 
 </mapper>

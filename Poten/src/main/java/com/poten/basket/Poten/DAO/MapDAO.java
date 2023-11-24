@@ -16,23 +16,29 @@ public interface MapDAO {
 
     List<MapResponse> mapList();
 
-    // 방문자수 + 1
-    void visitCounting();
+    List<MapResponse> mapReqList();
+
+    List<MapResponse> mapDelList();
+
+    List<MapResponse> mapRejList();
 
     // 방문자수 호출
     int visitCount();
 
-    void mapCre(MapRequest params);
-
-    void mapUpt(MapRequest params);
-
-    void mapDelReq(int params);
-
-    void mapDel(int params);
+    List<Feedbacks> getFeedbacks();
 
     void feedback(HashMap<String, Object> params);
 
+    void mapCre(MapRequest params);
 
+    // 방문자수 + 1
+    void visitCounting();
 
-    List<Feedbacks> getFeedbacks();
+    void mapUpt(MapRequest params);
+
+    void mapDelRequest(int params);
+
+    void mapDel(int params);
+
+    void mapDelReject(int params);
 }
