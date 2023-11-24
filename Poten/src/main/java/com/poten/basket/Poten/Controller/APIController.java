@@ -103,6 +103,15 @@ public class APIController {
       return new ResponseEntity(params, HttpStatus.OK);
   }
 
+  @GetMapping("/admin/login")
+  public ResponseEntity adminLogin(@PathVariable String password){
+    String loginStatus = "FAIL";
+    if (password == "test"){
+      loginStatus = "SUCCESS";
+    }
+    return ResponseEntity.ok(loginStatus);
+  }
+
   @GetMapping("/admin/feedback/read")
   public ResponseEntity getFeedbacks() {
     List<Feedbacks> feedbacks = mapService.getFeedbacks();
