@@ -147,7 +147,7 @@ export const Feedback = () => {
           placeholder="여러분의 의견을 들려주세요."
         />
       </div>
-      <div className="flex justify-center gap-[18px] mt-[56px] mobile:mt-[194px]">
+      <div className="flex justify-center gap-[18px] mt-[56px]">
         <ButtonBig
           text="보내기"
           color={`${data.rating === 0 ? 'gray' : 'white'}`}
