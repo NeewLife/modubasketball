@@ -10,7 +10,7 @@ module.exports = {
   entry: ['./src/index.tsx'],
   output: {
     path: path.resolve('./build'),
-    filename: '[name].min.js',
+    filename: '[name].[chunkhash:8].js',
   },
   resolve: {
     extensions: ['.js', '.ts', '.jsx', '.tsx'],

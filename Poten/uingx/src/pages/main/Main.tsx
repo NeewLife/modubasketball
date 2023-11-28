@@ -138,7 +138,7 @@ export const Main = () => {
 
         <div
           className="fixed right-[30px] bottom-[42px] z-50 flex flex-col items-end gap-[15px]
-                     mobile:right-0 mobile::bottom-[34px] mobile:w-full mobile:justify-center mobile:flex-row mobile:items-center mobile:gap-[10px]
+                     mobile:right-0 mobile:bottom-[34px] mobile:w-full mobile:justify-center mobile:flex-row mobile:items-center mobile:gap-[10px]
         "
         >
           <ButtonIcon text="feedback" icon={FeedbackIcon} onClick={onClickFeedback} />
