@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.poten.basket.Poten.DAO.FeedbackDAO">
+    <select id="getFeedbackAll" parameterType="java.util.Map" resultType="com.poten.basket.Poten.VO.Feedbacks">
+        SELECT
+        id
+        , fd_comment fdComment
+        , fd_rating fdRating
+        , fd_create_date fdCreateDate
+        FROM feedback
+        ORDER BY fd_create_date DESC
+        LIMIT #{currPage}, #{prePerPage}
+    </select>
+</mapper>
