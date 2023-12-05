@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { AxiosResponse } from 'axios';
 import { Body, Caption } from '@components/atoms';
 
 import Face1Pressed from '@constants/image/face-1-pressed.png';
@@ -7,22 +8,24 @@ import Face3Pressed from '@constants/image/face-3-pressed.png';
 import Face4Pressed from '@constants/image/face-4-pressed.png';
 import Face5Pressed from '@constants/image/face-5-pressed.png';
 
-import { FeedbackTypes, sampleFeedbackData } from './sample';
+import { IFeedback, useFeedbackService } from '@services/feedback.service';
 
 export const AdminFeedback = () => {
-  const [data, setData] = useState<FeedbackTypes[]>([]);
+  const [data, setData] = useState<IFeedback[]>([]);
 
-  const [limit, setLimit] = useState(20);
+  const [currPage, setCurrPage] = useState(1);
 
   const onScroll = (event: any) => {
     const isScrollBottom = event.target.scrollTop >= event.target.scrollHeight - event.target.clientHeight;
 
-    if (isScrollBottom) setLimit(limit + 20);
+    if (isScrollBottom) setCurrPage(currPage + 1);
   };
 
   useEffect(() => {
-    setData(sampleFeedbackData.slice(0, limit));
-  }, [limit]);
+    useFeedbackService.getAll(currPage).then((response: AxiosResponse<IFeedback[]>) => {
+      if (response.data.length > 0) setData(data.concat(response.data));
+    });
+  }, [currPage]);
 
   return (
     <div
@@ -35,15 +38,23 @@ export const AdminFeedback = () => {
             key={datum.id}
             className="w-full bg-gray-10 px-[20px] py-[10px] rounded-[10px] flex items-center desktop:gap-[15px] gap-[10px] tablet:flex-col mobile:flex-col"
           >
-            <Caption className="tablet:hidden mobile:hidden" text="2023-12-01" color="text-gray-60" />
-            <Caption className="tablet:hidden mobile:hidden" text="13:40:23" color="text-gray-60" />
+            <Caption
+              className="tablet:hidden mobile:hidden"
+              text={datum.fdCreateDate.split(' ')[0]}
+              color="text-gray-60"
+            />
+            <Caption
+              className="tablet:hidden mobile:hidden"
+              text={datum.fdCreateDate.split(' ')[1]}
+              color="text-gray-60"
+            />
 
             <div className="tablet:hidden mobile:hidden">
-              {datum.tdLating === 1 && <img alt={datum.id.toString()} src={Face5Pressed} width={30} height={30} />}
-              {datum.tdLating === 2 && <img alt={datum.id.toString()} src={Face4Pressed} width={30} height={30} />}
-              {datum.tdLating === 3 && <img alt={datum.id.toString()} src={Face3Pressed} width={30} height={30} />}
-              {datum.tdLating === 4 && <img alt={datum.id.toString()} src={Face2Pressed} width={30} height={30} />}
-              {datum.tdLating === 5 && <img alt={datum.id.toString()} src={Face1Pressed} width={30} height={30} />}
+              {datum.fdRating === 1 && <img alt={datum.id.toString()} src={Face5Pressed} width={30} height={30} />}
+              {datum.fdRating === 2 && <img alt={datum.id.toString()} src={Face4Pressed} width={30} height={30} />}
+              {datum.fdRating === 3 && <img alt={datum.id.toString()} src={Face3Pressed} width={30} height={30} />}
+              {datum.fdRating === 4 && <img alt={datum.id.toString()} src={Face2Pressed} width={30} height={30} />}
+              {datum.fdRating === 5 && <img alt={datum.id.toString()} src={Face1Pressed} width={30} height={30} />}
             </div>
 
             <div className="desktop:hidden w-full flex justify-between items-center">
@@ -52,19 +63,20 @@ export const AdminFeedback = () => {
                 <Caption text="13:40:23" color="text-gray-60" />
               </div>
               <div>
-                {datum.tdLating === 1 && <img alt={datum.id.toString()} src={Face5Pressed} width={30} height={30} />}
-                {datum.tdLating === 2 && <img alt={datum.id.toString()} src={Face4Pressed} width={30} height={30} />}
-                {datum.tdLating === 3 && <img alt={datum.id.toString()} src={Face3Pressed} width={30} height={30} />}
-                {datum.tdLating === 4 && <img alt={datum.id.toString()} src={Face2Pressed} width={30} height={30} />}
-                {datum.tdLating === 5 && <img alt={datum.id.toString()} src={Face1Pressed} width={30} height={30} />}
+                {datum.fdRating === 1 && <img alt={datum.id.toString()} src={Face5Pressed} width={30} height={30} />}
+                {datum.fdRating === 2 && <img alt={datum.id.toString()} src={Face4Pressed} width={30} height={30} />}
+                {datum.fdRating === 3 && <img alt={datum.id.toString()} src={Face3Pressed} width={30} height={30} />}
+                {datum.fdRating === 4 && <img alt={datum.id.toString()} src={Face2Pressed} width={30} height={30} />}
+                {datum.fdRating === 5 && <img alt={datum.id.toString()} src={Face1Pressed} width={30} height={30} />}
               </div>
             </div>
 
             <div className="flex-1 tablet:self-start mobile:self-start">
-              <Body text={datum.fbComment} />
+              <Body text={datum.fdComment ? datum.fdComment : ''} />
             </div>
           </div>
         ))}
+        {data.length === 0 && <Caption text="데이터가 없습니다." color="text-gray-60" />}
       </div>
     </div>
   );
