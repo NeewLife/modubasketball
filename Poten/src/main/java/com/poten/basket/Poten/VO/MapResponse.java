@@ -13,7 +13,7 @@ public class MapResponse {
   private String feeYn; // 사용료
   private String courtSize; // 코트 사이즈
   private String goalPost; // 골대 수
-//  private String showerYn;  샤워 가능여부
+//  private String showerYn; // 샤워 가능여부
   private String parkYn; // 주차 가능여부
   private String createDate; // 생성 날짜
   private String modifyDate; // 수정 날짜
