@@ -21,6 +21,10 @@
             , comment
             , court_name AS courtName
             , del_req AS delReq
+            , has_light AS hasLight
+            , light_time AS lightTime
+            , open_status AS openStatus
+            , open_time AS openTime
         FROM basket_spot
     </sql>
 
@@ -90,6 +94,10 @@
             , address
             , comment
             , court_name
+            , has_light
+            , light_time
+            , open_status
+            , open_time
         ) VALUES (
             #{lat}
             , #{lon}
@@ -103,6 +111,10 @@
             , #{address}
             , #{comment}
             , #{courtName}
+            , #{hasLight}
+            , #{lightTime}
+            , #{openStatus}
+            , #{openTime}
         )
     </insert>
 
@@ -125,6 +137,10 @@
             , modify_date = NOW()
             , court_name = #{courtName}
             , comment = #{comment}
+            , has_light = #{hasLight}
+            , light_time = #{lightTime}
+            , open_status = #{openStatus}
+            , open_time = #{openTime}
         WHERE
             id = #{id}
             <!-- lat = #{lat} -->
