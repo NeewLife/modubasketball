@@ -5,8 +5,8 @@ import lombok.Data;
 @Data
 public class MapRequest {
 
-  private Integer id;
   // 입력 or 수정용 데이터 양식
+  private Integer id;
   private double lat; // 위도
   private double lon; // 경도
   private String courtType; // 코트 종류
@@ -18,4 +18,8 @@ public class MapRequest {
   private String address = ""; // 주소
   private String comment = ""; // 기타 정보란
   private String courtName = ""; // 코트 고유명
+  private String hasLight; // 야간 조명여부
+  private String lightTime; // 야간 조명시간
+  private String openStatus; // 개방 타입
+  private String openTime; // 개방 시간
 }
