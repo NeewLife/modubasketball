@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+
 import { AxiosResponse } from 'axios';
 import { Body, Caption } from '@components/atoms';
 
@@ -12,7 +13,6 @@ import { IFeedback, useFeedbackService } from '@services/feedback.service';
 
 export const AdminFeedback = () => {
   const [data, setData] = useState<IFeedback[]>([]);
-
   const [currPage, setCurrPage] = useState(1);
 
   const onScroll = (event: any) => {
@@ -59,8 +59,8 @@ export const AdminFeedback = () => {
 
             <div className="desktop:hidden w-full flex justify-between items-center">
               <div className="flex gap-[10px]">
-                <Caption text="2023-12-01" color="text-gray-60" />
-                <Caption text="13:40:23" color="text-gray-60" />
+                <Caption text={datum.fdCreateDate.split(' ')[0]} color="text-gray-60" />
+                <Caption text={datum.fdCreateDate.split(' ')[1]} color="text-gray-60" />
               </div>
               <div>
                 {datum.fdRating === 1 && <img alt={datum.id.toString()} src={Face5Pressed} width={30} height={30} />}

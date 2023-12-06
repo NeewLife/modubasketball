@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { Title } from '@components/atoms';
 import { Table } from '@components/molecules';
 import { Info, InfoProps } from '@pages/index';

@@ -7,6 +7,8 @@ import { useModal, useResize } from '@utils/zustand';
 import { element } from './route';
 
 import './index.css';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 export const App = () => {
   const routes = useRoutes(element);
