@@ -2,6 +2,8 @@ import type { Preview } from '@storybook/react';
 import { withRouter } from 'storybook-addon-react-router-v6';
 
 import '../src/index.css';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 const preview: Preview = {
   parameters: {

@@ -22,3 +22,4 @@ export { Button } from './button/Button';
 export * from './radio';
 export * from './textarea';
 export * from './alert';
+export * from './frame';
