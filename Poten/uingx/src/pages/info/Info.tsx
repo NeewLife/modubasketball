@@ -17,6 +17,10 @@ export interface InfoProps {
   feeYn: string;
   parkYn: string;
   comment: string;
+  hasLight: string;
+  lightTime?: string;
+  openStatus: string;
+  openTime?: string;
 }
 
 export const Info = (props: InfoProps & { mode?: 'delete' | 'info' }) => {

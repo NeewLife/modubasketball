@@ -33,6 +33,10 @@ export const FrameAction = (
     ref.current?.slickGoTo(num);
   };
 
+  const onPreventDefault = (event: any) => {
+    event.preventDefault();
+  };
+
   useEffect(() => {
     setLocalSwiping(swiping);
   }, [swiping]);
@@ -51,9 +55,18 @@ export const FrameAction = (
   }, [ref.current]);
 
   useEffect(() => {
-    if (ref.current && localSwiping) window.addEventListener('wheel', onWheel);
+    if (ref.current && localSwiping) {
+      window.addEventListener('wheel', onWheel);
 
-    return () => window.removeEventListener('wheel', onWheel);
+      document.getElementById('modal')?.addEventListener('wheel', onPreventDefault);
+      document.getElementById('modal')?.addEventListener('mousewheel', onPreventDefault);
+    }
+
+    return () => {
+      window.removeEventListener('wheel', onWheel);
+      document.getElementById('modal')?.removeEventListener('wheel', onPreventDefault);
+      document.getElementById('modal')?.removeEventListener('mousewheel', onPreventDefault);
+    };
   }, [ref.current, localSwiping, localCurrSlide]);
 
   const settings = {
@@ -71,7 +84,7 @@ export const FrameAction = (
     <div className="flex flex-col items-center gap-[15px]">
       {swiping && <img className="cursor-pointer" alt="up" src={Up} onClick={onClick(localCurrSlide - 1)} />}
       <Slider
-        className={`text-center p-[10px] border [&>button]:!hidden cursor-pointer ${
+        className={`text-center desktop:p-[10px] p-[8px] border [&>button]:!hidden cursor-pointer ${
           swiping ? 'bg-secondary-5 text-secondary-20 border-secondary-10' : 'bg-gray-15 text-gray-100 border-none'
         }`}
         verticalSwiping={localSwiping}
@@ -80,7 +93,7 @@ export const FrameAction = (
       >
         {data.map((datum) => (
           <Frame key={datum} {...prop}>
-            <span className="font-[regular] leading-normal text-[40px]">{datum}</span>
+            <span className="font-[regular] leading-normal desktop:text-[40px] text-[20px]">{datum}</span>
           </Frame>
         ))}
       </Slider>

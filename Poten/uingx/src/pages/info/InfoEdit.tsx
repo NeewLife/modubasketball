@@ -1,5 +1,15 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { Info, InfoProps, courtSizeData, courtTypeData, feeYnData, parkYnData, InfoSuccess } from '@pages/index';
+import {
+  Info,
+  InfoProps,
+  courtSizeData,
+  courtTypeData,
+  feeYnData,
+  parkYnData,
+  InfoSuccess,
+  lightData,
+  openData,
+} from '@pages/index';
 import { Body, ButtonBig, Headline, Input, Title } from '@components/atoms';
 import { Form, IFormTypes } from '@components/templates';
 import { useModal, useResize, useUpdate } from '@utils/zustand';
@@ -25,6 +35,8 @@ export const InfoEdit = (props: InfoEditProps & InfoProps) => {
     courtSize: courtSizeData.find((datum) => datum.text === prop.courtSize)?.id,
     feeYn: feeYnData.find((datum) => datum.text === prop.feeYn)?.id,
     parkYn: parkYnData.find((datum) => datum.text === prop.parkYn)?.id,
+    hasLight: lightData.find((datum) => datum.text === prop.hasLight)?.id,
+    openStatus: openData.find((datum) => datum.text === prop.openStatus)?.id,
   });
 
   const [match, setMatch] = useState({
@@ -52,6 +64,7 @@ export const InfoEdit = (props: InfoEditProps & InfoProps) => {
       feeYn: feeYnData.find((datum) => datum.id === data.feeYn)?.text,
       parkYn: parkYnData.find((datum) => datum.id === data.parkYn)?.text,
       comment: data.comment ? data.comment.trim() : '',
+      hasLight: lightData.find((datum) => datum.id === data.hasLight)?.text,
     } as InfoProps;
 
     if (type === 'update') {
@@ -146,6 +159,40 @@ export const InfoEdit = (props: InfoEditProps & InfoProps) => {
           onTrackable: onChangeInput('goalPost'),
           placeholder: '정보를 입력해주세요.',
           regex: { regex: /^[0-9]{1}$|^[1]{1}[0-9]{1}$|^$/, message: '*0 ~ 19사이로 입력해주세요.' },
+        },
+      },
+      {
+        type: 'date',
+        label: '야간 조명',
+        prop: {
+          check: data.hasLight === '1',
+          text: '조명 시간을 입력해주세요.',
+          radio: {
+            data: lightData.map((datum) => {
+              return {
+                ...datum,
+                check: datum.id === data.hasLight,
+              };
+            }),
+            onTrackable: onChangeInput('hasLight'),
+          },
+        },
+      },
+      {
+        type: 'date',
+        label: '개방 시간',
+        prop: {
+          check: data.openStatus === '1',
+          text: '개방 시간을 입력해주세요.',
+          radio: {
+            data: openData.map((datum) => {
+              return {
+                ...datum,
+                check: datum.id === data.openStatus,
+              };
+            }),
+            onTrackable: onChangeInput('openStatus'),
+          },
         },
       },
       {

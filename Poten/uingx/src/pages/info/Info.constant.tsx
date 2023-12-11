@@ -17,6 +17,10 @@ export const courtTypeData = [
   },
   {
     id: '5',
+    text: '폴리프로필렌 (PP)',
+  },
+  {
+    id: '6',
     text: '알 수 없음',
   },
 ];
@@ -51,5 +55,31 @@ export const parkYnData = [
   {
     id: '2',
     text: '불가능',
+  },
+];
+
+export const lightData = [
+  {
+    id: '1',
+    text: '있음',
+  },
+  {
+    id: '2',
+    text: '없음',
+  },
+  {
+    id: '3',
+    text: '알수 없음',
+  },
+];
+
+export const openData = [
+  {
+    id: '1',
+    text: '제한',
+  },
+  {
+    id: '2',
+    text: '24시',
   },
 ];

@@ -1,7 +1,7 @@
 import React, { DetailedHTMLProps, InputHTMLAttributes, TextareaHTMLAttributes } from 'react';
 import { RadioGroup, RadioGroupProps } from '@components/molecules';
-import { Input, InputProps, Textarea, TextareaProps, Title } from '@components/atoms';
-import { CheckBoxGroup, CheckBoxGroupProps } from '@components/organisms';
+import { Body, Input, InputProps, Textarea, TextareaProps, Title } from '@components/atoms';
+import { CheckBoxGroup, CheckBoxGroupProps, TimeInput } from '@components/organisms';
 import { useResize } from '@utils/zustand';
 
 interface IForm {
@@ -29,7 +29,24 @@ interface IFormCheckBox extends IForm {
   prop: CheckBoxGroupProps;
 }
 
-export type IFormTypes = IFormRadio | IFormInput | IFormTextarea | IFormCheckBox;
+interface IFormDate extends IForm {
+  type: 'date';
+  prop: {
+    startTime?: {
+      type: string;
+      time: string;
+    };
+    endTime?: {
+      type: string;
+      time: string;
+    };
+    check?: boolean;
+    text: string;
+    radio: RadioGroupProps;
+  };
+}
+
+export type IFormTypes = IFormRadio | IFormInput | IFormTextarea | IFormCheckBox | IFormDate;
 
 interface FormProps {
   data?: IFormTypes[];
@@ -51,6 +68,24 @@ export const Form = (props: FormProps) => {
           {type === 'checkBox' && <CheckBoxGroup {...prop} />}
           {type === 'radio' && <RadioGroup {...prop} />}
           {type === 'textarea' && <Textarea {...prop} />}
+          {type === 'date' && (
+            <div>
+              <RadioGroup {...prop.radio} />
+              {prop.check && (
+                <>
+                  <div className="flex gap-[15px] items-center mt-[30px]">
+                    <TimeInput />
+                    <Title type="sub" text="~" color="text-gray-60" />
+                    <TimeInput />
+                  </div>
+                  <div className="mt-[10px]">
+                    <Title type="sub" text={prop.text} color="text-gray-60" className="tablet:hidden mobile:hidden" />
+                    <Body type="sub" text={prop.text} color="text-gray-60" className="desktop:hidden" />
+                  </div>
+                </>
+              )}
+            </div>
+          )}
         </div>
       ))}
     </div>

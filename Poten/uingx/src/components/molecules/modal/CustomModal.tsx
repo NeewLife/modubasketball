@@ -63,6 +63,7 @@ export const CustomModal = () => {
 
   return (
     <Modal
+      id="modal"
       isOpen={open}
       onRequestClose={onloaclSetClose}
       style={type === 'desktop' || isModile ? customStyles(width, type) : customMobildStyles()}
