@@ -1,5 +1,6 @@
 package com.poten.basket.Poten.Controller;
 
+import com.poten.basket.Poten.DTO.KakaoDTO;
 import com.poten.basket.Poten.Service.KakaoService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
