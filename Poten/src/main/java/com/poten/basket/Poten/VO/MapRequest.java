@@ -2,6 +2,8 @@ package com.poten.basket.Poten.VO;
 
 import lombok.Data;
 
+import java.util.Map;
+
 @Data
 public class MapRequest {
 
@@ -22,4 +24,6 @@ public class MapRequest {
   private String lightTime; // 야간 조명시간
   private String openStatus; // 개방 타입
   private String openTime; // 개방 시간
+
+  Map<String, Object> photoPath;
 }

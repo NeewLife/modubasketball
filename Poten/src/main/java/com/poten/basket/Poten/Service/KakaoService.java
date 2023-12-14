@@ -1,28 +1,29 @@
 package com.poten.basket.Poten.Service;
 
+import com.poten.basket.Poten.DAO.KakaoDAO;
 import com.poten.basket.Poten.DTO.KakaoDTO;
+import com.poten.basket.Poten.VO.UserVO;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
+import java.util.Map;
 
 @Service
 public class KakaoService {
+
+    @Autowired
+    private KakaoDAO kakaoDAO;
+
     @Value("${kakao.client.id}")
     private String KAKAO_CLIENT_ID;
 
@@ -90,55 +91,43 @@ public class KakaoService {
     }
 
     private KakaoDTO getUserInfoWithToken(String accessToken) throws Exception {
+        //HttpHeader 생성
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Authorization", "Bearer " + accessToken);
+        headers.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
 
-        String reqURL = "https://kapi.kakao.com/v2/user/me";
+        //HttpHeader 담기
+        RestTemplate rt = new RestTemplate();
+        HttpEntity<MultiValueMap<String, String>> httpEntity = new HttpEntity<>(headers);
+        ResponseEntity<String> response = rt.exchange(
+                KAKAO_API_URI + "/v2/user/me",
+                HttpMethod.POST,
+                httpEntity,
+                String.class
+        );
 
-        try {
-            URL url = new URL(reqURL);
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        //Response 데이터 파싱
+        JSONParser jsonParser = new JSONParser();
+        JSONObject jsonObj    = (JSONObject) jsonParser.parse(response.getBody());
+        JSONObject account = (JSONObject) jsonObj.get("kakao_account");
+        JSONObject profile = (JSONObject) account.get("profile");
 
-            conn.setRequestMethod("POST");
-            conn.setDoOutput(true);
-            conn.setRequestProperty("Authorization", "Bearer " + accessToken); //전송할 header 작성, access_token전송
+        long id = (long) jsonObj.get("id");
+        String email = String.valueOf(account.get("email"));
+        String nickname = String.valueOf(profile.get("nickname"));
 
-            //결과 코드가 200이라면 성공
-            int responseCode = conn.getResponseCode();
-            System.out.println("responseCode : " + responseCode);
-
-            //요청을 통해 얻은 JSON타입의 Response 메세지 읽어오기
-            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-            String line = "";
-            String result = "";
-
-            while ((line = br.readLine()) != null) {
-                result += line;
-            }
-            System.out.println("response body : " + result);
-
-            //Response 데이터 파싱
-            JSONParser jsonParser = new JSONParser();
-            JSONObject jsonObj    = (JSONObject) jsonParser.parse(result);
-            JSONObject account = (JSONObject) jsonObj.get("kakao_account");
-            JSONObject profile = (JSONObject) account.get("profile");
-
-            System.out.println("JSON 객체 가져옴. JSON = " + jsonObj);
-
-            long id = (long) jsonObj.get("id");
-            String email = String.valueOf(account.get("email"));
-            String nickname = String.valueOf(profile.get("nickname"));
-
-            System.out.println("email = " + email);
-
-        }   catch (IOException e){
-            e.printStackTrace();
-        }
-
-//        return KakaoDTO.builder()
-//                .id(id)
-//                .email(email)
-//                .nickname(nickname).build();
-        return null;
+        return KakaoDTO.builder()
+                .id(id)
+                .email(email)
+                .nickname(nickname).build();
     }
 
+    public int getUser(String email){
+        return kakaoDAO.getUser(email);
+    }
+
+    public void register(Map<String, Object> params){
+        kakaoDAO.register(params);
+    }
 
 }

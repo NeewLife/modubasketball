@@ -8,6 +8,7 @@ import com.poten.basket.Poten.VO.MapResponse;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.CacheControl;
@@ -15,6 +16,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/api")
@@ -60,9 +62,10 @@ public class APIController {
    * 필요 params - com.poten.basket.Poten.VO.MapRequest
    * */
   @PostMapping("/spot/create")
-  public ResponseEntity saveSpot(@RequestBody MapRequest params) {
+  public ResponseEntity saveSpot(@RequestBody MapRequest params) throws Exception {
     System.out.println("====================create====================");
     System.out.println("create의 params = " + params);
+
     mapService.mapCre(params);
     System.out.println("생성됨");
     return new ResponseEntity(params, HttpStatus.OK);
@@ -86,10 +89,16 @@ public class APIController {
    * 필요 params - com.poten.basket.Poten.VO.MapRequest
    * */
   @PutMapping("/spot/update")
-  public ResponseEntity updateSpot(@RequestBody MapRequest params) {
+  public ResponseEntity updateSpot(@RequestBody MapRequest params,
+                                   @RequestParam String photoName,
+                                   @RequestParam String nickname) {
     System.out.println("====================update====================");
     System.out.println("update의 params = " + params);
-    mapService.mapUpt(params);
+    Map<String, Object> photoParams = new HashMap<>();
+    UUID uuid = UUID.randomUUID();
+    photoParams.put("photoName", uuid + "_" + photoName);
+    photoParams.put("nickname", nickname);
+    mapService.mapUpt(params, photoParams);
     return new ResponseEntity(params, HttpStatus.OK);
   }
 
