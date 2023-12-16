@@ -7,6 +7,8 @@ import com.poten.basket.Poten.VO.MapResponse;
 
 import java.util.*;
 
+import com.poten.basket.Poten.VO.Photo;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.CacheControl;
 import org.springframework.http.HttpHeaders;
@@ -60,21 +62,25 @@ public class APIController {
    * */
   @PostMapping("/spot/create")
   public ResponseEntity saveSpot(@RequestBody MapRequest params,
-                                 @RequestParam(required = false, value = "photo") List<Map<String, Object>> photo)
+                                 @Valid @RequestBody List<Photo> photo)
                         throws Exception{
-    if (photo != null){
-      List<Map<String, Object>> photoList = new ArrayList<Map<String, Object>>();
-      for (int i = 0; i < photoList.size(); i++){
-        UUID uuid = UUID.randomUUID();
-        String photoName = photoList.get(i).get("photoName").toString();
-        photoList.get(i).put("photoName", uuid + "_" + photoName);
-        photoList.get(i).put("seq", i + 1);
-      }
-      params.setPhoto(photoList);
-    };
-    params.setId(mapService.getLastID());
-    mapService.mapCre(params);
     System.out.println("====================create====================");
+    Integer id = mapService.getLastID();
+    params.setId(id);
+    System.out.println("photo = " + photo);
+
+    if (!photo.isEmpty()){
+      System.out.println("photo = " + photo);
+      for (int i = 0; i < photo.size(); i++){
+        UUID uuid = UUID.randomUUID();
+        String photoName = photo.get(i).getPhotoName();
+        photo.get(i).setPhotoName(uuid + "_" + photoName);
+        photo.get(i).setSeq(i + 1);
+        photo.get(i).setId(id);
+      }
+    };
+
+    mapService.mapCre(params);
     System.out.println("create의 params = " + params);
     System.out.println("생성됨");
     return new ResponseEntity(params, HttpStatus.OK);
@@ -98,8 +104,21 @@ public class APIController {
    * 필요 params - com.poten.basket.Poten.VO.MapRequest
    * */
   @PutMapping("/spot/update")
-  public ResponseEntity updateSpot(@RequestBody MapRequest params){
+  public ResponseEntity updateSpot(@RequestBody MapRequest params
+                                 , @RequestParam(required = false, value = "photo") List<Photo> photo){
     System.out.println("====================update====================");
+    if (!params.getPhotoList().isEmpty()){
+      Integer id = params.getId();
+      mapService.delPhoto(id);
+      System.out.println("photo = " + photo);
+      for (int i = 0; i < photo.size(); i++){
+        UUID uuid = UUID.randomUUID();
+        String photoName = photo.get(i).getPhotoName();
+        photo.get(i).setPhotoName(uuid + "_" + photoName);
+        photo.get(i).setSeq(i + 1);
+        photo.get(i).setId(id);
+      }
+    }
     System.out.println("update의 params = " + params);
     mapService.mapUpt(params);
 

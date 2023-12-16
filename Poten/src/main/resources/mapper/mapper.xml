@@ -28,26 +28,20 @@
         FROM basket_spot
     </sql>
 
-    <resultMap id="mapResult" type="java.util.HashMap">
-        <id property="id" column="id"/>
-        <result property="properties" column="properties"/>
-    </resultMap>
-
     <select id="mapList" resultType="com.poten.basket.Poten.VO.MapResponse">
         <include refid="mapList"></include>
         WHERE
             is_deleted = 0
     </select>
 
-    <select id="mapPhotoList" resultMap="mapResult">
+    <select id="mapPhotoList" resultType="com.poten.basket.Poten.VO.Photo">
         SELECT
-            id,
-            JSON_OBJECT(
-                'seq', seq,
-                'photoName', photoName
-            ) AS properties
-        FROM your_table
-        WHERE your_condition;
+            id
+            , seq
+            , photo_name AS photoName
+            , photo_upload_date AS photoUploadDate
+            , nickname
+        FROM photo
     </select>
 
     <select id="getLastID" resultType="int">
@@ -139,14 +133,16 @@
         )
     </insert>
 
-    <insert id="mapPhotoCre" parameterType="com.poten.basket.Poten.VO.MapRequest">
+    <insert id="mapPhotoUpload" parameterType="com.poten.basket.Poten.VO.MapRequest">
         INSERT INTO photo(
             id
+            , seq
             , photo_name
             , photo_upload_date
             , nickname
         ) VALUES (
             #{id}
+            , #{seq}
             , #{photoName}
             , NOW()
             , #{nickname}
@@ -182,14 +178,6 @@
         <!-- AND lon = #{lon} -->
     </update>
 
-    <update id="mapPhotoUpt" parameterType="com.poten.basket.Poten.VO.MapRequest">
-        UPDATE photo
-        SET
-            photo_name = #{photo}
-        WHERE
-            id = #{id}
-
-    </update>
 
     <update id="mapDelRequest" parameterType="int">
         UPDATE basket_spot
@@ -217,5 +205,10 @@
             id = #{id}
     </update>
 
+    <delete id="delPhoto" parameterType="Integer">
+        DELETE FROM photo
+        WHERE
+            id = #{id}
+    </delete>
 
 </mapper>

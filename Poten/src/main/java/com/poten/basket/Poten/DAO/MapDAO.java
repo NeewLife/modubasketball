@@ -3,6 +3,7 @@ package com.poten.basket.Poten.DAO;
 import com.poten.basket.Poten.VO.Feedbacks;
 import com.poten.basket.Poten.VO.MapRequest;
 import com.poten.basket.Poten.VO.MapResponse;
+import com.poten.basket.Poten.VO.Photo;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -16,7 +17,7 @@ public interface MapDAO {
 
     List<MapResponse> mapList();
 
-    List<Map<String, Object>> mapPhotoList();
+    List<Photo> mapPhotoList();
 
     List<MapResponse> mapReqList();
 
@@ -33,7 +34,7 @@ public interface MapDAO {
 
     void mapCre(MapRequest params);
 
-    void mapPhotoCre(MapRequest params);
+    void mapPhotoUpload(MapRequest params);
 
     int getLastID();
 
@@ -42,11 +43,11 @@ public interface MapDAO {
 
     void mapUpt(MapRequest params);
 
-    void mapPhotoUpt(MapRequest params);
-
     void mapDelRequest(int params);
 
     void mapDel(int params);
 
     void mapDelReject(int params);
+
+    void delPhoto(Integer id);
 }

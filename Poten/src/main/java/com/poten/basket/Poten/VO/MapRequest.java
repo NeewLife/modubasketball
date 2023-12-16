@@ -27,13 +27,5 @@ public class MapRequest {
   private String openTime; // 개방 시간
 
   // 사진 리스트
-  private List<Map<String, Object>> photo;
-
-  public List<Map<String, Object>> getPhoto() {
-    return photo;
-  }
-
-  public void setPhoto(List<Map<String, Object>> photo) {
-    this.photo = photo;
-  }
+  private List<Photo> photoList;
 }

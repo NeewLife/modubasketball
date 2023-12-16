@@ -6,9 +6,7 @@ import com.poten.basket.Poten.VO.MapRequest;
 import com.poten.basket.Poten.VO.MapResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
 import java.util.*;
 
 @Service
@@ -18,13 +16,9 @@ public class MapService {
     MapDAO mapDAO;
 
     public List<MapResponse> mapList() {
-        List<MapResponse> mapResponseList = new ArrayList<>();
-        List<Map<String, Object>> mapPhotoList = new ArrayList<>();
-        if (!mapPhotoList.isEmpty()){
-            for (int i = 0; i < mapPhotoList.size(); i++){
-                mapResponseList.get(i).setPhoto(mapPhotoList.get(i));
-            }
-
+        List<MapResponse> mapResponseList = mapDAO.mapList();
+        for (int i = 0; i < mapResponseList.size(); i++){
+            mapResponseList.get(i).setPhotoList(mapDAO.mapPhotoList());
         }
         return mapResponseList;
     }
@@ -35,8 +29,8 @@ public class MapService {
 
     public void mapCre(MapRequest params){
         mapDAO.mapCre(params);
-        if (!params.getPhoto().isEmpty()){
-            mapDAO.mapPhotoCre(params);
+        if (!params.getPhotoList().isEmpty()){
+            mapDAO.mapPhotoUpload(params);
         }
     }
 
@@ -46,8 +40,8 @@ public class MapService {
 
     public void mapUpt(MapRequest params){
         mapDAO.mapUpt(params);
-        if (!params.getPhoto().isEmpty()){
-            mapDAO.mapPhotoUpt(params);
+        if (!params.getPhotoList().isEmpty()){
+            mapDAO.mapPhotoUpload(params);
         }
     }
 
@@ -84,4 +78,7 @@ public class MapService {
         mapDAO.mapDelReject(params);
     }
 
+    public void delPhoto(Integer id) {
+        mapDAO.delPhoto(id);
+    }
 }
