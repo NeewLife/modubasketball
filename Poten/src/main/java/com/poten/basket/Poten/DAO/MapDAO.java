@@ -16,6 +16,8 @@ public interface MapDAO {
 
     List<MapResponse> mapList();
 
+    List<Map<String, Object>> mapPhotoList();
+
     List<MapResponse> mapReqList();
 
     List<MapResponse> mapDelList();
@@ -31,10 +33,16 @@ public interface MapDAO {
 
     void mapCre(MapRequest params);
 
+    void mapPhotoCre(MapRequest params);
+
+    int getLastID();
+
     // 방문자수 + 1
     void visitCounting();
 
     void mapUpt(MapRequest params);
+
+    void mapPhotoUpt(MapRequest params);
 
     void mapDelRequest(int params);
 

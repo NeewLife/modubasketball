@@ -5,10 +5,7 @@ import com.poten.basket.Poten.VO.Feedbacks;
 import com.poten.basket.Poten.VO.MapRequest;
 import com.poten.basket.Poten.VO.MapResponse;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.CacheControl;
@@ -62,11 +59,23 @@ public class APIController {
    * 필요 params - com.poten.basket.Poten.VO.MapRequest
    * */
   @PostMapping("/spot/create")
-  public ResponseEntity saveSpot(@RequestBody MapRequest params) throws Exception {
+  public ResponseEntity saveSpot(@RequestBody MapRequest params,
+                                 @RequestParam(required = false, value = "photo") List<Map<String, Object>> photo)
+                        throws Exception{
+    if (photo != null){
+      List<Map<String, Object>> photoList = new ArrayList<Map<String, Object>>();
+      for (int i = 0; i < photoList.size(); i++){
+        UUID uuid = UUID.randomUUID();
+        String photoName = photoList.get(i).get("photoName").toString();
+        photoList.get(i).put("photoName", uuid + "_" + photoName);
+        photoList.get(i).put("seq", i + 1);
+      }
+      params.setPhoto(photoList);
+    };
+    params.setId(mapService.getLastID());
+    mapService.mapCre(params);
     System.out.println("====================create====================");
     System.out.println("create의 params = " + params);
-
-    mapService.mapCre(params);
     System.out.println("생성됨");
     return new ResponseEntity(params, HttpStatus.OK);
   }
@@ -89,16 +98,11 @@ public class APIController {
    * 필요 params - com.poten.basket.Poten.VO.MapRequest
    * */
   @PutMapping("/spot/update")
-  public ResponseEntity updateSpot(@RequestBody MapRequest params,
-                                   @RequestParam String photoName,
-                                   @RequestParam String nickname) {
+  public ResponseEntity updateSpot(@RequestBody MapRequest params){
     System.out.println("====================update====================");
     System.out.println("update의 params = " + params);
-    Map<String, Object> photoParams = new HashMap<>();
-    UUID uuid = UUID.randomUUID();
-    photoParams.put("photoName", uuid + "_" + photoName);
-    photoParams.put("nickname", nickname);
-    mapService.mapUpt(params, photoParams);
+    mapService.mapUpt(params);
+
     return new ResponseEntity(params, HttpStatus.OK);
   }
 
