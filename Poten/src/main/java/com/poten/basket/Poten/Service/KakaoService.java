@@ -48,7 +48,6 @@ public class KakaoService {
 
         String accessToken = "";
         String refreshToken = "";
-        System.out.println("getKakaoInfo 실행됨");
 
         try {
             HttpHeaders headers = new HttpHeaders();
@@ -61,8 +60,6 @@ public class KakaoService {
             params.add("code", code);
             params.add("redirect_uri", KAKAO_REDIRECT_URL);
 
-            System.out.println("params = " + params);
-
             RestTemplate restTemplate = new RestTemplate();
             HttpEntity<MultiValueMap<String, String>> httpEntity = new HttpEntity<>(params, headers);
 
@@ -73,15 +70,11 @@ public class KakaoService {
                     String.class
             );
 
-            System.out.println("response = " + response);
-
             JSONParser jsonParser = new JSONParser();
             JSONObject jsonObj = (JSONObject) jsonParser.parse(response.getBody());
 
             accessToken  = (String) jsonObj.get("access_token");
             refreshToken = (String) jsonObj.get("refresh_token");
-
-            System.out.println("accessToken = " + accessToken);
 
         } catch (Exception e) {
             throw new Exception("API call failed");

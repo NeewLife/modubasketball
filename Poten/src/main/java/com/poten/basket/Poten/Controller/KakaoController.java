@@ -27,7 +27,7 @@ public class KakaoController {
             return ResponseEntity.ok(email);
         }
         return ResponseEntity.ok()
-                .body(kakaoService.getNickname(email));
+                .body("nickname = " + kakaoService.getNickname(email));
     }
 
     @GetMapping("/login")
