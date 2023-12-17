@@ -5,6 +5,7 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 static/
+static\
 
 ### STS ###
 .apt_generated
@@ -45,5 +46,3 @@ out/
 /uingx/chromatic.logstatic\
 /uingx/storybook-static
 
-static\
-static\
