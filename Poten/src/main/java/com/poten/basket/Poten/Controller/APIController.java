@@ -35,7 +35,6 @@ public class APIController {
     HttpHeaders headers = new HttpHeaders();
     headers.setCacheControl(CacheControl.noCache().mustRevalidate());
     List<MapResponse> mapList = mapService.mapList();
-    System.out.println(mapList);
     return ResponseEntity.ok(mapList);
   }
 
@@ -69,7 +68,6 @@ public class APIController {
     Integer id = mapService.getLastID();
     params.setId(id);
     List<Photo> photoList = params.getPhotoList();
-    System.out.println("photoList = " + photoList);
 
     if (!photoList.isEmpty()){
       System.out.println("photoList = " + photoList);
@@ -112,7 +110,6 @@ public class APIController {
     if (!photoList.isEmpty()){
       Integer id = params.getId();
       mapService.delPhoto(id);
-      System.out.println("photoList = " + photoList);
       for (int i = 0; i < photoList.size(); i++){
         UUID uuid = UUID.randomUUID();
         String photoName = photoList.get(i).getPhotoName();
