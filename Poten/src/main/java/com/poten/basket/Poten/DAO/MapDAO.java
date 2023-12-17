@@ -17,7 +17,7 @@ public interface MapDAO {
 
     List<MapResponse> mapList();
 
-    List<Photo> mapPhotoList();
+    List<Photo> mapPhotoList(int id);
 
     List<MapResponse> mapReqList();
 
@@ -34,7 +34,7 @@ public interface MapDAO {
 
     void mapCre(MapRequest params);
 
-    void mapPhotoUpload(MapRequest params);
+    void mapPhotoUpload(List<Photo> params);
 
     int getLastID();
 

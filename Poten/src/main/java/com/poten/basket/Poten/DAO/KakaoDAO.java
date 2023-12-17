@@ -9,7 +9,11 @@ import java.util.Map;
 @Repository
 public interface KakaoDAO {
 
-    int getUser(String email);
+    int countEmail(String email);
+
+    int nickDupCheck(String nickname);
+
+    String getNickname(String email);
 
     void register(Map<String, Object> params);
 }

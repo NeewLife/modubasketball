@@ -122,8 +122,16 @@ public class KakaoService {
                 .nickname(nickname).build();
     }
 
-    public int getUser(String email){
-        return kakaoDAO.getUser(email);
+    public int countEmail(String email){
+        return kakaoDAO.countEmail(email);
+    }
+
+    public int nickDupCheck(String nickname){
+        return kakaoDAO.nickDupCheck(nickname);
+    }
+
+    public String getNickname(String email){
+        return kakaoDAO.getNickname(email);
     }
 
     public void register(Map<String, Object> params){

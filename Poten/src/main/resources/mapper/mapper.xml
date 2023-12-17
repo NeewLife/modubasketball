@@ -34,7 +34,7 @@
             is_deleted = 0
     </select>
 
-    <select id="mapPhotoList" resultType="com.poten.basket.Poten.VO.Photo">
+    <select id="mapPhotoList" parameterType="int" resultType="com.poten.basket.Poten.VO.Photo">
         SELECT
             id
             , seq
@@ -42,6 +42,8 @@
             , photo_upload_date AS photoUploadDate
             , nickname
         FROM photo
+        WHERE
+            id = #{id}
     </select>
 
     <select id="getLastID" resultType="int">
@@ -133,20 +135,23 @@
         )
     </insert>
 
-    <insert id="mapPhotoUpload" parameterType="com.poten.basket.Poten.VO.MapRequest">
+    <insert id="mapPhotoUpload" parameterType="list">
         INSERT INTO photo(
             id
             , seq
             , photo_name
             , photo_upload_date
             , nickname
-        ) VALUES (
-            #{id}
-            , #{seq}
-            , #{photoName}
+        ) VALUES
+        <foreach collection="list" item="item" separator=",">
+        (
+            #{item.id}
+            , #{item.seq}
+            , #{item.photoName}
             , NOW()
-            , #{nickname}
+            , #{item.nickname}
         )
+        </foreach>
     </insert>
 
     <update id="visitCounting">

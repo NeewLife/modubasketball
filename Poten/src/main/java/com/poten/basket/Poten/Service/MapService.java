@@ -18,7 +18,8 @@ public class MapService {
     public List<MapResponse> mapList() {
         List<MapResponse> mapResponseList = mapDAO.mapList();
         for (int i = 0; i < mapResponseList.size(); i++){
-            mapResponseList.get(i).setPhotoList(mapDAO.mapPhotoList());
+            int id = mapResponseList.get(i).getId();
+            mapResponseList.get(i).setPhotoList(mapDAO.mapPhotoList(id));
         }
         return mapResponseList;
     }
@@ -30,7 +31,7 @@ public class MapService {
     public void mapCre(MapRequest params){
         mapDAO.mapCre(params);
         if (!params.getPhotoList().isEmpty()){
-            mapDAO.mapPhotoUpload(params);
+            mapDAO.mapPhotoUpload(params.getPhotoList());
         }
     }
 
@@ -41,7 +42,7 @@ public class MapService {
     public void mapUpt(MapRequest params){
         mapDAO.mapUpt(params);
         if (!params.getPhotoList().isEmpty()){
-            mapDAO.mapPhotoUpload(params);
+            mapDAO.mapPhotoUpload(params.getPhotoList());
         }
     }
 

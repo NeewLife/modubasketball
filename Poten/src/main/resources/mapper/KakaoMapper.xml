@@ -4,8 +4,20 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.poten.basket.Poten.DAO.KakaoDAO">
 
-    <select id="getUser" resultType="int">
+    <select id="countEmail" resultType="int">
         SELECT COUNT(email)
+        FROM user
+        WHERE email = #{email}
+    </select>
+
+    <select id="nickDupCheck" parameterType="String" resultType="int">
+        SELECT COUNT(nickname)
+        FROM user
+        WHERE nickname = #{nickname}
+    </select>
+    
+    <select id="getNickname" parameterType="String" resultType="String">
+        SELECT nickname
         FROM user
         WHERE email = #{email}
     </select>

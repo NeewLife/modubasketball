@@ -22,11 +22,12 @@ public class KakaoController {
     public ResponseEntity<Object> callback(HttpServletRequest request) throws Exception {
         KakaoDTO kakaoInfo = kakaoService.getKakaoInfo(request.getParameter("code"));
         System.out.println(kakaoInfo);
-        if (kakaoService.getUser(kakaoInfo.getEmail()) == 0){
-            return ResponseEntity.ok(kakaoService.getUser(kakaoInfo.getEmail()));
+        String email = kakaoInfo.getEmail();
+        if (kakaoService.countEmail(email) == 0){
+            return ResponseEntity.ok(email);
         }
         return ResponseEntity.ok()
-                .body(kakaoInfo);
+                .body(kakaoService.getNickname(email));
     }
 
     @GetMapping("/login")
@@ -37,6 +38,9 @@ public class KakaoController {
     @PostMapping("/register")
     public ResponseEntity<String> register(@RequestParam String email
                                          , @RequestParam String userNickname){
+        if (kakaoService.nickDupCheck(email) != 0){
+            return ResponseEntity.ok("이미 존재하는 닉네임 입니다.");
+        }
         HashMap<String, Object> params = new HashMap<>();
         params.put("email", email);
         params.put("userNickname", userNickname);
