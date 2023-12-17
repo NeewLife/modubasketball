@@ -34,6 +34,23 @@
             is_deleted = 0
     </select>
 
+    <select id="mapPhotoList" parameterType="int" resultType="com.poten.basket.Poten.VO.Photo">
+        SELECT
+            id
+            , seq
+            , photo_name AS photoName
+            , photo_upload_date AS photoUploadDate
+            , nickname
+        FROM photo
+        WHERE
+            id = #{id}
+    </select>
+
+    <select id="getLastID" resultType="int">
+        SELECT MAX(id) + 1
+        FROM basket_spot
+    </select>
+
     <select id="mapReqList" resultType="com.poten.basket.Poten.VO.MapResponse">
         <include refid="mapList"></include>
         WHERE
@@ -118,6 +135,25 @@
         )
     </insert>
 
+    <insert id="mapPhotoUpload" parameterType="list">
+        INSERT INTO photo(
+            id
+            , seq
+            , photo_name
+            , photo_upload_date
+            , nickname
+        ) VALUES
+        <foreach collection="list" item="item" separator=",">
+        (
+            #{item.id}
+            , #{item.seq}
+            , #{item.photoName}
+            , NOW()
+            , #{item.nickname}
+        )
+        </foreach>
+    </insert>
+
     <update id="visitCounting">
         UPDATE visit
         SET
@@ -147,6 +183,7 @@
         <!-- AND lon = #{lon} -->
     </update>
 
+
     <update id="mapDelRequest" parameterType="int">
         UPDATE basket_spot
         SET
@@ -173,5 +210,10 @@
             id = #{id}
     </update>
 
+    <delete id="delPhoto" parameterType="Integer">
+        DELETE FROM photo
+        WHERE
+            id = #{id}
+    </delete>
 
 </mapper>

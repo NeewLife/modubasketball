@@ -7,10 +7,7 @@ import com.poten.basket.Poten.VO.MapResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class MapService {
@@ -19,7 +16,12 @@ public class MapService {
     MapDAO mapDAO;
 
     public List<MapResponse> mapList() {
-        return mapDAO.mapList();
+        List<MapResponse> mapResponseList = mapDAO.mapList();
+        for (int i = 0; i < mapResponseList.size(); i++){
+            int id = mapResponseList.get(i).getId();
+            mapResponseList.get(i).setPhotoList(mapDAO.mapPhotoList(id));
+        }
+        return mapResponseList;
     }
 
     public void visitCounting() {mapDAO.visitCounting();}
@@ -28,10 +30,20 @@ public class MapService {
 
     public void mapCre(MapRequest params){
         mapDAO.mapCre(params);
+        if (!params.getPhotoList().isEmpty()){
+            mapDAO.mapPhotoUpload(params.getPhotoList());
+        }
     }
+
+    public int getLastID(){
+        return mapDAO.getLastID();
+    };
 
     public void mapUpt(MapRequest params){
         mapDAO.mapUpt(params);
+        if (!params.getPhotoList().isEmpty()){
+            mapDAO.mapPhotoUpload(params.getPhotoList());
+        }
     }
 
     public void mapDelRequest(int params){
@@ -67,4 +79,7 @@ public class MapService {
         mapDAO.mapDelReject(params);
     }
 
+    public void delPhoto(Integer id) {
+        mapDAO.delPhoto(id);
+    }
 }

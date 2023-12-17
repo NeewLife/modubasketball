@@ -5,16 +5,18 @@ import com.poten.basket.Poten.VO.Feedbacks;
 import com.poten.basket.Poten.VO.MapRequest;
 import com.poten.basket.Poten.VO.MapResponse;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
+import com.poten.basket.Poten.VO.Photo;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.CacheControl;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/api")
@@ -33,6 +35,7 @@ public class APIController {
     HttpHeaders headers = new HttpHeaders();
     headers.setCacheControl(CacheControl.noCache().mustRevalidate());
     List<MapResponse> mapList = mapService.mapList();
+    System.out.println(mapList);
     return ResponseEntity.ok(mapList);
   }
 
@@ -57,20 +60,37 @@ public class APIController {
 
   /*
    * 지도 데이터 추가
-   * 필요 params - com.poten.basket.Poten.VO.MapRequest
+   * param - com.poten.basket.Poten.VO.MapRequest
    * */
   @PostMapping("/spot/create")
-  public ResponseEntity saveSpot(@RequestBody MapRequest params) {
+  public ResponseEntity saveSpot(@RequestBody MapRequest params)
+                        throws Exception{
     System.out.println("====================create====================");
-    System.out.println("create의 params = " + params);
+    Integer id = mapService.getLastID();
+    params.setId(id);
+    List<Photo> photoList = params.getPhotoList();
+    System.out.println("photoList = " + photoList);
+
+    if (!photoList.isEmpty()){
+      System.out.println("photoList = " + photoList);
+      for (int i = 0; i < photoList.size(); i++){
+        UUID uuid = UUID.randomUUID();
+        String photoName = photoList.get(i).getPhotoName();
+        photoList.get(i).setPhotoName(uuid + "_" + photoName);
+        photoList.get(i).setSeq(i + 1);
+        photoList.get(i).setId(id);
+      }
+    };
+
     mapService.mapCre(params);
+    System.out.println("create의 params = " + params);
     System.out.println("생성됨");
     return new ResponseEntity(params, HttpStatus.OK);
   }
 
   /*
    * 지도 데이터 삭제 요청
-   * 필요 params - id
+   * param - id
    * */
   @PutMapping("/spot/delete/{id}")
   public ResponseEntity deleteReqSpot(@PathVariable int id) {
@@ -83,13 +103,27 @@ public class APIController {
 
   /*
    * 지도 데이터 수정
-   * 필요 params - com.poten.basket.Poten.VO.MapRequest
+   * param - com.poten.basket.Poten.VO.MapRequest
    * */
   @PutMapping("/spot/update")
-  public ResponseEntity updateSpot(@RequestBody MapRequest params) {
+  public ResponseEntity updateSpot(@RequestBody MapRequest params){
     System.out.println("====================update====================");
+    List<Photo> photoList = params.getPhotoList();
+    if (!photoList.isEmpty()){
+      Integer id = params.getId();
+      mapService.delPhoto(id);
+      System.out.println("photoList = " + photoList);
+      for (int i = 0; i < photoList.size(); i++){
+        UUID uuid = UUID.randomUUID();
+        String photoName = photoList.get(i).getPhotoName();
+        photoList.get(i).setPhotoName(uuid + "_" + photoName);
+        photoList.get(i).setSeq(i + 1);
+        photoList.get(i).setId(id);
+      }
+    }
     System.out.println("update의 params = " + params);
     mapService.mapUpt(params);
+
     return new ResponseEntity(params, HttpStatus.OK);
   }
 
@@ -134,7 +168,7 @@ public class APIController {
 
   /*
    * 관리자에서 지도 논리적삭제
-   * 필요 params - id
+   * param - id
    * */
   @PutMapping("/admin/delete/{id}")
   public ResponseEntity deleteSpot(@PathVariable int id) {

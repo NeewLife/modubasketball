@@ -2,6 +2,9 @@ package com.poten.basket.Poten.VO;
 
 import lombok.Data;
 
+import java.util.List;
+import java.util.Map;
+
 @Data
 public class MapResponse {
 
@@ -25,5 +28,7 @@ public class MapResponse {
   private String lightTime; // 야간 조명시간
   private String openStatus; // 개방 타입
   private String openTime; // 개방 시간
+
+  private List<Photo> photoList;
 
 }
