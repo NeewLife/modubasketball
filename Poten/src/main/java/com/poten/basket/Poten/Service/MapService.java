@@ -4,6 +4,7 @@ import com.poten.basket.Poten.DAO.MapDAO;
 import com.poten.basket.Poten.VO.Feedbacks;
 import com.poten.basket.Poten.VO.MapRequest;
 import com.poten.basket.Poten.VO.MapResponse;
+import com.poten.basket.Poten.VO.Photo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,9 +31,6 @@ public class MapService {
 
     public void mapCre(MapRequest params){
         mapDAO.mapCre(params);
-        if (!params.getPhotoList().isEmpty()){
-            mapDAO.mapPhotoUpload(params.getPhotoList());
-        }
     }
 
     public int getLastID(){
@@ -41,9 +39,10 @@ public class MapService {
 
     public void mapUpt(MapRequest params){
         mapDAO.mapUpt(params);
-        if (!params.getPhotoList().isEmpty()){
-            mapDAO.mapPhotoUpload(params.getPhotoList());
-        }
+    }
+
+    public void mapPhotoUpload(List<Photo> files){
+        mapDAO.mapPhotoUpload(files);
     }
 
     public void mapDelRequest(int params){

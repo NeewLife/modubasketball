@@ -38,9 +38,11 @@
         SELECT
             id
             , seq
-            , photo_name AS photoName
+            , save_name AS saveName
             , photo_upload_date AS photoUploadDate
             , nickname
+            , original_name AS originalName
+            , upload_path AS uploadPath
         FROM photo
         WHERE
             id = #{id}
@@ -139,17 +141,21 @@
         INSERT INTO photo(
             id
             , seq
-            , photo_name
+            , save_name
+            , original_name
             , photo_upload_date
             , nickname
+            , upload_path
         ) VALUES
         <foreach collection="list" item="item" separator=",">
         (
             #{item.id}
             , #{item.seq}
-            , #{item.photoName}
+            , #{item.saveName}
+            , #{item.originalName}
             , NOW()
             , #{item.nickname}
+            , #{item.uploadPath}
         )
         </foreach>
     </insert>
