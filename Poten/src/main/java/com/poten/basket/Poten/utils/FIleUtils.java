@@ -7,6 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -18,23 +19,20 @@ import java.util.UUID;
 public class FIleUtils {
 
     // 서버 업로드 경로
-    private final String uploadPath = Paths.get("root", "apps", "modubasketball", "Poten", "uingx", "public").toString();
+    String applicationDirectory = System.getProperty("user.dir");
+    private final String uploadPath = Paths.get(applicationDirectory, "uingx", "public").toString();
 
     // 테스트용 업로드 경로
 //    private final String uploadPath = Paths.get("D:", "java", "Project", "modubasketball", "Poten", "uingx", "public").toString();
 
     public List<Photo> uploadFiles(final List<MultipartFile> multipartFiles) {
         List<Photo> files = new ArrayList<>();
-        System.out.println("uploadFiles 실행");
         for (MultipartFile multipartFile : multipartFiles) {
-            System.out.println("for문 실행");
             if (multipartFile.isEmpty()) {
-                System.out.println("multipartFile 비어있음");
                 continue;
             }
             files.add(uploadFile(multipartFile));
         }
-        System.out.println("files = " + files);
         return files;
     }
 
@@ -49,7 +47,6 @@ public class FIleUtils {
             return null;
         }
 
-        System.out.println("uploadFile 실행");
         String saveName = generateSaveFilename(multipartFile.getOriginalFilename());
         String today = LocalDate.now().format(DateTimeFormatter.ofPattern("yyMMdd")).toString();
         String uploadPath = makeDirectory(today) + File.separator + saveName;
@@ -60,7 +57,6 @@ public class FIleUtils {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        System.out.println("try문 넘어감");
 
         return Photo.builder()
                 .originalName(multipartFile.getOriginalFilename())
@@ -88,6 +84,7 @@ public class FIleUtils {
 
     private String makeDirectory(String path){
         File dir = new File(uploadPath + File.separator + path);
+
         if (dir.exists() == false){
             dir.mkdirs();
         }

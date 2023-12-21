@@ -78,9 +78,6 @@ public class APIController {
           return ResponseEntity.ok("사진 크기가 너무 큽니다. (20mb 제한)");
         }
         String fileExt = fIleUtils.getExtension(photo);
-        System.out.println("fileExt = " + fileExt);
-        System.out.println("Arrays.asList(fileType) = " + Arrays.asList(fileType));
-        System.out.println("Arrays.asList(fileType).contains(fileExt) = " + Arrays.asList(fileType).contains(fileExt));
         if (!Arrays.asList(fileType).contains(fileExt)){
           return ResponseEntity.ok("잘못된 확장자 입니다.");
         }
@@ -138,7 +135,6 @@ public class APIController {
 
       Integer id = params.getId();
       mapService.delPhoto(id);
-      System.out.println("photoList = " + photoList);
       for (int i = 0; i < photoList.size(); i++) {
         photoList.get(i).setSeq(i + 1);
         photoList.get(i).setId(id);
