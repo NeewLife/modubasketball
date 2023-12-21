@@ -1,14 +1,11 @@
 package com.poten.basket.Poten.VO;
 
-import lombok.Data;
-
 import java.util.List;
-import java.util.Map;
+import lombok.Data;
 
 @Data
 public class MapResponse {
 
-  // 조회용 map 데이터 양식
   private Integer id;
   private double lat; // 위도
   private double lon; // 경도
@@ -16,13 +13,13 @@ public class MapResponse {
   private String feeYn; // 사용료
   private String courtSize; // 코트 사이즈
   private String goalPost; // 골대 수
-//  private String showerYn; // 샤워 가능여부
   private String parkYn; // 주차 가능여부
   private String createDate; // 생성 날짜
   private String modifyDate; // 수정 날짜
   private String address; // 주소
   private String comment; // 기타 정보란
   private String courtName; // 코트 고유명
+
   private int delReq; // 삭제요청 수
   private String hasLight; // 야간 조명여부
   private String lightTime; // 야간 조명시간
@@ -30,5 +27,5 @@ public class MapResponse {
   private String openTime; // 개방 시간
 
   private List<Photo> photoList;
-
+  private int deleteCount;
 }

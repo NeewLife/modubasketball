@@ -81,7 +81,7 @@ export const FrameAction = (
   };
 
   return (
-    <div className="flex flex-col items-center gap-[15px]">
+    <div className="flex flex-col items-center desktop:gap-[10px] gap-[5px]">
       {swiping && <img className="cursor-pointer" alt="up" src={Up} onClick={onClick(localCurrSlide - 1)} />}
       <Slider
         className={`text-center desktop:p-[10px] p-[8px] border [&>button]:!hidden cursor-pointer ${

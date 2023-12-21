@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+
 import { Input } from '@components/atoms';
 import { TiemPicker } from '@components/organisms';
+// import { useTimePicker } from '@utils/zustand';
 
 interface TimeInputProps {
   start?: {
@@ -12,7 +14,11 @@ interface TimeInputProps {
 export const TimeInput = (props: TimeInputProps) => {
   const { start } = props;
 
+  // const { count } = useTimePicker();
+
   const [open, setOpen] = useState(false);
+  // const idx = useMemo(() => count, []);
+
   const [timePicker, setTimePicker] = useState({
     type: start ? start.type : '',
     time: start ? start.time : '',

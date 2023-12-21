@@ -32,10 +32,6 @@ class MapService {
   update(prop: IMap) {
     return CustomAxios.put('/api/spot/update', prop);
   }
-
-  delete(id: number) {
-    return CustomAxios.put(`/api/spot/delete/${id}`);
-  }
 }
 
 export const useMapService = new MapService();

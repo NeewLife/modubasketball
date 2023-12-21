@@ -13,7 +13,7 @@ import {
 import { Body, ButtonBig, Headline, Input, Title } from '@components/atoms';
 import { Form, IFormTypes } from '@components/templates';
 import { useModal, useResize, useUpdate } from '@utils/zustand';
-import { useMapService } from '@services/index';
+import { useDeleteService, useMapService } from '@services/index';
 
 import Delete from '@constants/icon/delete.svg';
 import DeleteBig from '@constants/icon/deleteBig.svg';
@@ -98,7 +98,7 @@ export const InfoEdit = (props: InfoEditProps & InfoProps) => {
   };
 
   const onClickDelete = () => {
-    useMapService.delete(props?.id).then((response) => {
+    useDeleteService.update(props?.id).then((response) => {
       if (response.status === 200) {
         setMap();
         useModal.setState(() => ({

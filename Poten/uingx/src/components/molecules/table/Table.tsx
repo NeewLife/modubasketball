@@ -1,5 +1,5 @@
 import React from 'react';
-import { Body, Title } from '@components/atoms';
+import { Body, Caption, Title } from '@components/atoms';
 
 import { v4 as uuidv4 } from 'uuid';
 
@@ -48,6 +48,7 @@ export const Table = (props: TableProps) => {
             )}
           </div>
         ))}
+        {data.length === 0 && <Caption text="데이터가 없습니다." color="text-gray-70" className="mt-2 ml-2" />}
       </div>
     </div>
   );

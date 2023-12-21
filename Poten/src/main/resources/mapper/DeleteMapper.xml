@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.poten.basket.Poten.DAO.DeleteDAO">
+    <select id="getBasketSpotByState" parameterType="int" resultType="com.poten.basket.Poten.VO.MapResponse">
+        SELECT
+            BS.ID
+            , BS.LAT
+            , BS.LON
+            , BS.COURT_TYPE courtType
+            , BS.FEE_YN feeYn
+            , BS.COURT_SIZE courtSize  
+            , BS.GOAL_POST goalPost
+            , BS.PARK_YN parkYn
+            , BS.CREATE_DATE createDate
+            , BS.MODIFY_DATE modifyDate
+            , BS.ADDRESS 
+            , BS.COMMENT
+            , BS.COURT_NAME courtName
+            , BS.HAS_LIGHT hasLight
+            , BS.LIGHT_TIME lightTime
+            , BS.OPEN_STATUS openStatus
+            , BS.OPEN_TIME openTime
+            , BSD.DELETE_COUNT deleteCount
+        FROM basket_spot BS, BASKET_SPOT_DELETE BSD 
+        WHERE BS.ID = BSD.BASKET_SPOT_ID 
+          AND BSD.DELETE_STATE = #{state}
+    </select>
+
+    <select id="getBasketSpotCount" parameterType="int" resultType="int">
+        SELECT COUNT(1)
+        FROM BASKET_SPOT_DELETE 
+        WHERE BASKET_SPOT_ID = #{id}
+    </select>
+
+    <update id="modifyBasketSpotDelete" parameterType="int">
+        UPDATE BASKET_SPOT_DELETE 
+        SET DELETE_COUNT = DELETE_COUNT + 1
+          , MODIFY_DATE = NOW()
+        WHERE BASKET_SPOT_ID = #{id}
+    </update>
+
+    <insert id="addBasketSpotDelete" parameterType="int">
+        INSERT INTO BASKET_SPOT_DELETE (BASKET_SPOT_ID, DELETE_COUNT, DELETE_STATE, MODIFY_DATE)
+        VALUES (#{id}, 1, 0, NOW())
+    </insert>
+
+    <update id="modifyBasketSpotDeleteByState" parameterType="java.util.Map">
+        UPDATE BASKET_SPOT_DELETE 
+        SET DELETE_STATE = #{state}
+        WHERE BASKET_SPOT_ID = #{id}
+    </update>
+</mapper>

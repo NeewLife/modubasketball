@@ -4,9 +4,9 @@ import com.poten.basket.Poten.Service.MapService;
 import com.poten.basket.Poten.VO.Feedbacks;
 import com.poten.basket.Poten.VO.MapRequest;
 import com.poten.basket.Poten.VO.MapResponse;
-
 import com.poten.basket.Poten.VO.Photo;
 import com.poten.basket.Poten.utils.FIleUtils;
+import java.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.CacheControl;
 import org.springframework.http.HttpHeaders;
@@ -14,8 +14,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.util.*;
 
 @RestController
 @RequestMapping("/api")
@@ -27,7 +25,14 @@ public class APIController {
   @Autowired
   FIleUtils fIleUtils;
 
-  private final String[] fileType = {"png","PNG", "jpg", "JPG", "jpeg", "JPEG"};
+  private final String[] fileType = {
+    "png",
+    "PNG",
+    "jpg",
+    "JPG",
+    "jpeg",
+    "JPEG",
+  };
 
   /*
    * 지도 리스트 조회
@@ -43,8 +48,8 @@ public class APIController {
   }
 
   /*
-  * 방문자수 + 1
-  * */
+   * 방문자수 + 1
+   * */
   @PutMapping("/counting")
   public ResponseEntity<String> visitCounting() {
     mapService.visitCounting();
@@ -52,9 +57,9 @@ public class APIController {
   }
 
   /*
-  * 방문자수 조회
-  * return 방문자수
-  * */
+   * 방문자수 조회
+   * return 방문자수
+   * */
   @GetMapping("/count")
   public ResponseEntity visitCount() {
     int visitCount = mapService.visitCount();
@@ -66,26 +71,27 @@ public class APIController {
    * param - com.poten.basket.Poten.VO.MapRequest
    * */
   @PostMapping("/spot/create")
-  public ResponseEntity saveSpot(@RequestPart MapRequest params
-                               , @RequestPart(required = false) List<MultipartFile> files)
-                        throws Exception{
+  public ResponseEntity saveSpot(
+    @RequestPart MapRequest params,
+    @RequestPart(required = false) List<MultipartFile> files
+  ) throws Exception {
     System.out.println("====================create====================");
     Integer id = mapService.getLastID();
     params.setId(id);
-    if (files != null){
-      for(MultipartFile photo : files){
-        if (photo.getSize() > 20971520){
+    if (files != null) {
+      for (MultipartFile photo : files) {
+        if (photo.getSize() > 20971520) {
           return ResponseEntity.ok("사진 크기가 너무 큽니다. (20mb 제한)");
         }
         String fileExt = fIleUtils.getExtension(photo);
-        if (!Arrays.asList(fileType).contains(fileExt)){
+        if (!Arrays.asList(fileType).contains(fileExt)) {
           return ResponseEntity.ok("잘못된 확장자 입니다.");
         }
       }
 
       List<Photo> photoList = fIleUtils.uploadFiles(files);
 
-      for (int i = 0; i < photoList.size(); i++){
+      for (int i = 0; i < photoList.size(); i++) {
         photoList.get(i).setSeq(i + 1);
         photoList.get(i).setId(id);
       }
@@ -100,25 +106,14 @@ public class APIController {
   }
 
   /*
-   * 지도 데이터 삭제 요청
-   * param - id
-   * */
-  @PutMapping("/spot/delete/{id}")
-  public ResponseEntity deleteReqSpot(@PathVariable int id) {
-    System.out.println("====================deleteReq====================");
-    System.out.println(id);
-    mapService.mapDelRequest(id);
-    System.out.println("삭제 요청됨");
-    return new ResponseEntity(id, HttpStatus.OK);
-  }
-
-  /*
    * 지도 데이터 수정
    * param - com.poten.basket.Poten.VO.MapRequest
    * */
   @PutMapping("/spot/update")
-  public ResponseEntity updateSpot(@RequestPart MapRequest params
-                                 , @RequestPart(required = false) List<MultipartFile> files){
+  public ResponseEntity updateSpot(
+    @RequestPart MapRequest params,
+    @RequestPart(required = false) List<MultipartFile> files
+  ) {
     System.out.println("====================update====================");
     if (files != null) {
       for (MultipartFile photo : files) {
@@ -149,19 +144,21 @@ public class APIController {
   }
 
   @PostMapping("/feedback")
-  public ResponseEntity feedback(@RequestParam int fdRating
-                               , @RequestParam String fdComment){
-      HashMap<String, Object> params = new HashMap<>();
-      params.put("fdRating", fdRating);
-      params.put("fdComment", fdComment);
-      mapService.feedback(params);
-      return new ResponseEntity(params, HttpStatus.OK);
+  public ResponseEntity feedback(
+    @RequestParam int fdRating,
+    @RequestParam String fdComment
+  ) {
+    HashMap<String, Object> params = new HashMap<>();
+    params.put("fdRating", fdRating);
+    params.put("fdComment", fdComment);
+    mapService.feedback(params);
+    return new ResponseEntity(params, HttpStatus.OK);
   }
 
   @GetMapping("/admin/login")
-  public ResponseEntity adminLogin(@PathVariable String password){
+  public ResponseEntity adminLogin(@PathVariable String password) {
     String loginStatus = "FAIL";
-    if (password == "test"){
+    if (password == "test") {
       loginStatus = "SUCCESS";
     }
     return ResponseEntity.ok(loginStatus);
@@ -172,33 +169,4 @@ public class APIController {
     List<Feedbacks> feedbacks = mapService.getFeedbacks();
     return ResponseEntity.ok(feedbacks);
   }
-
-  @GetMapping("/admin/spot")
-  public ResponseEntity<Map<String, List<MapResponse>>> getAdminMap() {
-    Map<String, List<MapResponse>> mapReqList = mapService.mapReqList();
-    return ResponseEntity.ok(mapReqList);
-  }
-
-  @PutMapping("/admin/delete-reject/{id}")
-  public ResponseEntity deleteRejectSpot(@PathVariable int id) {
-    System.out.println("====================deleteReject====================");
-    System.out.println(id);
-    mapService.mapDelReject(id);
-    return new ResponseEntity(id, HttpStatus.OK);
-  }
-
-  /*
-   * 관리자에서 지도 논리적삭제
-   * param - id
-   * */
-  @PutMapping("/admin/delete/{id}")
-  public ResponseEntity deleteSpot(@PathVariable int id) {
-    System.out.println("====================delete====================");
-    System.out.println(id);
-    mapService.mapDel(id);
-    System.out.println("삭제됨");
-    return new ResponseEntity(id, HttpStatus.OK);
-  }
-
-
 }

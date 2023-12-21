@@ -5,80 +5,58 @@ import com.poten.basket.Poten.VO.Feedbacks;
 import com.poten.basket.Poten.VO.MapRequest;
 import com.poten.basket.Poten.VO.MapResponse;
 import com.poten.basket.Poten.VO.Photo;
+import java.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.*;
 
 @Service
 public class MapService {
 
-    @Autowired
-    MapDAO mapDAO;
+  @Autowired
+  MapDAO mapDAO;
 
-    public List<MapResponse> mapList() {
-        List<MapResponse> mapResponseList = mapDAO.mapList();
-        for (int i = 0; i < mapResponseList.size(); i++){
-            int id = mapResponseList.get(i).getId();
-            mapResponseList.get(i).setPhotoList(mapDAO.mapPhotoList(id));
-        }
-        return mapResponseList;
+  public List<MapResponse> mapList() {
+    List<MapResponse> mapResponseList = mapDAO.mapList();
+    for (int i = 0; i < mapResponseList.size(); i++) {
+      int id = mapResponseList.get(i).getId();
+      mapResponseList.get(i).setPhotoList(mapDAO.mapPhotoList(id));
     }
+    return mapResponseList;
+  }
 
-    public void visitCounting() {mapDAO.visitCounting();}
+  public void visitCounting() {
+    mapDAO.visitCounting();
+  }
 
-    public int visitCount() {return mapDAO.visitCount();}
+  public int visitCount() {
+    return mapDAO.visitCount();
+  }
 
-    public void mapCre(MapRequest params){
-        mapDAO.mapCre(params);
-    }
+  public void mapCre(MapRequest params) {
+    mapDAO.mapCre(params);
+  }
 
-    public int getLastID(){
-        return mapDAO.getLastID();
-    };
+  public int getLastID() {
+    return mapDAO.getLastID();
+  }
 
-    public void mapUpt(MapRequest params){
-        mapDAO.mapUpt(params);
-    }
+  public void mapUpt(MapRequest params) {
+    mapDAO.mapUpt(params);
+  }
 
-    public void mapPhotoUpload(List<Photo> files){
-        mapDAO.mapPhotoUpload(files);
-    }
+  public void mapPhotoUpload(List<Photo> files) {
+    mapDAO.mapPhotoUpload(files);
+  }
 
-    public void mapDelRequest(int params){
-        mapDAO.mapDelRequest(params);
-    }
+  public void feedback(HashMap<String, Object> params) {
+    mapDAO.feedback(params);
+  }
 
-    public void mapDel(int params){
-        mapDAO.mapDel(params);
-    }
+  public List<Feedbacks> getFeedbacks() {
+    return mapDAO.getFeedbacks();
+  }
 
-    public void feedback(HashMap<String, Object> params){mapDAO.feedback(params);}
-
-    public List<Feedbacks> getFeedbacks() {
-        return mapDAO.getFeedbacks();
-    }
-
-    public Map<String, List<MapResponse>> mapReqList() {
-        List<MapResponse> mapReqList = mapDAO.mapReqList();
-        List<MapResponse> mapDelList = mapDAO.mapDelList();
-        List<MapResponse> mapRejList = mapDAO.mapRejList();
-
-        Map<String, List<MapResponse>> adminMapList = new HashMap<>();
-        adminMapList.put("mapReqList", mapReqList);
-        adminMapList.put("mapDelList", mapDelList);
-        adminMapList.put("mapRejList", mapRejList);
-
-        System.out.println("adminMapList = " + adminMapList);
-
-        return adminMapList;
-    }
-
-    public void mapDelReject(int params){
-        mapDAO.mapDelReject(params);
-    }
-
-    public void delPhoto(Integer id) {
-        mapDAO.delPhoto(id);
-    }
+  public void delPhoto(Integer id) {
+    mapDAO.delPhoto(id);
+  }
 }

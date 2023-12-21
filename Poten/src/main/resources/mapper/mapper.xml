@@ -20,7 +20,6 @@
             , address
             , comment
             , court_name AS courtName
-            , del_req AS delReq
             , has_light AS hasLight
             , light_time AS lightTime
             , open_status AS openStatus
@@ -30,8 +29,8 @@
 
     <select id="mapList" resultType="com.poten.basket.Poten.VO.MapResponse">
         <include refid="mapList"></include>
-        WHERE
-            is_deleted = 0
+        <!-- WHERE
+            is_deleted = 0 -->
     </select>
 
     <select id="mapPhotoList" parameterType="int" resultType="com.poten.basket.Poten.VO.Photo">
@@ -51,27 +50,6 @@
     <select id="getLastID" resultType="int">
         SELECT MAX(id) + 1
         FROM basket_spot
-    </select>
-
-    <select id="mapReqList" resultType="com.poten.basket.Poten.VO.MapResponse">
-        <include refid="mapList"></include>
-        WHERE
-            del_req >= 1
-        AND is_deleted = 0
-        AND is_rejected = 0
-    </select>
-
-    <select id="mapDelList" resultType="com.poten.basket.Poten.VO.MapResponse">
-        <include refid="mapList"></include>
-        WHERE
-            is_deleted = 1
-    </select>
-
-    <select id="mapRejList" resultType="com.poten.basket.Poten.VO.MapResponse">
-        <include refid="mapList"></include>
-        WHERE
-            is_rejected = 1
-        AND is_deleted = 0
     </select>
 
     <select id="visitCount" resultType="int">
@@ -187,33 +165,6 @@
             id = #{id}
             <!-- lat = #{lat} -->
         <!-- AND lon = #{lon} -->
-    </update>
-
-
-    <update id="mapDelRequest" parameterType="int">
-        UPDATE basket_spot
-        SET
-            del_req = del_req + 1
-            , is_rejected = 0
-        WHERE
-            id = #{id}
-    </update>
-
-    <update id="mapDel" parameterType="int">
-        UPDATE basket_spot
-        SET
-            is_deleted = 1
-        WHERE
-            id = #{id}
-    </update>
-
-    <update id="mapDelReject" parameterType="int">
-        UPDATE basket_spot
-        SET
-            del_req = 0
-            is_rejected = 1
-        WHERE
-            id = #{id}
     </update>
 
     <delete id="delPhoto" parameterType="Integer">
