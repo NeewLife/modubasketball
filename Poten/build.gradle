@@ -64,6 +64,7 @@ task installReact(type: Exec) {
 	}
 }
 
+
 task buildReact(type: Exec) {
 	dependsOn "installReact"
 	workingDir "$frontendDir"

@@ -1,7 +1,9 @@
 package com.poten.basket.Poten.VO;
 
 import lombok.Data;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -26,6 +28,4 @@ public class MapRequest {
   private String openStatus; // 개방 타입
   private String openTime; // 개방 시간
 
-  // 사진 리스트
-  private List<Photo> photoList;
 }

@@ -5,18 +5,17 @@ import com.poten.basket.Poten.VO.Feedbacks;
 import com.poten.basket.Poten.VO.MapRequest;
 import com.poten.basket.Poten.VO.MapResponse;
 
-import java.util.*;
-
 import com.poten.basket.Poten.VO.Photo;
-import jakarta.validation.Valid;
+import com.poten.basket.Poten.utils.FIleUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.CacheControl;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.*;
 
 @RestController
 @RequestMapping("/api")
@@ -24,6 +23,11 @@ public class APIController {
 
   @Autowired
   MapService mapService;
+
+  @Autowired
+  FIleUtils fIleUtils;
+
+  private final String[] fileType = {"png","PNG", "jpg", "JPG", "jpeg", "JPEG"};
 
   /*
    * 지도 리스트 조회
@@ -35,7 +39,6 @@ public class APIController {
     HttpHeaders headers = new HttpHeaders();
     headers.setCacheControl(CacheControl.noCache().mustRevalidate());
     List<MapResponse> mapList = mapService.mapList();
-    System.out.println(mapList);
     return ResponseEntity.ok(mapList);
   }
 
@@ -63,24 +66,35 @@ public class APIController {
    * param - com.poten.basket.Poten.VO.MapRequest
    * */
   @PostMapping("/spot/create")
-  public ResponseEntity saveSpot(@RequestBody MapRequest params)
+  public ResponseEntity saveSpot(@RequestPart MapRequest params
+                               , @RequestPart(required = false) List<MultipartFile> files)
                         throws Exception{
     System.out.println("====================create====================");
     Integer id = mapService.getLastID();
     params.setId(id);
-    List<Photo> photoList = params.getPhotoList();
-    System.out.println("photoList = " + photoList);
+    if (files != null){
+      for(MultipartFile photo : files){
+        if (photo.getSize() > 20971520){
+          return ResponseEntity.ok("사진 크기가 너무 큽니다. (20mb 제한)");
+        }
+        String fileExt = fIleUtils.getExtension(photo);
+        System.out.println("fileExt = " + fileExt);
+        System.out.println("Arrays.asList(fileType) = " + Arrays.asList(fileType));
+        System.out.println("Arrays.asList(fileType).contains(fileExt) = " + Arrays.asList(fileType).contains(fileExt));
+        if (!Arrays.asList(fileType).contains(fileExt)){
+          return ResponseEntity.ok("잘못된 확장자 입니다.");
+        }
+      }
 
-    if (!photoList.isEmpty()){
-      System.out.println("photoList = " + photoList);
+      List<Photo> photoList = fIleUtils.uploadFiles(files);
+
       for (int i = 0; i < photoList.size(); i++){
-        UUID uuid = UUID.randomUUID();
-        String photoName = photoList.get(i).getPhotoName();
-        photoList.get(i).setPhotoName(uuid + "_" + photoName);
         photoList.get(i).setSeq(i + 1);
         photoList.get(i).setId(id);
       }
-    };
+      System.out.println("photoList = " + photoList);
+      mapService.mapPhotoUpload(photoList);
+    }
 
     mapService.mapCre(params);
     System.out.println("create의 params = " + params);
@@ -106,20 +120,31 @@ public class APIController {
    * param - com.poten.basket.Poten.VO.MapRequest
    * */
   @PutMapping("/spot/update")
-  public ResponseEntity updateSpot(@RequestBody MapRequest params){
+  public ResponseEntity updateSpot(@RequestPart MapRequest params
+                                 , @RequestPart(required = false) List<MultipartFile> files){
     System.out.println("====================update====================");
-    List<Photo> photoList = params.getPhotoList();
-    if (!photoList.isEmpty()){
+    if (files != null) {
+      for (MultipartFile photo : files) {
+        if (photo.getSize() > 20971520) {
+          return ResponseEntity.ok("사진 크기가 너무 큽니다. (20mb 제한)");
+        }
+        String fileExt = fIleUtils.getExtension(photo);
+        if (!Arrays.asList(fileType).contains(fileExt)) {
+          return ResponseEntity.ok("잘못된 확장자 입니다.");
+        }
+      }
+
+      List<Photo> photoList = fIleUtils.uploadFiles(files);
+
       Integer id = params.getId();
       mapService.delPhoto(id);
       System.out.println("photoList = " + photoList);
-      for (int i = 0; i < photoList.size(); i++){
-        UUID uuid = UUID.randomUUID();
-        String photoName = photoList.get(i).getPhotoName();
-        photoList.get(i).setPhotoName(uuid + "_" + photoName);
+      for (int i = 0; i < photoList.size(); i++) {
         photoList.get(i).setSeq(i + 1);
         photoList.get(i).setId(id);
       }
+
+      mapService.mapPhotoUpload(photoList);
     }
     System.out.println("update의 params = " + params);
     mapService.mapUpt(params);
