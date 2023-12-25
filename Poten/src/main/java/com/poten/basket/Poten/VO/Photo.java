@@ -16,6 +16,7 @@ public class Photo {
     private String saveName;
     private String originalName;
     private String uploadPath;
+    private byte[] photoByteData;
 
     private String photoUploadDate;
     private String nickname;

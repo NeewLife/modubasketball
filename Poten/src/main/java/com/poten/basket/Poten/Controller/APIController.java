@@ -6,6 +6,8 @@ import com.poten.basket.Poten.VO.MapRequest;
 import com.poten.basket.Poten.VO.MapResponse;
 import com.poten.basket.Poten.VO.Photo;
 import com.poten.basket.Poten.utils.FIleUtils;
+
+import java.io.IOException;
 import java.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.CacheControl;
@@ -40,7 +42,7 @@ public class APIController {
    * return 지도 데이터 형식 - com.poten.basket.Poten.VO.MapResponse
    * */
   @GetMapping("/")
-  public ResponseEntity<List<MapResponse>> openMap() {
+  public ResponseEntity<List<MapResponse>> openMap() throws IOException {
     HttpHeaders headers = new HttpHeaders();
     headers.setCacheControl(CacheControl.noCache().mustRevalidate());
     List<MapResponse> mapList = mapService.mapList();

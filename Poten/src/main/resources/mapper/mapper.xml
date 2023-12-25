@@ -33,7 +33,7 @@
             is_deleted = 0 -->
     </select>
 
-    <select id="mapPhotoList" parameterType="int" resultType="com.poten.basket.Poten.VO.Photo">
+    <select id="mapPhoto" parameterType="int" resultType="com.poten.basket.Poten.VO.Photo">
         SELECT
             id
             , seq

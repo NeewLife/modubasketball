@@ -29,6 +29,7 @@ dependencies {
 // Jasypt 암호화를 위한 라이브러리
 	implementation 'com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.5'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	implementation 'commons-io:commons-io:2.11.0'
 	implementation 'com.googlecode.json-simple:json-simple:1.1.1'
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'com.mysql:mysql-connector-j'

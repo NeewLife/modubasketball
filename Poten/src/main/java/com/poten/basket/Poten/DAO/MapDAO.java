@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
 public interface MapDAO {
   List<MapResponse> mapList();
 
-  List<Photo> mapPhotoList(int id);
+  List<Photo> mapPhoto(int id);
   // 방문자수 호출
   int visitCount();
 

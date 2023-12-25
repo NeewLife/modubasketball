@@ -1,6 +1,7 @@
 package com.poten.basket.Poten.utils;
 
 import com.poten.basket.Poten.VO.Photo;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -20,7 +21,9 @@ public class FIleUtils {
 
     // 서버 업로드 경로
     String applicationDirectory = System.getProperty("user.dir");
-    private final String uploadPath = Paths.get(applicationDirectory, "uingx", "public").toString();
+
+    @Value("${file.upload.directory}")
+    String uploadPath;
 
     // 테스트용 업로드 경로
 //    private final String uploadPath = Paths.get("D:", "java", "Project", "modubasketball", "Poten", "uingx", "public").toString();
