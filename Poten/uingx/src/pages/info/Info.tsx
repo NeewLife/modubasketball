@@ -5,7 +5,8 @@ import { Form, IFormTypes } from '@components/templates';
 import Edit from '@constants/icon/edit.svg';
 import { IModal, useModal } from '@utils/zustand/useModal';
 import { InfoEdit } from '@pages/index';
-import { useResize } from '@utils/zustand';
+import { useResize, useUpdate } from '@utils/zustand';
+import { useDeleteService } from '@services/delete.services';
 
 export interface InfoProps {
   id: number;
@@ -28,16 +29,25 @@ export const Info = (props: InfoProps & { mode?: 'delete' | 'info' }) => {
 
   const { type } = useResize();
   const { setClose } = useModal();
+  const { setDelete } = useUpdate();
 
   const onClickEdit = () => {
     useModal.setState(() => ({ children: <InfoEdit type="update" {...props} /> }));
   };
 
   const onClickCancel = () => {
-    setClose();
+    useDeleteService.updateState(2, props?.id).then(() => {
+      setClose();
+      setDelete();
+    });
   };
 
-  const onClickDelete = () => {};
+  const onClickDelete = () => {
+    useDeleteService.updateState(1, props?.id).then(() => {
+      setClose();
+      setDelete();
+    });
+  };
 
   const formProps: IFormTypes[] = [
     {

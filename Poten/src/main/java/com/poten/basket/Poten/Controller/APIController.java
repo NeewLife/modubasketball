@@ -6,7 +6,6 @@ import com.poten.basket.Poten.VO.MapRequest;
 import com.poten.basket.Poten.VO.MapResponse;
 import com.poten.basket.Poten.VO.Photo;
 import com.poten.basket.Poten.utils.FIleUtils;
-
 import java.io.IOException;
 import java.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +46,13 @@ public class APIController {
     headers.setCacheControl(CacheControl.noCache().mustRevalidate());
     List<MapResponse> mapList = mapService.mapList();
     return ResponseEntity.ok(mapList);
+  }
+
+  @GetMapping("/{id}")
+  public ResponseEntity<?> getOne(
+    @PathVariable(value = "id", required = true) int id
+  ) {
+    return ResponseEntity.ok(mapService.getOne(id));
   }
 
   /*

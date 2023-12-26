@@ -7,31 +7,37 @@
 
     <sql id="mapList">
         SELECT
-            id
-            , lat
-            , lon
-            , court_type AS courtType
-            , fee_yn AS feeYn
-            , court_size AS courtSize
-            , goal_post AS goalPost
-            , park_yn AS parkYn
-            , create_date AS createDate
-            , modify_date AS modifyDate
-            , address
-            , comment
-            , court_name AS courtName
-            , has_light AS hasLight
-            , light_time AS lightTime
-            , open_status AS openStatus
-            , open_time AS openTime
-        FROM basket_spot
+            bs.id id
+            , bs.lat lat
+            , bs.lon lon
+            , bs.court_type courtType
+            , bs.fee_yn feeYn
+            , bs.court_size courtSize
+            , bs.goal_post goalPost
+            , bs.park_yn parkYn
+            , bs.create_date createDate
+            , bs.modify_date modifyDate
+            , bs.address address
+            , bs.comment comment
+            , bs.court_name courtName
+            , bs.has_light hasLight
+            , bs.light_time lightTime
+            , bs.open_status openStatus
+            , bs.open_time openTime
+        FROM basket_spot bs
     </sql>
 
     <select id="mapList" resultType="com.poten.basket.Poten.VO.MapResponse">
         <include refid="mapList"></include>
-        <!-- WHERE
-            is_deleted = 0 -->
+        LEFT JOIN BASKET_SPOT_DELETE bsd ON bs.ID = bsd.BASKET_SPOT_ID 
+        WHERE bsd.DELETE_STATE IS NULL OR bsd.DELETE_STATE != 1
     </select>
+
+    <select id="getOne" parameterType="int" resultType="com.poten.basket.Poten.VO.MapResponse">
+        <include refid="mapList"></include>
+        WHERE id = #{id}
+    </select>
+
 
     <select id="mapPhoto" parameterType="int" resultType="com.poten.basket.Poten.VO.Photo">
         SELECT

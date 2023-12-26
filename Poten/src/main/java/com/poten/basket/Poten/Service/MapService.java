@@ -5,12 +5,10 @@ import com.poten.basket.Poten.VO.Feedbacks;
 import com.poten.basket.Poten.VO.MapRequest;
 import com.poten.basket.Poten.VO.MapResponse;
 import com.poten.basket.Poten.VO.Photo;
-
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.*;
-
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,21 +27,24 @@ public class MapService {
       System.out.println("photo = " + photo);
 
       if (!photo.isEmpty()) {
-        for (int j = 0; j < photo.size(); j++){
+        for (int j = 0; j < photo.size(); j++) {
           System.out.println(photo.get(j).getUploadPath());
           String filePath = photo.get(j).getUploadPath().trim();
-          try(InputStream in = new FileInputStream(filePath)){
+          try (InputStream in = new FileInputStream(filePath)) {
             byte[] image = IOUtils.toByteArray(in);
             System.out.println("image = " + image);
             photo.get(j).setPhotoByteData(image);
-          } catch (IOException e){
+          } catch (IOException e) {
             e.printStackTrace();
           }
-
         }
       }
     }
     return mapResponseList;
+  }
+
+  public MapResponse getOne(int id) {
+    return mapDAO.getOne(id);
   }
 
   public void visitCounting() {

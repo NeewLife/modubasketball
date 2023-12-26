@@ -4,14 +4,15 @@ import { AxiosResponse } from 'axios';
 import { Title } from '@components/atoms';
 import { Table } from '@components/molecules';
 import { Info, InfoProps } from '@pages/index';
-import { useModal } from '@utils/zustand';
+import { useModal, useUpdate } from '@utils/zustand';
 
-import { IMap, useDeleteService } from '@services/index';
+import { IMap, useDeleteService, useMapService } from '@services/index';
 
 type DeleteTypes = IMap & { deleteCount?: number };
 
 export const AdminDelete = () => {
   const { setOpen } = useModal();
+  const { uDelete } = useUpdate();
 
   const [data, setData] = useState({
     require: [] as string[][],
@@ -34,20 +35,10 @@ export const AdminDelete = () => {
   ];
 
   const onClickTable = (type: 'ing' | 'ed') => (id: string) => {
-    const infoData = {
-      id: +id,
-      address: '서울 영등포구 양평동 33-3',
-      courtName: '이촌 한강공원 농구장',
-      courtType: '알 수 없음',
-      courtSize: '반코트',
-      goalPost: '0',
-      feeYn: '무료',
-      parkYn: '가능',
-      comment: '123',
-    } as InfoProps;
-
-    if (type === 'ed') setOpen(<Info mode="info" {...infoData} />);
-    else setOpen(<Info mode="delete" {...infoData} />);
+    useMapService.getOne(+id).then((response: AxiosResponse<InfoProps>) => {
+      if (type === 'ed') setOpen(<Info mode="info" {...response.data} />);
+      else setOpen(<Info mode="delete" {...response.data} />);
+    });
   };
 
   useEffect(() => {
@@ -68,7 +59,7 @@ export const AdminDelete = () => {
         });
       });
     });
-  }, []);
+  }, [uDelete]);
 
   return (
     <div

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface MapDAO {
   List<MapResponse> mapList();
+  MapResponse getOne(int id);
 
   List<Photo> mapPhoto(int id);
   // 방문자수 호출
