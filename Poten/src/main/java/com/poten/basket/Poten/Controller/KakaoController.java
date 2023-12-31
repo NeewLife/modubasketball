@@ -18,9 +18,11 @@ public class KakaoController {
 
     private final KakaoService kakaoService;
 
-    @GetMapping("/callback")
-    public ResponseEntity<Object> callback(HttpServletRequest request) throws Exception {
-        KakaoDTO kakaoInfo = kakaoService.getKakaoInfo(request.getParameter("code"));
+
+    // 프론트에서 인가 코드 넘겨주면 실행됨
+    @GetMapping("/login")
+    public ResponseEntity<Object> callback(@RequestParam String code) throws Exception {
+        KakaoDTO kakaoInfo = kakaoService.getKakaoInfo(code);
         System.out.println(kakaoInfo);
         String email = kakaoInfo.getEmail();
         if (kakaoService.countEmail(email) == 0){
@@ -30,10 +32,6 @@ public class KakaoController {
                 .body("nickname = " + kakaoService.getNickname(email));
     }
 
-    @GetMapping("/login")
-    public void login(HttpServletResponse response) throws Exception {
-        response.sendRedirect(kakaoService.getKakaoLogin());
-    }
 
     @PostMapping("/register")
     public ResponseEntity<String> register(@RequestParam String email

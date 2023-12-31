@@ -8,7 +8,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -41,6 +40,7 @@ public class FIleUtils {
 
     /**
      * 단일 파일 업로드
+     *
      * @param multipartFile - 파일 객체
      * @return DB에 저장할 파일 정보
      */
@@ -76,6 +76,7 @@ public class FIleUtils {
 
     /**
      * 저장 파일명 생성
+     *
      * @param filename 원본 파일명
      * @return 디스크에 저장할 파일명
      */
@@ -85,10 +86,10 @@ public class FIleUtils {
         return uuid + "." + extension;
     }
 
-    private String makeDirectory(String path){
+    private String makeDirectory(String path) {
         File dir = new File(uploadPath + File.separator + path);
 
-        if (dir.exists() == false){
+        if (dir.exists() == false) {
             dir.mkdirs();
         }
         return dir.getPath();
