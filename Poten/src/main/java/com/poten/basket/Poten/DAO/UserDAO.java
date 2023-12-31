@@ -10,5 +10,9 @@ public interface UserDAO {
 
     String findByRefreshToken(String refreshToken);
 
+    String findByEmail(String email);
+
     String updateRefreshToken(User user);
+
+
 }

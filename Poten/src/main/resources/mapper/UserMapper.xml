@@ -8,6 +8,10 @@
 
     </select>
 
+    <select id="findByEmail" resultType="java.lang.String">
+
+    </select>
+
 
     <update id="updateRefreshToken" parameterType="com.poten.basket.Poten.VO.User">
 
