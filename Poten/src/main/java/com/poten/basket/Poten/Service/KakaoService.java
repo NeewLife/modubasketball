@@ -2,8 +2,6 @@ package com.poten.basket.Poten.Service;
 
 import com.poten.basket.Poten.DAO.KakaoDAO;
 import com.poten.basket.Poten.DTO.KakaoDTO;
-import com.poten.basket.Poten.VO.UserVO;
-import com.poten.basket.Poten.utils.JwtTokenUtil;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +15,6 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.HashMap;
 import java.util.Map;
 
 @Service
@@ -25,9 +22,6 @@ public class KakaoService {
 
     @Autowired
     private KakaoDAO kakaoDAO;
-
-    @Autowired
-    private JwtTokenUtil jwtTokenUtil;
 
     @Value("${kakao.client.id}")
     private String KAKAO_CLIENT_ID;

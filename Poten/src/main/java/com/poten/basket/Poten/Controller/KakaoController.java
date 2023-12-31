@@ -2,9 +2,6 @@ package com.poten.basket.Poten.Controller;
 
 import com.poten.basket.Poten.DTO.KakaoDTO;
 import com.poten.basket.Poten.Service.KakaoService;
-import com.poten.basket.Poten.VO.UserVO;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
