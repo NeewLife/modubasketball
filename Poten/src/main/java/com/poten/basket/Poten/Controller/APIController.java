@@ -163,6 +163,7 @@ public class APIController {
         List<Photo> photoList = fIleUtils.uploadFiles(files, request.getHeader("nickname"));
 
         Integer id = params.getId();
+        fIleUtils.deleteFiles(id);
         mapService.delPhoto(id);
         for (int i = 0; i < photoList.size(); i++) {
           photoList.get(i).setSeq(i + 1);

@@ -1,6 +1,8 @@
 package com.poten.basket.Poten.utils;
 
+import com.poten.basket.Poten.DAO.MapDAO;
 import com.poten.basket.Poten.VO.Photo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -14,11 +16,15 @@ import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
 @Component
 public class FIleUtils {
+
+    @Autowired
+    MapDAO mapDAO;
 
     // 서버 업로드 경로
     String applicationDirectory = System.getProperty("user.dir");
@@ -70,6 +76,18 @@ public class FIleUtils {
                 .saveName(saveName)
                 .uploadPath(uploadPath.toString())
                 .build();
+    }
+
+    public void deleteFiles(Integer id){
+
+        List<Photo> files = mapDAO.mapPhoto(id);
+
+        for(int i = 0; i < files.size(); i++){
+            String uploadPath = files.get(i).getUploadPath();
+            File deleteFile = new File(uploadPath);
+            deleteFile.delete();
+        }
+
     }
 
     public String getExtension(MultipartFile multipartFile) {

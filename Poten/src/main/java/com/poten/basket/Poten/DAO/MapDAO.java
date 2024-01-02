@@ -6,6 +6,7 @@ import com.poten.basket.Poten.VO.MapResponse;
 import com.poten.basket.Poten.VO.Photo;
 import java.util.HashMap;
 import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -35,4 +36,5 @@ public interface MapDAO {
   void mapUpt(MapRequest params);
 
   void delPhoto(Integer id);
+
 }
