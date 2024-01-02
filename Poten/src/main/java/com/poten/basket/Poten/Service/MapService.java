@@ -79,10 +79,6 @@ public class MapService {
     return mapDAO.getFeedbacks();
   }
 
-  public List<String> getFilePath(Integer id){
-    return mapDAO.getFilePath(id);
-  }
-
   public void delPhoto(Integer id) {
     mapDAO.delPhoto(id);
   }
