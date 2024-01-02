@@ -39,6 +39,7 @@ public class KakaoController {
 
         String jwtAccessToken = jwtService.createAccessToken(email);
         String jwtRefreshToken = jwtService.createRefreshToken();
+        response.setHeader("nickname", kakaoService.getNickname(email));
         jwtService.sendAccessAndRefreshToken(response, jwtAccessToken, jwtRefreshToken);
         jwtService.updateRefreshToken(email, jwtRefreshToken);
 
