@@ -114,7 +114,7 @@ public class APIController {
           }
         }
 
-        List<Photo> photoList = fIleUtils.uploadFiles(files);
+        List<Photo> photoList = fIleUtils.uploadFiles(files, request.getHeader("nickname"));
 
         for (int i = 0; i < photoList.size(); i++) {
           photoList.get(i).setSeq(i + 1);
@@ -124,10 +124,8 @@ public class APIController {
         mapService.mapPhotoUpload(photoList);
       }
 
-      // 인증 없으면 메세지 출력
-      return new ResponseEntity("인증이 필요합니다", HttpStatus.OK);
-
-
+      // jwt인증 없으면 메세지 출력
+      else return new ResponseEntity("인증이 필요합니다", HttpStatus.OK);
     }
 
     mapService.mapCre(params);
@@ -162,7 +160,7 @@ public class APIController {
           }
         }
 
-        List<Photo> photoList = fIleUtils.uploadFiles(files);
+        List<Photo> photoList = fIleUtils.uploadFiles(files, request.getHeader("nickname"));
 
         Integer id = params.getId();
         mapService.delPhoto(id);
@@ -174,7 +172,9 @@ public class APIController {
         mapService.mapPhotoUpload(photoList);
       }
 
-      return new ResponseEntity("인증이 필요합니다", HttpStatus.OK);
+      // jwt인증 없으면 메세지 출력
+      else return new ResponseEntity("인증이 필요합니다", HttpStatus.OK);
+
     }
     System.out.println("update의 params = " + params);
     mapService.mapUpt(params);

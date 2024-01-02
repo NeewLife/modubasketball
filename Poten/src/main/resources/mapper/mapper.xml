@@ -85,7 +85,8 @@
 
     <insert id="mapCre" parameterType="com.poten.basket.Poten.VO.MapRequest">
         INSERT INTO basket_spot (
-            lat
+            id
+            , lat
             , lon
             , court_type
             , fee_yn
@@ -102,7 +103,8 @@
             , open_status
             , open_time
         ) VALUES (
-            #{lat}
+            #{id}
+            , #{lat}
             , #{lon}
             , #{courtType}
             , #{feeYn}

@@ -51,6 +51,8 @@ public class JwtService {
     public String createAccessToken(String email) {
         Date now = new Date();
         System.out.println("Date = " + now);
+        System.out.println("만료시간 = " + new Date(now.getTime() + accessTokenExpirationPeriod));
+
         return JWT.create() // JWT 토큰을 생성하는 빌더 반환
                 .withSubject(ACCESS_TOKEN_SUBJECT) // JWT의 Subject 지정 -> AccessToken이므로 AccessToken
                 .withExpiresAt(new Date(now.getTime() + accessTokenExpirationPeriod)) // 토큰 만료 시간 설정

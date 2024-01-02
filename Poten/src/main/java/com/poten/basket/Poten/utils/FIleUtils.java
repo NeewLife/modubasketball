@@ -29,13 +29,13 @@ public class FIleUtils {
     // 테스트용 업로드 경로
 //    private final String uploadPath = Paths.get("D:", "java", "Project", "modubasketball", "Poten", "uingx", "public").toString();
 
-    public List<Photo> uploadFiles(final List<MultipartFile> multipartFiles) {
+    public List<Photo> uploadFiles(final List<MultipartFile> multipartFiles, String nickname) {
         List<Photo> files = new ArrayList<>();
         for (MultipartFile multipartFile : multipartFiles) {
             if (multipartFile.isEmpty()) {
                 continue;
             }
-            files.add(uploadFile(multipartFile));
+            files.add(uploadFile(multipartFile,nickname));
         }
         return files;
     }
@@ -46,7 +46,7 @@ public class FIleUtils {
      * @param multipartFile - 파일 객체
      * @return DB에 저장할 파일 정보
      */
-    public Photo uploadFile(final MultipartFile multipartFile) {
+    public Photo uploadFile(final MultipartFile multipartFile, String nickname) {
 
         if (multipartFile.isEmpty()) {
             return null;
@@ -66,6 +66,7 @@ public class FIleUtils {
 
         return Photo.builder()
                 .originalName(multipartFile.getOriginalFilename())
+                .nickname(nickname)
                 .saveName(saveName)
                 .uploadPath(uploadPath.toString())
                 .build();
