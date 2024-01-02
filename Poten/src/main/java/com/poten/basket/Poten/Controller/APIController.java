@@ -8,6 +8,11 @@ import com.poten.basket.Poten.VO.Photo;
 import com.poten.basket.Poten.utils.FIleUtils;
 import java.io.IOException;
 import java.util.*;
+
+import com.poten.basket.Poten.utils.JwtTokenUtil;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.CacheControl;
 import org.springframework.http.HttpHeaders;
@@ -25,6 +30,9 @@ public class APIController {
 
   @Autowired
   FIleUtils fIleUtils;
+
+  @Autowired
+  JwtTokenUtil jwtTokenUtil;
 
   private final String[] fileType = {
     "png",
@@ -80,31 +88,46 @@ public class APIController {
    * */
   @PostMapping("/spot/create")
   public ResponseEntity saveSpot(
+    HttpServletRequest request,
+    HttpServletResponse response,
     @RequestPart MapRequest params,
     @RequestPart(required = false) List<MultipartFile> files
   ) throws Exception {
     System.out.println("====================create====================");
     Integer id = mapService.getLastID();
     params.setId(id);
+    System.out.println("params = " + params);
+    System.out.println("files = " + files);
+
+    // 사진이 존재하면 jwt 토큰인증
     if (files != null) {
-      for (MultipartFile photo : files) {
-        if (photo.getSize() > 20971520) {
-          return ResponseEntity.ok("사진 크기가 너무 큽니다. (20mb 제한)");
+
+      // jwt 토큰이 유효할 때만 사진 업로드
+      if(jwtTokenUtil.validateJwtToken(request, response)){
+        for (MultipartFile photo : files) {
+          if (photo.getSize() > 20971520) {
+            return ResponseEntity.ok("사진 크기가 너무 큽니다. (20mb 제한)");
+          }
+          String fileExt = fIleUtils.getExtension(photo);
+          if (!Arrays.asList(fileType).contains(fileExt)) {
+            return ResponseEntity.ok("잘못된 확장자 입니다.");
+          }
         }
-        String fileExt = fIleUtils.getExtension(photo);
-        if (!Arrays.asList(fileType).contains(fileExt)) {
-          return ResponseEntity.ok("잘못된 확장자 입니다.");
+
+        List<Photo> photoList = fIleUtils.uploadFiles(files);
+
+        for (int i = 0; i < photoList.size(); i++) {
+          photoList.get(i).setSeq(i + 1);
+          photoList.get(i).setId(id);
         }
+        System.out.println("photoList = " + photoList);
+        mapService.mapPhotoUpload(photoList);
       }
 
-      List<Photo> photoList = fIleUtils.uploadFiles(files);
+      // 인증 없으면 메세지 출력
+      return new ResponseEntity("인증이 필요합니다", HttpStatus.OK);
 
-      for (int i = 0; i < photoList.size(); i++) {
-        photoList.get(i).setSeq(i + 1);
-        photoList.get(i).setId(id);
-      }
-      System.out.println("photoList = " + photoList);
-      mapService.mapPhotoUpload(photoList);
+
     }
 
     mapService.mapCre(params);
@@ -119,31 +142,39 @@ public class APIController {
    * */
   @PutMapping("/spot/update")
   public ResponseEntity updateSpot(
+    HttpServletRequest request,
+    HttpServletResponse response,
     @RequestPart MapRequest params,
     @RequestPart(required = false) List<MultipartFile> files
-  ) {
+  ) throws ServletException, IOException {
     System.out.println("====================update====================");
     if (files != null) {
-      for (MultipartFile photo : files) {
-        if (photo.getSize() > 20971520) {
-          return ResponseEntity.ok("사진 크기가 너무 큽니다. (20mb 제한)");
+
+      // jwt 토큰이 유효할 때만 사진 수정
+      if(jwtTokenUtil.validateJwtToken(request, response)) {
+        for (MultipartFile photo : files) {
+          if (photo.getSize() > 20971520) {
+            return ResponseEntity.ok("사진 크기가 너무 큽니다. (20mb 제한)");
+          }
+          String fileExt = fIleUtils.getExtension(photo);
+          if (!Arrays.asList(fileType).contains(fileExt)) {
+            return ResponseEntity.ok("잘못된 확장자 입니다.");
+          }
         }
-        String fileExt = fIleUtils.getExtension(photo);
-        if (!Arrays.asList(fileType).contains(fileExt)) {
-          return ResponseEntity.ok("잘못된 확장자 입니다.");
+
+        List<Photo> photoList = fIleUtils.uploadFiles(files);
+
+        Integer id = params.getId();
+        mapService.delPhoto(id);
+        for (int i = 0; i < photoList.size(); i++) {
+          photoList.get(i).setSeq(i + 1);
+          photoList.get(i).setId(id);
         }
+
+        mapService.mapPhotoUpload(photoList);
       }
 
-      List<Photo> photoList = fIleUtils.uploadFiles(files);
-
-      Integer id = params.getId();
-      mapService.delPhoto(id);
-      for (int i = 0; i < photoList.size(); i++) {
-        photoList.get(i).setSeq(i + 1);
-        photoList.get(i).setId(id);
-      }
-
-      mapService.mapPhotoUpload(photoList);
+      return new ResponseEntity("인증이 필요합니다", HttpStatus.OK);
     }
     System.out.println("update의 params = " + params);
     mapService.mapUpt(params);

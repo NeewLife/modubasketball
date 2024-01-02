@@ -2,6 +2,7 @@ package com.poten.basket.Poten.Service;
 
 import com.poten.basket.Poten.DAO.KakaoDAO;
 import com.poten.basket.Poten.DTO.KakaoDTO;
+import com.poten.basket.Poten.VO.User;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,7 +51,7 @@ public class KakaoService {
 
         try {
             HttpHeaders headers = new HttpHeaders();
-            headers.add("Content-type", "application/x-www-form-urlencoded");
+            headers.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
 
             MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
             params.add("grant_type", "authorization_code");
@@ -79,10 +80,10 @@ public class KakaoService {
             throw new Exception("API call failed");
         }
 
-        return getUserInfoWithToken(accessToken, refreshToken);
+        return getUserInfoWithToken(accessToken);
     }
 
-    private KakaoDTO getUserInfoWithToken(String accessToken, String refreshToken) throws Exception {
+    private KakaoDTO getUserInfoWithToken(String accessToken) throws Exception {
         //HttpHeader 생성
         HttpHeaders headers = new HttpHeaders();
         headers.add("Authorization", "Bearer " + accessToken);
@@ -126,7 +127,7 @@ public class KakaoService {
         return kakaoDAO.getNickname(email);
     }
 
-    public void register(Map<String, Object> params){
+    public void register(User params){
         kakaoDAO.register(params);
     }
 

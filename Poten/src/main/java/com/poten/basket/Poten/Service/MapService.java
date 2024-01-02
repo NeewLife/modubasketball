@@ -31,9 +31,9 @@ public class MapService {
           System.out.println(photo.get(j).getUploadPath());
           String filePath = photo.get(j).getUploadPath().trim();
           try (InputStream in = new FileInputStream(filePath)) {
-            byte[] image = IOUtils.toByteArray(in);
-            System.out.println("image = " + image);
-            photo.get(j).setPhotoByteData(image);
+            byte[] bytes = IOUtils.toByteArray(in);
+            System.out.println("image = " + bytes);
+            photo.get(j).setPhotoByteData(bytes);
           } catch (IOException e) {
             e.printStackTrace();
           }

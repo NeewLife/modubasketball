@@ -1,5 +1,6 @@
 package com.poten.basket.Poten.DAO;
 
+import com.poten.basket.Poten.VO.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -15,5 +16,5 @@ public interface KakaoDAO {
 
     String getNickname(String email);
 
-    void register(Map<String, Object> params);
+    void register(User params);
 }

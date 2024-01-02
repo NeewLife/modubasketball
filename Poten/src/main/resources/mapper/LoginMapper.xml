@@ -22,7 +22,7 @@
         WHERE email = #{email}
     </select>
     
-    <insert id="register" parameterType="map">
+    <insert id="register" parameterType="com.poten.basket.Poten.VO.User">
         INSERT INTO user (
             email
             , nickname

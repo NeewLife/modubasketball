@@ -8,6 +8,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -52,11 +54,12 @@ public class FIleUtils {
 
         String saveName = generateSaveFilename(multipartFile.getOriginalFilename());
         String today = LocalDate.now().format(DateTimeFormatter.ofPattern("yyMMdd")).toString();
-        String uploadPath = makeDirectory(today) + File.separator + saveName;
-        File uploadFile = new File(uploadPath);
+        Path uploadPath = Paths.get(makeDirectory(today) + File.separator + saveName);
+
 
         try {
-            multipartFile.transferTo(uploadFile);
+            byte[] bytes = multipartFile.getBytes();
+            Files.write(uploadPath, bytes);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -64,7 +67,7 @@ public class FIleUtils {
         return Photo.builder()
                 .originalName(multipartFile.getOriginalFilename())
                 .saveName(saveName)
-                .uploadPath(uploadPath)
+                .uploadPath(uploadPath.toString())
                 .build();
     }
 

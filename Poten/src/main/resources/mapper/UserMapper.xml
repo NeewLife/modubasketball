@@ -4,16 +4,34 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.poten.basket.Poten.DAO.UserDAO">
 
-    <select id="findByRefreshToken" resultType="String">
-
+    <select id="findByRefreshToken" resultType="com.poten.basket.Poten.VO.User">
+        SELECT
+            id
+            , email
+            , nickname AS userNickname
+            , refresh_token AS refreshToken
+        FROM user
+        WHERE
+            refresh_token = #{refreshToken}
     </select>
 
-    <select id="findByEmail" resultType="java.lang.String">
-
+    <select id="findByEmail" resultType="com.poten.basket.Poten.VO.User">
+        SELECT
+            id
+            , email
+            , nickname AS userNickname
+            , refresh_token AS refreshToken
+        FROM user
+        WHERE
+            email = #{email}
     </select>
 
 
-    <update id="updateRefreshToken" parameterType="com.poten.basket.Poten.VO.User">
+    <update id="updateRefreshToken" parameterType="String">
+        UPDATE user
+        SET refresh_token = #{refreshToken}
+        WHERE
+            email = #{email}
 
     </update>
 

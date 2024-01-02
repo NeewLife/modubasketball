@@ -8,11 +8,11 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserDAO {
 
-    String findByRefreshToken(String refreshToken);
+    User findByRefreshToken(String refreshToken);
 
-    String findByEmail(String email);
+    User findByEmail(String email);
 
-    String updateRefreshToken(User user);
+    void updateRefreshToken(String refreshToken, String email);
 
 
 }
