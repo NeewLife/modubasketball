@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { IMap } from '@services/index';
+import { IMap, useMapService } from '@services/index';
 
 import Marker from '@constants/image/marker.png';
 import GeoLocation from '@constants/icon/geoLocation.svg';
 
 import { useModal } from '@utils/zustand/useModal';
 import { Info, InfoEdit, InfoProps } from '@pages/index';
+import { AxiosResponse } from 'axios';
 
 type PlaceTypes = {
   id: string;
@@ -103,19 +104,21 @@ export const Map = (props: MapProps) => {
       });
 
       window.kakao.maps.event.addListener(marker, 'click', () => {
-        const infoData = {
-          id: sMarkerData[i].id,
-          address: sMarkerData[i].address ? sMarkerData[i].address : '',
-          courtName: sMarkerData[i].courtName ? sMarkerData[i].courtName : '',
-          courtType: sMarkerData[i].courtType ? sMarkerData[i].courtType : '알 수 없음',
-          courtSize: sMarkerData[i].courtSize ? sMarkerData[i].courtSize : '반코트',
-          goalPost: sMarkerData[i].goalPost ? sMarkerData[i].goalPost : '0',
-          feeYn: sMarkerData[i].feeYn ? sMarkerData[i].feeYn : '무료',
-          parkYn: sMarkerData[i].parkYn ? sMarkerData[i].parkYn : '가능',
-          comment: sMarkerData[i].comment ? sMarkerData[i].comment : '',
-        } as InfoProps;
+        useMapService.getOne(sMarkerData[i].id).then((response: AxiosResponse<IMap>) => {
+          const infoData = {
+            id: sMarkerData[i].id,
+            address: response.data.address ? response.data.address : '',
+            courtName: response.data.courtName ? response.data.courtName : '',
+            courtType: response.data.courtType ? response.data.courtType : '알 수 없음',
+            courtSize: response.data.courtSize ? response.data.courtSize : '반코트',
+            goalPost: response.data.goalPost ? response.data.goalPost : '0',
+            feeYn: response.data.feeYn ? response.data.feeYn : '무료',
+            parkYn: response.data.parkYn ? response.data.parkYn : '가능',
+            comment: response.data.comment ? response.data.comment : '',
+          } as InfoProps;
 
-        setOpen(<Info {...infoData} />);
+          setOpen(<Info {...infoData} />);
+        });
       });
 
       markers.push(marker);

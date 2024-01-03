@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.poten.basket.Poten.DAO.ImageDAO">
+    <select id="getImg" parameterType="string" resultType="com.poten.basket.Poten.VO.Image">
+        SELECT NAME name,
+            ORIGINAL_NAME originalName,
+            USER_ID userId,
+            EXT ext,
+            SIZE size,
+            CREATE_DATE createDate
+        FROM IMAGE
+        WHERE NAME = #{name}
+    </select>
+</mapper>

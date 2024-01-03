@@ -5,42 +5,18 @@ import com.poten.basket.Poten.VO.Feedbacks;
 import com.poten.basket.Poten.VO.MapRequest;
 import com.poten.basket.Poten.VO.MapResponse;
 import com.poten.basket.Poten.VO.Photo;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.*;
-import org.apache.commons.io.IOUtils;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class MapService {
 
-  @Autowired
-  MapDAO mapDAO;
+  private final MapDAO mapDAO;
 
-  public List<MapResponse> mapList() throws IOException {
-    List<MapResponse> mapResponseList = mapDAO.mapList();
-    for (int i = 0; i < mapResponseList.size(); i++) {
-      int id = mapResponseList.get(i).getId();
-      List<Photo> photo = mapDAO.mapPhoto(id);
-      System.out.println("photo = " + photo);
-
-      if (!photo.isEmpty()) {
-        for (int j = 0; j < photo.size(); j++) {
-          System.out.println(photo.get(j).getUploadPath());
-          String filePath = photo.get(j).getUploadPath().trim();
-          try (InputStream in = new FileInputStream(filePath)) {
-            byte[] bytes = IOUtils.toByteArray(in);
-            System.out.println("image = " + bytes);
-            photo.get(j).setPhotoByteData(bytes);
-          } catch (IOException e) {
-            e.printStackTrace();
-          }
-        }
-      }
-    }
-    return mapResponseList;
+  public List<MapResponse> mapList() {
+    return mapDAO.mapList();
   }
 
   public MapResponse getOne(int id) {

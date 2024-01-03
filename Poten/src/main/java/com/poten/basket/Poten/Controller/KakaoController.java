@@ -9,9 +9,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.net.http.HttpResponse;
-import java.util.HashMap;
-
 @RestController
 @RequestMapping("/kakao")
 @RequiredArgsConstructor
