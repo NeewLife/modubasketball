@@ -115,6 +115,7 @@ export const Map = (props: MapProps) => {
             feeYn: response.data.feeYn ? response.data.feeYn : '무료',
             parkYn: response.data.parkYn ? response.data.parkYn : '가능',
             comment: response.data.comment ? response.data.comment : '',
+            imageList: response.data.imageList,
           } as InfoProps;
 
           setOpen(<Info {...infoData} />);

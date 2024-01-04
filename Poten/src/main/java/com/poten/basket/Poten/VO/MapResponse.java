@@ -28,4 +28,5 @@ public class MapResponse {
 
   private List<Photo> photoList;
   private int deleteCount;
+  private List<Image> imageList;
 }

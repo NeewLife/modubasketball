@@ -17,7 +17,7 @@ public class ImgService {
   String uploadPath;
 
   public File getImage(String name) {
-    Image image = imageDAO.getImage(name);
+    Image image = imageDAO.getImg(name);
 
     return new File(uploadPath + image.getName() + "." + image.getExt());
   }

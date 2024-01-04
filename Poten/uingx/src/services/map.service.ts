@@ -14,6 +14,17 @@ export interface IMap {
   courtName?: string; // 코드장 이름
   createData?: string; // 생성 날짜
   modifytDate?: string; // 수정 날짜
+
+  imageList?: IImage[];
+}
+
+export interface IImage {
+  name: string;
+  originalName?: string;
+  ext?: string;
+  size?: number;
+  userId?: number;
+  createDate?: string;
 }
 
 class MapService {

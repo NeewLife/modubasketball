@@ -1,12 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { Body, ButtonBig, Headline, Title } from '@components/atoms';
-import { Form, IFormTypes } from '@components/templates';
+import { Form, IFormTypes, ImageForm } from '@components/templates';
 
 import Edit from '@constants/icon/edit.svg';
 import { IModal, useModal } from '@utils/zustand/useModal';
 import { InfoEdit } from '@pages/index';
 import { useResize, useUpdate } from '@utils/zustand';
 import { useDeleteService } from '@services/delete.services';
+import { IImage } from '@services/map.service';
+
+const webpackMode = process.env.NODE_ENV || 'development';
 
 export interface InfoProps {
   id: number;
@@ -22,14 +25,20 @@ export interface InfoProps {
   lightTime?: string;
   openStatus: string;
   openTime?: string;
+
+  imageList?: IImage[];
 }
 
 export const Info = (props: InfoProps & { mode?: 'delete' | 'info' }) => {
-  const { address, courtName, courtType, courtSize, goalPost, feeYn, parkYn, comment, mode } = props;
+  const { address, courtName, courtType, courtSize, goalPost, feeYn, parkYn, comment, mode, imageList = [] } = props;
 
   const { type } = useResize();
   const { setClose } = useModal();
   const { setDelete } = useUpdate();
+
+  const path = useMemo(() => {
+    return webpackMode === 'development' ? '/proxy' : '';
+  }, []);
 
   const onClickEdit = () => {
     useModal.setState(() => ({ children: <InfoEdit type="update" {...props} /> }));
@@ -47,6 +56,10 @@ export const Info = (props: InfoProps & { mode?: 'delete' | 'info' }) => {
       setClose();
       setDelete();
     });
+  };
+
+  const onFileAction = () => {
+    console.log('fileAction');
   };
 
   const formProps: IFormTypes[] = [
@@ -163,8 +176,18 @@ export const Info = (props: InfoProps & { mode?: 'delete' | 'info' }) => {
           <Title type="main" text={courtName} color="text-secondary-30" />
         )}
       </div>
-      <div className="mt-[58px] pl-[20px] tablet:mt-[40px] tablet:p-0 mobile:mt-[40px] mobile:p-0">
+      <div className="mt-[58px] pl-[20px] tablet:mt-[40px] tablet:p-0 mobile:mt-[40px] mobile:p-0 flex flex-col desktop:gap-[60px] gap-[40px]">
         <Form data={formProps} />
+        <div className="bg-gray-30 h-[1px]" />
+        <ImageForm
+          imageData={imageList.map((datum) => {
+            return {
+              url: `${path}/img/${datum.name}`,
+              alt: `${datum.userId} / ${datum.createDate}`,
+            };
+          })}
+          onFileAction={onFileAction}
+        />
       </div>
       {mode === 'delete' && (
         <div className="flex items-center justify-center mt-[50px] desktop:gap-[21px] gap-[10px]">

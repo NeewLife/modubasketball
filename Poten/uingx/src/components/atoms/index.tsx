@@ -23,3 +23,4 @@ export * from './radio';
 export * from './textarea';
 export * from './alert';
 export * from './frame';
+export * from './image';

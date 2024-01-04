@@ -1,5 +1,6 @@
 package com.poten.basket.Poten.Service;
 
+import com.poten.basket.Poten.DAO.ImageDAO;
 import com.poten.basket.Poten.DAO.MapDAO;
 import com.poten.basket.Poten.VO.Feedbacks;
 import com.poten.basket.Poten.VO.MapRequest;
@@ -14,13 +15,17 @@ import org.springframework.stereotype.Service;
 public class MapService {
 
   private final MapDAO mapDAO;
+  private final ImageDAO imageDAO;
 
   public List<MapResponse> mapList() {
     return mapDAO.mapList();
   }
 
   public MapResponse getOne(int id) {
-    return mapDAO.getOne(id);
+    MapResponse response = mapDAO.getOne(id);
+    response.setImageList(imageDAO.getImgGroup(id));
+
+    return response;
   }
 
   public void visitCounting() {

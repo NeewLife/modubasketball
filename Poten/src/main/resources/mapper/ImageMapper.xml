@@ -14,4 +14,16 @@
         FROM IMAGE
         WHERE NAME = #{name}
     </select>
+
+    <select id="getImgGroup" parameterType="int" resultType="com.poten.basket.Poten.VO.Image">
+        SELECT NAME name,
+            ORIGINAL_NAME originalName,
+            USER_ID userId,
+            EXT ext,
+            SIZE size,
+            CREATE_DATE createDate
+        FROM IMAGE i, BASKET_SPOT_IMAGE bsi 
+        WHERE bsi.IMAGE_NAME = i.NAME 
+        AND bsi.BASKET_SPOT_ID = #{id}
+    </select>
 </mapper>
