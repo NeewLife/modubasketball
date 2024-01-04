@@ -1,11 +1,10 @@
 import React, { useEffect, useMemo } from 'react';
-import { Body, ButtonBig, Headline, Title } from '@components/atoms';
+import { Body, ButtonBig, Caption, Headline, Title } from '@components/atoms';
 import { Form, IFormTypes, ImageForm } from '@components/templates';
 
-import Edit from '@constants/icon/edit.svg';
 import { IModal, useModal } from '@utils/zustand/useModal';
 import { InfoEdit } from '@pages/index';
-import { useResize, useUpdate } from '@utils/zustand';
+import { useUpdate } from '@utils/zustand';
 import { useDeleteService } from '@services/delete.services';
 import { IImage } from '@services/map.service';
 
@@ -32,7 +31,6 @@ export interface InfoProps {
 export const Info = (props: InfoProps & { mode?: 'delete' | 'info' }) => {
   const { address, courtName, courtType, courtSize, goalPost, feeYn, parkYn, comment, mode, imageList = [] } = props;
 
-  const { type } = useResize();
   const { setClose } = useModal();
   const { setDelete } = useUpdate();
 
@@ -148,33 +146,26 @@ export const Info = (props: InfoProps & { mode?: 'delete' | 'info' }) => {
       height: true,
       close: true,
       isModile: false,
+      edit: undefined,
     } as IModal;
-
-    if (!mode)
-      modal.edit = {
-        icon: Edit,
-        onClick: onClickEdit,
-      };
 
     useModal.setState(() => modal);
   }, []);
 
   return (
     <div className="pt-[10px] pr-[40px] pl-[20px] mobile:p-0 tablet:p-0">
-      <Headline type={type === 'desktop' ? 'main' : 'sub'} text="농구장 정보" />
+      <Headline className="tablet:hidden mobile:hidden" type="main" text="농구장 정보" />
+      <Headline className="desktop:hidden" type="sub" text="농구장 정보" />
       <div className="mt-[8px]">
-        {type === 'desktop' ? (
-          <Title type="sub" text={address} />
-        ) : (
-          <Body type="sub" text={address} color="text-gray-70" />
-        )}
+        <Title className="tablet:hidden mobile:hidden" type="sub" text={address} />
+        <Body className="desktop:hidden" type="sub" text={address} color="text-gray-70" />
       </div>
-      <div className="mt-[2px] tablet:mt-[5px] mobile:mt-[5px]">
-        {type === 'desktop' ? (
-          <Headline type="sub" text={courtName} color="text-secondary-30" />
-        ) : (
-          <Title type="main" text={courtName} color="text-secondary-30" />
-        )}
+      <div className="mt-[2px] tablet:mt-[5px] mobile:mt-[5px] flex justify-between items-center">
+        <div>
+          <Headline className="tablet:hidden mobile:hidden" type="sub" text={courtName} color="text-secondary-30" />
+          <Title className="desktop:hidden" type="main" text={courtName} color="text-secondary-30" />
+        </div>
+        <Caption className="cursor-pointer" text="정보 수정하기" color="text-secondary-30" onClick={onClickEdit} />
       </div>
       <div className="mt-[58px] pl-[20px] tablet:mt-[40px] tablet:p-0 mobile:mt-[40px] mobile:p-0 flex flex-col desktop:gap-[60px] gap-[40px]">
         <Form data={formProps} />
