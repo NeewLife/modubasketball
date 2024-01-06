@@ -28,20 +28,6 @@ public class APIController {
   @Autowired
   MapService mapService;
 
-  @Autowired
-  FIleUtils fIleUtils;
-
-  @Autowired
-  JwtTokenUtil jwtTokenUtil;
-
-  private final String[] fileType = {
-    "png",
-    "PNG",
-    "jpg",
-    "JPG",
-    "jpeg",
-    "JPEG",
-  };
 
   /*
    * 지도 리스트 조회
@@ -90,43 +76,12 @@ public class APIController {
   public ResponseEntity saveSpot(
     HttpServletRequest request,
     HttpServletResponse response,
-    @RequestPart MapRequest params,
-    @RequestPart(required = false) List<MultipartFile> files
+    @RequestPart MapRequest params
   ) throws Exception {
     System.out.println("====================create====================");
     Integer id = mapService.getLastID();
     params.setId(id);
     System.out.println("params = " + params);
-    System.out.println("files = " + files);
-
-    // 사진이 존재하면 jwt 토큰인증
-    if (files != null) {
-
-      // jwt 토큰이 유효할 때만 사진 업로드
-      if(jwtTokenUtil.validateJwtToken(request, response)){
-        for (MultipartFile photo : files) {
-          if (photo.getSize() > 20971520) {
-            return ResponseEntity.ok("사진 크기가 너무 큽니다. (20mb 제한)");
-          }
-          String fileExt = fIleUtils.getExtension(photo);
-          if (!Arrays.asList(fileType).contains(fileExt)) {
-            return ResponseEntity.ok("잘못된 확장자 입니다.");
-          }
-        }
-
-        List<Photo> photoList = fIleUtils.uploadFiles(files, request.getHeader("nickname"));
-
-        for (int i = 0; i < photoList.size(); i++) {
-          photoList.get(i).setSeq(i + 1);
-          photoList.get(i).setId(id);
-        }
-        System.out.println("photoList = " + photoList);
-        mapService.mapPhotoUpload(photoList);
-      }
-
-      // jwt인증 없으면 메세지 출력
-      else return new ResponseEntity("인증이 필요합니다", HttpStatus.OK);
-    }
 
     mapService.mapCre(params);
     System.out.println("create의 params = " + params);
@@ -142,41 +97,9 @@ public class APIController {
   public ResponseEntity updateSpot(
     HttpServletRequest request,
     HttpServletResponse response,
-    @RequestPart MapRequest params,
-    @RequestPart(required = false) List<MultipartFile> files
+    @RequestPart MapRequest params
   ) throws ServletException, IOException {
     System.out.println("====================update====================");
-    if (files != null) {
-
-      // jwt 토큰이 유효할 때만 사진 수정
-      if(jwtTokenUtil.validateJwtToken(request, response)) {
-        for (MultipartFile photo : files) {
-          if (photo.getSize() > 20971520) {
-            return ResponseEntity.ok("사진 크기가 너무 큽니다. (20mb 제한)");
-          }
-          String fileExt = fIleUtils.getExtension(photo);
-          if (!Arrays.asList(fileType).contains(fileExt)) {
-            return ResponseEntity.ok("잘못된 확장자 입니다.");
-          }
-        }
-
-        List<Photo> photoList = fIleUtils.uploadFiles(files, request.getHeader("nickname"));
-
-        Integer id = params.getId();
-        fIleUtils.deleteFiles(id);
-        mapService.delPhoto(id);
-        for (int i = 0; i < photoList.size(); i++) {
-          photoList.get(i).setSeq(i + 1);
-          photoList.get(i).setId(id);
-        }
-
-        mapService.mapPhotoUpload(photoList);
-      }
-
-      // jwt인증 없으면 메세지 출력
-      else return new ResponseEntity("인증이 필요합니다", HttpStatus.OK);
-
-    }
     System.out.println("update의 params = " + params);
     mapService.mapUpt(params);
 

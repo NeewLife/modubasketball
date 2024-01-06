@@ -90,8 +90,8 @@ public class FIleUtils {
 
     }
 
-    public String getExtension(MultipartFile multipartFile) {
-        String fileName = multipartFile.getOriginalFilename();
+    public String getExtension(File file) {
+        String fileName = file.getName();
         String extension = fileName.substring(fileName.lastIndexOf(".") + 1);
         return extension;
     }
