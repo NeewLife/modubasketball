@@ -4,6 +4,7 @@ import com.poten.basket.Poten.DTO.KakaoDTO;
 import com.poten.basket.Poten.Service.JwtService;
 import com.poten.basket.Poten.Service.KakaoService;
 import com.poten.basket.Poten.VO.User;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -21,17 +22,13 @@ public class KakaoController {
     private final JwtService jwtService;
 
 
-    // 프론트에서 인가 코드 넘겨주면 실행됨
-    @PostMapping("/callback")
-    public ResponseEntity<Object> callback(HttpServletResponse response,
-                                           @RequestParam String code) throws Exception {
-        KakaoDTO kakaoInfo = kakaoService.getKakaoInfo(code);
+    @GetMapping("/callback")
+    public ResponseEntity<Object> callback(HttpServletRequest request,
+                                           HttpServletResponse response) throws Exception {
+        KakaoDTO kakaoInfo = kakaoService.getKakaoInfo(request.getParameter("code"));
         System.out.println(kakaoInfo);
         String email = kakaoInfo.getEmail();
 
-        // 회원가입이 안된상태
-        // 뭘 보내야 할까? 백에서 자체적으로 리다이렉트를 할까?
-        // null 을 보내야 하나?
         if (kakaoService.countEmail(email) == 0){
             return ResponseEntity.ok("email = " + email);
         }
@@ -42,6 +39,7 @@ public class KakaoController {
         jwtService.sendAccessAndRefreshToken(response, jwtAccessToken, jwtRefreshToken);
         jwtService.updateRefreshToken(email, jwtRefreshToken);
 
+        response.sendRedirect("https://modubasketball.com/#/map");
         return ResponseEntity.ok(
                 "로그인에 성공하였습니다. email = " + email +
                 "\naccessToken = " + jwtAccessToken +
