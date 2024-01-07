@@ -16,7 +16,7 @@ public interface MapDAO {
   List<MapResponse> mapList();
   MapResponse getOne(int id);
 
-  List<Photo> mapPhoto(int id);
+
   // 방문자수 호출
   int visitCount();
 
@@ -26,7 +26,7 @@ public interface MapDAO {
 
   void mapCre(MapRequest params);
 
-  void mapPhotoUpload(List<Photo> params);
+
 
   int getLastID();
 
@@ -35,6 +35,6 @@ public interface MapDAO {
 
   void mapUpt(MapRequest params);
 
-  void delPhoto(Integer id);
+
 
 }

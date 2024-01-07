@@ -9,6 +9,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+
 @RestController
 @RequestMapping("/kakao")
 @RequiredArgsConstructor
@@ -47,8 +49,8 @@ public class KakaoController {
     }
 
     @GetMapping("/login")
-    public ResponseEntity<String> login() {
-        return ResponseEntity.ok(kakaoService.getKakaoLogin());
+    public void login(HttpServletResponse response) throws IOException {
+        response.sendRedirect(kakaoService.getKakaoLogin());
     }
 
 

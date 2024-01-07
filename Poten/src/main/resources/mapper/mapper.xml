@@ -39,20 +39,6 @@
     </select>
 
 
-    <select id="mapPhoto" parameterType="int" resultType="com.poten.basket.Poten.VO.Photo">
-        SELECT
-            id
-            , seq
-            , save_name AS saveName
-            , photo_upload_date AS photoUploadDate
-            , nickname
-            , original_name AS originalName
-            , upload_path AS uploadPath
-        FROM photo
-        WHERE
-            id = #{id}
-    </select>
-
     <select id="getLastID" resultType="int">
         SELECT MAX(id) + 1
         FROM basket_spot
@@ -123,29 +109,6 @@
         )
     </insert>
 
-    <insert id="mapPhotoUpload" parameterType="list">
-        INSERT INTO photo(
-            id
-            , seq
-            , save_name
-            , original_name
-            , photo_upload_date
-            , nickname
-            , upload_path
-        ) VALUES
-        <foreach collection="list" item="item" separator=",">
-        (
-            #{item.id}
-            , #{item.seq}
-            , #{item.saveName}
-            , #{item.originalName}
-            , NOW()
-            , #{item.nickname}
-            , #{item.uploadPath}
-        )
-        </foreach>
-    </insert>
-
     <update id="visitCounting">
         UPDATE visit
         SET
@@ -175,11 +138,7 @@
         <!-- AND lon = #{lon} -->
     </update>
 
-    <delete id="delPhoto" parameterType="Integer">
-        DELETE FROM photo
-        WHERE
-            id = #{id}
-    </delete>
+
 
 
 

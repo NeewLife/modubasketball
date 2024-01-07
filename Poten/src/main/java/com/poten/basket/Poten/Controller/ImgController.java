@@ -57,46 +57,43 @@ public class ImgController {
     outputStream.write(IOUtils.toByteArray(inputStream));
   }
 
-  /*
+  /**
   * 사진 업로드 하는 RestAPI Servlet 방식
-  * @param - 파일 이름
-  * @return - 결과 메세지
-  * */
-  @PostMapping(value = "/upload")
-  public String uploadImage(
+  * @param files - 파일
+  * @param id - 장소 고유 ID
+  */
+  @PostMapping(value = "{id}/upload")
+  public @ResponseBody ResponseEntity<String> uploadImage(
           HttpServletResponse response,
           HttpServletRequest request,
-          List<MultipartFile> files
+          @RequestParam(value = "id", required = true) int id,
+          @RequestParam(value = "files") List<MultipartFile> files
   ) throws ServletException, IOException {
     // jwt 토큰이 유효할 때만 사진 수정
     if(!jwtTokenUtil.validateJwtToken(request, response)) {
-      return "유효하지 않은 토큰입니다.";
+      return ResponseEntity.ok("유효하지 않는 토큰입니다.");
     }
 
     for(int i = 0; i < files.size(); i++) {
-
+      if (files.get(i).getSize() > 20971520) {
+        return ResponseEntity.ok("파일 사이즈가 너무 큽니다");
+      }
+      String fileExt = fIleUtils.getExtension(files.get(i));
+      System.out.println("fileExt = " + fileExt);
+      if (!Arrays.asList(fileType).contains(fileExt)) {
+        return ResponseEntity.ok("사진 확장자명이 아님");
+      }
     }
-    if (file.length() > 20971520) {
-      return ResponseEntity.ok("사진 크기가 너무 큽니다. (20mb 제한)");
-    }
-    String fileExt = fIleUtils.getExtension(file);
-    if (!Arrays.asList(fileType).contains(fileExt)) {
-      return ResponseEntity.ok("잘못된 확장자 입니다.");
-    }
 
-
-    List<Photo> photoList = fIleUtils.uploadFiles(file, request.getHeader("nickname"));
-
-    Integer id = params.getId();
-    fIleUtils.deleteFiles(id);
-    mapService.delPhoto(id);
+    List<Photo> photoList = fIleUtils.uploadFiles(files, request.getHeader("nickname"));
+    fIleUtils.deleteFiles(photoList);
     for (int i = 0; i < photoList.size(); i++) {
       photoList.get(i).setSeq(i + 1);
       photoList.get(i).setId(id);
     }
-    mapService.mapPhotoUpload(photoList);
+    imgService.mapPhotoUpload(photoList);
 
     return ResponseEntity.ok("사진 업로드 완료");
-    }
   }
+
 }

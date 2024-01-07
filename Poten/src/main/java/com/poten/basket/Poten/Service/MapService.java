@@ -48,9 +48,7 @@ public class MapService {
     mapDAO.mapUpt(params);
   }
 
-  public void mapPhotoUpload(List<Photo> files) {
-    mapDAO.mapPhotoUpload(files);
-  }
+
 
   public void feedback(HashMap<String, Object> params) {
     mapDAO.feedback(params);
@@ -60,7 +58,5 @@ public class MapService {
     return mapDAO.getFeedbacks();
   }
 
-  public void delPhoto(Integer id) {
-    mapDAO.delPhoto(id);
-  }
+
 }

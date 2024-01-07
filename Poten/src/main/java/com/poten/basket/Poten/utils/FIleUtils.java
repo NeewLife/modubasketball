@@ -1,5 +1,6 @@
 package com.poten.basket.Poten.utils;
 
+import com.poten.basket.Poten.DAO.ImageDAO;
 import com.poten.basket.Poten.DAO.MapDAO;
 import com.poten.basket.Poten.VO.Photo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ import java.util.UUID;
 public class FIleUtils {
 
     @Autowired
-    MapDAO mapDAO;
+    ImageDAO imageDAO;
 
     // 서버 업로드 경로
     String applicationDirectory = System.getProperty("user.dir");
@@ -78,21 +79,28 @@ public class FIleUtils {
                 .build();
     }
 
-    public void deleteFiles(Integer id){
-
-        List<Photo> files = mapDAO.mapPhoto(id);
-
-        for(int i = 0; i < files.size(); i++){
-            String uploadPath = files.get(i).getUploadPath();
-            File deleteFile = new File(uploadPath);
-            deleteFile.delete();
+    /**
+    * 업로드할 파일이랑 기존파일이랑 비교해서 삭제
+    * @param newFiles - 새 업로드할 파일
+    * */
+    public void deleteFiles(List<Photo> newFiles){
+        for(int i = 0; i < newFiles.size(); i++){
+            List<Photo> files = imageDAO.mapPhoto(newFiles.get(i).getId());
+            Photo file = files.get(i);      // 기존 파일
+            if(file.getOriginalName().equals(newFiles.get(i).getOriginalName())){
+                String uploadPath = file.getUploadPath();
+                File deleteFile = new File(uploadPath);
+                deleteFile.delete();
+                imageDAO.delPhoto(file);
+            }
         }
-
     }
 
-    public String getExtension(File file) {
+    public String getExtension(MultipartFile file) {
         String fileName = file.getName();
         String extension = fileName.substring(fileName.lastIndexOf(".") + 1);
+        System.out.println("fimeName = " + fileName);
+        System.out.println("extension = " + extension);
         return extension;
     }
 
