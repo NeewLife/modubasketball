@@ -39,7 +39,7 @@ const customMobildStyles = () => {
 };
 
 export const CustomModal = () => {
-  const { open, change, changeChildren, children, width, height, close, edit, isModile, setOpen, setClose } =
+  const { open, change, changeChildren, timeout, children, width, height, close, edit, isModile, setOpen, setClose } =
     useModal();
   const { type } = useResize();
 
@@ -52,12 +52,12 @@ export const CustomModal = () => {
   };
 
   useEffect(() => {
-    if (change) {
+    if (change && timeout) {
       setTimeout(() => {
         setClose();
         if (changeChildren.props.id !== 'end') setOpen(changeChildren);
         useModal.setState(() => ({ change: false }));
-      }, 1500);
+      }, 2000);
     }
   }, [change]);
 

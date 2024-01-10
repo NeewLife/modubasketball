@@ -73,6 +73,7 @@ export const InfoEdit = (props: InfoEditProps & InfoProps) => {
           setMap();
           useModal.setState(() => ({
             change: true,
+            timeout: true,
             changeChildren: <Info {...request} />,
             children: <InfoSuccess type="수정이 완료되었습니다." message="농구장 정보로 이동합니다." />,
           }));
@@ -84,6 +85,7 @@ export const InfoEdit = (props: InfoEditProps & InfoProps) => {
           setMap();
           useModal.setState(() => ({
             change: true,
+            timeout: true,
             changeChildren: <div id="end" />,
             children: <InfoSuccess type="저장이 완료되었습니다." message="지도로 이동합니다." />,
           }));
@@ -103,6 +105,7 @@ export const InfoEdit = (props: InfoEditProps & InfoProps) => {
         setMap();
         useModal.setState(() => ({
           change: true,
+          timeout: true,
           changeChildren: <div id="end" />,
           children: (
             <InfoSuccess

@@ -1,9 +1,9 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo, MouseEvent } from 'react';
 import { Body, ButtonBig, Caption, Headline, Title } from '@components/atoms';
 import { Form, IFormTypes, ImageForm } from '@components/templates';
 
 import { IModal, useModal } from '@utils/zustand/useModal';
-import { InfoEdit } from '@pages/index';
+import { InfoEdit, Login } from '@pages/index';
 import { useUpdate } from '@utils/zustand';
 import { useDeleteService } from '@services/delete.services';
 import { IImage } from '@services/map.service';
@@ -29,10 +29,23 @@ export interface InfoProps {
 }
 
 export const Info = (props: InfoProps & { mode?: 'delete' | 'info' }) => {
-  const { address, courtName, courtType, courtSize, goalPost, feeYn, parkYn, comment, mode, imageList = [] } = props;
+  const {
+    id,
+    address,
+    courtName,
+    courtType,
+    courtSize,
+    goalPost,
+    feeYn,
+    parkYn,
+    comment,
+    mode,
+    imageList = [],
+  } = props;
 
-  const { setClose } = useModal();
+  const { setClose, setOpen } = useModal();
   const { setDelete } = useUpdate();
+  const { setId } = useUpdate();
 
   const path = useMemo(() => {
     return webpackMode === 'development' ? '/proxy' : '';
@@ -43,14 +56,14 @@ export const Info = (props: InfoProps & { mode?: 'delete' | 'info' }) => {
   };
 
   const onClickCancel = () => {
-    useDeleteService.updateState(2, props?.id).then(() => {
+    useDeleteService.updateState(2, id).then(() => {
       setClose();
       setDelete();
     });
   };
 
   const onClickDelete = () => {
-    useDeleteService.updateState(1, props?.id).then(() => {
+    useDeleteService.updateState(1, id).then(() => {
       setClose();
       setDelete();
     });
@@ -58,6 +71,14 @@ export const Info = (props: InfoProps & { mode?: 'delete' | 'info' }) => {
 
   const onFileAction = () => {
     console.log('fileAction');
+  };
+
+  const onFilePreAction = (event: MouseEvent<HTMLSpanElement>) => {
+    if (!localStorage.getItem('accessToken')) {
+      setOpen(<Login />);
+      setId(id);
+      event.preventDefault();
+    }
   };
 
   const formProps: IFormTypes[] = [
@@ -169,16 +190,19 @@ export const Info = (props: InfoProps & { mode?: 'delete' | 'info' }) => {
       </div>
       <div className="mt-[58px] pl-[20px] tablet:mt-[40px] tablet:p-0 mobile:mt-[40px] mobile:p-0 flex flex-col desktop:gap-[60px] gap-[40px]">
         <Form data={formProps} />
-        <div className="bg-gray-30 h-[1px]" />
-        <ImageForm
-          imageData={imageList.map((datum) => {
-            return {
-              url: `${path}/img/${datum.name}`,
-              alt: `${datum.userId} / ${datum.createDate}`,
-            };
-          })}
-          onFileAction={onFileAction}
-        />
+        <div className="bg-gray-30 h-[2px]" />
+        <div className="desktop:mb-[80px]">
+          <ImageForm
+            imageData={imageList.map((datum) => {
+              return {
+                url: `${path}/img/${datum.name}`,
+                alt: `${datum.userId} / ${datum.createDate}`,
+              };
+            })}
+            onFileAction={onFileAction}
+            onClickAction={onFilePreAction}
+          />
+        </div>
       </div>
       {mode === 'delete' && (
         <div className="flex items-center justify-center mt-[50px] desktop:gap-[21px] gap-[10px]">

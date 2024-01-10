@@ -1,14 +1,17 @@
-import React from 'react';
+import React, { MouseEvent } from 'react';
 import { Caption, ImageProps, Title } from '@components/atoms';
 import { ImageGroup } from '@components/molecules';
 
 interface ImageFromProps {
   imageData?: ImageProps[];
+
   onFileAction?: () => void;
+
+  onClickAction?: (event: MouseEvent<HTMLSpanElement>) => void;
 }
 
 export const ImageForm = (props: ImageFromProps) => {
-  const { imageData = [], onFileAction = () => {} } = props;
+  const { imageData = [], onFileAction = () => {}, onClickAction = () => {} } = props;
 
   return (
     <div>
@@ -19,7 +22,7 @@ export const ImageForm = (props: ImageFromProps) => {
         </div>
         <div className="relative">
           <label htmlFor="file">
-            <Caption className="cursor-pointer" text="사진 올리기" color="text-secondary-30" />
+            <Caption className="cursor-pointer" text="사진 올리기" color="text-secondary-30" onClick={onClickAction} />
           </label>
           <input id="file" className="hidden" type="file" accept="image/*" multiple onChange={onFileAction} />
         </div>

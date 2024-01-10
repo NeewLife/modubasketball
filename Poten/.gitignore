@@ -46,3 +46,6 @@ out/
 /uingx/chromatic.logstatic\
 /uingx/storybook-static
 
+
+/uingx/.env
+/uingx/.env.production

@@ -3,6 +3,7 @@ const path = require('path');
 const TerserPlugin = require('terser-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 
 const webpackMode = process.env.NODE_ENV || 'development';
 
@@ -33,6 +34,7 @@ module.exports = {
         pathRewrite: { '/proxy': '/' },
       },
     },
+    historyApiFallback: true,
   },
   performance: {
     hints: false,
@@ -95,5 +97,8 @@ module.exports = {
           : false,
     }),
     new CleanWebpackPlugin(),
+    new Dotenv({
+      path: webpackMode === 'production' ? '.env.production' : '.env',
+    }),
   ],
 };

@@ -61,6 +61,7 @@ export const Feedback = () => {
       close: true,
       edit: undefined,
       isModile: false,
+      timeout: true,
     }));
   }, []);
 
