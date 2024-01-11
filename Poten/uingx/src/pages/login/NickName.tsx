@@ -2,13 +2,16 @@ import React, { useEffect, useState } from 'react';
 
 import { ButtonLong, Caption, Headline, Input } from '@components/atoms';
 import { IModal, useModal } from '@utils/zustand';
+import { useLoginService } from '@services/login.services';
+import { AxiosResponse } from 'axios';
 
 interface NickNameProps {
   accessToken: string;
+  email: string;
 }
 
 export const NickName = (props: NickNameProps) => {
-  const { accessToken } = props;
+  const { accessToken, email } = props;
 
   const { setClose } = useModal();
   const [text, setText] = useState('');
@@ -18,8 +21,14 @@ export const NickName = (props: NickNameProps) => {
   };
 
   const onClick = () => {
-    localStorage.setItem('accessToken', accessToken);
-    setClose();
+    useLoginService.check(text).then((response: AxiosResponse<boolean>) => {
+      if (response.data)
+        useLoginService.register({ nickname: text, email: email }).then(() => {
+          localStorage.setItem('accessToken', accessToken);
+          localStorage.setItem('nickname', text);
+          setClose();
+        });
+    });
   };
 
   useEffect(() => {

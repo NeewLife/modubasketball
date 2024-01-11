@@ -17,6 +17,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
@@ -39,18 +40,6 @@ public class KakaoService {
 
   private static final String KAKAO_AUTH_URI = "https://kauth.kakao.com";
   private static final String KAKAO_API_URI = "https://kapi.kakao.com";
-
-  public String getKakaoLogin() {
-    return (
-      KAKAO_AUTH_URI +
-      "/oauth/authorize" +
-      "?client_id=" +
-      KAKAO_CLIENT_ID +
-      "&redirect_uri=" +
-      KAKAO_REDIRECT_URL +
-      "&response_type=code"
-    );
-  }
 
   /**
    * code -> accessToken, refreshToken
@@ -197,24 +186,24 @@ public class KakaoService {
     KakaoDTO info = getInfo(token.getAccessToken());
 
     answer.put("accessToken", token.getAccessToken());
+    answer.put("email", info.getEmail());
     answer.put("nickname", kakaoDAO.getUserByNickname(info.getEmail()));
 
     return answer;
   }
 
-  public int countEmail(String email) {
-    return 0;
+  public boolean nickDupCheck(String nickname) {
+    if (kakaoDAO.nickDupCheck(nickname) == 0) return true;
+
+    return false;
   }
 
-  public int nickDupCheck(String nickname) {
-    return kakaoDAO.nickDupCheck(nickname);
+  @Transactional
+  public void register(User user) {
+    kakaoDAO.register(user);
   }
 
   public String getNickname(String email) {
     return kakaoDAO.getNickname(email);
-  }
-
-  public void register(User params) {
-    kakaoDAO.register(params);
   }
 }

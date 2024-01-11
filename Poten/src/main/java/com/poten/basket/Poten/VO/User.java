@@ -6,12 +6,11 @@ import lombok.Data;
 @Builder
 @Data
 public class User {
-    private int id;
-    private String email;
-    private String userNickname;
-    private String refreshToken;
 
-    public void updateRefreshToken(String refreshToken) {
-        this.refreshToken = refreshToken;
-    }
+  private String nickname;
+  private String email;
+  private String createDate;
+  private String modifyDate;
+
+  public void updateRefreshToken(String refreshToken) {}
 }

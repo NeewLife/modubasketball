@@ -15,10 +15,12 @@ export const LoginProcess = () => {
   useEffect(() => {
     useLoginService.login(param.get('code')).then((response: AxiosResponse<ILogin>) => {
       if (response.data.nickname === null) {
-        setOpen(<NickName accessToken={response.data.accessToken} />);
+        setOpen(<NickName accessToken={response.data.accessToken} email={response.data.email} />);
       } else {
         localStorage.setItem('accessToken', response.data.accessToken);
+        localStorage.setItem('nickname', response.data.email);
       }
+
       navigate('/map');
     });
   }, []);

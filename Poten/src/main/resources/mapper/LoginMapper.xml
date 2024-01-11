@@ -17,19 +17,19 @@
     </select>
 
     <select id="nickDupCheck" parameterType="String" resultType="int">
-        SELECT COUNT(nickname)
-        FROM user
-        WHERE nickname = #{nickname}
+        SELECT COUNT(*)
+        FROM USER
+        WHERE NICKNAME = #{nickname}
     </select>
     
     
     <insert id="register" parameterType="com.poten.basket.Poten.VO.User">
-        INSERT INTO user (
-            email
-            , nickname
+        INSERT INTO USER (
+            NICKNAME
+            , EMAIL
         ) VALUES (
-            #{email}
-            , #{userNickname}
+            #{nickname}
+            , #{email}
         )
     </insert>
 
