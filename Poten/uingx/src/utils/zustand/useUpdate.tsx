@@ -1,21 +1,22 @@
+import { InfoProps } from '@pages/info';
 import { create } from 'zustand';
 
 export interface IUpdate {
   uMap: number;
   uDelete: number;
-  lastId: number;
+
+  lastData?: InfoProps;
 }
 
 interface IUseUpdate extends IUpdate {
   setMap: () => void;
   setDelete: () => void;
-  setId: (id: number) => void;
+  setData: (data: InfoProps) => void;
 }
 
 export const useUpdate = create<IUseUpdate>((set, get) => ({
   uMap: 0,
   uDelete: 0,
-  lastId: 0,
   setMap: () => {
     const { uMap } = get();
 
@@ -26,7 +27,7 @@ export const useUpdate = create<IUseUpdate>((set, get) => ({
 
     set(() => ({ uDelete: uDelete + 1 }));
   },
-  setId: (id: number) => {
-    set(() => ({ lastId: id }));
+  setData: (data: InfoProps) => {
+    set(() => ({ lastData: data }));
   },
 }));

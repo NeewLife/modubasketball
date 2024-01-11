@@ -4,17 +4,15 @@ import com.poten.basket.Poten.VO.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
-import java.util.Map;
-
 @Mapper
 @Repository
 public interface KakaoDAO {
+  int nickDupCheck(String nickname);
 
-    int countEmail(String email);
+  String getNickname(String email);
 
-    int nickDupCheck(String nickname);
+  void register(User params);
 
-    String getNickname(String email);
-
-    void register(User params);
+  String getUserByRefreshToken(String email);
+  String getUserByNickname(String email);
 }

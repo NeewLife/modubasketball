@@ -7,7 +7,7 @@ public class Image {
 
   private String name;
   private String originalName;
-  private int userId;
+  private int userNickname;
   private String ext;
   private int size;
   private String createDate;

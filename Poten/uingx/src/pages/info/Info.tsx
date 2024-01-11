@@ -45,7 +45,7 @@ export const Info = (props: InfoProps & { mode?: 'delete' | 'info' }) => {
 
   const { setClose, setOpen } = useModal();
   const { setDelete } = useUpdate();
-  const { setId } = useUpdate();
+  const { setData } = useUpdate();
 
   const path = useMemo(() => {
     return webpackMode === 'development' ? '/proxy' : '';
@@ -76,7 +76,6 @@ export const Info = (props: InfoProps & { mode?: 'delete' | 'info' }) => {
   const onFilePreAction = (event: MouseEvent<HTMLSpanElement>) => {
     if (!localStorage.getItem('accessToken')) {
       setOpen(<Login />);
-      setId(id);
       event.preventDefault();
     }
   };
@@ -171,6 +170,7 @@ export const Info = (props: InfoProps & { mode?: 'delete' | 'info' }) => {
     } as IModal;
 
     useModal.setState(() => modal);
+    setData(props);
   }, []);
 
   return (
@@ -196,7 +196,7 @@ export const Info = (props: InfoProps & { mode?: 'delete' | 'info' }) => {
             imageData={imageList.map((datum) => {
               return {
                 url: `${path}/img/${datum.name}`,
-                alt: `${datum.userId} / ${datum.createDate}`,
+                alt: `${datum.userNickname} / ${datum.createDate}`,
               };
             })}
             onFileAction={onFileAction}

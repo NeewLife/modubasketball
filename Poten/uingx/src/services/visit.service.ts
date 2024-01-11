@@ -1,4 +1,4 @@
-import { CustomAxios } from './common';
+import { CustomAxios } from '@services/index';
 
 class VisitService {
   getAll() {

@@ -1,30 +1,19 @@
 import React, { useEffect } from 'react';
-import { AxiosResponse } from 'axios';
 
 import { ButtonLong, Caption, Headline } from '@components/atoms';
 import Kakao from '@constants/icon/kakao.svg';
 import { IModal, useModal, useUpdate } from '@utils/zustand';
-import { IMap, useMapService } from '@services/map.service';
-import { Info, InfoProps } from '@pages/index';
+import { Info } from '@pages/index';
 
 export const Login = () => {
-  const { lastId } = useUpdate();
+  const { lastData } = useUpdate();
+
+  const onClick = () => {
+    window.location.href = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${process.env.REACT_APP_CLIENT_ID}&redirect_uri=${process.env.REACT_APP_REDIRECT_URL}`;
+  };
 
   useEffect(() => {
-    useMapService.getOne(lastId).then((response: AxiosResponse<IMap>) => {
-      const infoData = {
-        id: lastId,
-        address: response.data.address ? response.data.address : '',
-        courtName: response.data.courtName ? response.data.courtName : '',
-        courtType: response.data.courtType ? response.data.courtType : '알 수 없음',
-        courtSize: response.data.courtSize ? response.data.courtSize : '반코트',
-        goalPost: response.data.goalPost ? response.data.goalPost : '0',
-        feeYn: response.data.feeYn ? response.data.feeYn : '무료',
-        parkYn: response.data.parkYn ? response.data.parkYn : '가능',
-        comment: response.data.comment ? response.data.comment : '',
-        imageList: response.data.imageList,
-      } as InfoProps;
-
+    if (lastData) {
       const modal = {
         width: '510px',
         height: false,
@@ -33,11 +22,11 @@ export const Login = () => {
         edit: undefined,
         change: true,
         timeout: false,
-        changeChildren: <Info {...infoData} />,
+        changeChildren: <Info {...lastData} />,
       } as IModal;
 
       useModal.setState(() => modal);
-    });
+    }
   }, []);
 
   return (
@@ -56,6 +45,7 @@ export const Login = () => {
         color="text-gray-100"
         className="!bg-[#ffE500] !active:bg-[#ffE500] !hover:bg-[#ffE500] desktop:mt-[81px] mt-[92px]"
         icon={Kakao}
+        onClick={onClick}
       />
     </div>
   );

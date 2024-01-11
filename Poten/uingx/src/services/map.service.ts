@@ -23,7 +23,7 @@ export interface IImage {
   originalName?: string;
   ext?: string;
   size?: number;
-  userId?: number;
+  userNickname?: string;
   createDate?: string;
 }
 

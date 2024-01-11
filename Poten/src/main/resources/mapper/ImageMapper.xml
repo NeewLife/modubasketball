@@ -7,7 +7,7 @@
     <select id="getImg" parameterType="string" resultType="com.poten.basket.Poten.VO.Image">
         SELECT NAME name,
             ORIGINAL_NAME originalName,
-            USER_ID userId,
+            USER_NICKNAME userNickname,
             EXT ext,
             SIZE size,
             CREATE_DATE createDate
@@ -18,7 +18,7 @@
     <select id="getImgGroup" parameterType="int" resultType="com.poten.basket.Poten.VO.Image">
         SELECT NAME name,
             ORIGINAL_NAME originalName,
-            USER_ID userId,
+            USER_NICKNAME userNickname,
             EXT ext,
             SIZE size,
             CREATE_DATE createDate
