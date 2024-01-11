@@ -1,4 +1,4 @@
-import { CustomAxios } from './common';
+import { CustomAxios, CustomMultipartAxios } from '@services/common';
 
 export interface IMap {
   id: number;
@@ -42,6 +42,18 @@ class MapService {
 
   update(prop: IMap) {
     return CustomAxios.put('/api/spot/update', prop);
+  }
+
+  imgDelete(name: string) {
+    return CustomAxios.delete(`/img/${name}`);
+  }
+
+  imgUpload(id: number, files: File[]) {
+    const formData = new FormData();
+    formData.append('id', `${id}`);
+    files.forEach((file) => formData.append('files', file));
+
+    return CustomMultipartAxios.post('/img/', formData);
   }
 }
 

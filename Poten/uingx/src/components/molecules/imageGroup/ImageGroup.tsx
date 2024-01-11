@@ -20,13 +20,13 @@ export const ImageGroup = (props: ImageGroupProps) => {
   return data.length <= 3 ? (
     <div className="flex desktop:gap-[25px] gap-[20px]">
       {data.map((datum) => (
-        <Image key={datum.url} url={datum.url} alt={datum.alt} />
+        <Image key={datum.url} url={datum.url} alt={datum.alt} onClick={datum.onClick} />
       ))}
     </div>
   ) : (
     <Slider {...settings}>
       {data.map((datum) => (
-        <Image key={datum.url} url={datum.url} alt={datum.alt} />
+        <Image key={datum.url} url={datum.url} alt={datum.alt} onClick={datum.onClick} />
       ))}
     </Slider>
   );

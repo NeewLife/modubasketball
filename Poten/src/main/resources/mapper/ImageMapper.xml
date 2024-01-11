@@ -27,6 +27,26 @@
         AND bsi.BASKET_SPOT_ID = #{id}
     </select>
 
+    <delete id="deleteImage" parameterType="string">
+        DELETE FROM IMAGE
+        WHERE NAME = #{name}
+    </delete>
+
+    <delete id="deleteImageRelation" parameterType="string">
+        DELETE FROM BASKET_SPOT_IMAGE
+        WHERE IMAGE_NAME = #{name}
+    </delete>
+
+    <insert id="insertImage" parameterType="com.poten.basket.Poten.VO.Image">
+        INSERT INTO IMAGE (NAME, ORIGINAL_NAME, USER_NICKNAME, EXT, SIZE)
+                   VALUES (#{name}, #{originalName}, #{userNickname}, #{ext}, #{size})
+    </insert>
+
+    <insert id="insertImageRelation" parameterType="map">
+        INSERT INTO BASKET_SPOT_IMAGE (BASKET_SPOT_ID, IMAGE_NAME)
+                               VALUES (#{id}, #{name})
+    </insert>
+
     <select id="mapPhoto" parameterType="int" resultType="com.poten.basket.Poten.VO.Photo">
         SELECT
         id

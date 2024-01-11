@@ -10,3 +10,10 @@ export const CustomAxios = axios.create({
     'Content-type': 'application/json; charset=utf-8',
   },
 });
+
+export const CustomMultipartAxios = axios.create({
+  baseURL,
+  headers: {
+    'Content-type': 'multipart/form-data',
+  },
+});

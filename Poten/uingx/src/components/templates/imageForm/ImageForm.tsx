@@ -1,24 +1,25 @@
-import React, { MouseEvent } from 'react';
+import React, { ChangeEvent, MouseEvent } from 'react';
 import { Caption, ImageProps, Title } from '@components/atoms';
 import { ImageGroup } from '@components/molecules';
 
 interface ImageFromProps {
   imageData?: ImageProps[];
+  message?: string;
 
-  onFileAction?: () => void;
-
+  onFileAction?: (event: ChangeEvent<HTMLInputElement>) => void;
   onClickAction?: (event: MouseEvent<HTMLSpanElement>) => void;
 }
 
 export const ImageForm = (props: ImageFromProps) => {
-  const { imageData = [], onFileAction = () => {}, onClickAction = () => {} } = props;
+  const { imageData = [], message = '', onFileAction = () => {}, onClickAction = () => {} } = props;
 
   return (
     <div>
       <div className="flex justify-between items-center mb-[22px]">
-        <div>
+        <div className="flex items-center gap-[11px]">
           <Title className="desktop:hidden" type="mainSmall" text="사진" color="text-secondary-30" />
           <Title className="tablet:hidden mobile:hidden" type="main" text="사진" color="text-secondary-30" />
+          <Caption text={message} color="text-brand-30" />
         </div>
         <div className="relative">
           <label htmlFor="file">

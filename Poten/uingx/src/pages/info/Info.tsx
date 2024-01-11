@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, MouseEvent } from 'react';
+import React, { useEffect, useMemo, MouseEvent, useState, ChangeEvent } from 'react';
 import { Body, ButtonBig, Caption, Headline, Title } from '@components/atoms';
 import { Form, IFormTypes, ImageForm } from '@components/templates';
 
@@ -6,7 +6,8 @@ import { IModal, useModal } from '@utils/zustand/useModal';
 import { InfoEdit, Login } from '@pages/index';
 import { useUpdate } from '@utils/zustand';
 import { useDeleteService } from '@services/delete.services';
-import { IImage } from '@services/map.service';
+import { IImage, IMap, useMapService } from '@services/map.service';
+import { AxiosResponse } from 'axios';
 
 const webpackMode = process.env.NODE_ENV || 'development';
 
@@ -47,6 +48,11 @@ export const Info = (props: InfoProps & { mode?: 'delete' | 'info' }) => {
   const { setDelete } = useUpdate();
   const { setData } = useUpdate();
 
+  const [localImageList, setLocalImageList] = useState(imageList);
+  const [imageMessage, setImageMessage] = useState('');
+
+  const nickname = useMemo(() => localStorage.getItem('nickname'), []);
+
   const path = useMemo(() => {
     return webpackMode === 'development' ? '/proxy' : '';
   }, []);
@@ -69,8 +75,32 @@ export const Info = (props: InfoProps & { mode?: 'delete' | 'info' }) => {
     });
   };
 
-  const onFileAction = () => {
-    console.log('fileAction');
+  const onFileDelete = (name: string) => () => {
+    useMapService.imgDelete(name).then(() => {
+      useMapService.getOne(id).then((response: AxiosResponse<IMap>) => {
+        if (response.data.imageList) setLocalImageList(response.data.imageList);
+      });
+    });
+  };
+
+  const onFileAction = (event: ChangeEvent<HTMLInputElement>) => {
+    if (!event.target.files) return;
+
+    const len = event.target.files?.length;
+    if (len > 3) {
+      setImageMessage('* 1인당 최대 3장까지 첨부할 수 있습니다.');
+      return;
+    }
+
+    if (len + imageList.length > 4) {
+      setImageMessage('* 이미지는 최대 4개까지 저장되어 초과한 이미지는 저장되지 않습니다.');
+    }
+
+    useMapService.imgUpload(id, Array.from(event.target.files)).then(() => {
+      useMapService.getOne(id).then((response: AxiosResponse<IMap>) => {
+        if (response.data.imageList) setLocalImageList(response.data.imageList);
+      });
+    });
   };
 
   const onFilePreAction = (event: MouseEvent<HTMLSpanElement>) => {
@@ -193,14 +223,16 @@ export const Info = (props: InfoProps & { mode?: 'delete' | 'info' }) => {
         <div className="bg-gray-30 h-[2px]" />
         <div className="desktop:mb-[80px]">
           <ImageForm
-            imageData={imageList.map((datum) => {
+            imageData={localImageList.map((datum) => {
               return {
                 url: `${path}/img/${datum.name}`,
                 alt: `${datum.userNickname} / ${datum.createDate}`,
+                onClick: nickname === datum.userNickname ? onFileDelete(datum.name) : undefined,
               };
             })}
             onFileAction={onFileAction}
             onClickAction={onFilePreAction}
+            message={imageMessage}
           />
         </div>
       </div>

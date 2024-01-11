@@ -11,7 +11,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.util.Arrays;
 import java.util.List;
-
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,12 +34,12 @@ public class ImgController {
   private final ImgService imgService;
 
   private final String[] fileType = {
-          "png",
-          "PNG",
-          "jpg",
-          "JPG",
-          "jpeg",
-          "JPEG",
+    "png",
+    "PNG",
+    "jpg",
+    "JPG",
+    "jpeg",
+    "JPEG",
   };
 
   // 사진 데이터 가져오는 API
@@ -58,23 +57,23 @@ public class ImgController {
   }
 
   /**
-  * 사진 업로드 하는 RestAPI Servlet 방식
-  * @param files - 파일
-  * @param id - 장소 고유 ID
-  */
+   * 사진 업로드 하는 RestAPI Servlet 방식
+   * @param files - 파일
+   * @param id - 장소 고유 ID
+   */
   @PostMapping(value = "{id}/upload")
   public @ResponseBody ResponseEntity<String> uploadImage(
-          HttpServletResponse response,
-          HttpServletRequest request,
-          @RequestParam(value = "id", required = true) int id,
-          @RequestParam(value = "files") List<MultipartFile> files
+    HttpServletResponse response,
+    HttpServletRequest request,
+    @RequestParam(value = "id", required = true) int id,
+    @RequestParam(value = "files") List<MultipartFile> files
   ) throws ServletException, IOException {
     // jwt 토큰이 유효할 때만 사진 수정
-    if(!jwtTokenUtil.validateJwtToken(request, response)) {
-      return ResponseEntity.ok("유효하지 않는 토큰입니다.");
-    }
+    // if(!jwtTokenUtil.validateJwtToken(request, response)) {
+    //   return ResponseEntity.ok("유효하지 않는 토큰입니다.");
+    // }
 
-    for(int i = 0; i < files.size(); i++) {
+    for (int i = 0; i < files.size(); i++) {
       if (files.get(i).getSize() > 20971520) {
         return ResponseEntity.ok("파일 사이즈가 너무 큽니다");
       }
@@ -85,15 +84,36 @@ public class ImgController {
       }
     }
 
-    List<Photo> photoList = fIleUtils.uploadFiles(files, request.getHeader("nickname"));
-    fIleUtils.deleteFiles(photoList);
-    for (int i = 0; i < photoList.size(); i++) {
-      photoList.get(i).setSeq(i + 1);
-      photoList.get(i).setId(id);
-    }
-    imgService.mapPhotoUpload(photoList);
+    // List<Photo> photoList = fIleUtils.uploadFiles(
+    //   files,
+    //   request.getHeader("nickname")
+    // );
+    // fIleUtils.deleteFiles(photoList);
+    // for (int i = 0; i < photoList.size(); i++) {
+    //   photoList.get(i).setSeq(i + 1);
+    //   photoList.get(i).setId(id);
+    // }
+    // imgService.mapPhotoUpload(photoList);
 
     return ResponseEntity.ok("사진 업로드 완료");
   }
 
+  @PostMapping(path = "/", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+  public @ResponseBody ResponseEntity<?> updateImage(
+    @RequestParam(value = "id", required = true) int id,
+    @RequestParam(value = "files") List<MultipartFile> files
+  ) throws IOException {
+    imgService.updateImage(id, files);
+
+    return ResponseEntity.ok(true);
+  }
+
+  @DeleteMapping("/{name}")
+  public @ResponseBody ResponseEntity<?> deleteImage(
+    @PathVariable(value = "name", required = true) String name
+  ) {
+    imgService.deleteFile(name);
+
+    return ResponseEntity.ok(true);
+  }
 }
