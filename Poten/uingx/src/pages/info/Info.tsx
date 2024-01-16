@@ -226,7 +226,7 @@ export const Info = (props: InfoProps & { mode?: 'delete' | 'info' }) => {
             imageData={localImageList.map((datum) => {
               return {
                 url: `${path}/img/${datum.name}`,
-                alt: `${datum.userNickname} / ${datum.createDate}`,
+                alt: `${datum.userNickname} / ${datum.createDate?.split(' ')[0]}`,
                 onClick: nickname === datum.userNickname ? onFileDelete(datum.name) : undefined,
               };
             })}

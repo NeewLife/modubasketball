@@ -17,7 +17,7 @@ export const ButtonLong = (
     <button
       type="button"
       aria-label="long"
-      className={`w-full desktop:h-[72px] h-[60px] shadow-custom rounded-[10px] 
+      className={`w-full desktop:h-[72px] h-[60px] shadow-custom rounded-[10px] flex items-center justify-center
                bg-secondary-20 active:bg-secondary-30 hover:bg-secondary-30 outline-none relative
                 ${className}`}
       {...prop}

@@ -20,7 +20,6 @@ export const LoginProcess = () => {
         localStorage.setItem('accessToken', response.data.accessToken);
         localStorage.setItem('nickname', response.data.email);
       }
-
       navigate('/map');
     });
   }, []);
