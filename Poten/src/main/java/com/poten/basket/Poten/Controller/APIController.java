@@ -70,11 +70,8 @@ public class APIController {
    * param - com.poten.basket.Poten.VO.MapRequest
    * */
   @PostMapping("/spot/create")
-  public ResponseEntity saveSpot(
-    HttpServletRequest request,
-    HttpServletResponse response,
-    @RequestPart MapRequest params
-  ) throws Exception {
+  public ResponseEntity<?> saveSpot(@RequestBody MapRequest params)
+    throws Exception {
     System.out.println("====================create====================");
     Integer id = mapService.getLastID();
     params.setId(id);
@@ -91,11 +88,8 @@ public class APIController {
    * param - com.poten.basket.Poten.VO.MapRequest
    * */
   @PutMapping("/spot/update")
-  public ResponseEntity updateSpot(
-    HttpServletRequest request,
-    HttpServletResponse response,
-    @RequestPart MapRequest params
-  ) throws ServletException, IOException {
+  public ResponseEntity<?> updateSpot(@RequestBody MapRequest params)
+    throws ServletException, IOException {
     System.out.println("====================update====================");
     System.out.println("update의 params = " + params);
     mapService.mapUpt(params);

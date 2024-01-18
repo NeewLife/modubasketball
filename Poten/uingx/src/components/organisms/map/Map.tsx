@@ -116,6 +116,10 @@ export const Map = (props: MapProps) => {
             parkYn: response.data.parkYn ? response.data.parkYn : '가능',
             comment: response.data.comment ? response.data.comment : '',
             imageList: response.data.imageList,
+            lightTimeStart: response.data.lightTimeStart,
+            lightTimeEnd: response.data.lightTimeEnd,
+            openTimeStart: response.data.openTimeStart,
+            openTimeEnd: response.data.openTimeEnd,
           } as InfoProps;
 
           setOpen(<Info {...infoData} />);

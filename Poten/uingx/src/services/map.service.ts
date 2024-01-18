@@ -14,6 +14,10 @@ export interface IMap {
   courtName?: string; // 코드장 이름
   createData?: string; // 생성 날짜
   modifytDate?: string; // 수정 날짜
+  lightTimeStart?: string;
+  lightTimeEnd?: string;
+  openTimeStart?: string;
+  openTimeEnd?: string;
 
   imageList?: IImage[];
 }

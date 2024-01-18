@@ -85,9 +85,9 @@ export const TiemPicker = (props: TiemPickerProps) => {
       <div className="justify-center desktop:h-[144px] h-[90px] border-b border-gray-20 desktop:gap-[20px] gap-[12px]">
         <div className="flex flex-col desktop:gap-[10px] gap-[8px] [&>div]:p-[5px] [&>div]:cursor-pointer">
           <Frame
-            onClick={onChangeType('오전')}
+            onClick={onChangeType('am')}
             className={
-              type === '오전'
+              type === 'am'
                 ? 'bg-secondary-5 text-secondary-20 border-secondary-10 border'
                 : 'bg-gray-15 text-gray-100 border-none'
             }
@@ -96,9 +96,9 @@ export const TiemPicker = (props: TiemPickerProps) => {
             <span className="text-[10px] font-[regular] leading-normal text-gray-60 desktop:hidden">오전</span>
           </Frame>
           <Frame
-            onClick={onChangeType('오후')}
+            onClick={onChangeType('pm')}
             className={
-              type === '오후'
+              type === 'pm'
                 ? 'bg-secondary-5 text-secondary-20 border-secondary-10 border'
                 : 'bg-gray-15 text-gray-100 border-none'
             }

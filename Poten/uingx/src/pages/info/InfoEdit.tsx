@@ -22,12 +22,17 @@ interface InfoEditProps {
   type: 'update' | 'save';
   lat?: number;
   lon?: number;
+
+  isLightTime?: string;
+  isOpenTime?: string;
 }
 
 export const InfoEdit = (props: InfoEditProps & InfoProps) => {
   const { type, lat, lon, ...prop } = props;
 
   const resize = useResize();
+  const { setMap } = useUpdate();
+  const { setClose } = useModal();
 
   const [data, setData] = useState({
     ...props,
@@ -35,8 +40,8 @@ export const InfoEdit = (props: InfoEditProps & InfoProps) => {
     courtSize: courtSizeData.find((datum) => datum.text === prop.courtSize)?.id,
     feeYn: feeYnData.find((datum) => datum.text === prop.feeYn)?.id,
     parkYn: parkYnData.find((datum) => datum.text === prop.parkYn)?.id,
-    hasLight: lightData.find((datum) => datum.text === prop.hasLight)?.id,
-    openStatus: openData.find((datum) => datum.text === prop.openStatus)?.id,
+    isLightTime: prop.lightTimeStart ? '1' : '2',
+    isOpenTime: prop.openTimeStart ? '1' : '2',
   });
 
   const [match, setMatch] = useState({
@@ -49,14 +54,55 @@ export const InfoEdit = (props: InfoEditProps & InfoProps) => {
     [match.courtName, match.goalPost],
   );
 
-  const { setMap } = useUpdate();
-  const { setClose } = useModal();
+  const lightTime = useMemo(() => {
+    const sStart = (data.lightTimeStart ?? 'am 00:00').split(' ');
+    const sEnd = (data.lightTimeEnd ?? 'am 00:00').split(' ');
+
+    return {
+      start: {
+        type: sStart[0],
+        time: sStart[1],
+      },
+      end: {
+        type: sEnd[0],
+        time: sEnd[1],
+      },
+    };
+  }, [data.lightTimeStart, data.lightTimeEnd]);
+
+  const openTime = useMemo(() => {
+    const sStart = (data.openTimeStart ?? 'am 00:00').split(' ');
+    const sEnd = (data.openTimeEnd ?? 'am 00:00').split(' ');
+
+    return {
+      start: {
+        type: sStart[0],
+        time: sStart[1],
+      },
+      end: {
+        type: sEnd[0],
+        time: sEnd[1],
+      },
+    };
+  }, [data.openTimeStart, data.openTimeEnd]);
 
   const onClickSave = () => {
     if (!isMatch) return;
 
+    const sLightData = {
+      lightTimeStart: data.isLightTime !== '1' ? undefined : data.lightTimeStart,
+      lightTimeEnd: data.isLightTime !== '1' ? undefined : data.lightTimeEnd,
+    };
+
+    const sOpenData = {
+      openTimeStart: data.isOpenTime !== '1' ? undefined : data.openTimeStart,
+      openTimeEnd: data.isOpenTime !== '1' ? undefined : data.openTimeEnd,
+    };
+
     const request = {
       ...props,
+      ...sLightData,
+      ...sOpenData,
       courtName: data.courtName ? data.courtName.trim() : '',
       courtType: courtTypeData.find((datum) => datum.id === data.courtType)?.text,
       courtSize: courtSizeData.find((datum) => datum.id === data.courtSize)?.text,
@@ -64,7 +110,6 @@ export const InfoEdit = (props: InfoEditProps & InfoProps) => {
       feeYn: feeYnData.find((datum) => datum.id === data.feeYn)?.text,
       parkYn: parkYnData.find((datum) => datum.id === data.parkYn)?.text,
       comment: data.comment ? data.comment.trim() : '',
-      hasLight: lightData.find((datum) => datum.id === data.hasLight)?.text,
     } as InfoProps;
 
     if (type === 'update') {
@@ -125,6 +170,10 @@ export const InfoEdit = (props: InfoEditProps & InfoProps) => {
     if (key === 'courtName' || key === 'goalPost') setMatch({ ...match, [key]: !!sMatch });
   };
 
+  const onChangeDate = (key: string) => (sType: string, sTime: string) => {
+    setData({ ...data, [key]: `${sType} ${sTime}` });
+  };
+
   const formProps: IFormTypes[] = useMemo(
     () => [
       {
@@ -168,16 +217,23 @@ export const InfoEdit = (props: InfoEditProps & InfoProps) => {
         type: 'date',
         label: '야간 조명',
         prop: {
-          check: data.hasLight === '1',
-          text: '조명 시간을 입력해주세요.',
+          check: data.isLightTime === '1',
+          startTime: {
+            ...lightTime.start,
+            onTrackable: onChangeDate('lightTimeStart'),
+          },
+          endTime: {
+            ...lightTime.end,
+            onTrackable: onChangeDate('lightTimeEnd'),
+          },
           radio: {
             data: lightData.map((datum) => {
               return {
                 ...datum,
-                check: datum.id === data.hasLight,
+                check: data.isLightTime === datum.id,
               };
             }),
-            onTrackable: onChangeInput('hasLight'),
+            onTrackable: onChangeInput('isLightTime'),
           },
         },
       },
@@ -185,16 +241,23 @@ export const InfoEdit = (props: InfoEditProps & InfoProps) => {
         type: 'date',
         label: '개방 시간',
         prop: {
-          check: data.openStatus === '1',
-          text: '개방 시간을 입력해주세요.',
+          check: data.isOpenTime === '1',
+          startTime: {
+            ...openTime.start,
+            onTrackable: onChangeDate('openTimeStart'),
+          },
+          endTime: {
+            ...openTime.end,
+            onTrackable: onChangeDate('openTimeEnd'),
+          },
           radio: {
             data: openData.map((datum) => {
               return {
                 ...datum,
-                check: datum.id === data.openStatus,
+                check: data.isOpenTime === datum.id,
               };
             }),
-            onTrackable: onChangeInput('openStatus'),
+            onTrackable: onChangeInput('isOpenTime'),
           },
         },
       },

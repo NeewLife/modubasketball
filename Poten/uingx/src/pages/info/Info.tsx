@@ -3,7 +3,7 @@ import { Body, ButtonBig, Caption, Headline, Title } from '@components/atoms';
 import { Form, IFormTypes, ImageForm } from '@components/templates';
 
 import { IModal, useModal } from '@utils/zustand/useModal';
-import { InfoEdit, Login } from '@pages/index';
+import { InfoEdit, Login, lightData, openData } from '@pages/index';
 import { useUpdate } from '@utils/zustand';
 import { useDeleteService } from '@services/delete.services';
 import { IImage, IMap, useMapService } from '@services/map.service';
@@ -21,10 +21,10 @@ export interface InfoProps {
   feeYn: string;
   parkYn: string;
   comment: string;
-  hasLight: string;
-  lightTime?: string;
-  openStatus: string;
-  openTime?: string;
+  lightTimeStart?: string;
+  lightTimeEnd?: string;
+  openTimeStart?: string;
+  openTimeEnd?: string;
 
   imageList?: IImage[];
 }
@@ -41,6 +41,10 @@ export const Info = (props: InfoProps & { mode?: 'delete' | 'info' }) => {
     parkYn,
     comment,
     mode,
+    lightTimeStart,
+    lightTimeEnd,
+    openTimeStart,
+    openTimeEnd,
     imageList = [],
   } = props;
 
@@ -50,6 +54,40 @@ export const Info = (props: InfoProps & { mode?: 'delete' | 'info' }) => {
 
   const [localImageList, setLocalImageList] = useState(imageList);
   const [imageMessage, setImageMessage] = useState('');
+
+  const isLightTime = useMemo(() => (lightTimeStart ? '1' : '2'), [lightTimeStart, lightTimeEnd]);
+  const lightTime = useMemo(() => {
+    const sStart = (lightTimeStart ?? 'am 00:00').split(' ');
+    const sEnd = (lightTimeEnd ?? 'am 00:00').split(' ');
+
+    return {
+      start: {
+        type: sStart[0],
+        time: sStart[1],
+      },
+      end: {
+        type: sEnd[0],
+        time: sEnd[1],
+      },
+    };
+  }, [lightTimeStart, lightTimeEnd]);
+
+  const isOpenTime = useMemo(() => (openTimeStart ? '1' : '2'), [openTimeStart, openTimeEnd]);
+  const openTime = useMemo(() => {
+    const sStart = (openTimeStart ?? 'am 00:00').split(' ');
+    const sEnd = (openTimeEnd ?? 'am 00:00').split(' ');
+
+    return {
+      start: {
+        type: sStart[0],
+        time: sStart[1],
+      },
+      end: {
+        type: sEnd[0],
+        time: sEnd[1],
+      },
+    };
+  }, [openTimeStart, openTimeEnd]);
 
   const nickname = useMemo(() => localStorage.getItem('nickname'), []);
 
@@ -137,6 +175,44 @@ export const Info = (props: InfoProps & { mode?: 'delete' | 'info' }) => {
         text: goalPost,
         type: 'number',
         placeholder: '정보를 입력해주세요.',
+      },
+    },
+    {
+      type: 'date',
+      label: '야간 조명',
+      prop: {
+        check: isLightTime === '1',
+        disabled: true,
+        startTime: lightTime.start,
+        endTime: lightTime.end,
+        radio: {
+          disabled: true,
+          data: lightData.map((datum) => {
+            return {
+              ...datum,
+              check: isLightTime === datum.id,
+            };
+          }),
+        },
+      },
+    },
+    {
+      type: 'date',
+      label: '개방 시간',
+      prop: {
+        check: isOpenTime === '1',
+        disabled: true,
+        startTime: openTime.start,
+        endTime: openTime.end,
+        radio: {
+          disabled: true,
+          data: openData.map((datum) => {
+            return {
+              ...datum,
+              check: isOpenTime === datum.id,
+            };
+          }),
+        },
       },
     },
     {

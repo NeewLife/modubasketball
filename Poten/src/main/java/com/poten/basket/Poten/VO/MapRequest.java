@@ -13,7 +13,6 @@ public class MapRequest {
   private String feeYn; // 사용료
   private String courtSize; // 코트 사이즈
   private String goalPost; // 골대 수
-  // private String showerYn;         // 샤워 가능여부
   private String parkYn; // 주차 가능여부
   private String address = ""; // 주소
   private String comment = ""; // 기타 정보란
@@ -22,4 +21,8 @@ public class MapRequest {
   private String lightTime; // 야간 조명시간
   private String openStatus; // 개방 타입
   private String openTime; // 개방 시간
+  private String lightTimeStart;
+  private String lightTimeEnd;
+  private String openTimeStart;
+  private String openTimeEnd;
 }

@@ -21,10 +21,11 @@ public class MapResponse {
   private String courtName; // 코트 고유명
 
   private int delReq; // 삭제요청 수
-  private String hasLight; // 야간 조명여부
-  private String lightTime; // 야간 조명시간
-  private String openStatus; // 개방 타입
-  private String openTime; // 개방 시간
+
+  private String lightTimeStart;
+  private String lightTimeEnd;
+  private String openTimeStart;
+  private String openTimeEnd;
 
   private List<Photo> photoList;
   private int deleteCount;

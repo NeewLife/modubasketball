@@ -67,10 +67,6 @@ export const lightData = [
     id: '2',
     text: '없음',
   },
-  {
-    id: '3',
-    text: '알수 없음',
-  },
 ];
 
 export const openData = [

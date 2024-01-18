@@ -35,13 +35,16 @@ interface IFormDate extends IForm {
     startTime?: {
       type: string;
       time: string;
+      onTrackable?: (type: string, time: string) => void;
     };
     endTime?: {
       type: string;
       time: string;
+      onTrackable?: (type: string, time: string) => void;
     };
+    disabled?: boolean;
     check?: boolean;
-    text: string;
+    text?: string;
     radio: RadioGroupProps;
   };
 }
@@ -74,13 +77,26 @@ export const Form = (props: FormProps) => {
               {prop.check && (
                 <>
                   <div className="flex gap-[15px] items-center mt-[30px]">
-                    <TimeInput />
+                    <TimeInput
+                      isDisabled={prop.disabled}
+                      start={prop.startTime}
+                      onTrackable={prop.startTime?.onTrackable}
+                    />
                     <Title type="sub" text="~" color="text-gray-60" />
-                    <TimeInput />
+                    <TimeInput
+                      isDisabled={prop.disabled}
+                      start={prop.endTime}
+                      onTrackable={prop.endTime?.onTrackable}
+                    />
                   </div>
                   <div className="mt-[10px]">
-                    <Title type="sub" text={prop.text} color="text-gray-60" className="tablet:hidden mobile:hidden" />
-                    <Body type="sub" text={prop.text} color="text-gray-60" className="desktop:hidden" />
+                    <Title
+                      type="sub"
+                      text={prop.text ?? ''}
+                      color="text-gray-60"
+                      className="tablet:hidden mobile:hidden"
+                    />
+                    <Body type="sub" text={prop.text ?? ''} color="text-gray-60" className="desktop:hidden" />
                   </div>
                 </>
               )}
