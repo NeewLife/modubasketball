@@ -90,6 +90,12 @@ export const Info = (props: InfoProps & { mode?: 'delete' | 'info' }) => {
   }, [openTimeStart, openTimeEnd]);
 
   const nickname = useMemo(() => localStorage.getItem('nickname'), []);
+  const myImageCount = useMemo(() => {
+    const sNickname = localStorage.getItem('nickname');
+
+    if (sNickname) return localImageList.filter((image) => image.name === sNickname).length;
+    return 0;
+  }, [localImageList.length]);
 
   const path = useMemo(() => {
     return webpackMode === 'development' ? '/proxy' : '';
@@ -125,16 +131,19 @@ export const Info = (props: InfoProps & { mode?: 'delete' | 'info' }) => {
     if (!event.target.files) return;
 
     const len = event.target.files?.length;
-    if (len > 3) {
+    if (myImageCount + len > 3) {
       setImageMessage('* 1인당 최대 3장까지 첨부할 수 있습니다.');
       return;
     }
 
+    let aFiles = Array.from(event.target.files);
+
     if (len + imageList.length > 4) {
       setImageMessage('* 이미지는 최대 4개까지 저장되어 초과한 이미지는 저장되지 않습니다.');
+      aFiles = aFiles.slice(imageList.length - len);
     }
 
-    useMapService.imgUpload(id, Array.from(event.target.files)).then(() => {
+    useMapService.imgUpload(id, aFiles).then(() => {
       useMapService.getOne(id).then((response: AxiosResponse<IMap>) => {
         if (response.data.imageList) setLocalImageList(response.data.imageList);
       });
