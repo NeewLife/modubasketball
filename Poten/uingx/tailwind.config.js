@@ -1,3 +1,4 @@
+/* eslint-disable no-dupe-keys */
 const Scroll = require('tailwind-scrollbar');
 
 module.exports = {
@@ -54,6 +55,11 @@ module.exports = {
           max: '480px',
         },
       ],
+    },
+    extend: {
+      animation: {
+        'spin-slow': 'spin 3s linear infinite',
+      },
     },
   },
 
