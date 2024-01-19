@@ -143,11 +143,13 @@ export const Info = (props: InfoProps & { mode?: 'delete' | 'info' }) => {
       aFiles = aFiles.slice(imageList.length - len);
     }
 
-    useMapService.imgUpload(id, aFiles).then(() => {
-      useMapService.getOne(id).then((response: AxiosResponse<IMap>) => {
-        if (response.data.imageList) setLocalImageList(response.data.imageList);
+    if (aFiles.length > 0) {
+      useMapService.imgUpload(id, aFiles).then(() => {
+        useMapService.getOne(id).then((response: AxiosResponse<IMap>) => {
+          if (response.data.imageList) setLocalImageList(response.data.imageList);
+        });
       });
-    });
+    }
   };
 
   const onFilePreAction = (event: MouseEvent<HTMLSpanElement>) => {
