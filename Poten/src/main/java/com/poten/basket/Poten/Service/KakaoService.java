@@ -6,8 +6,13 @@ import com.poten.basket.Poten.DTO.TokenDTO;
 import com.poten.basket.Poten.VO.User;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.apache.tomcat.util.http.parser.Authorization;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -178,18 +183,43 @@ public class KakaoService {
     return kakaoDTO;
   }
 
-  public Map<String, String> loginHandler(String code)
+  public Map<String, String> loginHandler(HttpServletResponse response, String code)
     throws ParseException, Exception {
     Map<String, String> answer = new HashMap<>();
 
     TokenDTO token = getToken(code);
     KakaoDTO info = getInfo(token.getAccessToken());
 
+    setAccessTokenHeader(response, token.getAccessToken());
+
     answer.put("accessToken", token.getAccessToken());
     answer.put("email", info.getEmail());
     answer.put("nickname", kakaoDAO.getUserByNickname(info.getEmail()));
 
     return answer;
+  }
+
+  public void setAccessTokenHeader(HttpServletResponse response, String accessToken) {
+    response.setHeader("Authorization", accessToken);
+  }
+
+  public boolean isAccessTokenVaild(HttpServletRequest request, String nickname) throws Exception {
+    String accessToken = String.valueOf(extractAccessToken(request));
+    KakaoDTO info = getInfo(accessToken);
+    String dbNickname = kakaoDAO.getUserByNickname(info.getEmail());
+    boolean result = isUserVaild(nickname, dbNickname);
+
+    return result;
+  }
+
+  public boolean isUserVaild(String nickname, String dbNickname){
+    return dbNickname.equals(nickname);
+  }
+
+  private Optional<String> extractAccessToken(HttpServletRequest request) {
+    return Optional.ofNullable(request.getHeader("Authorization"))
+            .filter(accessToken -> accessToken.startsWith("Bearer "))
+            .map(accessToken -> accessToken.replace("Bearer ", ""));
   }
 
   public boolean nickDupCheck(String nickname) {
@@ -203,7 +233,4 @@ public class KakaoService {
     kakaoDAO.register(user);
   }
 
-  public String getNickname(String email) {
-    return kakaoDAO.getNickname(email);
-  }
 }

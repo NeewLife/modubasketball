@@ -6,20 +6,18 @@
 
     <select id="findByRefreshToken" resultType="com.poten.basket.Poten.VO.User">
         SELECT
-            id
-            , email
-            , nickname AS userNickname
-            , refresh_token AS refreshToken
-        FROM user
+            u.nickname
+            , u.email
+            , ut.refresh_token AS refreshToken
+        FROM user u, user_token ut
         WHERE
-            refresh_token = #{refreshToken}
+            ut.refresh_token = #{refreshToken}
     </select>
 
     <select id="findByEmail" resultType="com.poten.basket.Poten.VO.User">
         SELECT
-            id
-            , email
-            , nickname AS userNickname
+            email
+            , nickname
             , refresh_token AS refreshToken
         FROM user
         WHERE
@@ -28,7 +26,7 @@
 
 
     <update id="updateRefreshToken" parameterType="String">
-        UPDATE user
+        UPDATE user_token
         SET refresh_token = #{refreshToken}
         WHERE
             email = #{email}

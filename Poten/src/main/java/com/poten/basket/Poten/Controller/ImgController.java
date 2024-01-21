@@ -1,6 +1,7 @@
 package com.poten.basket.Poten.Controller;
 
 import com.poten.basket.Poten.Service.ImgService;
+import com.poten.basket.Poten.Service.KakaoService;
 import com.poten.basket.Poten.VO.Photo;
 import com.poten.basket.Poten.utils.FIleUtils;
 import com.poten.basket.Poten.utils.JwtTokenUtil;
@@ -28,10 +29,11 @@ public class ImgController {
   @Autowired
   FIleUtils fIleUtils;
 
-  @Autowired
-  JwtTokenUtil jwtTokenUtil;
+//  @Autowired
+//  JwtTokenUtil jwtTokenUtil;
 
   private final ImgService imgService;
+  private final KakaoService kakaoService;
 
   private final String[] fileType = {
     "png",
@@ -67,11 +69,13 @@ public class ImgController {
     HttpServletRequest request,
     @RequestParam(value = "id", required = true) int id,
     @RequestParam(value = "files") List<MultipartFile> files
-  ) throws ServletException, IOException {
-    // jwt 토큰이 유효할 때만 사진 수정
-    // if(!jwtTokenUtil.validateJwtToken(request, response)) {
-    //   return ResponseEntity.ok("유효하지 않는 토큰입니다.");
-    // }
+  ) throws Exception {
+    // 카카오 토큰으로 카카오 서버 접속해서 이메일 받아옴
+    // 받아온 이메일과 response 이메일이 일치하는지 검증
+    if(!kakaoService.isAccessTokenVaild(request, response.getHeader("nickname"))){
+      return ResponseEntity.ok("유효하지 않은 토큰입니다.");
+    }
+
 
     for (int i = 0; i < files.size(); i++) {
       if (files.get(i).getSize() > 20971520) {

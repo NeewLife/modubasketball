@@ -2,12 +2,15 @@ package com.poten.basket.Poten.Controller;
 
 import com.poten.basket.Poten.Service.KakaoService;
 import com.poten.basket.Poten.VO.User;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.json.simple.parser.ParseException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+
+import java.util.Map;
 
 @RestController
 @RequestMapping("/kakao")
@@ -18,9 +21,12 @@ public class KakaoController {
 
   @GetMapping("/callback/{code}")
   public ResponseEntity<Object> callback(
+    HttpServletResponse response,
     @PathVariable(value = "code", required = true) String code
   ) throws ParseException, Exception {
-    return ResponseEntity.ok(kakaoService.loginHandler(code));
+    Map<String, String> result = kakaoService.loginHandler(response,code);
+    kakaoService.setAccessTokenHeader(response, result.get("accessToken"));
+    return ResponseEntity.ok(result);
   }
 
   @GetMapping("/register/{nickname}")
