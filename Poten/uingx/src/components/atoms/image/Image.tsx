@@ -1,29 +1,50 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Caption } from '@components/atoms';
-
-import ImgClose from '@constants/icon/imgClose.svg';
 
 export interface ImageProps {
   url: string;
   alt?: string;
 
-  onClick?: () => void;
+  onClickDelete?: () => void;
+  onClickImage?: (sBlob: Blob) => () => void;
 }
 
 export const Image = (props: ImageProps) => {
-  const { url, alt = '', onClick } = props;
+  const { url, alt = '', onClickImage = () => () => {}, onClickDelete } = props;
+
+  const [blob, setBlob] = useState<Blob>(new Blob());
+
+  useEffect(() => {
+    fetch(url).then((response) => {
+      response.blob().then((sBlob) => {
+        setBlob(sBlob);
+      });
+    });
+  }, []);
 
   return (
-    <div className="flex flex-col gap-[4px] relative">
+    <div className="flex flex-col gap-[4px]">
       <div
-        style={{ backgroundImage: `url('${url}')` }}
-        className="desktop:w-[200px] w-[140px] desktop:h-[200px] h-[140px] rounded-[5px] bg-center relative inset-0"
+        style={{ backgroundImage: `url(${URL.createObjectURL(blob)})` }}
+        className="desktop:w-[200px] w-[140px] desktop:h-[200px] h-[140px] rounded-[5px] bg-center relative inset-0 cursor-zoom-in"
+        onClick={onClickImage(blob)}
+        role="presentation"
       >
-        {onClick && (
-          <img className="absolute top-0 right-0 cursor-pointer" alt="imgClose" src={ImgClose} onClick={onClick} />
-        )}
+        {/* {onClick && (
+          <img
+          className="absolute top-[-20px] right-[-20px] cursor-pointer"
+          width={40}
+          height={40}
+          alt="imgClose"
+          src={ImgClose}
+          onClick={onClick}
+          />
+        )} */}
       </div>
-      <Caption text={alt} color="text-gray-60" />
+      <div className="flex items-center justify-between">
+        <Caption text={alt} color="text-gray-60" />
+        {onClickDelete && <Caption text="삭제" color="text-brand-30" />}
+      </div>
     </div>
   );
 };

@@ -55,6 +55,9 @@ export const Info = (props: InfoProps & { mode?: 'delete' | 'info' }) => {
   const [localImageList, setLocalImageList] = useState(imageList);
   const [imageMessage, setImageMessage] = useState('');
 
+  const [isPreviewImage, isSetPreviewImage] = useState(false);
+  const [previewImage, setPreviewImage] = useState<Blob>(new Blob());
+
   const isLightTime = useMemo(() => (lightTimeStart ? '1' : '2'), [lightTimeStart, lightTimeEnd]);
   const lightTime = useMemo(() => {
     const sStart = (lightTimeStart ?? 'am 00:00').split(' ');
@@ -157,6 +160,16 @@ export const Info = (props: InfoProps & { mode?: 'delete' | 'info' }) => {
       setOpen(<Login />);
       event.preventDefault();
     }
+  };
+
+  const onClickImage = (blob: Blob) => () => {
+    isSetPreviewImage(true);
+    setPreviewImage(blob);
+  };
+
+  const onClickImageClose = () => {
+    isSetPreviewImage(false);
+    setPreviewImage(new Blob());
   };
 
   const formProps: IFormTypes[] = [
@@ -314,7 +327,8 @@ export const Info = (props: InfoProps & { mode?: 'delete' | 'info' }) => {
               return {
                 url: `${path}/img/${datum.name}`,
                 alt: `${datum.userNickname} / ${datum.createDate?.split(' ')[0]}`,
-                onClick: nickname === datum.userNickname ? onFileDelete(datum.name) : undefined,
+                onClickDelete: nickname === datum.userNickname ? onFileDelete(datum.name) : undefined,
+                onClickImage: onClickImage,
               };
             })}
             onFileAction={onFileAction}
@@ -327,6 +341,15 @@ export const Info = (props: InfoProps & { mode?: 'delete' | 'info' }) => {
         <div className="flex items-center justify-center mt-[50px] desktop:gap-[21px] gap-[10px]">
           <ButtonBig text="취소하기" background="gray" onClick={onClickCancel} />
           <ButtonBig text="삭제하기" background="secondary" color="white" onClick={onClickDelete} />
+        </div>
+      )}
+      {isPreviewImage && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-gray-30 bg-opacity-60 cursor-zoom-out"
+          onClick={onClickImageClose}
+          role="presentation"
+        >
+          <img alt="preview" src={URL.createObjectURL(previewImage)} />
         </div>
       )}
     </div>
