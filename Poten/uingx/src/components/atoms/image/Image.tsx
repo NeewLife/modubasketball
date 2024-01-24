@@ -23,27 +23,18 @@ export const Image = (props: ImageProps) => {
   }, []);
 
   return (
-    <div className="flex flex-col gap-[4px]">
+    <div className="flex flex-col gap-[4px] desktop:w-[200px] w-[140px]">
       <div
         style={{ backgroundImage: `url(${URL.createObjectURL(blob)})` }}
-        className="desktop:w-[200px] w-[140px] desktop:h-[200px] h-[140px] rounded-[5px] bg-center relative inset-0 cursor-zoom-in"
+        className="w-full desktop:h-[200px] h-[140px] rounded-[5px] bg-center relative inset-0 cursor-zoom-in"
         onClick={onClickImage(blob)}
         role="presentation"
-      >
-        {/* {onClick && (
-          <img
-          className="absolute top-[-20px] right-[-20px] cursor-pointer"
-          width={40}
-          height={40}
-          alt="imgClose"
-          src={ImgClose}
-          onClick={onClick}
-          />
-        )} */}
-      </div>
-      <div className="flex items-center justify-between">
+      />
+      <div className="flex items-start desktop:justify-between tablet:justify-start mobile:justify-start tablet:flex-col mobile:flex-col tablet:gap-[4px] mobile:gap-[4px]">
         <Caption text={alt} color="text-gray-60" />
-        {onClickDelete && <Caption text="삭제" color="text-brand-30" />}
+        {onClickDelete && (
+          <Caption className="cursor-pointer" text="삭제" color="text-brand-30" onClick={onClickDelete} />
+        )}
       </div>
     </div>
   );
