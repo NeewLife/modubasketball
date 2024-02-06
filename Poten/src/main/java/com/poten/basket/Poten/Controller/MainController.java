@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @Controller
-public class MainController implements ErrorController{
-    @GetMapping({ "/", "/error"})
+public class MainController {
+    @GetMapping({ "/", "/map"})
     public String index() {
         return "index.html";
     }
