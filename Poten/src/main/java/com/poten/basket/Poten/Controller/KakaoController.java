@@ -19,13 +19,15 @@ public class KakaoController {
 
   private final KakaoService kakaoService;
 
-  @GetMapping("/callback/{code}")
+  @GetMapping("/callback")
   public ResponseEntity<Object> callback(
     HttpServletResponse response,
-    @PathVariable(value = "code", required = true) String code
+    @RequestParam(value = "code", required = true) String code
   ) throws ParseException, Exception {
+    System.out.println("==========callback 실행됨");
     Map<String, String> result = kakaoService.loginHandler(response,code);
     kakaoService.setAccessTokenHeader(response, result.get("accessToken"));
+    response.setHeader("nickname", result.get("nickname"));
     return ResponseEntity.ok(result);
   }
 

@@ -29,8 +29,6 @@ public class ImgController {
   @Autowired
   FIleUtils fIleUtils;
 
-//  @Autowired
-//  JwtTokenUtil jwtTokenUtil;
 
   private final ImgService imgService;
   private final KakaoService kakaoService;

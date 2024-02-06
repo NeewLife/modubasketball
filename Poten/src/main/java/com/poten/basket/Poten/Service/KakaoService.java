@@ -117,16 +117,20 @@ public class KakaoService {
    */
   private ResponseEntity<String> makeInfoEntity(String accessToken) {
     HttpHeaders headers = new HttpHeaders();
+    System.out.println("headers = " + headers);
     headers.add("Authorization", "Bearer " + accessToken);
     headers.add(
       "Content-type",
       "application/x-www-form-urlencoded;charset=utf-8"
     );
+    System.out.println("headers = " + headers);
 
     RestTemplate rt = new RestTemplate();
     HttpEntity<MultiValueMap<String, String>> httpEntity = new HttpEntity<>(
       headers
     );
+    System.out.println("rt = " + rt);
+    System.out.println("httpEntity = " + httpEntity);
 
     return rt.exchange(
       KAKAO_API_URI + "/v2/user/me",
