@@ -9,6 +9,8 @@ import { useDeleteService } from '@services/delete.services';
 import { IImage, IMap, useMapService } from '@services/map.service';
 import { AxiosResponse } from 'axios';
 
+import Share from '@constants/icon/share.svg';
+
 const webpackMode = process.env.NODE_ENV || 'development';
 
 export interface InfoProps {
@@ -172,6 +174,10 @@ export const Info = (props: InfoProps & { mode?: 'delete' | 'info' }) => {
     setPreviewImage(new Blob());
   };
 
+  const onClickShare = () => {
+    window.navigator.clipboard.writeText(`${process.env.REACT_APP_SHARE_URL}${id}`);
+  };
+
   const formProps: IFormTypes[] = [
     {
       type: 'input',
@@ -296,7 +302,10 @@ export const Info = (props: InfoProps & { mode?: 'delete' | 'info' }) => {
       height: true,
       close: true,
       isModile: false,
-      edit: undefined,
+      edit: {
+        icon: Share,
+        onClick: onClickShare,
+      },
     } as IModal;
 
     useModal.setState(() => modal);

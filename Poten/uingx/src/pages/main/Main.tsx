@@ -13,9 +13,9 @@ import Error from '@constants/icon/error.svg';
 import { useKeyword, useModal, useResize, useUpdate } from '@utils/zustand';
 import { IMap, useMapService } from '@services/index';
 
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { AxiosResponse } from 'axios';
-import { Feedback } from '@pages/index';
+import { Feedback, Info, InfoProps } from '@pages/index';
 
 export const Main = () => {
   const keyword = useKeyword();
@@ -24,6 +24,7 @@ export const Main = () => {
   const { setOpen } = useModal();
 
   const navigate = useNavigate();
+  const { search } = useLocation();
 
   const [markerData, setMarkerData] = useState<IMap[]>([]);
   const [location, setLocation] = useState(0);
@@ -87,6 +88,33 @@ export const Main = () => {
         setMarkerData([]);
       });
   }, [uMap]);
+
+  useEffect(() => {
+    if (search) {
+      const sId = search.split('id=')[1];
+
+      useMapService.getOne(+sId).then((response: AxiosResponse<IMap>) => {
+        const infoData = {
+          id: +sId,
+          address: response.data.address ? response.data.address : '',
+          courtName: response.data.courtName ? response.data.courtName : '',
+          courtType: response.data.courtType ? response.data.courtType : '알 수 없음',
+          courtSize: response.data.courtSize ? response.data.courtSize : '반코트',
+          goalPost: response.data.goalPost ? response.data.goalPost : '0',
+          feeYn: response.data.feeYn ? response.data.feeYn : '무료',
+          parkYn: response.data.parkYn ? response.data.parkYn : '가능',
+          comment: response.data.comment ? response.data.comment : '',
+          imageList: response.data.imageList,
+          lightTimeStart: response.data.lightTimeStart,
+          lightTimeEnd: response.data.lightTimeEnd,
+          openTimeStart: response.data.openTimeStart,
+          openTimeEnd: response.data.openTimeEnd,
+        } as InfoProps;
+
+        setOpen(<Info {...infoData} />);
+      });
+    }
+  }, [search]);
 
   useEffect(() => {
     window.addEventListener('keydown', (event) => {
