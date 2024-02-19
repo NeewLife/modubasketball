@@ -4,7 +4,7 @@ import { Form, IFormTypes, ImageForm } from '@components/templates';
 
 import { IModal, useModal } from '@utils/zustand/useModal';
 import { InfoEdit, Login, lightData, openData } from '@pages/index';
-import { useUpdate } from '@utils/zustand';
+import { useAlert, useUpdate } from '@utils/zustand';
 import { useDeleteService } from '@services/delete.services';
 import { IImage, IMap, useMapService } from '@services/map.service';
 import { AxiosResponse } from 'axios';
@@ -53,6 +53,7 @@ export const Info = (props: InfoProps & { mode?: 'delete' | 'info' }) => {
   const { setClose, setOpen } = useModal();
   const { setDelete } = useUpdate();
   const { setData } = useUpdate();
+  const alert = useAlert();
 
   const [localImageList, setLocalImageList] = useState(imageList);
   const [imageMessage, setImageMessage] = useState('');
@@ -176,6 +177,8 @@ export const Info = (props: InfoProps & { mode?: 'delete' | 'info' }) => {
 
   const onClickShare = () => {
     window.navigator.clipboard.writeText(`${process.env.REACT_APP_SHARE_URL}${id}`);
+
+    alert.setOpen('success', '해당 링크가 복사되었습니다.');
   };
 
   const formProps: IFormTypes[] = [
