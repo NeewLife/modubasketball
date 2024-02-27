@@ -3,7 +3,7 @@ Exception in thread "DisconnectableInputStream source reader" org.gradle.api.Unc
 	at org.gradle.internal.UncheckedException.throwAsUncheckedException(UncheckedException.java:62)
 	at org.gradle.internal.UncheckedException.throwAsUncheckedException(UncheckedException.java:41)
 	at org.gradle.util.internal.DisconnectableInputStream$1.run(DisconnectableInputStream.java:127)
-	at java.base/java.lang.Thread.run(Thread.java:833)
+	at java.base/java.lang.Thread.run(Thread.java:840)
 Caused by: java.io.IOException: Bad file descriptor
 	at java.base/java.io.FileInputStream.readBytes(Native Method)
 	at java.base/java.io.FileInputStream.read(FileInputStream.java:276)
@@ -11,28 +11,13 @@ Caused by: java.io.IOException: Bad file descriptor
 	at java.base/java.io.BufferedInputStream.read(BufferedInputStream.java:343)
 	at org.gradle.util.internal.DisconnectableInputStream$1.run(DisconnectableInputStream.java:98)
 	... 1 more
-
-> Task :compileJava
-Note: /root/apps/modubasketball/Poten/src/main/java/com/poten/basket/Poten/Controller/APIController.java uses unchecked or unsafe operations.
-Note: Recompile with -Xlint:unchecked for details.
+> Task :compileJava UP-TO-DATE
 
 > Task :installReact
-npm WARN deprecated stable@0.1.8: Modern JS already guarantees Array#sort() is a stable sort, so this library is deprecated. See the compatibility table on MDN: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort#browser_compatibility
-npm WARN deprecated @babel/plugin-proposal-private-methods@7.18.6: This proposal has been merged to the ECMAScript standard and thus this plugin is no longer maintained. Please use @babel/plugin-transform-private-methods instead.
-npm WARN deprecated @babel/plugin-proposal-numeric-separator@7.18.6: This proposal has been merged to the ECMAScript standard and thus this plugin is no longer maintained. Please use @babel/plugin-transform-numeric-separator instead.
-npm WARN deprecated @babel/plugin-proposal-nullish-coalescing-operator@7.18.6: This proposal has been merged to the ECMAScript standard and thus this plugin is no longer maintained. Please use @babel/plugin-transform-nullish-coalescing-operator instead.
-npm WARN deprecated @babel/plugin-proposal-class-properties@7.18.6: This proposal has been merged to the ECMAScript standard and thus this plugin is no longer maintained. Please use @babel/plugin-transform-class-properties instead.
-npm WARN deprecated rollup-plugin-terser@7.0.2: This package has been deprecated and is no longer maintained. Please use @rollup/plugin-terser
-npm WARN deprecated @babel/plugin-proposal-private-property-in-object@7.21.11: This proposal has been merged to the ECMAScript standard and thus this plugin is no longer maintained. Please use @babel/plugin-transform-private-property-in-object instead.
-npm WARN deprecated @babel/plugin-proposal-optional-chaining@7.21.0: This proposal has been merged to the ECMAScript standard and thus this plugin is no longer maintained. Please use @babel/plugin-transform-optional-chaining instead.
-npm WARN deprecated w3c-hr-time@1.0.2: Use your platform's native performance.now() and performance.timeOrigin.
-npm WARN deprecated sourcemap-codec@1.4.8: Please use @jridgewell/sourcemap-codec instead
-npm WARN deprecated workbox-cacheable-response@6.6.0: workbox-background-sync@6.6.0
-npm WARN deprecated svgo@1.3.2: This SVGO version is no longer supported. Upgrade to v2.x.x.
 
-added 2245 packages, and audited 2246 packages in 26s
+up to date, audited 2273 packages in 7s
 
-371 packages are looking for funding
+366 packages are looking for funding
   run `npm fund` for details
 
 9 vulnerabilities (3 moderate, 6 high)
@@ -79,6 +64,7 @@ Run `npm audit` for details.
 <s> [webpack.Progress] 8% setup compilation
 <s> [webpack.Progress] 9% setup compilation
 <s> [webpack.Progress] 9% setup compilation ProgressPlugin
+<s> [webpack.Progress] 9% setup compilation DefinePlugin
 <s> [webpack.Progress] 9% setup compilation ChunkPrefetchPreloadPlugin
 <s> [webpack.Progress] 9% setup compilation JavascriptModulesPlugin
 <s> [webpack.Progress] 9% setup compilation JsonModulesPlugin
@@ -143,17 +129,21 @@ Run `npm audit` for details.
 <s> [webpack.Progress] 10% building import loader ./node_modules/style-loader/dist/cjs.js
 <s> [webpack.Progress] 10% building import loader ./node_modules/css-loader/dist/cjs.js
 <s> [webpack.Progress] 10% building import loader ./node_modules/postcss-loader/dist/cjs.js
-<s> [webpack.Progress] 10% building 0/1 entries 15/24 dependencies 2/11 modules
-<s> [webpack.Progress] 10% building 0/1 entries 39/46 dependencies 2/31 modules
-<s> [webpack.Progress] 10% building 0/1 entries 105/111 dependencies 24/66 modules
-<s> [webpack.Progress] 10% building 0/1 entries 138/200 dependencies 39/92 modules
-<s> [webpack.Progress] 10% building 0/1 entries 140/300 dependencies 39/93 modules
-<s> [webpack.Progress] 10% building 0/1 entries 300/463 dependencies 40/120 modules
+<s> [webpack.Progress] 10% building 0/1 entries 17/28 dependencies 0/13 modules
+<s> [webpack.Progress] 10% building 0/1 entries 45/61 dependencies 2/26 modules
+<s> [webpack.Progress] 10% building 0/1 entries 70/84 dependencies 9/37 modules
+<s> [webpack.Progress] 10% building 0/1 entries 121/138 dependencies 21/69 modules
+<s> [webpack.Progress] 10% building 0/1 entries 173/200 dependencies 42/109 modules
+<s> [webpack.Progress] 10% building 0/1 entries 183/300 dependencies 42/110 modules
+<s> [webpack.Progress] 10% building 0/1 entries 500/609 dependencies 43/144 modules
 <s> [webpack.Progress] 10% building import loader ./node_modules/file-loader/dist/cjs.js
-<s> [webpack.Progress] 10% building 0/1 entries 548/628 dependencies 47/218 modules
-<s> [webpack.Progress] 11% building 0/1 entries 987/1000 dependencies 116/331 modules
-<s> [webpack.Progress] 13% building 0/1 entries 1377/1383 dependencies 300/364 modules
-<s> [webpack.Progress] 65% building 1/1 entries 1504/1504 dependencies 417/417 modules
+<s> [webpack.Progress] 10% building 0/1 entries 593/610 dependencies 43/185 modules
+<s> [webpack.Progress] 11% building 0/1 entries 800/845 dependencies 93/273 modules
+<s> [webpack.Progress] 11% building 0/1 entries 1193/1300 dependencies 125/365 modules
+<s> [webpack.Progress] 12% building 0/1 entries 1500/1531 dependencies 239/387 modules
+<s> [webpack.Progress] 13% building 0/1 entries 1672/1700 dependencies 316/434 modules
+<s> [webpack.Progress] 15% building 0/1 entries 2000/2009 dependencies 456/500 modules
+<s> [webpack.Progress] 64% building 1/1 entries 2049/2049 dependencies 517/517 modules
 <s> [webpack.Progress] 65% building
 <s> [webpack.Progress] 69% building finish
 <s> [webpack.Progress] 69% building finish
@@ -282,43 +272,40 @@ Run `npm audit` for details.
 <s> [webpack.Progress] 99% cache shutdown
 <s> [webpack.Progress] 100% 
 
-assets by chunk 3.85 MiB (auxiliary name: main)
-  assets by path *.png 595 KiB
-    asset 085bb94051f914f6a232725a85a57464.png 365 KiB [emitted] [immutable] [from: src/constants/image/fotter.png] (auxiliary name: main)
-    + 24 assets
-  assets by path *.svg 50.1 KiB
-    asset dd7592446c3a1c2aa797c7c3add5c268.svg 7.95 KiB [emitted] [immutable] [from: src/constants/icon/feedback.svg] (auxiliary name: main)
-    + 16 assets
-  assets by status 3.21 MiB [big]
-    asset 1f1dbbbf311ffffcc770.woff 1.08 MiB [emitted] [immutable] [from: src/constants/font/Pretendard-Bold.woff] [big] (auxiliary name: main)
-    + 2 assets
-assets by path *.js 400 KiB
-  asset 891.e77dba66.js 260 KiB [emitted] [immutable] [minimized] (id hint: vendors) 1 related asset
-  asset main.a29ac7f5.js 140 KiB [emitted] [immutable] [minimized] (name: main)
+assets by chunk 3.84 MiB (auxiliary name: main)
+  assets by path *.png 595 KiB 25 assets
+  assets by path *.svg 48.1 KiB 22 assets
+  assets by status 3.21 MiB [big] 3 assets
+assets by chunk 11.5 KiB (auxiliary id hint: vendors)
+  assets by path *.svg 2.18 KiB 2 assets
+  assets by path *.gif 4.16 KiB 2 assets
+  + 3 assets
+assets by path *.js 602 KiB
+  asset 776.4fe5ed2a.js 444 KiB [emitted] [immutable] [minimized] (id hint: vendors) 1 related asset
+  asset main.1ddcce9b.js 158 KiB [emitted] [immutable] [minimized] (name: main)
 asset logo.png 3.43 KiB [emitted]
 asset index.html 783 bytes [emitted]
-Entrypoint main 400 KiB (3.85 MiB) = 891.e77dba66.js 260 KiB main.a29ac7f5.js 140 KiB 45 auxiliary assets
-orphan modules 324 KiB [orphan] 201 modules
-runtime modules 5.61 KiB 10 modules
-cacheable modules 945 KiB (javascript) 3.21 MiB (asset)
-  modules by path ./node_modules/core-js/ 133 KiB 164 modules
-  modules by path ./node_modules/react-modal/lib/ 48.4 KiB 11 modules
-  modules by path ./node_modules/style-loader/dist/runtime/*.js 5.84 KiB 6 modules
-  modules by path ./src/ 233 KiB (javascript) 3.21 MiB (asset) 5 modules
-  modules by path ./node_modules/use-sync-external-store/ 2.59 KiB 4 modules
-  modules by path ./node_modules/react-dom/ 131 KiB 3 modules
-  modules by path ./node_modules/prop-types/ 2.6 KiB 3 modules
-  modules by path ./node_modules/css-loader/dist/runtime/*.js 2.89 KiB 3 modules
-  modules by path ./node_modules/react/ 6.94 KiB 2 modules
-  modules by path ./node_modules/react-cookie/es6/*.js 803 bytes 2 modules
-  modules by path ./node_modules/scheduler/ 4.33 KiB 2 modules
-  + 11 modules
-webpack 5.89.0 compiled successfully in 12929 ms
+Entrypoint main [big] 602 KiB (3.85 MiB) = 776.4fe5ed2a.js 444 KiB main.1ddcce9b.js 158 KiB 57 auxiliary assets
+orphan modules 376 KiB [orphan] 228 modules
+runtime modules 5.64 KiB 10 modules
+javascript modules 1.34 MiB 281 modules
+asset modules 336 bytes (javascript) 3.22 MiB (asset)
+  modules by path ./node_modules/ 210 bytes (javascript) 5.35 KiB (asset)
+    ./node_modules/slick-carousel/slick/ajax-loader.gif 42 bytes (javascript) 80 bytes (asset) [built] [code generated]
+    ./node_modules/slick-carousel/slick/fonts/slick.eot 42 bytes (javascript) 2 KiB (asset) [built] [code generated]
+    ./node_modules/slick-carousel/slick/fonts/slick.woff 42 bytes (javascript) 1.35 KiB (asset) [built] [code generated]
+    ./node_modules/slick-carousel/slick/fonts/slick.ttf 42 bytes (javascript) 1.85 KiB (asset) [built] [code generated]
+    ./node_modules/slick-carousel/slick/fonts/slick.svg 42 bytes (javascript) 80 bytes (asset) [built] [code generated]
+  modules by path ./src/ 126 bytes (javascript) 3.21 MiB (asset)
+    ./src/constants/font/Pretendard-Bold.woff 42 bytes (javascript) 1.08 MiB (asset) [built] [code generated]
+    ./src/constants/font/Pretendard-Regular.woff 42 bytes (javascript) 1.06 MiB (asset) [built] [code generated]
+    ./src/constants/font/Pretendard-SemiBold.woff 42 bytes (javascript) 1.07 MiB (asset) [built] [code generated]
+webpack 5.90.3 compiled successfully in 27047 ms
 
-> Task :copyReactBuildFiles
-> Task :processResources
-> Task :classes
-> Task :resolveMainClassName
+> Task :copyReactBuildFiles UP-TO-DATE
+> Task :processResources UP-TO-DATE
+> Task :classes UP-TO-DATE
+> Task :resolveMainClassName UP-TO-DATE
 
 > Task :bootRun
 
@@ -330,133 +317,44 @@ webpack 5.89.0 compiled successfully in 12929 ms
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::                (v3.1.5)
 
-2023-11-28T18:32:46.156+09:00  INFO 329343 --- [           main] c.poten.basket.Poten.PotenApplication    : Starting PotenApplication using Java 17.0.8.1 with PID 329343 (/root/apps/modubasketball/Poten/build/classes/java/main started by root in /root/apps/modubasketball/Poten)
-2023-11-28T18:32:46.167+09:00  INFO 329343 --- [           main] c.poten.basket.Poten.PotenApplication    : No active profile set, falling back to 1 default profile: "default"
-2023-11-28T18:32:46.978+09:00  INFO 329343 --- [           main] ptablePropertiesBeanFactoryPostProcessor : Post-processing PropertySource instances
-2023-11-28T18:32:46.979+09:00  INFO 329343 --- [           main] c.u.j.EncryptablePropertySourceConverter : Skipping PropertySource configurationProperties [class org.springframework.boot.context.properties.source.ConfigurationPropertySourcesPropertySource
-2023-11-28T18:32:46.980+09:00  INFO 329343 --- [           main] c.u.j.EncryptablePropertySourceConverter : Skipping PropertySource servletConfigInitParams [class org.springframework.core.env.PropertySource$StubPropertySource
-2023-11-28T18:32:46.981+09:00  INFO 329343 --- [           main] c.u.j.EncryptablePropertySourceConverter : Skipping PropertySource servletContextInitParams [class org.springframework.core.env.PropertySource$StubPropertySource
-2023-11-28T18:32:46.982+09:00  INFO 329343 --- [           main] c.u.j.EncryptablePropertySourceConverter : Converting PropertySource systemProperties [org.springframework.core.env.PropertiesPropertySource] to EncryptableMapPropertySourceWrapper
-2023-11-28T18:32:46.982+09:00  INFO 329343 --- [           main] c.u.j.EncryptablePropertySourceConverter : Converting PropertySource systemEnvironment [org.springframework.boot.env.SystemEnvironmentPropertySourceEnvironmentPostProcessor$OriginAwareSystemEnvironmentPropertySource] to EncryptableSystemEnvironmentPropertySourceWrapper
-2023-11-28T18:32:46.982+09:00  INFO 329343 --- [           main] c.u.j.EncryptablePropertySourceConverter : Converting PropertySource random [org.springframework.boot.env.RandomValuePropertySource] to EncryptablePropertySourceWrapper
-2023-11-28T18:32:46.982+09:00  INFO 329343 --- [           main] c.u.j.EncryptablePropertySourceConverter : Converting PropertySource Config resource 'class path resource [application.properties]' via location 'optional:classpath:/' [org.springframework.boot.env.OriginTrackedMapPropertySource] to EncryptableMapPropertySourceWrapper
-2023-11-28T18:32:46.983+09:00  INFO 329343 --- [           main] c.u.j.EncryptablePropertySourceConverter : Converting PropertySource class path resource [application.properties] [org.springframework.core.io.support.ResourcePropertySource] to EncryptableMapPropertySourceWrapper
-2023-11-28T18:32:47.094+09:00  INFO 329343 --- [           main] c.u.j.filter.DefaultLazyPropertyFilter   : Property Filter custom Bean not found with name 'encryptablePropertyFilter'. Initializing Default Property Filter
-2023-11-28T18:32:47.103+09:00  INFO 329343 --- [           main] c.u.j.r.DefaultLazyPropertyResolver      : Property Resolver custom Bean not found with name 'encryptablePropertyResolver'. Initializing Default Property Resolver
-2023-11-28T18:32:47.106+09:00  INFO 329343 --- [           main] c.u.j.d.DefaultLazyPropertyDetector      : Property Detector custom Bean not found with name 'encryptablePropertyDetector'. Initializing Default Property Detector
-2023-11-28T18:32:47.332+09:00  INFO 329343 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8078 (http)
-2023-11-28T18:32:47.347+09:00  INFO 329343 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2023-11-28T18:32:47.347+09:00  INFO 329343 --- [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.15]
-2023-11-28T18:32:47.450+09:00  INFO 329343 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2023-11-28T18:32:47.451+09:00  INFO 329343 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1227 ms
-2023-11-28T18:32:47.527+09:00  INFO 329343 --- [           main] c.u.j.encryptor.DefaultLazyEncryptor     : Found Custom Encryptor Bean org.jasypt.encryption.pbe.PooledPBEStringEncryptor@65e21ce3 with name: jasyptStringEncryptor
-2023-11-28T18:32:47.884+09:00  INFO 329343 --- [           main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
-2023-11-28T18:32:48.074+09:00  INFO 329343 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8078 (http) with context path ''
-2023-11-28T18:32:48.076+09:00  INFO 329343 --- [           main] u.j.c.RefreshScopeRefreshedEventListener : Refreshing cached encryptable property sources on ServletWebServerInitializedEvent
-2023-11-28T18:32:48.076+09:00  INFO 329343 --- [           main] CachingDelegateEncryptablePropertySource : Property Source systemProperties refreshed
-2023-11-28T18:32:48.076+09:00  INFO 329343 --- [           main] CachingDelegateEncryptablePropertySource : Property Source systemEnvironment refreshed
-2023-11-28T18:32:48.076+09:00  INFO 329343 --- [           main] CachingDelegateEncryptablePropertySource : Property Source random refreshed
-2023-11-28T18:32:48.077+09:00  INFO 329343 --- [           main] CachingDelegateEncryptablePropertySource : Property Source Config resource 'class path resource [application.properties]' via location 'optional:classpath:/' refreshed
-2023-11-28T18:32:48.077+09:00  INFO 329343 --- [           main] CachingDelegateEncryptablePropertySource : Property Source class path resource [application.properties] refreshed
-2023-11-28T18:32:48.077+09:00  INFO 329343 --- [           main] c.u.j.EncryptablePropertySourceConverter : Skipping PropertySource configurationProperties [class org.springframework.boot.context.properties.source.ConfigurationPropertySourcesPropertySource
-2023-11-28T18:32:48.077+09:00  INFO 329343 --- [           main] c.u.j.EncryptablePropertySourceConverter : Skipping PropertySource servletConfigInitParams [class org.springframework.core.env.PropertySource$StubPropertySource
-2023-11-28T18:32:48.077+09:00  INFO 329343 --- [           main] c.u.j.EncryptablePropertySourceConverter : Converting PropertySource servletContextInitParams [org.springframework.web.context.support.ServletContextPropertySource] to EncryptableEnumerablePropertySourceWrapper
-2023-11-28T18:32:48.086+09:00  INFO 329343 --- [           main] c.poten.basket.Poten.PotenApplication    : Started PotenApplication in 2.415 seconds (process running for 2.767)
-2023-11-28T18:33:34.229+09:00  INFO 329343 --- [nio-8078-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2023-11-28T18:33:34.229+09:00  INFO 329343 --- [nio-8078-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2023-11-28T18:33:34.230+09:00  INFO 329343 --- [nio-8078-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
-2023-11-28T18:33:34.479+09:00  INFO 329343 --- [nio-8078-exec-4] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2023-11-28T18:33:34.982+09:00  INFO 329343 --- [nio-8078-exec-4] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@33f9663d
-2023-11-28T18:33:34.986+09:00  INFO 329343 --- [nio-8078-exec-4] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-====================create====================
-create의 params = MapRequest(id=null, lat=37.43914035011369, lon=126.88257252630845, courtType=아스팔트, feeYn=유료, courtSize=풀코트, goalPost=2, parkYn=불가능, address=경기 광명시 소하동 878, comment=, courtName=test)
-생성됨
-====================create====================
-create의 params = MapRequest(id=null, lat=37.43149921046916, lon=126.88204212880154, courtType=고무, feeYn=유료, courtSize=풀코트, goalPost=2, parkYn=불가능, address=경기도 광명시 성채로 37, comment=, courtName=test)
-생성됨
-====================create====================
-create의 params = MapRequest(id=null, lat=37.433656919812925, lon=126.87739486757668, courtType=아스팔트, feeYn=유료, courtSize=풀코트, goalPost=2, parkYn=불가능, address=경기 광명시 소하동 939-11, comment=, courtName=test)
-생성됨
-2023-11-28T18:49:54.641+09:00  WARN 329343 --- [nio-8078-exec-7] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@6b52e3a1 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
-2023-11-28T18:49:54.641+09:00  WARN 329343 --- [nio-8078-exec-8] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@33f9663d (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
-2023-11-28T18:49:54.642+09:00  WARN 329343 --- [nio-8078-exec-8] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@4b72fce2 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
-2023-11-28T18:49:54.643+09:00  WARN 329343 --- [nio-8078-exec-7] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@67bcebbd (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
-2023-11-28T18:49:54.643+09:00  WARN 329343 --- [nio-8078-exec-8] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@1965e72a (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
-2023-11-28T18:49:54.644+09:00  WARN 329343 --- [nio-8078-exec-7] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@1b8f4300 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
-2023-11-28T18:49:54.644+09:00  WARN 329343 --- [nio-8078-exec-8] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@2dc8c229 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
-2023-11-28T18:49:54.645+09:00  WARN 329343 --- [nio-8078-exec-8] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@924a905 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
-2023-11-28T18:49:54.646+09:00  WARN 329343 --- [nio-8078-exec-8] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@55edc12f (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
-2023-11-28T18:49:54.648+09:00  WARN 329343 --- [nio-8078-exec-7] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@1fb61f80 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
-2023-11-28T18:56:24.813+09:00  WARN 329343 --- [nio-8078-exec-4] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@db2b3b6 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
-2023-11-28T18:56:24.815+09:00  WARN 329343 --- [nio-8078-exec-3] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@12f963de (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
-2023-11-28T18:56:24.816+09:00  WARN 329343 --- [nio-8078-exec-3] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@16c6e559 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
-2023-11-28T18:56:24.816+09:00  WARN 329343 --- [nio-8078-exec-5] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@51731f33 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
-2023-11-28T18:56:24.817+09:00  WARN 329343 --- [nio-8078-exec-3] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@53c469e5 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
-2023-11-28T18:56:24.818+09:00  WARN 329343 --- [nio-8078-exec-3] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@3be3ea72 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
-2023-11-28T18:56:24.819+09:00  WARN 329343 --- [nio-8078-exec-3] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@62dd9943 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
-2023-11-28T18:56:24.820+09:00  WARN 329343 --- [nio-8078-exec-3] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@4310446c (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
-2023-11-28T18:56:24.819+09:00  WARN 329343 --- [nio-8078-exec-5] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@107fc830 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
-2023-11-28T18:56:24.822+09:00  WARN 329343 --- [nio-8078-exec-3] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@33eb96aa (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
-====================create====================
-create의 params = MapRequest(id=null, lat=37.437128535475715, lon=126.88926496723437, courtType=아스팔트, feeYn=유료, courtSize=반코트, goalPost=2, parkYn=불가능, address=경기도 광명시 기아로 113, comment=, courtName=test)
-생성됨
-2023-11-28T22:38:41.168+09:00  WARN 329343 --- [nio-8078-exec-6] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
-====================create====================
-create의 params = MapRequest(id=null, lat=37.44435240248407, lon=126.9955475709851, courtType=우레탄, feeYn=무료, courtSize=풀코트, goalPost=4, parkYn=불가능, address=경기도 과천시 중앙로 294, comment=넓고 큰 풀코트 2개 있습니다., courtName=관문체육공원 농구장A)
-생성됨
-====================create====================
-create의 params = MapRequest(id=null, lat=37.44124836824523, lon=126.99463244563717, courtType=우레탄, feeYn=무료, courtSize=풀코트, goalPost=2, parkYn=불가능, address=경기도 과천시 중앙로 294, comment=24시간 개방, courtName=관문체육공원 농구장B)
-생성됨
-====================update====================
-update의 params = MapRequest(id=287, lat=0.0, lon=0.0, courtType=우레탄, feeYn=무료, courtSize=풀코트, goalPost=4, parkYn=불가능, address=경기도 과천시 중앙로 294, comment=24시간 개방, 넓고 큰 풀코트 2개 있습니다., courtName=관문체육공원 농구장A)
-====================create====================
-create의 params = MapRequest(id=null, lat=37.550422583055465, lon=126.96428488644021, courtType=우레탄, feeYn=무료, courtSize=풀코트, goalPost=6, parkYn=가능, address=서울특별시 용산구 효창원로 258, comment=풀코트 2개이고, 주차비 있습니다., courtName=배문중고등학교 농구장)
-생성됨
-====================update====================
-update의 params = MapRequest(id=39, lat=0.0, lon=0.0, courtType=우레탄, feeYn=무료, courtSize=풀코트, goalPost=2, parkYn=불가능, address=서울 강서구 화곡동 산 164-3, comment=, courtName=까치산공원 농구장)
-====================create====================
-create의 params = MapRequest(id=null, lat=36.79164498189332, lon=127.09697048039051, courtType=알 수 없음, feeYn=무료, courtSize=풀코트, goalPost=2, parkYn=불가능, address=충남 아산시 배방읍 장재리 1343, comment=천안 아산역에서 도보 20분 정도 걸립니다., courtName=지산체육공원 농구장)
-생성됨
-====================create====================
-create의 params = MapRequest(id=null, lat=33.518255686051276, lon=126.52569846012575, courtType=우레탄, feeYn=무료, courtSize=반코트, goalPost=5, parkYn=불가능, address=제주특별자치도 제주시 건입동 1444, comment=반코트 5개이고 24시 사용 가능합니다., courtName=탑동 농구장)
-생성됨
-====================create====================
-create의 params = MapRequest(id=null, lat=37.50392460081347, lon=127.12882710218689, courtType=null, feeYn=null, courtSize=null, goalPost=null, parkYn=null, address=서울특별시 송파구 중대로 247, comment=, courtName=오금고등학교 농구장)
-생성됨
-====================create====================
-create의 params = MapRequest(id=null, lat=37.50138026891043, lon=127.13596729399102, courtType=null, feeYn=null, courtSize=null, goalPost=null, parkYn=null, address=서울 송파구 오금동 59, comment=, courtName=오주중학교 농구장)
-생성됨
-====================create====================
-create의 params = MapRequest(id=null, lat=37.495091507637476, lon=127.12972789331495, courtType=null, feeYn=null, courtSize=null, goalPost=null, parkYn=null, address=서울특별시 송파구 동남로 203, comment=, courtName=송파중학교 농구장)
-생성됨
-====================create====================
-create의 params = MapRequest(id=null, lat=37.492780296945384, lon=127.12984545535032, courtType=null, feeYn=null, courtSize=null, goalPost=null, parkYn=null, address=서울특별시 송파구 문정로 83, comment=, courtName=문정동 삼성래미안아파트 농구장)
-생성됨
-====================create====================
-create의 params = MapRequest(id=null, lat=37.50217883481987, lon=127.11352264119783, courtType=null, feeYn=null, courtSize=null, goalPost=null, parkYn=null, address=서울특별시 송파구 송파대로38길 8, comment=, courtName=잠실여자고등학교 농구장)
-생성됨
-====================create====================
-create의 params = MapRequest(id=null, lat=37.50151378045477, lon=127.11410688460046, courtType=null, feeYn=null, courtSize=null, goalPost=null, parkYn=null, address=서울특별시 송파구 송파대로38길 8, comment=, courtName=일신여자상업고등학교 농구장)
-생성됨
-====================create====================
-create의 params = MapRequest(id=null, lat=37.50378445249407, lon=127.1185408474326, courtType=null, feeYn=null, courtSize=null, goalPost=null, parkYn=null, address=서울특별시 송파구 오금로32길 14, comment=, courtName=삼성래미안아파트 농구장)
-생성됨
-====================deleteReq====================
-224
-삭제 요청됨
-====================create====================
-create의 params = MapRequest(id=null, lat=36.359415659073406, lon=127.363180191953, courtType=우레탄, feeYn=무료, courtSize=풀코트, goalPost=2, parkYn=불가능, address=대전광역시 서구 월평중로 55, comment=, courtName=은평공원 농구장)
-생성됨
-====================create====================
-create의 params = MapRequest(id=null, lat=36.33558607457864, lon=127.33471153570027, courtType=우레탄, feeYn=무료, courtSize=풀코트, goalPost=2, parkYn=가능, address=대전 유성구 상대동 488, comment=주차 : 대전시립박물관 주차장에 주차 가능합니다
-조명 : 농구 코트용 조명은 따로 없음, 주변 가로등 & 족구장 조명을 간접등으로 사용합니다. 그렇게 어둡지는 않아 야간에도 농구 가능합니다.
-골대 : 최근에 새 골대로 바뀌었습니다(23.12.01. 기준)
-인원 : 농구장 사용 인원이 많지 않아 언제든 자유롭게 연습 가능합니다., courtName=도안문화공원 농구장)
-생성됨
-2023-12-01T18:41:39.811+09:00  INFO 329343 --- [nio-8078-exec-3] o.apache.coyote.http11.Http11Processor   : Error parsing HTTP request header
+2024-02-21T07:52:38.685Z  INFO 10897 --- [           main] c.poten.basket.Poten.PotenApplication    : Starting PotenApplication using Java 17.0.9 with PID 10897 (/home/ubuntu/apps/modubasketball/Poten/build/classes/java/main started by ubuntu in /home/ubuntu/apps/modubasketball/Poten)
+2024-02-21T07:52:38.691Z  INFO 10897 --- [           main] c.poten.basket.Poten.PotenApplication    : No active profile set, falling back to 1 default profile: "default"
+2024-02-21T07:52:40.082Z  INFO 10897 --- [           main] ptablePropertiesBeanFactoryPostProcessor : Post-processing PropertySource instances
+2024-02-21T07:52:40.084Z  INFO 10897 --- [           main] c.u.j.EncryptablePropertySourceConverter : Skipping PropertySource configurationProperties [class org.springframework.boot.context.properties.source.ConfigurationPropertySourcesPropertySource
+2024-02-21T07:52:40.085Z  INFO 10897 --- [           main] c.u.j.EncryptablePropertySourceConverter : Skipping PropertySource servletConfigInitParams [class org.springframework.core.env.PropertySource$StubPropertySource
+2024-02-21T07:52:40.085Z  INFO 10897 --- [           main] c.u.j.EncryptablePropertySourceConverter : Skipping PropertySource servletContextInitParams [class org.springframework.core.env.PropertySource$StubPropertySource
+2024-02-21T07:52:40.086Z  INFO 10897 --- [           main] c.u.j.EncryptablePropertySourceConverter : Converting PropertySource systemProperties [org.springframework.core.env.PropertiesPropertySource] to EncryptableMapPropertySourceWrapper
+2024-02-21T07:52:40.086Z  INFO 10897 --- [           main] c.u.j.EncryptablePropertySourceConverter : Converting PropertySource systemEnvironment [org.springframework.boot.env.SystemEnvironmentPropertySourceEnvironmentPostProcessor$OriginAwareSystemEnvironmentPropertySource] to EncryptableSystemEnvironmentPropertySourceWrapper
+2024-02-21T07:52:40.086Z  INFO 10897 --- [           main] c.u.j.EncryptablePropertySourceConverter : Converting PropertySource random [org.springframework.boot.env.RandomValuePropertySource] to EncryptablePropertySourceWrapper
+2024-02-21T07:52:40.087Z  INFO 10897 --- [           main] c.u.j.EncryptablePropertySourceConverter : Converting PropertySource Config resource 'class path resource [application.properties]' via location 'optional:classpath:/' [org.springframework.boot.env.OriginTrackedMapPropertySource] to EncryptableMapPropertySourceWrapper
+2024-02-21T07:52:40.087Z  INFO 10897 --- [           main] c.u.j.EncryptablePropertySourceConverter : Converting PropertySource class path resource [application.properties] [org.springframework.core.io.support.ResourcePropertySource] to EncryptableMapPropertySourceWrapper
+2024-02-21T07:52:40.546Z  INFO 10897 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2024-02-21T07:52:40.590Z  INFO 10897 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-02-21T07:52:40.591Z  INFO 10897 --- [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.15]
+2024-02-21T07:52:40.799Z  INFO 10897 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-02-21T07:52:40.801Z  INFO 10897 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2016 ms
+2024-02-21T07:52:41.104Z  INFO 10897 --- [           main] c.u.j.filter.DefaultLazyPropertyFilter   : Property Filter custom Bean not found with name 'encryptablePropertyFilter'. Initializing Default Property Filter
+2024-02-21T07:52:41.122Z  INFO 10897 --- [           main] c.u.j.r.DefaultLazyPropertyResolver      : Property Resolver custom Bean not found with name 'encryptablePropertyResolver'. Initializing Default Property Resolver
+2024-02-21T07:52:41.124Z  INFO 10897 --- [           main] c.u.j.d.DefaultLazyPropertyDetector      : Property Detector custom Bean not found with name 'encryptablePropertyDetector'. Initializing Default Property Detector
+2024-02-21T07:52:42.193Z  INFO 10897 --- [           main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
+2024-02-21T07:52:42.459Z  INFO 10897 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2024-02-21T07:52:42.461Z  INFO 10897 --- [           main] u.j.c.RefreshScopeRefreshedEventListener : Refreshing cached encryptable property sources on ServletWebServerInitializedEvent
+2024-02-21T07:52:42.461Z  INFO 10897 --- [           main] CachingDelegateEncryptablePropertySource : Property Source systemProperties refreshed
+2024-02-21T07:52:42.461Z  INFO 10897 --- [           main] CachingDelegateEncryptablePropertySource : Property Source systemEnvironment refreshed
+2024-02-21T07:52:42.461Z  INFO 10897 --- [           main] CachingDelegateEncryptablePropertySource : Property Source random refreshed
+2024-02-21T07:52:42.462Z  INFO 10897 --- [           main] CachingDelegateEncryptablePropertySource : Property Source Config resource 'class path resource [application.properties]' via location 'optional:classpath:/' refreshed
+2024-02-21T07:52:42.462Z  INFO 10897 --- [           main] CachingDelegateEncryptablePropertySource : Property Source class path resource [application.properties] refreshed
+2024-02-21T07:52:42.462Z  INFO 10897 --- [           main] c.u.j.EncryptablePropertySourceConverter : Skipping PropertySource configurationProperties [class org.springframework.boot.context.properties.source.ConfigurationPropertySourcesPropertySource
+2024-02-21T07:52:42.462Z  INFO 10897 --- [           main] c.u.j.EncryptablePropertySourceConverter : Skipping PropertySource servletConfigInitParams [class org.springframework.core.env.PropertySource$StubPropertySource
+2024-02-21T07:52:42.462Z  INFO 10897 --- [           main] c.u.j.EncryptablePropertySourceConverter : Converting PropertySource servletContextInitParams [org.springframework.web.context.support.ServletContextPropertySource] to EncryptableEnumerablePropertySourceWrapper
+2024-02-21T07:52:42.477Z  INFO 10897 --- [           main] c.poten.basket.Poten.PotenApplication    : Started PotenApplication in 4.413 seconds (process running for 5.176)
+2024-02-21T08:04:28.958Z  INFO 10897 --- [nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-02-21T08:04:28.959Z  INFO 10897 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-02-21T08:04:28.960Z  INFO 10897 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2024-02-21T08:44:51.311Z  INFO 10897 --- [nio-8080-exec-1] o.apache.coyote.http11.Http11Processor   : Error parsing HTTP request header
  Note: further occurrences of HTTP request parsing errors will be logged at DEBUG level.
 
-java.lang.IllegalArgumentException: Invalid character found in method name [0x160x030x010x000xee0x010x000x000xea0x030x03Q9.0x0bfm=*$0xf20xaf80xc10x010xab0x060xd10x84%0xd10x1e0x850xdd0x0b0x95h0x1d0xcc]0x880xc00xe1 ]. HTTP method names must be tokens
+java.lang.IllegalArgumentException: Invalid character found in method name [0x160x030x010x000xee0x010x000x000xea0x030x030xfd0x8e0xc60xec0xee0x190xd20xb50x848v0x9akO0xe90x160xd6X0xb90x0eE0x9a0xcb0xbf0x170x0a0x0a&Q0xa2.0xfb ]. HTTP method names must be tokens
 	at org.apache.coyote.http11.Http11InputBuffer.parseRequestLine(Http11InputBuffer.java:407) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
 	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:264) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
 	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
@@ -466,12 +364,16 @@ java.lang.IllegalArgumentException: Invalid character found in method name [0x16
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
-	at java.base/java.lang.Thread.run(Thread.java:833) ~[na:na]
+	at java.base/java.lang.Thread.run(Thread.java:840) ~[na:na]
 
-2023-12-02T04:32:42.589+09:00  INFO 329343 --- [nio-8078-exec-4] o.apache.coyote.http11.Http11Processor   : Error parsing HTTP request header
+2024-02-21T09:09:13.568Z  INFO 10897 --- [nio-8080-exec-9] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+Loading class `com.mysql.jdbc.Driver'. This is deprecated. The new driver class is `com.mysql.cj.jdbc.Driver'. The driver is automatically registered via the SPI and manual loading of the driver class is generally unnecessary.
+2024-02-21T09:09:14.188Z  INFO 10897 --- [nio-8080-exec-9] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@4785a14b
+2024-02-21T09:09:14.199Z  INFO 10897 --- [nio-8080-exec-9] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-02-21T13:35:05.905Z  INFO 10897 --- [nio-8080-exec-3] o.apache.coyote.http11.Http11Processor   : Error parsing HTTP request header
  Note: further occurrences of HTTP request parsing errors will be logged at DEBUG level.
 
-java.lang.IllegalArgumentException: Invalid character found in method name [0x030x000x00/*0xe00x000x000x000x000x00Cookie: ]. HTTP method names must be tokens
+java.lang.IllegalArgumentException: Invalid character found in method name [0x160x030x010x00{0x010x000x00w0x030x03{0x9e0xefP0x940x830xc60xed8]k0xd00xed`0x970xdb0x9f0xf40xd3w0x1d0xd90xed+0xca0x020x97l0xc70x060xce0xfd0x000x000x1a0xc0/0xc0+0xc00x110xc00x070xc00x130xc00x090xc00x140xc00x0a0x000x050x00/0x0050xc00x120x000x0a0x010x000x0040x000x050x000x050x010x000x000x000x000x000x0a0x000x080x000x060x000x170x000x180x000x190x000x0b0x000x020x010x000x000x0d0x000x100x000x0e0x040x010x040x030x020x010x020x030x040x010x050x010x060x010xff0x010x000x010x00...]. HTTP method names must be tokens
 	at org.apache.coyote.http11.Http11InputBuffer.parseRequestLine(Http11InputBuffer.java:407) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
 	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:264) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
 	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
@@ -481,14 +383,23 @@ java.lang.IllegalArgumentException: Invalid character found in method name [0x03
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
-	at java.base/java.lang.Thread.run(Thread.java:833) ~[na:na]
+	at java.base/java.lang.Thread.run(Thread.java:840) ~[na:na]
 
-2023-12-02T12:30:26.322+09:00  WARN 329343 --- [nio-8078-exec-4] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
-2023-12-02T14:22:53.647+09:00  WARN 329343 --- [nio-8078-exec-9] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
-2023-12-06T02:12:58.128+09:00  INFO 329343 --- [nio-8078-exec-7] o.apache.coyote.http11.Http11Processor   : Error parsing HTTP request header
+2024-02-21T14:14:04.497Z  WARN 10897 --- [nio-8080-exec-4] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
+2024-02-21T14:37:41.807Z  WARN 10897 --- [nio-8080-exec-1] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
+2024-02-21T17:03:54.938Z  WARN 10897 --- [nio-8080-exec-7] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
+2024-02-21T19:45:41.102Z  WARN 10897 --- [io-8080-exec-10] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
+2024-02-21T20:30:25.928Z  WARN 10897 --- [nio-8080-exec-4] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Failed to convert value of type 'java.lang.String' to required type 'int'; For input string: ".env"]
+2024-02-21T20:30:34.839Z  WARN 10897 --- [nio-8080-exec-8] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
+2024-02-21T21:09:20.913Z  WARN 10897 --- [nio-8080-exec-3] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
+2024-02-22T01:38:54.499Z  WARN 10897 --- [nio-8080-exec-6] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
+2024-02-22T04:45:45.325Z  WARN 10897 --- [nio-8080-exec-8] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
+2024-02-22T05:04:28.570Z  WARN 10897 --- [nio-8080-exec-5] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
+2024-02-22T05:08:33.014Z  WARN 10897 --- [nio-8080-exec-4] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
+2024-02-22T07:36:53.435Z  INFO 10897 --- [nio-8080-exec-4] o.apache.coyote.http11.Http11Processor   : Error parsing HTTP request header
  Note: further occurrences of HTTP request parsing errors will be logged at DEBUG level.
 
-java.lang.IllegalArgumentException: Invalid character found in method name [0x030x000x00/*0xe00x000x000x000x000x00Cookie: ]. HTTP method names must be tokens
+java.lang.IllegalArgumentException: Invalid character found in method name [0xde0xfehyy0xbbQ0xc5`0x100x040xb07x0x000x000x020x040x050xb4...]. HTTP method names must be tokens
 	at org.apache.coyote.http11.Http11InputBuffer.parseRequestLine(Http11InputBuffer.java:407) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
 	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:264) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
 	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
@@ -498,12 +409,19 @@ java.lang.IllegalArgumentException: Invalid character found in method name [0x03
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
-	at java.base/java.lang.Thread.run(Thread.java:833) ~[na:na]
+	at java.base/java.lang.Thread.run(Thread.java:840) ~[na:na]
 
-2023-12-07T06:59:45.455+09:00  INFO 329343 --- [io-8078-exec-10] o.apache.coyote.http11.Http11Processor   : Error parsing HTTP request header
+2024-02-22T09:07:30.677Z  WARN 10897 --- [nio-8080-exec-3] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
+2024-02-22T12:41:25.933Z  WARN 10897 --- [nio-8080-exec-4] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
+2024-02-22T12:55:13.315Z  WARN 10897 --- [nio-8080-exec-9] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
+2024-02-22T13:50:21.904Z  WARN 10897 --- [nio-8080-exec-8] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
+2024-02-22T16:35:58.689Z  WARN 10897 --- [nio-8080-exec-2] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
+2024-02-22T20:01:59.303Z  WARN 10897 --- [nio-8080-exec-5] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
+2024-02-22T20:17:43.223Z  WARN 10897 --- [nio-8080-exec-7] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
+2024-02-22T20:44:27.535Z  INFO 10897 --- [nio-8080-exec-1] o.apache.coyote.http11.Http11Processor   : Error parsing HTTP request header
  Note: further occurrences of HTTP request parsing errors will be logged at DEBUG level.
 
-java.lang.IllegalArgumentException: Invalid character found in method name [0x030x000x00/*0xe00x000x000x000x000x00Cookie: ]. HTTP method names must be tokens
+java.lang.IllegalArgumentException: Invalid character found in method name [0x160x030x010x000xee0x010x000x000xea0x030x030xaf0xee0xba0x020xdbA0x12V0x090xb10x14l-0xf90xcf0x90YnX0xb57#0x830xd6n0xd90x8d0xaf0x930x00b0xb6 ]. HTTP method names must be tokens
 	at org.apache.coyote.http11.Http11InputBuffer.parseRequestLine(Http11InputBuffer.java:407) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
 	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:264) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
 	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
@@ -513,18 +431,407 @@ java.lang.IllegalArgumentException: Invalid character found in method name [0x03
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
-	at java.base/java.lang.Thread.run(Thread.java:833) ~[na:na]
+	at java.base/java.lang.Thread.run(Thread.java:840) ~[na:na]
 
-2023-12-07T12:52:05.177+09:00  WARN 329343 --- [nio-8078-exec-3] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
-2023-12-08T08:25:26.500+09:00  WARN 329343 --- [nio-8078-exec-2] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
-2023-12-08T22:03:57.607+09:00  WARN 329343 --- [nio-8078-exec-3] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
-2023-12-08T22:10:52.015+09:00 ERROR 329343 --- [nio-8078-exec-6] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception
+2024-02-23T00:51:22.662Z  INFO 10897 --- [nio-8080-exec-8] o.apache.coyote.http11.Http11Processor   : Error parsing HTTP request header
+ Note: further occurrences of HTTP request parsing errors will be logged at DEBUG level.
 
-java.lang.IllegalArgumentException: URLDecoder: Illegal hex characters in escape (%) pattern - Error at index 0 in: "@ "
-	at java.base/java.net.URLDecoder.decode(URLDecoder.java:237) ~[na:na]
-	at org.springframework.http.converter.FormHttpMessageConverter.read(FormHttpMessageConverter.java:353) ~[spring-web-6.0.13.jar:6.0.13]
-	at org.springframework.web.filter.FormContentFilter.parseIfNecessary(FormContentFilter.java:109) ~[spring-web-6.0.13.jar:6.0.13]
-	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:88) ~[spring-web-6.0.13.jar:6.0.13]
+java.lang.IllegalArgumentException: Invalid character found in method name [0x160x030x010x020x000x010x000x010xfc0x030x030xf90x810xad0x8c0xab0xd20xa0z0xa80x12H0xd8@rJX0xe10xbcBU0xb90x1d0x050xc9&0xe70x96f0xe2G_0xba ]. HTTP method names must be tokens
+	at org.apache.coyote.http11.Http11InputBuffer.parseRequestLine(Http11InputBuffer.java:407) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:264) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at java.base/java.lang.Thread.run(Thread.java:840) ~[na:na]
+
+2024-02-23T01:11:01.828Z  WARN 10897 --- [nio-8080-exec-3] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
+2024-02-23T01:45:21.010Z  WARN 10897 --- [nio-8080-exec-6] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
+2024-02-23T04:48:07.389Z  WARN 10897 --- [nio-8080-exec-4] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
+2024-02-23T07:56:22.409Z  WARN 10897 --- [nio-8080-exec-1] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
+2024-02-23T08:23:42.078Z  WARN 10897 --- [nio-8080-exec-3] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
+2024-02-23T10:41:24.959Z  WARN 10897 --- [nio-8080-exec-9] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
+2024-02-23T10:59:23.213Z  WARN 10897 --- [nio-8080-exec-4] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
+2024-02-23T10:59:23.239Z  WARN 10897 --- [nio-8080-exec-1] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
+2024-02-23T11:34:24.210Z  INFO 10897 --- [nio-8080-exec-2] o.apache.coyote.http11.Http11Processor   : Error parsing HTTP request header
+ Note: further occurrences of HTTP request parsing errors will be logged at DEBUG level.
+
+java.lang.IllegalArgumentException: Invalid character found in method name [MGLNDD_13.125.88.20_80800x0a...]. HTTP method names must be tokens
+	at org.apache.coyote.http11.Http11InputBuffer.parseRequestLine(Http11InputBuffer.java:407) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:264) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at java.base/java.lang.Thread.run(Thread.java:840) ~[na:na]
+
+2024-02-23T13:03:19.448Z  WARN 10897 --- [nio-8080-exec-8] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
+2024-02-23T13:16:37.427Z  WARN 10897 --- [nio-8080-exec-7] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
+2024-02-23T13:30:39.750Z  WARN 10897 --- [nio-8080-exec-9] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
+2024-02-23T13:30:40.069Z  WARN 10897 --- [nio-8080-exec-2] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
+2024-02-23T13:30:40.496Z  WARN 10897 --- [nio-8080-exec-1] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
+2024-02-23T13:30:40.876Z  WARN 10897 --- [nio-8080-exec-4] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
+2024-02-23T13:30:41.303Z  WARN 10897 --- [nio-8080-exec-8] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
+2024-02-23T13:30:41.674Z  WARN 10897 --- [nio-8080-exec-6] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
+2024-02-23T16:30:41.932Z  WARN 10897 --- [nio-8080-exec-2] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
+2024-02-23T17:26:46.701Z  WARN 10897 --- [nio-8080-exec-5] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
+2024-02-23T17:26:48.230Z  WARN 10897 --- [nio-8080-exec-4] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
+2024-02-23T17:26:49.972Z  WARN 10897 --- [nio-8080-exec-6] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
+2024-02-23T17:26:51.829Z  WARN 10897 --- [nio-8080-exec-8] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
+2024-02-23T17:26:53.448Z  WARN 10897 --- [nio-8080-exec-9] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
+2024-02-23T17:26:54.289Z  WARN 10897 --- [nio-8080-exec-5] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
+2024-02-23T17:26:55.586Z  WARN 10897 --- [nio-8080-exec-4] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
+2024-02-23T17:26:57.868Z  WARN 10897 --- [nio-8080-exec-6] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
+2024-02-23T18:43:34.939Z  WARN 10897 --- [nio-8080-exec-9] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
+2024-02-23T19:45:39.804Z  INFO 10897 --- [nio-8080-exec-1] o.apache.coyote.http11.Http11Processor   : Error parsing HTTP request header
+ Note: further occurrences of HTTP request parsing errors will be logged at DEBUG level.
+
+java.lang.IllegalArgumentException: Invalid character found in method name [0x160x030x010x000x850x010x000x000x810x030x03f>0xf10xc50x820xad0xe2 ]. HTTP method names must be tokens
+	at org.apache.coyote.http11.Http11InputBuffer.parseRequestLine(Http11InputBuffer.java:407) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:264) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at java.base/java.lang.Thread.run(Thread.java:840) ~[na:na]
+
+2024-02-23T21:04:37.286Z  WARN 10897 --- [nio-8080-exec-8] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
+2024-02-24T01:05:21.190Z  WARN 10897 --- [nio-8080-exec-2] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
+2024-02-24T03:02:16.692Z  INFO 10897 --- [nio-8080-exec-4] o.apache.coyote.http11.Http11Processor   : Error parsing HTTP request header
+ Note: further occurrences of HTTP request parsing errors will be logged at DEBUG level.
+
+java.lang.IllegalArgumentException: Invalid character found in method name [0x160x030x010x00{0x010x000x00w0x030x030xef:0x950x9a0x82k00xdeF0x880x800x1d0xc00xa50xec=0xdby0x0e0x1620xdb0xa80xc7)0xfey0x8c0x7f0xe60x9c]0x000x000x1a0xc0/0xc0+0xc00x110xc00x070xc00x130xc00x090xc00x140xc00x0a0x000x050x00/0x0050xc00x120x000x0a0x010x000x0040x000x050x000x050x010x000x000x000x000x000x0a0x000x080x000x060x000x170x000x180x000x190x000x0b0x000x020x010x000x000x0d0x000x100x000x0e0x040x010x040x030x020x010x020x030x040x010x050x010x060x010xff0x010x000x010x00...]. HTTP method names must be tokens
+	at org.apache.coyote.http11.Http11InputBuffer.parseRequestLine(Http11InputBuffer.java:407) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:264) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at java.base/java.lang.Thread.run(Thread.java:840) ~[na:na]
+
+2024-02-24T03:22:51.524Z  WARN 10897 --- [nio-8080-exec-8] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
+2024-02-24T14:11:07.730Z  WARN 10897 --- [nio-8080-exec-9] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
+2024-02-24T15:36:01.158Z  WARN 10897 --- [nio-8080-exec-9] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
+2024-02-24T15:54:46.522Z  WARN 10897 --- [nio-8080-exec-3] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
+2024-02-24T19:40:22.379Z  WARN 10897 --- [nio-8080-exec-9] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
+2024-02-24T21:30:36.829Z  WARN 10897 --- [io-8080-exec-10] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
+2024-02-24T21:59:20.589Z  WARN 10897 --- [nio-8080-exec-4] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
+2024-02-24T23:48:58.961Z  WARN 10897 --- [nio-8080-exec-2] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
+2024-02-25T04:24:11.419Z  WARN 10897 --- [nio-8080-exec-4] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
+2024-02-25T06:55:22.243Z  INFO 10897 --- [nio-8080-exec-6] o.apache.coyote.http11.Http11Processor   : Error parsing HTTP request header
+ Note: further occurrences of HTTP request parsing errors will be logged at DEBUG level.
+
+java.lang.IllegalArgumentException: Invalid character found in method name [0x160x030x010x00{0x010x000x00w0x030x03,NA0xc9TU0x9b0xabb0xa40xablTr0x1fW0xb20xe0fD0xc20xeb}7f0xfb0xfa0x1489w#0x000x000x1a0xc0/0xc0+0xc00x110xc00x070xc00x130xc00x090xc00x140xc00x0a0x000x050x00/0x0050xc00x120x000x0a0x010x000x0040x000x050x000x050x010x000x000x000x000x000x0a0x000x080x000x060x000x170x000x180x000x190x000x0b0x000x020x010x000x000x0d0x000x100x000x0e0x040x010x040x030x020x010x020x030x040x010x050x010x060x010xff0x010x000x010x00...]. HTTP method names must be tokens
+	at org.apache.coyote.http11.Http11InputBuffer.parseRequestLine(Http11InputBuffer.java:407) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:264) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at java.base/java.lang.Thread.run(Thread.java:840) ~[na:na]
+
+2024-02-25T07:40:07.420Z  WARN 10897 --- [io-8080-exec-10] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
+2024-02-25T13:45:22.492Z  WARN 10897 --- [nio-8080-exec-6] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
+2024-02-25T14:29:27.769Z  WARN 10897 --- [nio-8080-exec-2] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
+2024-02-25T18:34:35.432Z  WARN 10897 --- [nio-8080-exec-2] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
+2024-02-25T21:06:29.022Z  WARN 10897 --- [nio-8080-exec-8] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
+2024-02-26T00:21:14.275Z  WARN 10897 --- [nio-8080-exec-9] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
+2024-02-26T01:45:08.106Z  INFO 10897 --- [nio-8080-exec-7] o.apache.coyote.http11.Http11Processor   : Error parsing HTTP request header
+ Note: further occurrences of HTTP request parsing errors will be logged at DEBUG level.
+
+java.lang.IllegalArgumentException: Invalid character found in method name [0x160x030x010x000xee0x010x000x000xea0x030x030xfe0xc20x810xa00x1d0xcb!d0x94R0x80IAN0xe20xd10x1b0xff0xebs0x8b0xad0x9550x9d0xa1F0xaf0xae90x07l ]. HTTP method names must be tokens
+	at org.apache.coyote.http11.Http11InputBuffer.parseRequestLine(Http11InputBuffer.java:407) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:264) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at java.base/java.lang.Thread.run(Thread.java:840) ~[na:na]
+
+2024-02-26T02:19:26.449Z  WARN 10897 --- [nio-8080-exec-1] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
+2024-02-26T07:32:28.638Z  WARN 10897 --- [nio-8080-exec-7] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
+2024-02-26T08:07:26.910Z  INFO 10897 --- [nio-8080-exec-1] o.apache.coyote.http11.Http11Processor   : Error parsing HTTP request header
+ Note: further occurrences of HTTP request parsing errors will be logged at DEBUG level.
+
+java.lang.IllegalArgumentException: Invalid character found in method name [0x050x030x000x010x02...]. HTTP method names must be tokens
+	at org.apache.coyote.http11.Http11InputBuffer.parseRequestLine(Http11InputBuffer.java:407) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:264) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at java.base/java.lang.Thread.run(Thread.java:840) ~[na:na]
+
+2024-02-26T10:58:46.997Z  WARN 10897 --- [nio-8080-exec-4] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
+2024-02-26T12:07:06.188Z  WARN 10897 --- [nio-8080-exec-8] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
+2024-02-26T19:42:42.604Z  WARN 10897 --- [nio-8080-exec-9] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
+2024-02-26T20:08:27.903Z  INFO 10897 --- [nio-8080-exec-2] o.apache.coyote.http11.Http11Processor   : Error parsing HTTP request header
+ Note: further occurrences of HTTP request parsing errors will be logged at DEBUG level.
+
+java.lang.IllegalArgumentException: Invalid character found in method name [0x160x030x010x010xfb0x010x000x010xf70x030x030xec0xc73(l_Hw0x8e:V0xb60x8e0x0f[0x95p,0x8bB0xab0x86o0xa3n0x110xef0x180xdb0xef80xc60x000x01<0xcc0x140xcc0x130xcc0x150xc000xc0,0xc0(0xc0$0xc00x140xc00x0a0x000xa50x000xa30x000xa10x000x9f0x00k0x00j0x00i0x00h0x0090x0080x0070x0060xc0w0xc0s0x000xc40x000xc30x000xc20x000xc10x000x880x000x870x000x860x000x850xc00x190x000xa70x00m0x00:0x000xc50x000x890xc020xc0.0xc0*0xc0&0xc00x0f0xc00x050xc0y0xc0u0x000x9d0x00=0x0050x000xc00x000x840x000x950xc0/0xc0+0xc0'0xc0#0xc00x130xc00x090x000xa40x000xa20x000xa00x000x9e0x00g0x00@0x00?0x00>0x0030x0020x0010x0000xc0v0xc0r0x000xbe0x000xbd0x000xbc0x000xbb0x000x9a0x000x990x000x980x000x970x00E0x00D0x00C0x00B0xc00x180x000xa60x00l0x0040x000xbf0x000x9b0x00F0xc010xc0-0xc0)0xc0%0xc00x0e0xc00x040xc0x0xc0t0x000x9c0x00<0x00/0x000xba0x000x960x00A0x000x070x000x940xc00x110xc00x070x00f0xc00x160x000x180xc00x0c0xc00x020x000x050x000x040x000x920xc00x120xc00x080x000x160x000x130x000x100x000x0d0xc00x170x000x1b0xc00x0d0xc00x030x000x0a0x000x930x00c0x000x150x000x120x000x0f0x000x0c0x000x1a0x00b0x000x090x00a0x00e0x00d0x00`0x000x140x000x110x000x0e0x000x0b0x000x190x000x080x000x060x000x170x000x030xc00x150xc00x100xc00x060xc00x0b0xc00x010x00;0x000x020x000x010x000xff0x020x010x000x000x910x000x000x000x110x000x0f0x000x000x0c13.125.88.200x000x0b0x000x040x030x000x010x020x000x0a0x00:0x0080x000x0e0x000x0d0x000x190x000x1c0x000x0b0x000x0c0x000x1b0x000x180x000x090x000x0a0x000x1a0x000x160x000x170x000x080x000x060x000x070x000x140x000x150x000x040x000x050x000x120x000x130x000x010x000x020x000x030x000x0f0x000x100x000x110x00#0x000x000x000x0d0x00 ]. HTTP method names must be tokens
+	at org.apache.coyote.http11.Http11InputBuffer.parseRequestLine(Http11InputBuffer.java:407) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:264) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at java.base/java.lang.Thread.run(Thread.java:840) ~[na:na]
+
+2024-02-27T00:23:14.114Z  WARN 10897 --- [nio-8080-exec-4] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
+2024-02-27T04:36:53.754Z  WARN 10897 --- [nio-8080-exec-7] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: "{"error":"invalid_grant","error_description":"Redirect URI mismatch.","error_code":"KOE303"}"
+	at org.springframework.web.client.HttpClientErrorException.create(HttpClientErrorException.java:103)
+	at org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:183)
+	at org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:137)
+	at org.springframework.web.client.ResponseErrorHandler.handleError(ResponseErrorHandler.java:63)
+	at org.springframework.web.client.RestTemplate.handleResponse(RestTemplate.java:915)
+	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:864)
+	at org.springframework.web.client.RestTemplate.execute(RestTemplate.java:764)
+	at org.springframework.web.client.RestTemplate.exchange(RestTemplate.java:646)
+	at com.poten.basket.Poten.Service.KakaoService.makeTokenEntity(KakaoService.java:74)
+	at com.poten.basket.Poten.Service.KakaoService.getToken(KakaoService.java:143)
+	at com.poten.basket.Poten.Service.KakaoService.loginHandler(KakaoService.java:190)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:343)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:699)
+	at com.poten.basket.Poten.Service.KakaoService$$SpringCGLIB$$0.loginHandler(<generated>)
+	at com.poten.basket.Poten.Controller.KakaoController.callback(KakaoController.java:27)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:150)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:884)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:797)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1081)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:974)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1011)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:340)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+org.springframework.web.client.HttpClientErrorException$Unauthorized: 401 Unauthorized: [no body]
+	at org.springframework.web.client.HttpClientErrorException.create(HttpClientErrorException.java:106)
+	at org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:183)
+	at org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:137)
+	at org.springframework.web.client.ResponseErrorHandler.handleError(ResponseErrorHandler.java:63)
+	at org.springframework.web.client.RestTemplate.handleResponse(RestTemplate.java:915)
+	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:864)
+	at org.springframework.web.client.RestTemplate.execute(RestTemplate.java:764)
+	at org.springframework.web.client.RestTemplate.exchange(RestTemplate.java:646)
+	at com.poten.basket.Poten.Service.KakaoService.makeInfoEntity(KakaoService.java:131)
+	at com.poten.basket.Poten.Service.KakaoService.getInfo(KakaoService.java:166)
+	at com.poten.basket.Poten.Service.KakaoService.loginHandler(KakaoService.java:191)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:343)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:699)
+	at com.poten.basket.Poten.Service.KakaoService$$SpringCGLIB$$0.loginHandler(<generated>)
+	at com.poten.basket.Poten.Controller.KakaoController.callback(KakaoController.java:27)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:150)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:884)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:797)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1081)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:974)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1011)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:340)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+2024-02-27T05:14:48.749Z ERROR 10897 --- [nio-8080-exec-4] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: org.springframework.dao.DataIntegrityViolationException: 
+### Error updating database.  Cause: java.sql.SQLIntegrityConstraintViolationException: Column 'EMAIL' cannot be null
+### The error may exist in file [/home/ubuntu/apps/modubasketball/Poten/build/resources/main/mapper/LoginMapper.xml]
+### The error may involve com.poten.basket.Poten.DAO.KakaoDAO.register-Inline
+### The error occurred while setting parameters
+### SQL: INSERT INTO USER (             NICKNAME             , EMAIL         ) VALUES (             ?             , ?         )
+### Cause: java.sql.SQLIntegrityConstraintViolationException: Column 'EMAIL' cannot be null
+; Column 'EMAIL' cannot be null] with root cause
+
+java.sql.SQLIntegrityConstraintViolationException: Column 'EMAIL' cannot be null
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:118) ~[mysql-connector-j-8.0.33.jar:8.0.33]
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122) ~[mysql-connector-j-8.0.33.jar:8.0.33]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:916) ~[mysql-connector-j-8.0.33.jar:8.0.33]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.execute(ClientPreparedStatement.java:354) ~[mysql-connector-j-8.0.33.jar:8.0.33]
+	at com.zaxxer.hikari.pool.ProxyPreparedStatement.execute(ProxyPreparedStatement.java:44) ~[HikariCP-5.0.1.jar:na]
+	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.execute(HikariProxyPreparedStatement.java) ~[HikariCP-5.0.1.jar:na]
+	at org.apache.ibatis.executor.statement.PreparedStatementHandler.update(PreparedStatementHandler.java:48) ~[mybatis-3.5.13.jar:3.5.13]
+	at org.apache.ibatis.executor.statement.RoutingStatementHandler.update(RoutingStatementHandler.java:75) ~[mybatis-3.5.13.jar:3.5.13]
+	at org.apache.ibatis.executor.SimpleExecutor.doUpdate(SimpleExecutor.java:50) ~[mybatis-3.5.13.jar:3.5.13]
+	at org.apache.ibatis.executor.BaseExecutor.update(BaseExecutor.java:117) ~[mybatis-3.5.13.jar:3.5.13]
+	at org.apache.ibatis.executor.CachingExecutor.update(CachingExecutor.java:76) ~[mybatis-3.5.13.jar:3.5.13]
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.update(DefaultSqlSession.java:197) ~[mybatis-3.5.13.jar:3.5.13]
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.insert(DefaultSqlSession.java:184) ~[mybatis-3.5.13.jar:3.5.13]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:425) ~[mybatis-spring-3.0.2.jar:3.0.2]
+	at jdk.proxy2/jdk.proxy2.$Proxy69.insert(Unknown Source) ~[na:na]
+	at org.mybatis.spring.SqlSessionTemplate.insert(SqlSessionTemplate.java:272) ~[mybatis-spring-3.0.2.jar:3.0.2]
+	at org.apache.ibatis.binding.MapperMethod.execute(MapperMethod.java:62) ~[mybatis-3.5.13.jar:3.5.13]
+	at org.apache.ibatis.binding.MapperProxy$PlainMethodInvoker.invoke(MapperProxy.java:142) ~[mybatis-3.5.13.jar:3.5.13]
+	at org.apache.ibatis.binding.MapperProxy.invoke(MapperProxy.java:86) ~[mybatis-3.5.13.jar:3.5.13]
+	at jdk.proxy2/jdk.proxy2.$Proxy79.register(Unknown Source) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:343) ~[spring-aop-6.0.13.jar:6.0.13]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196) ~[spring-aop-6.0.13.jar:6.0.13]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163) ~[spring-aop-6.0.13.jar:6.0.13]
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:137) ~[spring-tx-6.0.13.jar:6.0.13]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.0.13.jar:6.0.13]
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:244) ~[spring-aop-6.0.13.jar:6.0.13]
+	at jdk.proxy2/jdk.proxy2.$Proxy80.register(Unknown Source) ~[na:na]
+	at com.poten.basket.Poten.Service.KakaoService.register(KakaoService.java:233) ~[main/:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:343) ~[spring-aop-6.0.13.jar:6.0.13]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196) ~[spring-aop-6.0.13.jar:6.0.13]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163) ~[spring-aop-6.0.13.jar:6.0.13]
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:751) ~[spring-aop-6.0.13.jar:6.0.13]
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:123) ~[spring-tx-6.0.13.jar:6.0.13]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:391) ~[spring-tx-6.0.13.jar:6.0.13]
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119) ~[spring-tx-6.0.13.jar:6.0.13]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.0.13.jar:6.0.13]
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:751) ~[spring-aop-6.0.13.jar:6.0.13]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:703) ~[spring-aop-6.0.13.jar:6.0.13]
+	at com.poten.basket.Poten.Service.KakaoService$$SpringCGLIB$$0.register(<generated>) ~[main/:na]
+	at com.poten.basket.Poten.Controller.KakaoController.postMethodName(KakaoController.java:41) ~[main/:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205) ~[spring-web-6.0.13.jar:6.0.13]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:150) ~[spring-web-6.0.13.jar:6.0.13]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118) ~[spring-webmvc-6.0.13.jar:6.0.13]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:884) ~[spring-webmvc-6.0.13.jar:6.0.13]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:797) ~[spring-webmvc-6.0.13.jar:6.0.13]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-6.0.13.jar:6.0.13]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1081) ~[spring-webmvc-6.0.13.jar:6.0.13]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:974) ~[spring-webmvc-6.0.13.jar:6.0.13]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1011) ~[spring-webmvc-6.0.13.jar:6.0.13]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914) ~[spring-webmvc-6.0.13.jar:6.0.13]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590) ~[tomcat-embed-core-10.1.15.jar:6.0]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885) ~[spring-webmvc-6.0.13.jar:6.0.13]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658) ~[tomcat-embed-core-10.1.15.jar:6.0]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51) ~[tomcat-embed-websocket-10.1.15.jar:10.1.15]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.0.13.jar:6.0.13]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.0.13.jar:6.0.13]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-6.0.13.jar:6.0.13]
 	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.0.13.jar:6.0.13]
 	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
 	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
@@ -547,15 +854,127 @@ java.lang.IllegalArgumentException: URLDecoder: Illegal hex characters in escape
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
-	at java.base/java.lang.Thread.run(Thread.java:833) ~[na:na]
+	at java.base/java.lang.Thread.run(Thread.java:840) ~[na:na]
 
-2023-12-08T22:42:36.330+09:00  WARN 329343 --- [nio-8078-exec-1] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' is not supported]
-2023-12-10T01:46:03.086+09:00  WARN 329343 --- [nio-8078-exec-5] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
-2023-12-10T12:11:33.921+09:00  WARN 329343 --- [nio-8078-exec-5] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
-2023-12-10T23:38:47.366+09:00  INFO 329343 --- [nio-8078-exec-5] o.apache.coyote.http11.Http11Processor   : Error parsing HTTP request header
+2024-02-27T05:14:48.750Z ERROR 10897 --- [nio-8080-exec-1] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: org.springframework.dao.DataIntegrityViolationException: 
+### Error updating database.  Cause: java.sql.SQLIntegrityConstraintViolationException: Column 'EMAIL' cannot be null
+### The error may exist in file [/home/ubuntu/apps/modubasketball/Poten/build/resources/main/mapper/LoginMapper.xml]
+### The error may involve com.poten.basket.Poten.DAO.KakaoDAO.register-Inline
+### The error occurred while setting parameters
+### SQL: INSERT INTO USER (             NICKNAME             , EMAIL         ) VALUES (             ?             , ?         )
+### Cause: java.sql.SQLIntegrityConstraintViolationException: Column 'EMAIL' cannot be null
+; Column 'EMAIL' cannot be null] with root cause
+
+java.sql.SQLIntegrityConstraintViolationException: Column 'EMAIL' cannot be null
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:118) ~[mysql-connector-j-8.0.33.jar:8.0.33]
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122) ~[mysql-connector-j-8.0.33.jar:8.0.33]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:916) ~[mysql-connector-j-8.0.33.jar:8.0.33]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.execute(ClientPreparedStatement.java:354) ~[mysql-connector-j-8.0.33.jar:8.0.33]
+	at com.zaxxer.hikari.pool.ProxyPreparedStatement.execute(ProxyPreparedStatement.java:44) ~[HikariCP-5.0.1.jar:na]
+	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.execute(HikariProxyPreparedStatement.java) ~[HikariCP-5.0.1.jar:na]
+	at org.apache.ibatis.executor.statement.PreparedStatementHandler.update(PreparedStatementHandler.java:48) ~[mybatis-3.5.13.jar:3.5.13]
+	at org.apache.ibatis.executor.statement.RoutingStatementHandler.update(RoutingStatementHandler.java:75) ~[mybatis-3.5.13.jar:3.5.13]
+	at org.apache.ibatis.executor.SimpleExecutor.doUpdate(SimpleExecutor.java:50) ~[mybatis-3.5.13.jar:3.5.13]
+	at org.apache.ibatis.executor.BaseExecutor.update(BaseExecutor.java:117) ~[mybatis-3.5.13.jar:3.5.13]
+	at org.apache.ibatis.executor.CachingExecutor.update(CachingExecutor.java:76) ~[mybatis-3.5.13.jar:3.5.13]
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.update(DefaultSqlSession.java:197) ~[mybatis-3.5.13.jar:3.5.13]
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.insert(DefaultSqlSession.java:184) ~[mybatis-3.5.13.jar:3.5.13]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:425) ~[mybatis-spring-3.0.2.jar:3.0.2]
+	at jdk.proxy2/jdk.proxy2.$Proxy69.insert(Unknown Source) ~[na:na]
+	at org.mybatis.spring.SqlSessionTemplate.insert(SqlSessionTemplate.java:272) ~[mybatis-spring-3.0.2.jar:3.0.2]
+	at org.apache.ibatis.binding.MapperMethod.execute(MapperMethod.java:62) ~[mybatis-3.5.13.jar:3.5.13]
+	at org.apache.ibatis.binding.MapperProxy$PlainMethodInvoker.invoke(MapperProxy.java:142) ~[mybatis-3.5.13.jar:3.5.13]
+	at org.apache.ibatis.binding.MapperProxy.invoke(MapperProxy.java:86) ~[mybatis-3.5.13.jar:3.5.13]
+	at jdk.proxy2/jdk.proxy2.$Proxy79.register(Unknown Source) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:343) ~[spring-aop-6.0.13.jar:6.0.13]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196) ~[spring-aop-6.0.13.jar:6.0.13]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163) ~[spring-aop-6.0.13.jar:6.0.13]
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:137) ~[spring-tx-6.0.13.jar:6.0.13]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.0.13.jar:6.0.13]
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:244) ~[spring-aop-6.0.13.jar:6.0.13]
+	at jdk.proxy2/jdk.proxy2.$Proxy80.register(Unknown Source) ~[na:na]
+	at com.poten.basket.Poten.Service.KakaoService.register(KakaoService.java:233) ~[main/:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:343) ~[spring-aop-6.0.13.jar:6.0.13]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196) ~[spring-aop-6.0.13.jar:6.0.13]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163) ~[spring-aop-6.0.13.jar:6.0.13]
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:751) ~[spring-aop-6.0.13.jar:6.0.13]
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:123) ~[spring-tx-6.0.13.jar:6.0.13]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:391) ~[spring-tx-6.0.13.jar:6.0.13]
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119) ~[spring-tx-6.0.13.jar:6.0.13]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.0.13.jar:6.0.13]
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:751) ~[spring-aop-6.0.13.jar:6.0.13]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:703) ~[spring-aop-6.0.13.jar:6.0.13]
+	at com.poten.basket.Poten.Service.KakaoService$$SpringCGLIB$$0.register(<generated>) ~[main/:na]
+	at com.poten.basket.Poten.Controller.KakaoController.postMethodName(KakaoController.java:41) ~[main/:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205) ~[spring-web-6.0.13.jar:6.0.13]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:150) ~[spring-web-6.0.13.jar:6.0.13]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118) ~[spring-webmvc-6.0.13.jar:6.0.13]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:884) ~[spring-webmvc-6.0.13.jar:6.0.13]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:797) ~[spring-webmvc-6.0.13.jar:6.0.13]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-6.0.13.jar:6.0.13]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1081) ~[spring-webmvc-6.0.13.jar:6.0.13]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:974) ~[spring-webmvc-6.0.13.jar:6.0.13]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1011) ~[spring-webmvc-6.0.13.jar:6.0.13]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914) ~[spring-webmvc-6.0.13.jar:6.0.13]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590) ~[tomcat-embed-core-10.1.15.jar:6.0]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885) ~[spring-webmvc-6.0.13.jar:6.0.13]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658) ~[tomcat-embed-core-10.1.15.jar:6.0]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51) ~[tomcat-embed-websocket-10.1.15.jar:10.1.15]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.0.13.jar:6.0.13]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.0.13.jar:6.0.13]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-6.0.13.jar:6.0.13]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.0.13.jar:6.0.13]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-6.0.13.jar:6.0.13]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.0.13.jar:6.0.13]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:340) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
+	at java.base/java.lang.Thread.run(Thread.java:840) ~[na:na]
+
+2024-02-27T05:35:49.274Z  WARN 10897 --- [nio-8080-exec-3] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Failed to convert value of type 'java.lang.String' to required type 'int'; For input string: "settings"]
+2024-02-27T07:01:47.155Z  WARN 10897 --- [nio-8080-exec-7] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
+2024-02-27T08:02:47.615Z  INFO 10897 --- [nio-8080-exec-6] o.apache.coyote.http11.Http11Processor   : Error parsing HTTP request header
  Note: further occurrences of HTTP request parsing errors will be logged at DEBUG level.
 
-java.lang.IllegalArgumentException: Invalid character found in method name [0x030x000x00/*0xe00x000x000x000x000x00Cookie: ]. HTTP method names must be tokens
+java.lang.IllegalArgumentException: Invalid character found in method name [0x160x030x010x000xee0x010x000x000xea0x030x030xc7<0xd10xfc)0xc2P0xa10x050xb9t&U90xa3a0xe00x940x030xd40xb40xddb90xba0xf5`0x8fJ.0xac0xd7 ]. HTTP method names must be tokens
 	at org.apache.coyote.http11.Http11InputBuffer.parseRequestLine(Http11InputBuffer.java:407) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
 	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:264) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
 	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
@@ -565,59 +984,5 @@ java.lang.IllegalArgumentException: Invalid character found in method name [0x03
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
-	at java.base/java.lang.Thread.run(Thread.java:833) ~[na:na]
+	at java.base/java.lang.Thread.run(Thread.java:840) ~[na:na]
 
-2023-12-11T11:21:51.724+09:00  INFO 329343 --- [io-8078-exec-10] o.apache.coyote.http11.Http11Processor   : Error parsing HTTP request header
- Note: further occurrences of HTTP request parsing errors will be logged at DEBUG level.
-
-java.lang.IllegalArgumentException: Invalid character found in method name [0x160x030x010x000xee0x010x000x000xea0x030x03r0xe80xde0xc330xae0xb67RgH$.0xec%d&0xfbB0x090x900x1b&0xdeC0x1d'0xedE'90x0d ]. HTTP method names must be tokens
-	at org.apache.coyote.http11.Http11InputBuffer.parseRequestLine(Http11InputBuffer.java:407) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
-	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:264) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
-	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
-	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
-	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
-	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
-	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
-	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
-	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
-	at java.base/java.lang.Thread.run(Thread.java:833) ~[na:na]
-
-2023-12-11T15:45:08.573+09:00  WARN 329343 --- [nio-8078-exec-6] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
-2023-12-12T13:13:49.370+09:00  WARN 329343 --- [nio-8078-exec-8] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
-2023-12-12T13:19:55.188+09:00  WARN 329343 --- [nio-8078-exec-4] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
-2023-12-13T18:11:47.149+09:00  WARN 329343 --- [nio-8078-exec-9] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
-2023-12-14T08:29:19.044+09:00  WARN 329343 --- [nio-8078-exec-4] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
-2023-12-14T08:29:20.848+09:00  WARN 329343 --- [nio-8078-exec-2] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
-2023-12-15T04:23:29.323+09:00  INFO 329343 --- [nio-8078-exec-7] o.apache.coyote.http11.Http11Processor   : Error parsing HTTP request header
- Note: further occurrences of HTTP request parsing errors will be logged at DEBUG level.
-
-java.lang.IllegalArgumentException: Invalid character found in method name [0x160x030x010x000xee0x010x000x000xea0x030x03Q0xe50x1b;0xa6F0x12q%0xbe0x84w0x990xff6u0x9c0xd70x160xad0x190x12S980x1fp0xa80xc6p0xcc0x7f ]. HTTP method names must be tokens
-	at org.apache.coyote.http11.Http11InputBuffer.parseRequestLine(Http11InputBuffer.java:407) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
-	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:264) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
-	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
-	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
-	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
-	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
-	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
-	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
-	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-10.1.15.jar:10.1.15]
-	at java.base/java.lang.Thread.run(Thread.java:833) ~[na:na]
-
-2023-12-16T23:50:36.305+09:00  WARN 329343 --- [io-8078-exec-10] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' is not supported]
-
-> Task :bootRun FAILED
-
-FAILURE: Build failed with an exception.
-
-* What went wrong:
-Execution failed for task ':bootRun'.
-> Process 'command '/usr/lib/jvm/java-17-openjdk-amd64/bin/java'' finished with non-zero exit value 137
-
-* Try:
-> Run with --stacktrace option to get the stack trace.
-> Run with --info or --debug option to get more log output.
-> Run with --scan to get full insights.
-> Get more help at https://help.gradle.org.
-
-BUILD FAILED in 465h 12m 29s
-7 actionable tasks: 7 executed

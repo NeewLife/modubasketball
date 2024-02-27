@@ -17,12 +17,12 @@ public class MainController {
         return "index.html";
     }
 
-    @GetMapping("/login")
-    @ResponseBody
-    public void kakaoLogin(HttpServletResponse response,
-                             @RequestParam String code) throws IOException {
-        System.out.println("code : " + code);
-        String redirect_uri = "https://modubasketball.com/kakao/callback/";
-        response.sendRedirect(redirect_uri + code);
-    }
+//    @GetMapping("/login")
+//    @ResponseBody
+//    public void kakaoLogin(HttpServletResponse response,
+//                             @RequestParam String code) throws IOException {
+//        System.out.println("code : " + code);
+//        String redirect_uri = "https://modubasketball.com/kakao/callback/";
+//        response.sendRedirect(redirect_uri + code);
+//    }
 }
